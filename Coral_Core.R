@@ -9,6 +9,7 @@ Browse <- read_csv("Browse_Island_Data.csv")
 #use floor to identify closest integer below actual value
 #age-floor to create a new variable for month analysis
 
+
 Floor <- floor(Browse$age)
 Browse_Y_M <- Browse %>% 
   mutate(year = Floor, mth_deci = age-Floor)
