@@ -71,8 +71,13 @@ SrCa_Monthly_Proxies <- SrCa_Monthly_Proxies %>%
 
 #use glue to join year and month to convert to date format
 SrCa_Proxies <- SrCa_Proxies %>% 
-  mutate(date = glue("{year}{month}{01}")) %>% 
-  ymd(date)
+  mutate(date = as.character(glue("{year}-{month}-{01}"))) %>% 
+  mutate(date = ymd(date))
+
+SrCa_Proxies %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date))
+  
 
 
 #plot time series for Browse Island, Cocos Islands and Ningaloo Reef SrCa coral core sites
@@ -90,7 +95,7 @@ Browse_BRS07 %>%
   facet_wrap(~core_id)
 
 SrCa_Proxies %>% 
-  ggplot(mapping = aes(x = Year, y = SrCa)) +
+  ggplot(mapping = aes(x = date, y = SrCa)) +
   geom_point() + 
   geom_line() +
   facet_wrap(~core_id)
