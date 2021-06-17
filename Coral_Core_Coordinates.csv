@@ -1,0 +1,21 @@
+﻿Data_Type,Site,Reef_Site,Latitude,Longitude,Temporal_Res,From_Time,To_Time,Missing_Time,2013-06 to 2013-10+I:N,Missing_Time_To(1),Missing_Time_From(2),Missing_Time_To(2),Missing_Time_From(3),Missing_Time_To(3),Reference
+Coral Core Sr/Ca Proxy,Browse Island,BRS05,-14.105,123.5356924,Monthly,1950-01,2011-07,,,,,,,,Unpublished Data from Hedi & Jens
+Coral Core Sr/Ca Proxy,Browse Island,BRS07,-14.121,123.5467277,Monthly,1950-01,2011-07,,,,,,,,Unpublished Data from Hedi & Jens
+Coral Core Sr/Ca Proxy,Cocos (Keeling) Islands,DAR Long,-12.0875,96.875,Monthly,1808,2009,,,,,,,,Hennekam et al. 2018
+Coral Core Sr/Ca Proxy,Cocos (Keeling) Islands,DAR3,-12.095,96.8805,Monthly,1987,2009,,,,,,,,Hennekam et al. 2018
+Coral Core Sr/Ca Proxy,Ningaloo Reef,Tantabiddi (13TNT),-21.91,113.97,Monthly,2004-01,2013-06,,,,,,,,Clarke et al. 2017
+Coral Core Sr/Ca Proxy,Ningaloo Reef,Tantabiddi (08TNT),-21.91,113.97,Monthly,1996-03,2008-06,,,,,,,,Clarke et al. 2017
+Coral Core Sr/Ca Proxy,Ningaloo Reef,Bundegi (13BND),-21.87,114.156,Monthly,2005-05,2013-07,,,,,,,,Clarke et al. 2017
+Coral Core Sr/Ca Proxy,Ningaloo Reef,Bundegi (08BND),-21.87,114.156,Monthly,1998-03,2008-10,,,,,,,,Clarke et al. 2017
+Coral Core Sr/Ca Proxy,Ningaloo Reef,TNT07C,-21.893,113.963,Annual,1961,2008,,,,,,,,"Zinke eat al., 2015"
+Coral Core Sr/Ca Proxy,Ningaloo Reef,BUN05A,-21.836,114.178,Annual,1952,2008,,,,,,,,"Zinke eat al., 2015"
+Coral Core d18O Proxy,Ningaloo Reef,TNT,-21.9,113.97,Monthly,1871,1994,,,,,,,,"Kuhnert et al., 2000"
+Coral Core d18O Proxy,Houtman Abrolhos,Wallabi Island,-28.28,113.46,Monthly,1795,1994,,,,,,,,"Kuhnert et al., 1999"
+Coral Core d18O Proxy,Houtman Abrolhos,HAB10A,-28.4589,113.749,Annual,1847,2010,,,,,,,,"Zinke eat al., 2015"
+Coral Core Sr/Ca Proxy,Houtman Abrolhos,HAB10A,-28.4589,113.749,Annual,1847,2010,,,,,,,,"Zinke eat al., 2015"
+Coral Core Sr/Ca Proxy,Houtman Abrolhos,HAB05B,-28.4609,113.772,Annual,1795,2010,,,,,,,,"Zinke eat al., 2015"
+Coral Core d18O Proxy,Houtman Abrolhos,HAB05B,-28.4609,113.772,Annual,1795,2010,,,,,,,,"Zinke eat al., 2015"
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
