@@ -558,6 +558,192 @@ Plot_1_Wallabi + Plot_2_Wallabi  #using Patchwork to bring plots together
 
 
 ##Houtman Abrolhos##
-#
+#HAB10A d18O
+HAbrol_HAB10A_d18O_CCI <- read_csv("CCI_HAB10A.csv")
+HAbrol_HAB10A_d18O_CCI <- HAbrol_HAB10A_d18O_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAbrol_HAB10A_d18O_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB10A_d18O_CCore <- read_csv("CCore_H_Abrol_HAB_year.csv")
+HAbrol_HAB10A_d18O_CCore <- HAbrol_HAB10A_d18O_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% #add month column
+  mutate(date = str_c(year, month, sep = "-")) %>% #join year-month columns
+  mutate(date = ym(date)) %>%  #convert chr to date format
+  select(data_type, date, `HAB10A d18O`)  #select only useful columns
+
+HAbrol_HAB10A_d18O_Logger <- read_csv("Logger_Avg_Daily_SST_NTHFISHFL1.csv")
+HAbrol_HAB10A_d18O_Logger <- HAbrol_HAB10A_d18O_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  #select only useful columns
+
+HAbrol_HAB10A_d18O_NOAA <- read_csv("NOAA_HAB10A_d18O_Proxy_SST.csv")
+HAbrol_HAB10A_d18O_NOAA <- HAbrol_HAB10A_d18O_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB10A_d18O_comb <- bind_rows(HAbrol_HAB10A_d18O_CCI, HAbrol_HAB10A_d18O_CCore, HAbrol_HAB10A_d18O_Logger, HAbrol_HAB10A_d18O_NOAA)
+
+Plot_1_HAB10A_d18O <- HAbrol_HAB10A_d18O_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+Plot_2_HAB10A_d18O <- HAbrol_HAB10A_d18O_CCore %>% 
+  ggplot(aes(x=date, y = `HAB10A d18O`)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1845-01-01", "2010-01-01")))
+
+Plot_1_HAB10A_d18O + Plot_2_HAB10A_d18O  #using Patchwork to bring plots together
+
+
+##Houtman Abrolhos##
+#HAB10A Sr/Ca
+HAbrol_HAB10A_SrCa_CCI <- read_csv("CCI_HAB10A.csv")
+HAbrol_HAB10A_SrCa_CCI <- HAbrol_HAB10A_SrCa_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAbrol_HAB10A_SrCa_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB10A_SrCa_CCore <- read_csv("CCore_H_Abrol_HAB_year.csv")
+HAbrol_HAB10A_SrCa_CCore <- HAbrol_HAB10A_SrCa_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% #add month column
+  mutate(date = str_c(year, month, sep = "-")) %>% #join year-month columns
+  mutate(date = ym(date)) %>%  #convert chr to date format
+  select(data_type, date, `HAB10A Sr/Ca`)  #select only useful columns
+
+HAbrol_HAB10A_SrCa_Logger <- read_csv("Logger_Avg_Daily_SST_NTHFISHFL1.csv")
+HAbrol_HAB10A_SrCa_Logger <- HAbrol_HAB10A_SrCa_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  #select only useful columns
+
+HAbrol_HAB10A_SrCa_NOAA <- read_csv("NOAA_HAB10A_SrCa_Proxy_SST.csv")
+HAbrol_HAB10A_SrCa_NOAA <- HAbrol_HAB10A_SrCa_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB10A_SrCa_comb <- bind_rows(HAbrol_HAB10A_SrCa_CCI, HAbrol_HAB10A_SrCa_CCore, HAbrol_HAB10A_SrCa_Logger, HAbrol_HAB10A_SrCa_NOAA)
+
+Plot_1_HAB10A_SrCa <- HAbrol_HAB10A_SrCa_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+Plot_2_HAB10A_SrCa <- HAbrol_HAB10A_SrCa_CCore %>% 
+  ggplot(aes(x=date, y = `HAB10A Sr/Ca`)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1845-01-01", "2010-01-01")))
+
+Plot_1_HAB10A_SrCa + Plot_2_HAB10A_SrCa  #using Patchwork to bring plots together
+
+
+##Houtman Abrolhos##
+#HAB05B d18O
+HAbrol_HAB05B_d18O_CCI <- read_csv("CCI_HAB05B.csv")
+HAbrol_HAB05B_d18O_CCI <- HAbrol_HAB05B_d18O_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAbrol_HAB05B_d18O_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB05B_d18O_CCore <- read_csv("CCore_H_Abrol_HAB_year.csv")
+HAbrol_HAB05B_d18O_CCore <- HAbrol_HAB05B_d18O_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% #add month column
+  mutate(date = str_c(year, month, sep = "-")) %>% #join year-month columns
+  mutate(date = ym(date)) %>%  #convert chr to date format
+  select(data_type, date, `HAB05B d18O`)  #select only useful columns
+
+HAbrol_HAB05B_d18O_Logger <- read_csv("Logger_Avg_Daily_SST_NTHFISHFL1.csv")
+HAbrol_HAB05B_d18O_Logger <- HAbrol_HAB05B_d18O_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  #select only useful columns
+
+HAbrol_HAB05B_d18O_NOAA <- read_csv("NOAA_HAB05B_d18O_Proxy_SST.csv")
+HAbrol_HAB05B_d18O_NOAA <- HAbrol_HAB05B_d18O_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB05B_d18O_comb <- bind_rows(HAbrol_HAB05B_d18O_CCI, HAbrol_HAB05B_d18O_CCore, HAbrol_HAB05B_d18O_Logger, HAbrol_HAB05B_d18O_NOAA)
+
+Plot_1_HAB05B_d18O <- HAbrol_HAB05B_d18O_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+Plot_2_HAB05B_d18O <- HAbrol_HAB05B_d18O_CCore %>% 
+  ggplot(aes(x=date, y = `HAB05B d18O`)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type))
+
+Plot_1_HAB05B_d18O + Plot_2_HAB05B_d18O  #using Patchwork to bring plots together
+
+
+##Houtman Abrolhos##
+#HAB05B SrCa
+HAbrol_HAB05B_SrCa_CCI <- read_csv("CCI_HAB05B.csv")
+HAbrol_HAB05B_SrCa_CCI <- HAbrol_HAB05B_SrCa_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAbrol_HAB05B_SrCa_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB05B_SrCa_CCore <- read_csv("CCore_H_Abrol_HAB_year.csv")
+HAbrol_HAB05B_SrCa_CCore <- HAbrol_HAB05B_SrCa_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% #add month column
+  mutate(date = str_c(year, month, sep = "-")) %>% #join year-month columns
+  mutate(date = ym(date)) %>%  #convert chr to date format
+  select(data_type, date, `HAB05B Sr/Ca`)  #select only useful columns
+
+HAbrol_HAB05B_SrCa_Logger <- read_csv("Logger_Avg_Daily_SST_NTHFISHFL1.csv")
+HAbrol_HAB05B_SrCa_Logger <- HAbrol_HAB05B_SrCa_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  #select only useful columns
+
+HAbrol_HAB05B_SrCa_NOAA <- read_csv("NOAA_HAB05B_SrCa_Proxy_SST.csv")
+HAbrol_HAB05B_SrCa_NOAA <- HAbrol_HAB05B_SrCa_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) #select only useful columns
+
+HAbrol_HAB05B_SrCa_comb <- bind_rows(HAbrol_HAB05B_SrCa_CCI, HAbrol_HAB05B_SrCa_CCore, HAbrol_HAB05B_SrCa_Logger, HAbrol_HAB05B_SrCa_NOAA)
+
+Plot_1_HAB05B_SrCa <- HAbrol_HAB05B_SrCa_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+Plot_2_HAB05B_SrCa <- HAbrol_HAB05B_SrCa_CCore %>% 
+  ggplot(aes(x=date, y = `HAB05B Sr/Ca`)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type))
+
+Plot_1_HAB05B_SrCa + Plot_2_HAB05B_SrCa  #using Patchwork to bring plots together
 
 ##Scott Reef##
