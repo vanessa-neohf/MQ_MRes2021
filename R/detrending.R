@@ -100,11 +100,30 @@ M_05_CCore_ARIMA <- M_05_CCore %>%
   select(arima)
 
 Browse_05_Logger %>% 
-  scan_gaps()
+  scan_gaps() 
+# found tons of gaps in the middle; 
 ggplot(Browse_05_Logger, aes(x = date, y = sst)) %>% 
   geom_line()
-# has only roughly 1 year a data. need two complete year data
+# has only roughly 1 year a data. need two complete year data 
+# but we will push on 
 
+# let's fill the gaps
+Browse_05_Logger <- Browse_05_Logger %>% 
+  add_case(Browse_05_Logger %>% 
+             scan_gaps() %>% 
+             mutate(sst  = NA)
+           ) %>% 
+  arrange(date)
+
+M_05_Logger <- Browse_05_Logger %>% 
+  model(
+  arima = ARIMA(sst ~ trend(), stepwise = FALSE),
+  lin_mod = TSLM(sst ~ trend())
+)
+
+M_05_Logger_ARIMA <- M_05_Logger %>% 
+  select(arima)
+  
 
 M_05_NOAA <- Browse_05_NOAA %>% 
   model(
@@ -122,17 +141,19 @@ resid_comb <- bind_rows(
     as_tibble(residuals(M_05_CCore_ARIMA, type = "regression")),
   NOAA = 
     as_tibble(residuals(M_05_NOAA_ARIMA, type = "regression")),
+  Logger = as_tibble(residuals(M_05_Logger_ARIMA, 
+                               type = "regression")),
   .id = "type"
 ) 
 
 plot_comb_resid <- resid_comb %>%
   mutate(
     type = factor(type, levels=c(
-      "CCI", "CCore", "NOAA"))
+      "CCI", "CCore", "NOAA", "Logger"))
   ) %>%
   ggplot(aes(x = date, y = .resid)) +
   geom_line() +
-  facet_wrap(vars(type)) + 
+  facet_wrap( ~ type, ncol = 4) + 
   ylab("Regression Residuals") 
 
 ggsave(file = here::here("graphics", 
