@@ -69,8 +69,8 @@ ggsave(file = here::here("graphics",
        plot = plot_M_Ningaloo_13TNT_CCI_detrend, width = 10, height = 4)
 
 
-M1_13TNT <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_13TNT_CCore)
-augment(M1_13TNT) %>% 
+M1_13TNT_CCore <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_13TNT_CCore)
+augment(M1_13TNT_CCore) %>% 
   mutate(.model = "arima") %>% 
   select(.model, date, .resid)
 
@@ -127,7 +127,7 @@ resid_comb_13TNT <- bind_rows(
   CCI =
     as_tibble(residuals(M_Ningaloo_13TNT_CCI_ARIMA, type = "regression")),
   CCore =
-    augment(M1_13TNT) %>% 
+    augment(M1_13TNT_CCore) %>% 
     mutate(.model = "arima") %>% 
     select(.model, date, .resid),
   NOAA = 
@@ -222,8 +222,8 @@ ggsave(file = here::here("graphics",
 
 
 
-M1_08TNT <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_08TNT_CCore)
-augment(M1_08TNT) %>% 
+M1_08TNT_CCore <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_08TNT_CCore)
+augment(M1_08TNT_CCore) %>% 
   mutate(.model = "arima") %>% 
   select(.model, date, .resid)
 
@@ -279,7 +279,7 @@ resid_comb_08TNT <- bind_rows(
   CCI =
     as_tibble(residuals(M_Ningaloo_08TNT_CCI_ARIMA, type = "regression")),
   CCore =
-    augment(M1_08TNT) %>% 
+    augment(M1_08TNT_CCore) %>% 
     mutate(.model = "arima") %>% 
     select(.model, date, .resid),
   NOAA = 
@@ -307,6 +307,244 @@ resid_comb_08TNT %>%
   group_by(type) %>% 
   summarise(sd = sd(.resid, na.rm = TRUE))
 
+
+###############################################################
+
+##Ningaloo Reef##
+##Tantabiddi 13BND
+Ningaloo_13BND_CCI <- read_csv(here::here("data_raw", "CCI_Bundegi.csv"))
+Ningaloo_13BND_CCI <- Ningaloo_13BND_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_13BND_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_13BND_Year_Month.csv"))
+Ningaloo_13BND_CCore <- Ningaloo_13BND_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
+Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_13BND_SST.csv"))
+Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+# Running the ARIMA of fable to detrend
+M_Ningaloo_13BND_CCI <- Ningaloo_13BND_CCI %>% 
+  model(
+    arima = ARIMA(sst~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_13BND_CCI_ARIMA <- M_Ningaloo_13BND_CCI %>% 
+  select(arima)
+
+
+M1_13BND_CCore <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_13BND_CCore)
+augment(M1_13TNT_CCore) %>% 
+  mutate(.model = "arima") %>% 
+  select(.model, date, .resid)
+
+
+Ningaloo_13BND_Logger %>% 
+  scan_gaps() 
+# found tons of gaps in the middle; 
+ggplot(Ningaloo_13BND_Logger, aes(x = date, y = sst)) + 
+  geom_line()
+
+# let's fill the gaps
+Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
+  add_case(Ningaloo_13BND_Logger %>% 
+             scan_gaps() %>% 
+             mutate(sst  = NA)
+  ) %>% 
+  arrange(date)
+
+M_Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
+  model(
+    arima = ARIMA(sst ~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_13BND_Logger_ARIMA <- M_Ningaloo_13BND_Logger %>% 
+  select(arima)
+
+
+M_Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>% 
+  model(
+    arima = ARIMA(sst~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_13BND_NOAA_ARIMA <- M_Ningaloo_13BND_NOAA %>% 
+  select(arima)
+
+resid_comb_13BND <- bind_rows(
+  CCI =
+    as_tibble(residuals(M_Ningaloo_13BND_CCI_ARIMA, type = "regression")),
+  CCore =
+    augment(M1_13BND_CCore) %>% 
+    mutate(.model = "arima") %>% 
+    select(.model, date, .resid),
+  NOAA = 
+    as_tibble(residuals(M_Ningaloo_13BND_NOAA_ARIMA, type = "regression")),
+  Logger = as_tibble(residuals(M_Ningaloo_13BND_Logger_ARIMA, 
+                               type = "regression")),
+  .id = "type"
+) 
+
+plot_comb_resid_13BND <- resid_comb_13BND %>%
+  mutate(
+    type = factor(type, levels=c(
+      "CCI", "CCore", "NOAA", "Logger"))
+  ) %>%
+  ggplot(aes(x = date, y = .resid)) +
+  geom_line() +
+  facet_wrap( ~ type, ncol = 4) + 
+  ylab("Regression Residuals") 
+
+ggsave(file = here::here("graphics", 
+                         "plot_comb_resid_13BND.png"),
+       plot = plot_comb_resid_13BND, width = 10, height = 4)
+
+resid_comb_13BND %>% 
+  group_by(type) %>% 
+  summarise(sd = sd(.resid, na.rm = TRUE))
+
+
+################################################
+
+##Ningaloo Reef##
+##Tantabiddi 08BND
+Ningaloo_08BND_CCI <- read_csv(here::here("data_raw", "CCI_Bundegi.csv"))
+Ningaloo_08BND_CCI <- Ningaloo_08BND_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_08BND_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_08BND_Year_Month.csv"))
+Ningaloo_08BND_CCore <- Ningaloo_08BND_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
+Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_08BND_SST.csv"))
+Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+# Running the ARIMA of fable to detrend
+M_Ningaloo_08BND_CCI <- Ningaloo_08BND_CCI %>% 
+  model(
+    arima = ARIMA(sst~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_08BND_CCI_ARIMA <- M_Ningaloo_08BND_CCI %>% 
+  select(arima)
+
+
+M1_08BND_CCore <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_08BND_CCore)
+augment(M1_08BND_CCore) %>% 
+  mutate(.model = "arima") %>% 
+  select(.model, date, .resid)
+
+
+Ningaloo_08BND_Logger %>% 
+  scan_gaps() 
+# found tons of gaps in the middle; 
+ggplot(Ningaloo_08BND_Logger, aes(x = date, y = sst)) + 
+  geom_line()
+
+
+# let's fill the gaps
+Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
+  add_case(Ningaloo_08BND_Logger %>% 
+             scan_gaps() %>% 
+             mutate(sst  = NA)
+  ) %>% 
+  arrange(date)
+
+M_Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
+  model(
+    arima = ARIMA(sst ~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_08BND_Logger_ARIMA <- M_Ningaloo_08BND_Logger %>% 
+  select(arima)
+
+
+M_Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>% 
+  model(
+    arima = ARIMA(sst~ trend(), stepwise = FALSE),
+    lin_mod = TSLM(sst ~ trend())
+  )
+
+M_Ningaloo_08BND_NOAA_ARIMA <- M_Ningaloo_08BND_NOAA %>% 
+  select(arima)
+
+resid_comb_08BND <- bind_rows(
+  CCI =
+    as_tibble(residuals(M_Ningaloo_08BND_CCI_ARIMA, type = "regression")),
+  CCore =
+    augment(M1_08BND_CCore) %>% 
+    mutate(.model = "arima") %>% 
+    select(.model, date, .resid),
+  NOAA = 
+    as_tibble(residuals(M_Ningaloo_08BND_NOAA_ARIMA, type = "regression")),
+  Logger = as_tibble(residuals(M_Ningaloo_08BND_Logger_ARIMA, 
+                               type = "regression")),
+  .id = "type"
+) 
+
+plot_comb_resid_08BND <- resid_comb_08BND %>%
+  mutate(
+    type = factor(type, levels=c(
+      "CCI", "CCore", "NOAA", "Logger"))
+  ) %>%
+  ggplot(aes(x = date, y = .resid)) +
+  geom_line() +
+  facet_wrap( ~ type, ncol = 4) + 
+  ylab("Regression Residuals") 
+
+ggsave(file = here::here("graphics", 
+                         "plot_comb_resid_08BND.png"),
+       plot = plot_comb_resid_08BND, width = 10, height = 4)
+
+resid_comb_08BND %>% 
+  group_by(type) %>% 
+  summarise(sd = sd(.resid, na.rm = TRUE))
 
 
 -------------------------------------------
