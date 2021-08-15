@@ -566,7 +566,7 @@ Ningaloo_TNT_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_TNT_Year_M
 Ningaloo_TNT_CCore <- Ningaloo_TNT_CCore %>% 
   mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
   mutate(date = as_date(date)) %>% 
-  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  select(data_type, date, `d18O`) %>%     #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
@@ -596,7 +596,7 @@ M_Ningaloo_TNT_CCI_ARIMA <- M_Ningaloo_TNT_CCI %>%
   select(arima)
 
 
-M1_TNT_CCore <- lm(`Sr/Ca` ~ 1 +date, Ningaloo_TNT_CCore)
+M1_TNT_CCore <- lm(`d18O` ~ 1 +date, Ningaloo_TNT_CCore)
 augment(M1_TNT_CCore) %>% 
   mutate(.model = "arima") %>% 
   select(.model, date, .resid)
