@@ -1,9 +1,15 @@
 library(tidyverse)
 
 #read NOAA SST CSV file
-NOAA <- read_csv("NOAA_SST.csv")
+#Browse Island, Cocos Keeling, Ningaloo Reef, Houtman Abrolhos
+NOAA <- read_csv(here::here("data_raw", "NOAA_SST.csv"))
+
+#read NOAA SST Scott Reef CSV file
+#Scott Reef
+NOAA_Scott <- read_csv(here::here("data_raw", "NOAA_SST_Scott_Reef.csv"))
 
 unique(NOAA$Reef_Site)
+unique(NOAA_Scott$subsite)
 
 #filter SST time series for individual reef sites and convert date to ym format
 #BRS05
@@ -127,3 +133,66 @@ NOAA_HAB05B_d18O <- NOAA %>%
   filter(Reef_Site == "HAB05B" & Data_Type == "Coral Core d18O Proxy")
 
 write_csv(NOAA_HAB05B_d18O, "D:/NOAA_Data/NOAA_HAB05B_d18O_Proxy_SST.csv")
+
+#SCOTT_RPO_1
+NOAA_SCOTT_RPO_1 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTT_RPO_1")
+
+write_csv(NOAA_SCOTT_RPO_1, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTT_RPO_1_SST.csv")
+
+#SCOTT_SL4
+NOAA_SCOTT_SL4 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTT_SL4")
+
+write_csv(NOAA_SCOTT_SL4, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTT_SL4_SST.csv")
+
+#SCOTT_SS3
+NOAA_SCOTT_SS3 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTT_SS3")
+
+write_csv(NOAA_SCOTT_SS3, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTT_SS3_SST.csv")
+
+#SCOTTNR1
+NOAA_SCOTTNR1 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTNR1")
+
+write_csv(NOAA_SCOTTNR1, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTNR1_SST.csv")
+
+#SCOTTSL1
+NOAA_SCOTTSL1 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTSL1")
+
+write_csv(NOAA_SCOTTSL1, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTSL1_SST.csv")
+
+#SCOTTSL2
+NOAA_SCOTTSL2 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTSL2")
+
+write_csv(NOAA_SCOTTSL2, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTSL2_SST.csv")
+
+#SCOTTSL3
+NOAA_SCOTTSL3 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTSL3")
+
+write_csv(NOAA_SCOTTSL3, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTSL3_SST.csv")
+
+#SCOTTSS1
+NOAA_SCOTTSS1 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTSS1")
+
+write_csv(NOAA_SCOTTSS1, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTSS1_SST.csv")
+
+#SCOTTSS2
+NOAA_SCOTTSS2 <- NOAA_Scott %>% 
+  mutate(date = format(Date, "%Y-%b-%d")) %>% 
+  filter(subsite == "SCOTTSS2")
+
+write_csv(NOAA_SCOTTSS2, "C:/Users/Sam/Documents/Git/MQ_MRes2021/data_raw/NOAA_SCOTTSS2_SST.csv")
