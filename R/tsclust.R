@@ -1,12 +1,10 @@
-# Ningaloo_13TNT_CCI
-# Ningaloo_13TNT_Logger
-# Ningaloo_13TNT_CCore
-# Ningaloo_13TNT_NOAA
-# Need to run the other scripts to obtian the dataset first 
+# Start script from row 51 #
 
+#####-----#####
 library(TSclust)
 dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% 
   add_row(as_tibble(Ningaloo_13TNT_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
   mutate(data_type = 
@@ -50,15 +48,27 @@ hc2 <- hclust(tsdist2)
 plot(hc2)
 
 
-
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script to get the following tibbles:
+# Need to run another script (Detrended.R files) to get the following tibbles:
 # Ningaloo_13TNT_CCI
 # Ningaloo_13TNT_Logger
 # Ningaloo_13TNT_CCore
 # Ningaloo_13TNT_NOAA
 #
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% # could remove this to improve significance
+  add_row(as_tibble(Ningaloo_13TNT_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
 
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
@@ -94,9 +104,945 @@ summary(gam2)
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
-summary(lm1)
+summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for the site ningaloo. 
-# Need to think about whether a straight pair-up using the collection date of coral core data with sst is a good idea. Alternative can be averaging the sst data leading up to the 
+# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
+# Need to think about whether a straight pair-up using the collection date of coral core data with sst is a good idea. 
+# Alternative can be averaging the sst data leading up to the 
+
+
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_08TNT_CCI
+# Ningaloo_08TNT_Logger
+# Ningaloo_08TNT_CCore
+# Ningaloo_08TNT_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_08TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_08TNT_NOAA)) %>% 
+  # no values if logger data is added here: add_row(as_tibble(Ningaloo_08TNT_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_08TNT_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
+# if logger data is added for this site, no values are obtained for the models
+
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_13BND_CCI
+# Ningaloo_13BND_Logger
+# Ningaloo_13BND_CCore
+# Ningaloo_13BND_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_13BND_CCI) %>% 
+  add_row(as_tibble(Ningaloo_13BND_NOAA)) %>% 
+  add_row(as_tibble(Ningaloo_13BND_Logger)) %>%
+  add_row(as_tibble(Ningaloo_13BND_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site. 
+## removing logger data in calculations reduces R-sq for CCI model
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_08BND_CCI
+# Ningaloo_08BND_Logger
+# Ningaloo_08BND_CCore
+# Ningaloo_08BND_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_08BND_CCI) %>% 
+  add_row(as_tibble(Ningaloo_08BND_NOAA)) %>% 
+  #no values if logger data is included : add_row(as_tibble(Ningaloo_08BND_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_08BND_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site. 
+# including logger data in calculations result in no data available
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_TNT_CCI
+# Ningaloo_TNT_Logger
+# Ningaloo_TNT_CCore
+# Ningaloo_TNT_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_TNT_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_TNT_CCore) %>% 
+            rename(sst = `d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this ningaloo site.  
+# no data is available for analysis when logger data is included
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_TNT07C_CCI
+# Ningaloo_TNT07C_Logger
+# Ningaloo_TNT07C_CCore
+# Ningaloo_TNT07C_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_TNT07C_CCI) %>% 
+  add_row(as_tibble(Ningaloo_TNT07C_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT07C_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_TNT07C_CCore) %>% 
+            rename(sst = `Tantabiddi Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
+# low R-sq value for both <0.5
+# no data is available for analysis when logger data is included
+
+#####--------------------##### 
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Ningaloo_BUN05A_CCI
+# Ningaloo_BUN05A_Logger
+# Ningaloo_BUN05A_CCore
+# Ningaloo_BUN05A_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Ningaloo_BUN05A_CCI) %>% 
+  add_row(as_tibble(Ningaloo_BUN05A_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_BUN05A_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_BUN05A_CCore) %>% 
+            rename(sst = `Bundegi Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this ningaloo site.  
+# low R-sq value for both <0.5
+# no data is available for analysis when logger data is included
+
+
+#####-----#####
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Browse_05_CCI
+# Browse_05_Logger
+# Browse_05_CCore
+# Browse_05_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Browse_05_CCI) %>% 
+  add_row(as_tibble(Browse_05_NOAA)) %>% 
+  add_row(as_tibble(Browse_05_Logger)) %>% 
+  add_row(as_tibble(Browse_05_CCore) %>% 
+            rename(sst = `BRS05 Sr/Ca [mmol/mol]`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "browse_CCI",
+                      data_type == "Logger" ~ "browse_Logger", 
+                      data_type == "NOAA" ~ "browse_NOAA",
+                      data_type == "Coral Core" ~ "browse_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this browse island site.  
+# R-sq value is much higher when logger data is included
+# wayyyy more data points when logger data is excluded, but lower R-sq
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Browse_07_CCI
+# Browse_07_Logger
+# Browse_07_CCore
+# Browse_07_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Browse_07_CCI) %>% 
+  add_row(as_tibble(Browse_07_NOAA)) %>% 
+  # only 9 points are available when including logger data: add_row(as_tibble(Browse_07_Logger)) %>% 
+  add_row(as_tibble(Browse_07_CCore) %>% 
+            rename(sst = `BRS07 Sr/Ca [mmol/mol]`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "browse_CCI",
+                      data_type == "Logger" ~ "browse_Logger", 
+                      data_type == "NOAA" ~ "browse_NOAA",
+                      data_type == "Coral Core" ~ "browse_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this browse island site.  
+# GAM does not work when logger data is included, as there are only 9 points
+
+#####-----#####
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# DARL_CCI
+# DARL_Logger
+# DARL_CCore
+# DARL_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(DARL_CCI) %>% 
+  add_row(as_tibble(DARL_NOAA)) %>% 
+  #less than 10 points if logger data is included : add_row(as_tibble(DARL_Logger)) %>% 
+  add_row(as_tibble(DARL_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "Cocos_CCI",
+                      data_type == "Logger" ~ "Cocos_Logger", 
+                      data_type == "NOAA" ~ "Cocos_NOAA",
+                      data_type == "Coral Core" ~ "Cocos_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this Cocos (Keeling) island site.  
+# GAM does not work when logger data is included, as there are less than 10 points
+#R-sq values are very low
+
+
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# DARL_CCI
+# DARL_Logger
+# DARL_CCore
+# DARL_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(DAR3_CCI) %>% 
+  add_row(as_tibble(DAR3_NOAA)) %>% 
+  #less than 10 points if logger data is included : add_row(as_tibble(DAR3_Logger)) %>% 
+  add_row(as_tibble(DAR3_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "Cocos_CCI",
+                      data_type == "Logger" ~ "Cocos_Logger", 
+                      data_type == "NOAA" ~ "Cocos_NOAA",
+                      data_type == "Coral Core" ~ "Cocos_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this Cocos (Keeling) island site.  
+# GAM does not work when logger data is included, as there are less than 10 points
+#R-sq values are very low
+
+
+#####-----#####
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# Wallabi_Island_CCI
+# Wallabi_Island_Logger
+# Wallabi_Island_CCore
+# Wallabi_Island_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(Wallabi_Island_CCI) %>% 
+  add_row(as_tibble(Wallabi_Island_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(Wallabi_Island_Logger)) %>% 
+  add_row(as_tibble(Wallabi_Island_CCore) %>% 
+            rename(sst = `d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
+# No data is available when logger data is included
+#R-sq values are very low <0.5
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# HAB10A_d18O_CCI
+# HAB10A_d18O_Logger
+# HAB10A_d18O_CCore
+# HAB10A_d18O_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(HAB10A_d18O_CCI) %>% 
+  add_row(as_tibble(HAB10A_d18O_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB10A_d18O_Logger)) %>% 
+  add_row(as_tibble(HAB10A_d18O_CCore) %>% 
+            rename(sst = `HAB10A d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in NOAA's sst better than CCI for this Houtman Abrolhos island site.  
+# No data is available when logger data is included
+#R-sq values are very low <0.5
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# HAB05B_d18O_CCI
+# HAB05B_d18O_Logger
+# HAB05B_d18O_CCore
+# HAB05B_d18O_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(HAB05B_d18O_CCI) %>% 
+  add_row(as_tibble(HAB05B_d18O_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB05B_d18O_Logger)) %>% 
+  add_row(as_tibble(HAB05B_d18O_CCore) %>% 
+            rename(sst = `HAB05B d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## only 9 points, unable to support GAM
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# HAB10A_SrCa_CCI
+# HAB10A_SrCa_Logger
+# HAB10A_SrCa_CCore
+# HAB10A_SrCa_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(HAB10A_SrCa_CCI) %>% 
+  add_row(as_tibble(HAB10A_SrCa_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB10A_SrCa_Logger)) %>% 
+  add_row(as_tibble(HAB10A_SrCa_CCore) %>% 
+            rename(sst = `HAB10A Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf is low!!
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
+# No data is available when logger data is included
+# model summary shows not significant
+#R-sq values are very low <0.5
+
+#####--------------------#####
+## To run the calibration analysis
+# Need to run another script (Detrended.R files) to get the following tibbles:
+# HAB05B_SrCa_CCI
+# HAB05B_SrCa_Logger
+# HAB05B_SrCa_CCore
+# HAB05B_SrCa_NOAA
+#
+
+library(TSclust)
+dat <- as_tibble(HAB05B_SrCa_CCI) %>% 
+  add_row(as_tibble(HAB05B_SrCa_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB05B_SrCa_Logger)) %>% 
+  add_row(as_tibble(HAB05B_SrCa_CCore) %>% 
+            rename(sst = `HAB05B Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  #add_row(dat2) %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  select(-date) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+library(mgcv)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam1)
+summary(gam1)
+# edf is low!!
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+plot(gam2)
+summary(gam2)
+# edf ~ 2 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+# Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
+# No data is available when logger data is included
+# model summary shows not significant
+#R-sq values are very low <0.5
