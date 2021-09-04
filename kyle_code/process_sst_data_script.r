@@ -15,7 +15,6 @@ library(hydrostats)
 library(ncdf4)
 # library(modes)
 library(parallel)
-library(multicore)
 library(beepr)
 
 
@@ -26,16 +25,16 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/coral_core_coordinates_scott_reef_NOAA_SST_data.csv'
+csv_file <- 'kyle_code/data/NOAA_SST.csv'
 
 
 # ..... settings ====
-lat_input <- 'latitude'  # latitude column
-lon_input <- 'longitude'  # longitude column
-date_input <- 'date'  # date column
+lat_input <- 'Latitude'  # latitude column
+lon_input <- 'Longitude'  # longitude column
+date_input <- 'Date'  # date column
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
 date_format <- 'dmy'  # date column format. e.g. 31/02/1998 = 'dmy'
-days <- 60  # number of days to calculate metrics for based on the date value for each row
+days <- 84  # number of days to calculate metrics for based on the date value for each row
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
 mmm_from_sst_start_year = 1985
@@ -177,7 +176,7 @@ output_data <- sst_data_plus_mmm_and_dhw %>%
 out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
 out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
 
-write_csv(x = output_data, file = out_name)
+write_csv(x = output_data, out_name)
 
 # Will finish metrics calculation if needed
 
