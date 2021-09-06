@@ -26,20 +26,21 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/coral_core_coordinates_scott_reef_NOAA_SST_data.csv'
+csv_file <- 'kyle_code/data/CCI_BRS05.csv'
 
 
 # ..... settings ====
-lat_input <- 'latitude'  # latitude column
-lon_input <- 'longitude'  # longitude column
-date_input <- 'date'  # date column
+sst_input <- 'mean temperature deg C'
+lat_input <- 'Lat'  # latitude column
+lon_input <- 'Lon'  # longitude column
+date_input <- 'daily_date'  # date column
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
 date_format <- 'dmy'  # date column format. e.g. 31/02/1998 = 'dmy'
 days <- 60  # number of days to calculate metrics for based on the date value for each row
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
-mmm_from_sst_start_year = 1985
-mmm_from_sst_end_year = 2012
+mmm_from_sst_start_year = 1985  # NOAA defaults, minus 1993
+mmm_from_sst_end_year = 1990  # NOAA defaults, minus 1993
 
 mmm_climatology_bool <- TRUE  # mean monthly maximum using NOAAs provided MMM climatology layer
 
@@ -65,14 +66,24 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 sst_data <- read_csv(file = csv_file)
 
 
-# ..... convert lat, long and date column names ====
+# ..... convert sst, lat, long and date column names ====
 sst_data <- sst_data %>%
-  rename(Date = date_input,
+  rename(sst = sst_input,
+         Date = date_input,
          Latitude = lat_input,
          Longitude = lon_input,
          end_date = end_date_input) %>%
   mutate(Date = date(parse_date_time(Date, orders = date_format)),
          end_date = date(parse_date_time(end_date, orders = date_format)))
+
+
+# ..... fix for brackets around sst data ====
+sst_data <- sst_data %>%
+  mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
+  mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
+  mutate(sst = as.numeric(sst))
+
+
 
 
 # ..... MMM Climatology recalculation ====
@@ -99,10 +110,10 @@ if(mmm_climatology_bool) {
 if(mmm_from_sst_bool) {
 
   calculate_maximum_monthly_mean_from_sst <- function(sst_data, 
-                                                    mmm_from_sst_end_year, 
-                                                    mmm_from_sst_start_year,
-                                                    continue_with_missing_sst_data = F) {
-  
+                                                      mmm_from_sst_end_year, 
+                                                      mmm_from_sst_start_year,
+                                                      continue_with_missing_sst_data = F) {
+    
   mmm_from_sst_year_range <- paste0(mmm_from_sst_start_year,'_to_',mmm_from_sst_end_year)
   
   mmm_data <- sst_data %>%
@@ -125,10 +136,11 @@ if(mmm_from_sst_bool) {
     summarise(monthly_means = mean(sst)) %>%
     ungroup() %>%
     group_by(Latitude, Longitude, year) %>%
-    filter(monthly_means == max(monthly_means)) %>%
+    summarise(monthly_means = mean(monthly_means)) %>%
     ungroup() %>%
     group_by(Latitude, Longitude) %>%
-    summarise(mmm_from_sst = max(monthly_means)) %>%
+    filter(monthly_means == max(monthly_means)) %>%
+    rename(mmm_from_sst = monthly_means) %>%
     mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
     distinct()
     
@@ -137,12 +149,12 @@ if(mmm_from_sst_bool) {
   
 }
 
-
-mmm_from_sst <- 
-  calculate_maximum_monthly_mean_from_sst(sst_data = sst_data,
-                                          mmm_from_sst_end_year = mmm_from_sst_end_year,
-                                          mmm_from_sst_start_year = mmm_from_sst_start_year,
-                                          continue_with_missing_sst_data = F)
+  
+  mmm_from_sst <- 
+    calculate_maximum_monthly_mean_from_sst(sst_data = sst_data,
+                                            mmm_from_sst_end_year = mmm_from_sst_end_year,
+                                            mmm_from_sst_start_year = mmm_from_sst_start_year,
+                                            continue_with_missing_sst_data = F)
 
 }
 
@@ -167,6 +179,21 @@ sst_data_plus_mmm_and_dhw <- sst_data %>%
   .
 }} %>%
   mutate(dhw_threshold = threshold)
+
+
+# Check how your sst derived mmm's match up with the NOAA provided ones
+if(mmm_climatology_bool && mmm_from_sst_bool) {
+  
+  mean_absolute_deviation_from_noaa_mmm <- sst_data_plus_mmm_and_dhw %>%
+    mutate(mad = mmm_from_sst - mmm_climatology) %>%
+    group_by(Latitude, Longitude) %>%
+    summarise(mad = mean(abs(mad))) %>%
+    print() %>%
+    ungroup() %>%
+    summarise(mad = mean(abs(mad))) %>%
+    print()
+
+}
 
 
 # Output
