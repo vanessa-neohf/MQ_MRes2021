@@ -87,10 +87,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 2.16 so linear + quadratic should give a good approx to the trend
+# edf = 2.677 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -101,10 +101,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf ~ 2 so linear + quadratic should give a good approx to the trend
+# edf = 2.724 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -153,16 +153,16 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 1.623 so linear + quadratic should give a good approx to the trend
+# edf = 2.477 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
 summary(lm1)
 
-# p-value for quadratic is 0.5
+# p-value for quadratic is 0.564
 # use linear model instead
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
@@ -174,10 +174,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 1.618 so linear + quadratic should give a good approx to the trend
+# edf = 2.391 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -192,7 +192,7 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
+# Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site.  
 # if logger data is added for this site, no values are obtained for the models
 
 
@@ -231,10 +231,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature for NOAA vs coral core. 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 1.7 so linear + quadratic should give a good approx to the trend
+# edf = 2.283 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -252,10 +252,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 6.801 so linear + quadratic should give a good approx to the trend
+# edf = 1.672 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -270,7 +270,7 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site. 
+# Coral core is able to explain the variability in NOAA's sst much better than CCI for this ningaloo site. 
 ## removing logger data in calculations reduces R-sq for CCI model
 # only 10 points when logger data is included in analysis
 
@@ -309,10 +309,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with curvature. 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 2.885 so linear + quadratic should give a good approx to the trend
+# edf = 3.657 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -325,10 +325,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with curvature. 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 2.736 so linear + quadratic should give a good approx to the trend
+# edf = 2.88 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -376,10 +376,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 3.237 so linear + quadratic should give a good approx to the trend
+# edf = 3.138 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -397,10 +397,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 3.313 so linear + quadratic should give a good approx to the trend
+# edf = 3.056 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -408,6 +408,10 @@ summary(lm2)
 
 # p-value for quadratic is 0.258
 # use linear model instead
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
@@ -449,10 +453,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 5.543 so linear + quadratic should give a good approx to the trend
+# edf = 1.237 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -470,10 +474,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 1.009 so linear + quadratic should give a good approx to the trend
+# edf = 1.139 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -482,9 +486,13 @@ summary(lm2)
 # p-value for quadratic is 0.726
 # use linear model
 
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+summary(lm2)
+
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
+# Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site.  
 # low R-sq value for both <0.5
 # no data is available for analysis when logger data is included
 
@@ -523,10 +531,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend 
 library(mgcv)
-gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 0.9226 so quadratic might not give a good approx to the trend
+# edf = 1.032 so quadratic might not give a good approx to the trend
 
 lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -544,10 +552,10 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend 
-gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 1.048 so linear + quadratic should give a good approx to the trend
+# edf = 1.221 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
           data = dat_joint)
@@ -562,7 +570,7 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this ningaloo site.  
+# Coral core is able to explain the variability in CCI's sst much better than NOAA for this ningaloo site.  
 # low R-sq value for both <0.5
 # no data is available for analysis when logger data is included
 
@@ -603,10 +611,10 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
   geom_smooth(method = "gam")
 # decreasing trend with curvature. 
 library(mgcv)
-gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 3.937 so linear + quadratic should give a good approx to the trend
+# edf = 3.841 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
           data = dat_joint)
@@ -624,10 +632,10 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 3.845 so linear + quadratic should give a good approx to the trend
+# edf = 3.727 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
           data = dat_joint)
@@ -636,9 +644,14 @@ summary(lm2)
 # p-value for quadratic is 0.204
 # use linear model
 
+lm2 <- lm(browse_CCI ~ 1 + browse_coral_core, 
+          data = dat_joint)
+summary(lm2)
+
+
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this browse island site.  
+# Coral core is able to explain the variability in CCI's sst much better than NOAA for this browse island site.  
 # R-sq value is much higher when logger data is included
 # wayyyy more data points when logger data is excluded, but lower R-sq
 
@@ -677,10 +690,10 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
 library(mgcv)
-gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 2.049 so linear + quadratic should give a good approx to the trend
+# edf = 3.039 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
           data = dat_joint)
@@ -698,10 +711,10 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 2.25 so linear + quadratic should give a good approx to the trend
+# edf = 3.166 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
           data = dat_joint)
@@ -711,7 +724,7 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# Coral core is able to explain the variability in CCI's sst better than NOAA for this browse island site.  
+# Coral core is able to explain the variability in CCI's sst much better than NOAA for this browse island site.  
 # GAM does not work when logger data is included, as there are only 9 points
 
 #####-----#####
@@ -753,10 +766,10 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
 # linear decreasing trend
 
 library(mgcv)
-gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 1.427 so linear + quadratic should give a good approx to the trend
+# edf = 1.881 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
           data = dat_joint)
@@ -774,10 +787,10 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend 
-gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 1.41 so linear + quadratic should give a good approx to the trend
+# edf = 1.969 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
           data = dat_joint)
@@ -833,10 +846,10 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
 library(mgcv)
-gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 1.427 so linear + quadratic should give a good approx to the trend
+# edf = 1.881 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
           data = dat_joint)
@@ -854,10 +867,10 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 1.41 so linear + quadratic should give a good approx to the trend
+# edf = 1.969 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
           data = dat_joint)
@@ -910,10 +923,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_smooth(method = "gam")
 # trend is explained by a curvature. 
 library(mgcv)
-gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 3.758 so linear + quadratic should give a good approx to the trend
+# edf = 3.398 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -926,10 +939,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # trend is explained by curvature. 
-gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 2.949 so linear + quadratic should give a good approx to the trend
+# edf = 2.975 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -977,16 +990,16 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
 library(mgcv)
-gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf = 1.767 so linear + quadratic should give a good approx to the trend
+# edf = 1.16 so linear + quadratic should give a good approx to the trend
 
 lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
 summary(lm1)
 
-# p-value for quadratic is 0.07
+# p-value for quadratic is 0.0657
 # use linear model
 
 lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
@@ -998,10 +1011,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 0.9157 so quadratic model might not give a good approx to the trend
+# edf = 0.9356 so quadratic model might not give a good approx to the trend
 
 lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -1051,6 +1064,25 @@ dat_joint <- dat %>%
 GGally::ggpairs(dat_joint)
 ## only 9 points, unable to support GAM
 
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
+          data = dat_joint)
+summary(lm1)
+
+#p-value not significant for linear model
+
+# repeat for CCI 
+## only 9 points, unable to support GAM
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
+          data = dat_joint)
+summary(lm2)
+
+# p-value is 0.0925, not significant for linear model
+
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
 #####--------------------#####
 ## To run the calibration analysis
 # Need to run another script (Detrended.R files) to get the following tibbles:
@@ -1086,10 +1118,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_smooth(method = "gam")
 # trend is linear and seems to be decreasing slightly
 library(mgcv)
-gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf is low!!
+# edf is low, only 0.2038!!
 
 lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -1109,10 +1141,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 0.7439 so quadratic might not give a good approx to the trend
+# edf = 0.8382 so quadratic might not give a good approx to the trend
 
 lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -1125,7 +1157,7 @@ lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core,
           data = dat_joint)
 summary(lm2)
 
-# p-value for linear model is not significant as well
+# p-value for linear model is not significant as well (0.0638)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
@@ -1169,10 +1201,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_smooth(method = "gam")
 # linear and slight decreasing trend
 library(mgcv)
-gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
-# edf is 1.641, linear + quadratic should be able to give a good approx to trend
+# edf is 0.5599 LOW!
 
 lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -1192,10 +1224,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend
-gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint)
+gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
 summary(gam2)
-# edf = 2.624 so linear + quadratic should give a good approx to the trend
+# edf = 0.9579 so linear + quadratic should give a good approx to the trend
 
 lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
           data = dat_joint)
@@ -1215,4 +1247,5 @@ modelsummary::modelsummary(list(lm1, lm2))
 # Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
 # No data is available when logger data is included
 # model summary shows not significant
-#R-sq values are very low <0.5
+# R-sq values are very low <0.5
+# p-value for linear models are only significant for CCI but not NOAA
