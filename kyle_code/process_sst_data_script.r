@@ -206,6 +206,46 @@ out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
+library(runner)
+# Output
+output_data <- sst_data_plus_mmm_and_dhw %>% 
+  dplyr::select(-end_date) %>%
+  mutate(Date = as.character(Date)) %>% 
+  mutate(DHW_value = degree_heating_week_mmm_from_sst + dhw_threshold) %>% 
+  mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value)) %>% 
+  run_by(idx = "Date", lag = 84, na_pad = FALSE) %>% 
+  mutate(accum_DHW_12weeks = runner(
+    x = DHW_value,
+    f = sum
+  )) %>% 
+  mutate(accum_DHW_12weeks = accum_DHW_12weeks/7) #calculate DHW with sum of SST (84 days) divided by 7
+
+
+out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
+out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
+
+write_csv(x = output_data, out_name)
+
+#.... Combining files from the same data source----
+csv_file_NOAA_1 <- 'kyle_code/data/coral_core_coordinates_scott_reef_NOAA_SST_data_with_mmm_and_dhw.csv'
+csv_file_NOAA_2 <- 'kyle_code/data/NOAA_SST_with_mmm_and_dhw.csv'
+NOAA_Scott_Reef <- read_csv(file = csv_file_NOAA_1)
+NOAA_Others <- read_csv(file = csv_file_NOAA_2)
+NOAA_Scott_Reef <- NOAA_Scott_Reef %>% #align column names with NOAA_Others
+  rename(Site = site,
+         Reef_Site = subsite) %>% 
+  mutate(Data_Type = "NOAA")
+NOAA_Others <- NOAA_Others %>% 
+  mutate(Data_Type = if_else(Data_Type == "NOAA", "NOAA", "NOAA"))
+
+NOAA_Combined <- bind_rows(csv_file_NOAA_1, csv_file_NOAA_2)
+
+out_name <- csv_file_NOAA_2 %>% str_replace(pattern = 'SST', replacement = 'Combined')
+
+#why does this not work?? <- out_name <- ('NOAA_Combined_with_mmm_and_dhw.csv')
+
+write_csv(x = NOAA_Combined, out_name)
+
 # Will finish metrics calculation if needed
 
 # # ..... calculate metrics ====
