@@ -16,6 +16,7 @@ library(ncdf4)
 # library(modes)
 library(parallel)
 library(beepr)
+library(runner)
 
 
 # ..... Functions ====
@@ -25,17 +26,17 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/CCI_BRS05.csv'
+csv_file <- 'kyle_code/data/NOAA_SST.csv'
 
 
 # ..... settings ====
-sst_input <- 'mean temperature deg C'
-lat_input <- 'Lat'  # latitude column
-lon_input <- 'Lon'  # longitude column
-date_input <- 'daily_date'  # date column
+sst_input <- 'sst'
+lat_input <- 'Latitude'  # latitude column
+lon_input <- 'Longitude'  # longitude column
+date_input <- 'Date'  # date column
 
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
-date_format <- 'dmy'  # date column format. e.g. 31/02/1998 = 'dmy'
+date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
 days <- 84  # number of days to calculate metrics for based on the date value for each row
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
@@ -63,7 +64,7 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 
 # ..... import SST data ====
-sst_data <- read_csv(file = csv_file)
+sst_data <- read_csv(file = csv_file) 
 
 
 # ..... convert sst, lat, long and date column names ====
@@ -196,55 +197,37 @@ if(mmm_climatology_bool && mmm_from_sst_bool) {
 }
 
 
-# Output
+
+# Calculating running sum of DHW
+unique(sst_data$Reef_Site) #for NOAA combined file only
+
 output_data <- sst_data_plus_mmm_and_dhw %>% 
   dplyr::select(-end_date) %>%
-  mutate(Date = as.character(Date))
-
-out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
-out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
-
-write_csv(x = output_data, out_name)
-
-library(runner)
-# Output
-output_data <- sst_data_plus_mmm_and_dhw %>% 
-  dplyr::select(-end_date) %>%
-  mutate(Date = as.character(Date)) %>% 
   mutate(DHW_value = degree_heating_week_mmm_from_sst + dhw_threshold) %>% 
-  mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value)) %>% 
-  run_by(idx = "Date", lag = 84, na_pad = FALSE) %>% 
+  mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value))
+
+output_data <- output_data %>%   #for NOAA combined file only
+  filter(Reef_Site == "Wallabi Island")
+
+output_data <- output_data %>% 
   mutate(accum_DHW_12weeks = runner(
-    x = DHW_value,
-    f = sum
+    x = output_data$DHW_value,
+    f = sum, 
+    k = "84 days",
+    idx = output_data$Date,
+    na_pad = TRUE
   )) %>% 
-  mutate(accum_DHW_12weeks = accum_DHW_12weeks/7) #calculate DHW with sum of SST (84 days) divided by 7
+  mutate(accum_DHW_12weeks = accum_DHW_12weeks / 7) %>%  #calculate DHW with sum of SST (84 days) divided by 7
+  mutate(Date = as.character(Date)) 
 
+max(output_data$accum_DHW_12weeks) #check accumulated DHW values
+ 
 
-out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
-out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
+out_name <- csv_file %>% str_replace(pattern = 'SST.csv', replacement = '')
+out_name <- paste0(out_name,'Wallabi_Island_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
-#.... Combining files from the same data source----
-csv_file_NOAA_1 <- 'kyle_code/data/coral_core_coordinates_scott_reef_NOAA_SST_data_with_mmm_and_dhw.csv'
-csv_file_NOAA_2 <- 'kyle_code/data/NOAA_SST_with_mmm_and_dhw.csv'
-NOAA_Scott_Reef <- read_csv(file = csv_file_NOAA_1)
-NOAA_Others <- read_csv(file = csv_file_NOAA_2)
-NOAA_Scott_Reef <- NOAA_Scott_Reef %>% #align column names with NOAA_Others
-  rename(Site = site,
-         Reef_Site = subsite) %>% 
-  mutate(Data_Type = "NOAA")
-NOAA_Others <- NOAA_Others %>% 
-  mutate(Data_Type = if_else(Data_Type == "NOAA", "NOAA", "NOAA"))
-
-NOAA_Combined <- bind_rows(csv_file_NOAA_1, csv_file_NOAA_2)
-
-out_name <- csv_file_NOAA_2 %>% str_replace(pattern = 'SST', replacement = 'Combined')
-
-#why does this not work?? <- out_name <- ('NOAA_Combined_with_mmm_and_dhw.csv')
-
-write_csv(x = NOAA_Combined, out_name)
 
 # Will finish metrics calculation if needed
 
