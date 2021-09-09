@@ -65,7 +65,8 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = csv_file) %>% 
-  mutate(end_date = "2021/06/01")
+  mutate(end_date = max(daily_date)) %>% 
+  mutate(end_date = as_date(ymd(end_date)))
 
 
 # ..... convert sst, lat, long and date column names ====
