@@ -73,7 +73,7 @@ NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with
 
 You can also embed plots, for example:
 
-```{r DHW Time Series Plots, echo = FALSE}
+```{r DHW_TS, echo = FALSE}
 #BRS05
 CCI_BRS05 <- CCI_BRS05 %>% 
   mutate(Reef_Site = "BRS05", Data_Type = "CCI") %>% 
