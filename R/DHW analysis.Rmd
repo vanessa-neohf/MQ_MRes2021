@@ -18,6 +18,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r Loading Packages, message = FALSE, include = FALSE}
 library(tidyverse)
+library(dplyr)
 library(colorspace)
 ```
 
@@ -64,7 +65,7 @@ NOAA_SCOTTSL3 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL3_with_mm
 NOAA_SCOTTSS1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS1_with_mmm_and_dhw.csv"))
 NOAA_SCOTTSS2 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS2_with_mmm_and_dhw.csv"))
 NOAA_Tantabiddi <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_with_mmm_and_dhw.csv"))
-NOAA_TNT <- read_csv(here::here("data_raw", "CCI_TNT_with_mmm_and_dhw.csv"))
+NOAA_TNT <- read_csv(here::here("data_raw", "NOAA_TNT_with_mmm_and_dhw.csv"))
 NOAA_TNT07C <- read_csv(here::here("data_raw", "NOAA_TNT07C_with_mmm_and_dhw.csv"))
 NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with_mmm_and_dhw.csv"))
 ```
