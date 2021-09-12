@@ -1,0 +1,539 @@
+---
+title: "Degree Heating Week Analysis"
+author: "Vanessa"
+date: "9/12/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+```{r Loading Packages, message = FALSE, include = FALSE}
+library(tidyverse)
+library(colorspace)
+```
+
+```{r Reading CCI & NOAA Degree Heating Week Raw Data, include = FALSE}
+#CCI data
+CCI_BRS05 <- read_csv(here::here("data_raw", "CCI_BRS05_with_mmm_and_dhw.csv"))
+CCI_BRS07 <- read_csv(here::here("data_raw", "CCI_BRS07_with_mmm_and_dhw.csv"))
+CCI_BUN05A <- read_csv(here::here("data_raw", "CCI_BUN05A_with_mmm_and_dhw.csv"))
+CCI_Bundegi <- read_csv(here::here("data_raw", "CCI_Bundegi_with_mmm_and_dhw.csv"))
+CCI_DAR3 <- read_csv(here::here("data_raw", "CCI_DAR3_with_mmm_and_dhw.csv"))
+CCI_DARL <- read_csv(here::here("data_raw", "CCI_DARL_with_mmm_and_dhw.csv"))
+CCI_HAB05B <- read_csv(here::here("data_raw", "CCI_HAB05B_with_mmm_and_dhw.csv"))
+CCI_HAB10A <- read_csv(here::here("data_raw", "CCI_HAB10A_with_mmm_and_dhw.csv"))
+CCI_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv"))
+CCI_SCOTT_SL4 <- read_csv(here::here("data_raw", "CCI_SCOTT_SL4_with_mmm_and_dhw.csv"))
+CCI_SCOTT_SS3 <- read_csv(here::here("data_raw", "CCI_SCOTT_SS3_with_mmm_and_dhw.csv"))
+CCI_SCOTTNR1 <- read_csv(here::here("data_raw", "CCI_SCOTTNR1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL1 <- read_csv(here::here("data_raw", "CCI_SCOTTSL1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL2 <- read_csv(here::here("data_raw", "CCI_SCOTTSL2_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL3 <- read_csv(here::here("data_raw", "CCI_SCOTTSL3_with_mmm_and_dhw.csv"))
+CCI_SCOTTSS1 <- read_csv(here::here("data_raw", "CCI_SCOTTSS1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSS2 <- read_csv(here::here("data_raw", "CCI_SCOTTSS2_with_mmm_and_dhw.csv"))
+CCI_Tantabiddi <- read_csv(here::here("data_raw", "CCI_Tantabiddi_with_mmm_and_dhw.csv"))
+CCI_TNT <- read_csv(here::here("data_raw", "CCI_TNT_with_mmm_and_dhw.csv"))
+CCI_TNT07C <- read_csv(here::here("data_raw", "CCI_TNT07C_with_mmm_and_dhw.csv"))
+CCI_Wallabi_Island <- read_csv(here::here("data_raw", "CCI_Wallabi_Island_with_mmm_and_dhw.csv"))
+
+#NOAA data
+NOAA_BRS05 <- read_csv(here::here("data_raw", "NOAA_BRS05_with_mmm_and_dhw.csv"))
+NOAA_BRS07 <- read_csv(here::here("data_raw", "NOAA_BRS07_with_mmm_and_dhw.csv"))
+NOAA_BUN05A <- read_csv(here::here("data_raw", "NOAA_BUN05A_with_mmm_and_dhw.csv"))
+NOAA_Bundegi <- read_csv(here::here("data_raw", "NOAA_Bundegi_with_mmm_and_dhw.csv"))
+NOAA_DAR3 <- read_csv(here::here("data_raw", "NOAA_DAR3_with_mmm_and_dhw.csv"))
+NOAA_DARL <- read_csv(here::here("data_raw", "NOAA_DAR_Long_with_mmm_and_dhw.csv"))
+NOAA_HAB05B <- read_csv(here::here("data_raw", "NOAA_HAB05B_with_mmm_and_dhw.csv"))
+NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_HAB10A_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_RPO_1_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_SL4 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_SL4_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_SS3 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_SS3_with_mmm_and_dhw.csv"))
+NOAA_SCOTTNR1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTNR1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL2 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL2_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL3 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL3_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSS1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSS2 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS2_with_mmm_and_dhw.csv"))
+NOAA_Tantabiddi <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_with_mmm_and_dhw.csv"))
+NOAA_TNT <- read_csv(here::here("data_raw", "CCI_TNT_with_mmm_and_dhw.csv"))
+NOAA_TNT07C <- read_csv(here::here("data_raw", "NOAA_TNT07C_with_mmm_and_dhw.csv"))
+NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with_mmm_and_dhw.csv"))
+```
+
+
+You can also embed plots, for example:
+
+```{r DHW Time Series Plots, echo = FALSE}
+#BRS05
+CCI_BRS05 <- CCI_BRS05 %>% 
+  mutate(Reef_Site = "BRS05", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BRS05 <- NOAA_BRS05 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BRS05_Sat_Combined <- rbind(CCI_BRS05, NOAA_BRS05)
+
+ggplot(BRS05_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BRS05 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#BRS07
+CCI_BRS07 <- CCI_BRS07 %>% 
+  mutate(Reef_Site = "BRS07", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BRS07 <- NOAA_BRS07 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07)
+
+ggplot(BRS07_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BRS07 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#DAR3
+CCI_DAR3 <- CCI_DAR3 %>% 
+  mutate(Reef_Site = "DAR3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_DAR3 <- NOAA_DAR3 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+DAR3_Sat_Combined <- rbind(CCI_DAR3, NOAA_DAR3)
+
+ggplot(DAR3_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of DAR3 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#DAR Long
+CCI_DARL <- CCI_DARL %>% 
+  mutate(Reef_Site = "DAR Long", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_DARL <- NOAA_DARL %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+DARL_Sat_Combined <- rbind(CCI_DARL, NOAA_DARL)
+
+ggplot(DARL_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of DAR Long Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Scott_RPO_1
+CCI_SCOTT_RPO_1 <- CCI_SCOTT_RPO_1 %>% 
+  mutate(Reef_Site = "SCOTT_RPO_1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_RPO_1_Sat_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1)
+
+ggplot(SCOTT_RPO_1_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_RPO_1 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Scott_SL4
+CCI_SCOTT_SL4 <- CCI_SCOTT_SL4 %>% 
+  mutate(Reef_Site = "SCOTT_SL4", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_SL4_Sat_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4)
+
+ggplot(SCOTT_SL4_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SL4 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+  
+
+#Scott_SS3
+CCI_SCOTT_SS3 <- CCI_SCOTT_SS3 %>% 
+  mutate(Reef_Site = "SCOTT_SS3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_SS3_Sat_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3)
+
+ggplot(SCOTT_SS3_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SS3 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottNR1
+CCI_SCOTTNR1 <- CCI_SCOTTNR1 %>% 
+  mutate(Reef_Site = "SCOTTNR1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTNR1_Sat_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1)
+
+ggplot(SCOTTNR1_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTNR1 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL1
+CCI_SCOTTSL1 <- CCI_SCOTTSL1 %>% 
+  mutate(Reef_Site = "SCOTTSL1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL1_Sat_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1)
+
+ggplot(SCOTTSL1_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL1 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL2
+CCI_SCOTTSL2 <- CCI_SCOTTSL2 %>% 
+  mutate(Reef_Site = "SCOTTSL2", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL2_Sat_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2)
+
+ggplot(SCOTTSL2_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL2 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL3
+CCI_SCOTTSL3 <- CCI_SCOTTSL3 %>% 
+  mutate(Reef_Site = "SCOTTSL3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL3_Sat_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3)
+
+ggplot(SCOTTSL3_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL3 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSS1
+CCI_SCOTTSS1 <- CCI_SCOTTSS1 %>% 
+  mutate(Reef_Site = "SCOTTSS1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSS1_Sat_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1)
+
+ggplot(SCOTTSS1_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS1 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSS2
+CCI_SCOTTSS2 <- CCI_SCOTTSS2 %>% 
+  mutate(Reef_Site = "SCOTTSS2", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSS2_Sat_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2)
+
+ggplot(SCOTTSS2_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS2 Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo BUN05A
+CCI_BUN05A <- CCI_BUN05A %>% 
+  mutate(Reef_Site = "BUN05A", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BUN05A <- NOAA_BUN05A %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
+
+ggplot(BUN05A_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BUN05A Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo Bundegi
+CCI_Bundegi <- CCI_Bundegi %>% 
+  mutate(Reef_Site = "Bundegi", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Bundegi <- NOAA_Bundegi %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Bundegi_Sat_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi)
+
+ggplot(Bundegi_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of 08BND and 13BND Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo Tantabiddi
+CCI_Tantabiddi <- CCI_Tantabiddi %>% 
+  mutate(Reef_Site = "Tantabiddi", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Tantabiddi <- NOAA_Tantabiddi %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Tantabiddi_Sat_Combined <- rbind(CCI_Tantabiddi, NOAA_Tantabiddi)
+
+ggplot(Tantabiddi_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of 08TNT and 13TNT Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo TNT
+CCI_TNT <- CCI_TNT %>% 
+  mutate(Reef_Site = "TNT", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_TNT <- NOAA_TNT %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+TNT_Sat_Combined <- rbind(CCI_TNT, NOAA_TNT)
+
+ggplot(TNT_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of TNT Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo TNT07C
+CCI_TNT07C <- CCI_TNT07C %>% 
+  mutate(Reef_Site = "TNT07C", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_TNT07C <- NOAA_TNT07C %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C)
+
+ggplot(TNT07C_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of TNT07C Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos Wallabi Island
+CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
+  mutate(Reef_Site = "Wallabi Island", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Wallabi_Island_Sat_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
+
+ggplot(Wallabi_Island_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of Wallabi Island Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos HAB05B
+CCI_HAB05B <- CCI_HAB05B %>% 
+  mutate(Reef_Site = "HAB05B", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_HAB05B <- NOAA_HAB05B %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
+
+ggplot(HAB05B_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of HAB05B Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos HAB10A
+CCI_HAB10A <- CCI_HAB10A %>% 
+  mutate(Reef_Site = "HAB10A", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_HAB10A <- NOAA_HAB10A %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
+
+ggplot(HAB10A_Sat_Combined)+
+  geom_point(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type)) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of HAB10A Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
