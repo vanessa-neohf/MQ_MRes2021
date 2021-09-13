@@ -26,14 +26,14 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/CCI_TNT07C.csv'
+csv_file <- 'kyle_code/data/NOAA_SST.csv'
 
 
 # ..... settings ====
-sst_input <- 'mean temperature deg C'
-lat_input <- 'Lat'  # latitude column
-lon_input <- 'Lon'  # longitude column
-date_input <- 'daily_date'  # date column
+sst_input <- 'sst'
+lat_input <- 'Latitude'  # latitude column
+lon_input <- 'Longitude'  # longitude column
+date_input <- 'Date'  # date column
 
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
 date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
@@ -207,8 +207,8 @@ output_data <- sst_data_plus_mmm_and_dhw %>%
   mutate(DHW_value = degree_heating_week_mmm_from_sst + dhw_threshold) %>% 
   mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value))
 
-#output_data <- output_data %>%   #for NOAA combined file only
-  #filter(Reef_Site == "HAB05B")
+output_data <- output_data %>%   #for NOAA combined file only
+  filter(Reef_Site == "HAB10A" & Data_Type == "Coral Core Sr/Ca Proxy")
 
 output_data <- output_data %>% 
   mutate(accum_DHW_12weeks = runner(
@@ -225,10 +225,11 @@ max(output_data$accum_DHW_12weeks) #check accumulated DHW values
  
 
 out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
-out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
+out_name <- paste0(out_name,'_HAB10A_SrCa_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
+unique(length(output_data$Date)) == nrow(output_data) #check for any duplicates
 
 # Will finish metrics calculation if needed
 
