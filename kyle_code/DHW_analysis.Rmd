@@ -1,0 +1,1829 @@
+---
+title: "Degree Heating Week Analysis"
+author: "Vanessa"
+date: "`r lubridate::today()`"
+output: pdf_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r Loading Packages, message = FALSE, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(patchwork)
+library(colorspace)
+library(rmarkdown)
+```
+
+```{r Reading CCI & NOAA Degree Heating Week Raw Data, include = FALSE}
+#CCI data
+CCI_BRS05 <- read_csv(here::here("data_raw", "CCI_BRS05_with_mmm_and_dhw.csv"))
+CCI_BRS07 <- read_csv(here::here("data_raw", "CCI_BRS07_with_mmm_and_dhw.csv"))
+CCI_BUN05A <- read_csv(here::here("data_raw", "CCI_BUN05A_with_mmm_and_dhw.csv"))
+CCI_Bundegi <- read_csv(here::here("data_raw", "CCI_Bundegi_with_mmm_and_dhw.csv"))
+CCI_DAR3 <- read_csv(here::here("data_raw", "CCI_DAR3_with_mmm_and_dhw.csv"))
+CCI_DARL <- read_csv(here::here("data_raw", "CCI_DARL_with_mmm_and_dhw.csv"))
+CCI_HAB05B <- read_csv(here::here("data_raw", "CCI_HAB05B_with_mmm_and_dhw.csv"))
+CCI_HAB10A <- read_csv(here::here("data_raw", "CCI_HAB10A_with_mmm_and_dhw.csv"))
+CCI_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv"))
+CCI_SCOTT_SL4 <- read_csv(here::here("data_raw", "CCI_SCOTT_SL4_with_mmm_and_dhw.csv"))
+CCI_SCOTT_SS3 <- read_csv(here::here("data_raw", "CCI_SCOTT_SS3_with_mmm_and_dhw.csv"))
+CCI_SCOTTNR1 <- read_csv(here::here("data_raw", "CCI_SCOTTNR1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL1 <- read_csv(here::here("data_raw", "CCI_SCOTTSL1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL2 <- read_csv(here::here("data_raw", "CCI_SCOTTSL2_with_mmm_and_dhw.csv"))
+CCI_SCOTTSL3 <- read_csv(here::here("data_raw", "CCI_SCOTTSL3_with_mmm_and_dhw.csv"))
+CCI_SCOTTSS1 <- read_csv(here::here("data_raw", "CCI_SCOTTSS1_with_mmm_and_dhw.csv"))
+CCI_SCOTTSS2 <- read_csv(here::here("data_raw", "CCI_SCOTTSS2_with_mmm_and_dhw.csv"))
+CCI_Tantabiddi <- read_csv(here::here("data_raw", "CCI_Tantabiddi_with_mmm_and_dhw.csv"))
+CCI_TNT <- read_csv(here::here("data_raw", "CCI_TNT_with_mmm_and_dhw.csv"))
+CCI_TNT07C <- read_csv(here::here("data_raw", "CCI_TNT07C_with_mmm_and_dhw.csv"))
+CCI_Wallabi_Island <- read_csv(here::here("data_raw", "CCI_Wallabi_Island_with_mmm_and_dhw.csv"))
+
+#NOAA data
+NOAA_BRS05 <- read_csv(here::here("data_raw", "NOAA_BRS05_with_mmm_and_dhw.csv"))
+NOAA_BRS07 <- read_csv(here::here("data_raw", "NOAA_BRS07_with_mmm_and_dhw.csv"))
+NOAA_BUN05A <- read_csv(here::here("data_raw", "NOAA_BUN05A_with_mmm_and_dhw.csv"))
+NOAA_Bundegi <- read_csv(here::here("data_raw", "NOAA_Bundegi_with_mmm_and_dhw.csv"))
+NOAA_DAR3 <- read_csv(here::here("data_raw", "NOAA_DAR3_with_mmm_and_dhw.csv"))
+NOAA_DARL <- read_csv(here::here("data_raw", "NOAA_DAR_Long_with_mmm_and_dhw.csv"))
+NOAA_HAB05B <- read_csv(here::here("data_raw", "NOAA_SST_HAB05B_SrCa_with_mmm_and_dhw.csv"))
+NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_SST_HAB10A_SrCa_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_RPO_1_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_SL4 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_SL4_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_SS3 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTT_SS3_with_mmm_and_dhw.csv"))
+NOAA_SCOTTNR1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTNR1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL2 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL2_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSL3 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSL3_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSS1 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS1_with_mmm_and_dhw.csv"))
+NOAA_SCOTTSS2 <- read_csv(here::here("data_raw", "NOAA_SST_data_SCOTTSS2_with_mmm_and_dhw.csv"))
+NOAA_Tantabiddi <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_with_mmm_and_dhw.csv"))
+NOAA_TNT <- read_csv(here::here("data_raw", "NOAA_TNT_with_mmm_and_dhw.csv"))
+NOAA_TNT07C <- read_csv(here::here("data_raw", "NOAA_TNT07C_with_mmm_and_dhw.csv"))
+NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with_mmm_and_dhw.csv"))
+```
+
+
+# Degree Heating Week Time Series Plots for CCI and NOAA data:      
+
+
+
+```{r DHW_TS, echo = FALSE}
+#BRS05
+CCI_BRS05 <- CCI_BRS05 %>% 
+  mutate(Reef_Site = "BRS05", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BRS05 <- NOAA_BRS05 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BRS05_Sat_Combined <- rbind(CCI_BRS05, NOAA_BRS05)
+
+ggplot(BRS05_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BRS05 (-14.11, 123.54) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#BRS07
+CCI_BRS07 <- CCI_BRS07 %>% 
+  mutate(Reef_Site = "BRS07", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BRS07 <- NOAA_BRS07 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07)
+
+ggplot(BRS07_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BRS07 (-14.12, 123.55) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#DAR3
+CCI_DAR3 <- CCI_DAR3 %>% 
+  mutate(Reef_Site = "DAR3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_DAR3 <- NOAA_DAR3 %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+DAR3_Sat_Combined <- rbind(CCI_DAR3, NOAA_DAR3)
+
+ggplot(DAR3_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of DAR3 (-12.10, 96.88) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#DAR Long
+CCI_DARL <- CCI_DARL %>% 
+  mutate(Reef_Site = "DAR Long", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_DARL <- NOAA_DARL %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+DARL_Sat_Combined <- rbind(CCI_DARL, NOAA_DARL)
+
+ggplot(DARL_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of DAR Long (-12.09, 96.88) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Scott_RPO_1
+CCI_SCOTT_RPO_1 <- CCI_SCOTT_RPO_1 %>% 
+  mutate(Reef_Site = "SCOTT_RPO_1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_RPO_1_Sat_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1)
+
+ggplot(SCOTT_RPO_1_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_RPO_1 (-14.06, 121.78) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Scott_SL4
+CCI_SCOTT_SL4 <- CCI_SCOTT_SL4 %>% 
+  mutate(Reef_Site = "SCOTT_SL4", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_SL4_Sat_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4)
+
+ggplot(SCOTT_SL4_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SL4 (-14.02, 121.86) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+  
+
+#Scott_SS3
+CCI_SCOTT_SS3 <- CCI_SCOTT_SS3 %>% 
+  mutate(Reef_Site = "SCOTT_SS3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTT_SS3_Sat_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3)
+
+ggplot(SCOTT_SS3_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SS3 (-13.64, 122.03) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottNR1
+CCI_SCOTTNR1 <- CCI_SCOTTNR1 %>% 
+  mutate(Reef_Site = "SCOTTNR1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTNR1_Sat_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1)
+
+ggplot(SCOTTNR1_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTNR1 (-13.99, 121.88) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL1
+CCI_SCOTTSL1 <- CCI_SCOTTSL1 %>% 
+  mutate(Reef_Site = "SCOTTSL1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL1_Sat_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1)
+
+ggplot(SCOTTSL1_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL1 (-14.08, 121.95) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL2
+CCI_SCOTTSL2 <- CCI_SCOTTSL2 %>% 
+  mutate(Reef_Site = "SCOTTSL2", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL2_Sat_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2)
+
+ggplot(SCOTTSL2_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL2 (-14.19, 121.80) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSL3
+CCI_SCOTTSL3 <- CCI_SCOTTSL3 %>% 
+  mutate(Reef_Site = "SCOTTSL3", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSL3_Sat_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3)
+
+ggplot(SCOTTSL3_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL3 (-14.07, 121.78) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSS1
+CCI_SCOTTSS1 <- CCI_SCOTTSS1 %>% 
+  mutate(Reef_Site = "SCOTTSS1", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSS1_Sat_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1)
+
+ggplot(SCOTTSS1_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS1 (-14.08, 121.98) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#ScottSS2
+CCI_SCOTTSS2 <- CCI_SCOTTSS2 %>% 
+  mutate(Reef_Site = "SCOTTSS2", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>% 
+  mutate(Data_Type = "NOAA", Reef_Site = subsite) %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+SCOTTSS2_Sat_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2)
+
+ggplot(SCOTTSS2_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS2 (-13.92, 121.92) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo BUN05A
+CCI_BUN05A <- CCI_BUN05A %>% 
+  mutate(Reef_Site = "BUN05A", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_BUN05A <- NOAA_BUN05A %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
+
+ggplot(BUN05A_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of BUN05A (-21.84, 114.18) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo Bundegi
+CCI_Bundegi <- CCI_Bundegi %>% 
+  mutate(Reef_Site = "Bundegi", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Bundegi <- NOAA_Bundegi %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Bundegi_Sat_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi)
+
+ggplot(Bundegi_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of 08BND and 13BND (-21.87, 114.16) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo Tantabiddi
+CCI_Tantabiddi <- CCI_Tantabiddi %>% 
+  mutate(Reef_Site = "Tantabiddi", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Tantabiddi <- NOAA_Tantabiddi %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Tantabiddi_Sat_Combined <- rbind(CCI_Tantabiddi, NOAA_Tantabiddi)
+
+ggplot(Tantabiddi_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of 08TNT and 13TNT (-21.91, 113.97) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo TNT
+CCI_TNT <- CCI_TNT %>% 
+  mutate(Reef_Site = "TNT", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_TNT <- NOAA_TNT %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+TNT_Sat_Combined <- rbind(CCI_TNT, NOAA_TNT)
+
+ggplot(TNT_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of TNT (-21.9, 113.97) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Ningaloo TNT07C
+CCI_TNT07C <- CCI_TNT07C %>% 
+  mutate(Reef_Site = "TNT07C", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_TNT07C <- NOAA_TNT07C %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C)
+
+ggplot(TNT07C_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of TNT07C (-21.89, 113.96) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos Wallabi Island
+CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
+  mutate(Reef_Site = "Wallabi Island", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+Wallabi_Island_Sat_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
+
+ggplot(Wallabi_Island_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of Wallabi Island (-28.28, 113.46) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos HAB05B
+CCI_HAB05B <- CCI_HAB05B %>% 
+  mutate(Reef_Site = "HAB05B", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_HAB05B <- NOAA_HAB05B %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
+
+ggplot(HAB05B_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of HAB05B (-28.46, 113.77) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+#Houtman Abrolhos HAB10A
+CCI_HAB10A <- CCI_HAB10A %>% 
+  mutate(Reef_Site = "HAB10A", Data_Type = "CCI") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+NOAA_HAB10A <- NOAA_HAB10A %>% 
+  mutate(Data_Type = "NOAA") %>% 
+  select(sst, Latitude, Longitude, Date, hotspot, DHW_value, accum_DHW_12weeks, Reef_Site, Data_Type)
+
+HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
+
+ggplot(HAB10A_Sat_Combined)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  labs(x = "Time", y = "DHW value", title = "Time Series of HAB10A (-28.46, 113.75) Degree Heating Week values") +
+  scale_color_discrete_qualitative(name = "Satellite") +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold")
+  )
+
+
+```
+
+
+\newpage
+
+# **BRS05** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+
+```{r DHW_Count_BRS05, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##BRS05
+
+BRS05_Sat_DHW_Sum_Days <- BRS05_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- BRS05_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- BRS05_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- BRS05_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- BRS05_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = BRS05_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BRS05 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = BRS05_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BRS05 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily  
+
+
+```
+
+\newpage
+# **BRS07** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+
+```{r DHW_Count_BRS07, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##BRS07
+
+BRS07_Sat_DHW_Sum_Days <- BRS07_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- BRS07_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- BRS07_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- BRS07_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- BRS07_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = BRS07_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BRS07 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = BRS07_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BRS07 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily  
+
+
+
+
+```
+
+\newpage
+# **DAR3** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_DAR3, echo = FALSE, message = FALSE}
+#Line Graphof yearly Moderate to High DHW values in CCI and NOAA
+##DAR3
+
+DAR3_Sat_DHW_Sum_Days <- DAR3_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- DAR3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- DAR3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- DAR3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- DAR3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = DAR3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "DAR3 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = DAR3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "DAR3 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **DAR Long** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_DARL, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##DARL
+
+DARL_Sat_DHW_Sum_Days <- DARL_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- DARL_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- DARL_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- DARL_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- DARL_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = DARL_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "DARL Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = DARL_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "DARL Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **SCOTT_RPO_1** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTT_RPO_1, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTT_RPO_1
+
+SCOTT_RPO_1_Sat_DHW_Sum_Days <- SCOTT_RPO_1_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTT_RPO_1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTT_RPO_1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- SCOTT_RPO_1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTT_RPO_1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTT_RPO_1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_RPO_1 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTT_RPO_1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_RPO_1 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **SCOTT_SL4** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTT_SL4, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTT_RPO_1
+
+SCOTT_SL4_Sat_DHW_Sum_Days <- SCOTT_SL4_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTT_SL4_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTT_SL4_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- SCOTT_SL4_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTT_SL4_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTT_SL4_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_SL4 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTT_SL4_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_SL4 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **SCOTT_SS3** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTT_SS3, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTT_SS3
+
+SCOTT_SS3_Sat_DHW_Sum_Days <- SCOTT_SS3_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTT_SS3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTT_SS3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+  
+
+Max_DHW8_CCI <- SCOTT_SS3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTT_SS3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTT_SS3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_SS3 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTT_SS3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTT_SS3 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **SCOTTNR1** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTNR1, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTNR1
+
+SCOTTNR1_Sat_DHW_Sum_Days <- SCOTTNR1_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTNR1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTNR1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- SCOTTNR1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTNR1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTNR1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTNR1 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTNR1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTNR1 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **SCOTTSL1** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTSL1, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTSL1
+
+SCOTTSL1_Sat_DHW_Sum_Days <- SCOTTSL1_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTSL1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTSL1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- SCOTTSL1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTSL1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTSL1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL1 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTSL1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL1 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **SCOTTSL2** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTSL2, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTSL2
+
+SCOTTSL2_Sat_DHW_Sum_Days <- SCOTTSL2_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTSL2_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTSL2_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+  
+
+Max_DHW8_CCI <- SCOTTSL2_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTSL2_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTSL2_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL2 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTSL2_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL2 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **SCOTTSL3** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTSL3, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTSL3
+
+SCOTTSL3_Sat_DHW_Sum_Days <- SCOTTSL3_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTSL3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTSL3_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- SCOTTSL3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTSL3_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTSL3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL3 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTSL3_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSL3 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **SCOTTSS1** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTSS1, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTSS1
+
+SCOTTSS1_Sat_DHW_Sum_Days <- SCOTTSS1_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTSS1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTSS1_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- SCOTTSS1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTSS1_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")  
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTSS1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSS1 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTSS1_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSS1 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **SCOTTSS2** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_SCOTTSS2, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##SCOTTSS2
+
+SCOTTSS2_Sat_DHW_Sum_Days <- SCOTTSS2_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- SCOTTSS2_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- SCOTTSS2_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- SCOTTSS2_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- SCOTTSS2_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = SCOTTSS2_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSS2 Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = SCOTTSS2_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "SCOTTSS2 Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **Tantabiddi** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_Tantabiddi, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##Tantabiddi
+
+Tantabiddi_Sat_DHW_Sum_Days <- Tantabiddi_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- Tantabiddi_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- Tantabiddi_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+
+
+Max_DHW8_CCI <- Tantabiddi_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- Tantabiddi_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = Tantabiddi_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Tantabiddi Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = Tantabiddi_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Tantabiddi Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **TNT** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_TNT, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##TNT
+
+TNT_Sat_DHW_Sum_Days <- TNT_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- TNT_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- TNT_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+  
+
+Max_DHW8_CCI <- TNT_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- TNT_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = TNT_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "TNT Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = TNT_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "TNT Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+\newpage
+# **TNT07C** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_TNT07C, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##TNT07C
+
+TNT07C_Sat_DHW_Sum_Days <- TNT07C_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- TNT07C_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- TNT07C_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- TNT07C_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- TNT07C_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = TNT07C_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "TNT07C Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = TNT07C_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "TNT07C Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **Wallabi Island** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_Wallabi_Island, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##Wallabi Island
+
+Wallabi_Island_Sat_DHW_Sum_Days <- Wallabi_Island_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- Wallabi_Island_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- Wallabi_Island_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+  
+
+Max_DHW8_CCI <- Wallabi_Island_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- Wallabi_Island_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")  
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = Wallabi_Island_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Wallabi Island Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = Wallabi_Island_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Wallabi Island Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **HAB05B** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_HAB05B, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##HAB05B
+
+HAB05B_Sat_DHW_Sum_Days <- HAB05B_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- HAB05B_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- HAB05B_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- HAB05B_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- HAB05B_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")  
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = HAB05B_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "HAB05B Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = HAB05B_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "HAB05B Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
+
+\newpage
+# **HAB10A** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_HAB10A, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##HAB10A
+
+HAB10A_Sat_DHW_Sum_Days <- HAB10A_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- HAB05B_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- HAB10A_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- HAB10A_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+  
+
+Max_DHW8_NOAA <- HAB10A_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values")  
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = HAB10A_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "HAB10A Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = HAB10A_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "HAB10A Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+```
+
