@@ -1,9 +1,14 @@
-# Start script from row 53 #
+# Start script from row 60 #
+# Run script in pre_tsclust_sites_raw_data.R before running this to load raw data
 # Sites showing significance for quadratic terms in both CCI and NOAA: 13TNT, 08BND, Wallabi Island
 # Sites showing significance for quadratic terms in only CCI: BRS07
 # For site HAB05B_SrCa, no significance in quadratic terms, 
 # HAB05B_SrCa - no significance in linear terms for NOAA but significance for CCI
 
+library(TSclust)
+library(mgcv)
+library(broom)
+        
 #####-----#####
 library(TSclust)
 dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
@@ -77,7 +82,6 @@ dat <- as_tibble(Ningaloo_13TNT_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -111,6 +115,22 @@ lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2),
 summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_13TNT_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_13TNT_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_13TNT_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_13TNT_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_13TNT_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_13TNT_CCI.csv"))
 
 # Coral core is able to explain the variability in NOAA's sst a tiny bit better than CCI for this ningaloo site.  
 # Need to think about whether a straight pair-up using the collection date of coral core data with sst is a good idea. 
@@ -192,6 +212,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_08TNT_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_08TNT_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_08TNT_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_08TNT_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_08TNT_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_08TNT_CCI.csv"))
+
 # Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site.  
 # if logger data is added for this site, no values are obtained for the models
 
@@ -270,6 +306,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_13BND_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_13BND_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_13BND_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_13BND_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_13BND_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_13BND_CCI.csv"))
+
 # Coral core is able to explain the variability in NOAA's sst much better than CCI for this ningaloo site. 
 ## removing logger data in calculations reduces R-sq for CCI model
 # only 10 points when logger data is included in analysis
@@ -337,6 +389,22 @@ summary(lm2)
 # significant p-value for quadratic
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_08BND_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_08BND_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_08BND_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_08BND_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_08BND_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_08BND_CCI.csv"))
 
 # Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site. 
 # including logger data in calculations result in no data available
@@ -415,6 +483,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_TNT_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`d18O` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+CCore_SST_Ningaloo_TNT_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`d18O` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+write_csv(CCore_SST_Ningaloo_TNT_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_TNT_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_TNT_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_TNT_CCI.csv"))
+
 # Coral core is able to explain the variability in CCI's sst a tiny bit better than NOAA for this ningaloo site.  
 # no data is available for analysis when logger data is included
 
@@ -491,6 +575,22 @@ lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
 summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_TNT07C_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_TNT07C_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_TNT07C_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_TNT07C_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_TNT07C_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_TNT07C_CCI.csv"))
 
 # Coral core is able to explain the variability in NOAA's sst better than CCI for this ningaloo site.  
 # low R-sq value for both <0.5
@@ -569,6 +669,22 @@ lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
 summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Ningaloo_BUN05A_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_Ningaloo_BUN05A_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_Ningaloo_BUN05A_NOAA, here::here
+          ("data_raw/CCore_SST_Ningaloo_BUN05A_NOAA.csv"))
+write_csv(CCore_SST_Ningaloo_BUN05A_CCI, here::here
+          ("data_raw/CCore_SST_Ningaloo_BUN05A_CCI.csv"))
 
 # Coral core is able to explain the variability in CCI's sst much better than NOAA for this ningaloo site.  
 # low R-sq value for both <0.5
@@ -651,6 +767,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_BRS05_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_BRS05_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_BRS05_NOAA, here::here
+          ("data_raw/CCore_SST_BRS05_NOAA.csv"))
+write_csv(CCore_SST_BRS05_CCI, here::here
+          ("data_raw/CCore_SST_BRS05_CCI.csv"))
+
 # Coral core is able to explain the variability in CCI's sst much better than NOAA for this browse island site.  
 # R-sq value is much higher when logger data is included
 # wayyyy more data points when logger data is excluded, but lower R-sq
@@ -723,6 +855,22 @@ summary(lm2)
 # p-value for quadratic is significant, keep quadratic model
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_BRS07_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_BRS07_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_BRS07_NOAA, here::here
+          ("data_raw/CCore_SST_BRS07_NOAA.csv"))
+write_csv(CCore_SST_BRS07_CCI, here::here
+          ("data_raw/CCore_SST_BRS07_CCI.csv"))
 
 # Coral core is able to explain the variability in CCI's sst much better than NOAA for this browse island site.  
 # GAM does not work when logger data is included, as there are only 9 points
@@ -805,6 +953,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_DARL_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_DARL_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_DARL_NOAA, here::here
+          ("data_raw/CCore_SST_DARL_NOAA.csv"))
+write_csv(CCore_SST_DARL_CCI, here::here
+          ("data_raw/CCore_SST_DARL_CCI.csv"))
+
 # Coral core is able to explain the variability in CCI's sst better than NOAA for this Cocos (Keeling) island site.  
 # GAM does not work when logger data is included, as there are less than 10 points
 #R-sq values are very low
@@ -881,6 +1045,22 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_DAR3_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+CCore_SST_DAR3_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+write_csv(CCore_SST_DAR3_NOAA, here::here
+          ("data_raw/CCore_SST_DAR3_NOAA.csv"))
+write_csv(CCore_SST_DAR3_CCI, here::here
+          ("data_raw/CCore_SST_DAR3_CCI.csv"))
+
 # Coral core is able to explain the variability in CCI's sst better than NOAA for this Cocos (Keeling) island site.  
 # GAM does not work when logger data is included, as there are less than 10 points
 #R-sq values are very low
@@ -951,6 +1131,22 @@ summary(lm2)
 # p-value for quadratic is significant
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_Wallabi_Island_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+CCore_SST_Wallabi_Island_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+write_csv(CCore_SST_Wallabi_Island_NOAA, here::here
+          ("data_raw/CCore_SST_Wallabi_Island_NOAA.csv"))
+write_csv(CCore_SST_Wallabi_Island_CCI, here::here
+          ("data_raw/CCore_SST_Wallabi_Island_CCI.csv"))
 
 # Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
 # No data is available when logger data is included
@@ -1028,6 +1224,22 @@ lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core,
 summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_HAB10A_d18O_NOAA <- lm1 %>% 
+  augment() %>% 
+  rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+CCore_SST_HAB10A_d18O_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`d18O`, sst)
+
+write_csv(CCore_SST_HAB10A_d18O_NOAA, here::here
+          ("data_raw/CCore_SST_HAB10A_d18O_NOAA.csv"))
+write_csv(CCore_SST_HAB10A_d18O_CCI, here::here
+          ("data_raw/CCore_SST_HAB10A_d18O_CCI.csv"))
 
 # Coral core is able to explain the variability in NOAA's sst better than CCI for this Houtman Abrolhos island site.  
 # No data is available when logger data is included
@@ -1243,6 +1455,16 @@ summary(lm2)
 # p-value for linear model is significant
 
 modelsummary::modelsummary(list(lm1, lm2))
+
+# extracting fitted sst values of coral core from CCI and NOAA data
+CCore_SST_HAB05B_SrCa_CCI <- lm2 %>% 
+  augment() %>% 
+  rename(`Sr/Ca` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`Sr/Ca`, sst)
+
+
+write_csv(CCore_SST_HAB05B_SrCa_CCI, here::here
+          ("data_raw/CCore_SST_HAB05B_SrCa_CCI.csv"))
 
 # Coral core is able to explain the variability in CCI's sst better than NOAA for this Houtman Abrolhos island site.  
 # No data is available when logger data is included
