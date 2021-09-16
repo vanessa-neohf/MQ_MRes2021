@@ -26,14 +26,14 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/NOAA_SST.csv'
+csv_file <- 'kyle_code/data/CCI_Wallabi_Island.csv'
 
 
 # ..... settings ====
-sst_input <- 'sst'
-lat_input <- 'Latitude'  # latitude column
-lon_input <- 'Longitude'  # longitude column
-date_input <- 'Date'  # date column
+sst_input <- 'mean temperature deg C'
+lat_input <- 'Lat'  # latitude column
+lon_input <- 'Lon'  # longitude column
+date_input <- 'daily_date'  # date column
 
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
 date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
@@ -65,7 +65,8 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = csv_file) %>% 
-  mutate(end_date = max(daily_date))
+  mutate(end_date = max(daily_date))  #only for CCI data
+  # mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
 
 
 # ..... convert sst, lat, long and date column names ====
@@ -80,6 +81,7 @@ sst_data <- sst_data %>%
 
 
 # ..... fix for brackets around sst data ====
+#only for CCI data
 sst_data <- sst_data %>%
   mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
   mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
@@ -200,15 +202,15 @@ if(mmm_climatology_bool && mmm_from_sst_bool) {
 
 
 # Calculating running sum of DHW
-#unique(sst_data$Reef_Site) #for NOAA combined file only
+#unique(sst_data$Reef_Site) #for NOAA combined file
+#unique(sst_data$subsite) for NOAA Scott reef combined file
 
 output_data <- sst_data_plus_mmm_and_dhw %>% 
   dplyr::select(-end_date) %>%
-  mutate(DHW_value = degree_heating_week_mmm_from_sst + dhw_threshold) %>% 
-  mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value))
+  rename(DHW_value = degree_heating_week_mmm_from_sst)
 
-output_data <- output_data %>%   #for NOAA combined file only
-  filter(Reef_Site == "HAB10A" & Data_Type == "Coral Core Sr/Ca Proxy")
+#output_data <- output_data %>%   #for NOAA combined file only
+  #filter(subsite == "SCOTTSS2")
 
 output_data <- output_data %>% 
   mutate(accum_DHW_12weeks = runner(
@@ -218,14 +220,13 @@ output_data <- output_data %>%
     idx = output_data$Date,
     na_pad = TRUE
   )) %>% 
-  mutate(accum_DHW_12weeks = accum_DHW_12weeks / 7) %>%  #calculate DHW with sum of SST (84 days) divided by 7
   mutate(Date = as.character(Date)) 
 
 max(output_data$accum_DHW_12weeks) #check accumulated DHW values
  
 
 out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
-out_name <- paste0(out_name,'_HAB10A_SrCa_with_mmm_and_dhw.csv')
+out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
