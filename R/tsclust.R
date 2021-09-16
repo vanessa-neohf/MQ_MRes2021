@@ -116,16 +116,20 @@ summary(lm2)
 
 modelsummary::modelsummary(list(lm1, lm2))
 
-# extracting fitted sst values of coral core from CCI and NOAA data
+# extracting fitted sst values of coral core from CCI and NOAA data 
+# with dates
 CCore_SST_Ningaloo_13TNT_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
+ 
 
 CCore_SST_Ningaloo_13TNT_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_13TNT_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_13TNT_NOAA.csv"))
@@ -163,7 +167,6 @@ dat <- as_tibble(Ningaloo_08TNT_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -215,13 +218,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_Ningaloo_08TNT_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_Ningaloo_08TNT_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_08TNT_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_08TNT_NOAA.csv"))
@@ -257,7 +262,6 @@ dat <- as_tibble(Ningaloo_13BND_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -309,13 +313,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_Ningaloo_13BND_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_Ningaloo_13BND_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_13BND_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_13BND_NOAA.csv"))
@@ -351,7 +357,6 @@ dat <- as_tibble(Ningaloo_08BND_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -393,13 +398,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_Ningaloo_08BND_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_Ningaloo_08BND_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_08BND_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_08BND_NOAA.csv"))
@@ -434,7 +441,6 @@ dat <- as_tibble(Ningaloo_TNT_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -487,12 +493,14 @@ modelsummary::modelsummary(list(lm1, lm2))
 CCore_SST_Ningaloo_TNT_NOAA <- lm1 %>% 
   augment() %>% 
   rename(`d18O` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 CCore_SST_Ningaloo_TNT_CCI <- lm2 %>% 
   augment() %>% 
   rename(`d18O` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 write_csv(CCore_SST_Ningaloo_TNT_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_TNT_NOAA.csv"))
@@ -527,7 +535,6 @@ dat <- as_tibble(Ningaloo_TNT07C_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -579,13 +586,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_Ningaloo_TNT07C_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_Ningaloo_TNT07C_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_TNT07C_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_TNT07C_NOAA.csv"))
@@ -621,7 +630,6 @@ dat <- as_tibble(Ningaloo_BUN05A_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -673,13 +681,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_Ningaloo_BUN05A_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_Ningaloo_BUN05A_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = ningaloo_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = ningaloo_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_Ningaloo_BUN05A_NOAA, here::here
           ("data_raw/CCore_SST_Ningaloo_BUN05A_NOAA.csv"))
@@ -717,7 +727,6 @@ dat <- as_tibble(Browse_05_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -770,13 +779,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_BRS05_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = browse_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_BRS05_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = browse_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_BRS05_NOAA, here::here
           ("data_raw/CCore_SST_BRS05_NOAA.csv"))
@@ -812,7 +823,6 @@ dat <- as_tibble(Browse_07_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -859,13 +869,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_BRS07_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = browse_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_BRS07_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = browse_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = browse_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_BRS07_NOAA, here::here
           ("data_raw/CCore_SST_BRS07_NOAA.csv"))
@@ -902,7 +914,6 @@ dat <- as_tibble(DARL_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -956,13 +967,15 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_DARL_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_DARL_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_DARL_NOAA, here::here
           ("data_raw/CCore_SST_DARL_NOAA.csv"))
@@ -1000,7 +1013,6 @@ dat <- as_tibble(DAR3_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1043,18 +1055,24 @@ summary(lm2)
 # p-value for quadratic is 0.506
 # use linear model
 
+lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
+          data = dat_joint)
+summary(lm2)
+
 modelsummary::modelsummary(list(lm1, lm2))
 
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_DAR3_NOAA <- lm1 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 CCore_SST_DAR3_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = Cocos_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = Cocos_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst)%>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 write_csv(CCore_SST_DAR3_NOAA, here::here
           ("data_raw/CCore_SST_DAR3_NOAA.csv"))
@@ -1093,7 +1111,6 @@ dat <- as_tibble(Wallabi_Island_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1136,12 +1153,14 @@ modelsummary::modelsummary(list(lm1, lm2))
 CCore_SST_Wallabi_Island_NOAA <- lm1 %>% 
   augment() %>% 
   rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 CCore_SST_Wallabi_Island_CCI <- lm2 %>% 
   augment() %>% 
   rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 write_csv(CCore_SST_Wallabi_Island_NOAA, here::here
           ("data_raw/CCore_SST_Wallabi_Island_NOAA.csv"))
@@ -1176,7 +1195,6 @@ dat <- as_tibble(HAB10A_d18O_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1229,12 +1247,14 @@ modelsummary::modelsummary(list(lm1, lm2))
 CCore_SST_HAB10A_d18O_NOAA <- lm1 %>% 
   augment() %>% 
   rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 CCore_SST_HAB10A_d18O_CCI <- lm2 %>% 
   augment() %>% 
   rename(`d18O` = HAbrol_coral_core, sst = .fitted) %>% 
-  select(`d18O`, sst)
+  select(`d18O`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "d18O") 
 
 write_csv(CCore_SST_HAB10A_d18O_NOAA, here::here
           ("data_raw/CCore_SST_HAB10A_d18O_NOAA.csv"))
@@ -1270,7 +1290,6 @@ dat <- as_tibble(HAB05B_d18O_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1320,7 +1339,6 @@ dat <- as_tibble(HAB10A_SrCa_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1403,7 +1421,6 @@ dat <- as_tibble(HAB05B_SrCa_CCI) %>%
 dat_joint <- dat %>% 
   #add_row(dat2) %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
   drop_na() 
 
 GGally::ggpairs(dat_joint)
@@ -1459,8 +1476,9 @@ modelsummary::modelsummary(list(lm1, lm2))
 # extracting fitted sst values of coral core from CCI and NOAA data
 CCore_SST_HAB05B_SrCa_CCI <- lm2 %>% 
   augment() %>% 
-  rename(`Sr/Ca` = HAbrol_coral_core, sst = .fitted) %>% 
-  select(`Sr/Ca`, sst)
+  rename(`SrCa` = HAbrol_coral_core, sst = .fitted) %>% 
+  select(`SrCa`, sst) %>% 
+  add_column(date = dat_joint$date, .before = "SrCa") 
 
 
 write_csv(CCore_SST_HAB05B_SrCa_CCI, here::here
