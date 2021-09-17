@@ -74,6 +74,8 @@ NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with
 
 
 ```{r DHW_TS, echo = FALSE}
+#CCI and NOAA data were first checked for duplicate dates using sum(duplicated(<dataset>$Date)) and no duplicates were ensured
+
 #BRS05
 CCI_BRS05 <- CCI_BRS05 %>% 
   mutate(Reef_Site = "BRS05", Data_Type = "CCI") %>% 
