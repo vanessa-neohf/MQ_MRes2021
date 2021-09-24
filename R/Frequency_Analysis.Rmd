@@ -1,0 +1,1436 @@
+---
+title: "Frequency_Analysis"
+author: "Vanessa Hui Fen Neo"
+date: "r lubridate::today()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r Loading_Packages, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(patchwork)
+library(tsibble)
+library(TSclust)
+library(mgcv)
+library(broom)
+```
+
+## Comparison of SST time series in Browse Island sites
+- BRS05 (-14.105, 123.5356924)
+- BRS07 (-14.121, 123.5467277)
+
+```{r Browse_Island, message = FALSE}
+
+##BRS05
+
+Browse_05_CCI <- read_csv(here::here("data_raw", "CCI_BRS05.csv")) 
+Browse_05_CCI <- Browse_05_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Browse_05_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>% #select only useful columns 
+  as_tsibble(index = date) # convert them to tsibble
+
+Browse_05_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month.csv"), n_max = 740) %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = str_c(year, month, sep = "-")) %>% #stringing year and month
+  mutate(date = yearmonth(date)) %>% #converting date column fr chr to date format
+  select(data_type, date, `BRS05 Sr/Ca [mmol/mol]`) %>%  #select only useful columns 
+  as_tsibble(index = date) # convert them to tsibble 
+
+Browse_05_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv")) %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  %>% #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Browse_05_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS05_SST.csv")) %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+dat <- as_tibble(Browse_05_CCI) %>% 
+  add_row(as_tibble(Browse_05_NOAA)) %>% 
+  # only few data points when logger data is included: add_row(as_tibble(Browse_05_Logger)) %>% 
+  add_row(as_tibble(Browse_05_CCore) %>% 
+            rename(sst = `BRS05 Sr/Ca [mmol/mol]`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "browse_CCI",
+                      data_type == "Logger" ~ "browse_Logger", 
+                      data_type == "NOAA" ~ "browse_NOAA",
+                      data_type == "Coral Core" ~ "browse_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# decreasing trend with curvature. 
+# gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 3.841 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+         # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.175
+# use linear model
+
+lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 3.727 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+        #  data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.204
+# use linear model
+
+lm2 <- lm(browse_CCI ~ 1 + browse_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##BRS07
+
+Browse_07_CCI <- read_csv(here::here("data_raw", "CCI_BRS07.csv"))
+Browse_07_CCI <- Browse_07_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Browse_07_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>% #select only useful columns 
+  as_tsibble(index = date) # convert them to tsibble
+
+Browse_07_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month.csv"), n_max = 740) %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = str_c(year, month, sep = "-")) %>% #stringing year and month
+  mutate(date = yearmonth(date)) %>% #converting date column fr chr to date format
+  select(data_type, date, `BRS07 Sr/Ca [mmol/mol]`) %>%  #select only useful columns 
+  as_tsibble(index = date) # convert them to tsibble 
+
+Browse_07_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv")) %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst)  %>% #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Browse_07_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS07_SST.csv")) %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Browse_07_CCI) %>% 
+  add_row(as_tibble(Browse_07_NOAA)) %>% 
+  # only 9 points are available when including logger data: add_row(as_tibble(Browse_07_Logger)) %>% 
+  add_row(as_tibble(Browse_07_CCore) %>% 
+            rename(sst = `BRS07 Sr/Ca [mmol/mol]`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "browse_CCI",
+                      data_type == "Logger" ~ "browse_Logger", 
+                      data_type == "NOAA" ~ "browse_NOAA",
+                      data_type == "Coral Core" ~ "browse_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 3.039 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+         # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.146
+# use linear model
+
+lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 3.166 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is significant, keep quadratic model
+
+modelsummary::modelsummary(list(lm1, lm2))
+```
+
+
+
+## Comparison of SST time series in Cocos (Keeling) Island sites
+- DAR3 (-12.095, 96.8805)
+- DAR Long (-12.0875, 96.875)
+
+```{r Cocos_Keeling_Island, message = FALSE}
+##DAR Long
+DARL_CCI <- read_csv(here::here("data_raw", "CCI_DARL.csv"))
+DARL_CCI <- DARL_CCI %>% 
+  mutate(sst = as.numeric(str_sub(DARL_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DARL_CCore <- read_csv(here::here("data_raw", "CCore_DAR_Long_Year_Month.csv"))
+DARL_CCore <- DARL_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DARL_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.csv"))
+DARL_Logger <- DARL_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DARL_NOAA <- read_csv(here::here("data_raw", "NOAA_DAR_Long_SST.csv"))
+DARL_NOAA <- DARL_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(DARL_CCI) %>% 
+  add_row(as_tibble(DARL_NOAA)) %>% 
+  #less than 10 points if logger data is included : add_row(as_tibble(DARL_Logger)) %>% 
+  add_row(as_tibble(DARL_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "Cocos_CCI",
+                      data_type == "Logger" ~ "Cocos_Logger", 
+                      data_type == "NOAA" ~ "Cocos_NOAA",
+                      data_type == "Coral Core" ~ "Cocos_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+
+# linear decreasing trend
+
+# gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 1.881 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+         # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.322
+# use linear model
+
+lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 1.969 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+         # data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.506
+# use linear model
+
+lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##DAR3
+DAR3_CCI <- read_csv(here::here("data_raw", "CCI_DAR3.csv"))
+DAR3_CCI <- DAR3_CCI %>% 
+  mutate(sst = as.numeric(str_sub(DAR3_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DAR3_CCore <- read_csv(here::here("data_raw", "CCore_DAR3_Year_Month.csv"))
+DAR3_CCore <- DAR3_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DAR3_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.csv"))
+DAR3_Logger <- DAR3_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+DAR3_NOAA <- read_csv(here::here("data_raw", "NOAA_DAR3_SST.csv"))
+DAR3_NOAA <- DAR3_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(DAR3_CCI) %>% 
+  add_row(as_tibble(DAR3_NOAA)) %>% 
+  #less than 10 points if logger data is included : add_row(as_tibble(DAR3_Logger)) %>% 
+  add_row(as_tibble(DAR3_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "Cocos_CCI",
+                      data_type == "Logger" ~ "Cocos_Logger", 
+                      data_type == "NOAA" ~ "Cocos_NOAA",
+                      data_type == "Coral Core" ~ "Cocos_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more align with NOAA over CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 1.881 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+        #  data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.322
+# use linear model
+
+lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 1.969 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core + I(Cocos_coral_core^2), 
+#          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.506
+# use linear model
+
+lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
+```
+
+
+## Comparison of SST time series in Ningaloo Reef sites
+- Tantabiddi (13TNT) and Tantabiddi (08TNT) (-21.91, 113.97)
+- TNT (-21.9, 113.97)
+- TNT07C (-21.893, 113.963)
+- Bundegi (13BND) and Bundegi (08BND) (-21.87, 114.156)
+- BUN05A (-21.836, 114.178)
+
+```{r Ningaloo_Reef, message = FALSE}
+##Tantabiddi 13TNT
+Ningaloo_13TNT_CCI <- read_csv(here::here("data_raw", "CCI_Tantabiddi.csv"))
+Ningaloo_13TNT_CCI <- Ningaloo_13TNT_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_13TNT_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13TNT_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_13TNT_Year_Month.csv"))
+Ningaloo_13TNT_CCore <- Ningaloo_13TNT_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
+Ningaloo_13TNT_Logger <- Ningaloo_13TNT_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_13TNT_SST.csv"))
+Ningaloo_13TNT_NOAA <- Ningaloo_13TNT_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
+  # only 13 data points available if logger data is included in analysis: add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      # only 13 data points if logger data is included: data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with NOAA than CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 2.677 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 2.724 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
+##Tantabiddi 08TNT
+Ningaloo_08TNT_CCI <- read_csv(here::here("data_raw", "CCI_Tantabiddi.csv"))
+Ningaloo_08TNT_CCI <- Ningaloo_08TNT_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_08TNT_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08TNT_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_08TNT_Year_Month.csv"))
+Ningaloo_08TNT_CCore <- Ningaloo_08TNT_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
+Ningaloo_08TNT_Logger <- Ningaloo_08TNT_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_08TNT_SST.csv"))
+Ningaloo_08TNT_NOAA <- Ningaloo_08TNT_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+dat <- as_tibble(Ningaloo_08TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_08TNT_NOAA)) %>% 
+  # no values if logger data is added here: add_row(as_tibble(Ningaloo_08TNT_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_08TNT_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 2.477 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.564
+# use linear model instead
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 2.391 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.329
+# use linear model instead
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
+##Bundegi 13BND
+Ningaloo_13BND_CCI <- read_csv(here::here("data_raw", "CCI_Bundegi.csv"))
+Ningaloo_13BND_CCI <- Ningaloo_13BND_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_13BND_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_13BND_Year_Month.csv"))
+Ningaloo_13BND_CCore <- Ningaloo_13BND_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
+Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_13BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_13BND_SST.csv"))
+Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+dat <- as_tibble(Ningaloo_13BND_CCI) %>% 
+  add_row(as_tibble(Ningaloo_13BND_NOAA)) %>% 
+  # only 10 observations when logger data is added : add_row(as_tibble(Ningaloo_13BND_Logger)) %>%
+  add_row(as_tibble(Ningaloo_13BND_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is much more aligned with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature for NOAA vs coral core. 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 2.283 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.195
+# use linear model instead
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 1.672 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+         # data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.665
+# use linear model instead
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
+##Bundegi 08BND
+Ningaloo_08BND_CCI <- read_csv(here::here("data_raw", "CCI_Bundegi.csv"))
+Ningaloo_08BND_CCI <- Ningaloo_08BND_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_08BND_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_08BND_Year_Month.csv"))
+Ningaloo_08BND_CCore <- Ningaloo_08BND_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `Sr/Ca`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
+Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_08BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_08BND_SST.csv"))
+Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Ningaloo_08BND_CCI) %>% 
+  add_row(as_tibble(Ningaloo_08BND_NOAA)) %>% 
+  #no values if logger data is included : add_row(as_tibble(Ningaloo_08BND_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_08BND_CCore) %>% 
+            rename(sst = `Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is more aligned with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with curvature. 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 3.657 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+# summary(lm1)
+
+# significant p-value for quadratic
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with curvature. 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 2.88 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = dat_joint)
+# summary(lm2)
+
+# significant p-value for quadratic
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+
+##TNT
+
+Ningaloo_TNT_CCI <- read_csv(here::here("data_raw", "CCI_TNT.csv"))
+Ningaloo_TNT_CCI <- Ningaloo_TNT_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_TNT_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_TNT_Year_Month.csv"))
+Ningaloo_TNT_CCore <- Ningaloo_TNT_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = as_date(date)) %>% 
+  select(data_type, date, `d18O`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
+Ningaloo_TNT_Logger <- Ningaloo_TNT_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_TNT_SST.csv"))
+Ningaloo_TNT_NOAA <- Ningaloo_TNT_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Ningaloo_TNT_CCI) %>% 
+  add_row(as_tibble(Ningaloo_TNT_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_TNT_CCore) %>% 
+            rename(sst = `d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 3.138 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.160
+# use linear model instead
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 3.056 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+#          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.258
+# use linear model instead
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##TNT07C
+##Only annual coral core data
+
+Ningaloo_TNT07C_CCI <- read_csv(here::here("data_raw", "CCI_TNT07C.csv"))
+Ningaloo_TNT07C_CCI <- Ningaloo_TNT07C_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_TNT07C_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT07C_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_TNT07C_year.csv"))
+
+Ningaloo_TNT07C_CCore <- Ningaloo_TNT07C_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `Tantabiddi Sr/Ca`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT07C_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANTABIDDI_SL1.csv"))
+Ningaloo_TNT07C_Logger <- Ningaloo_TNT07C_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_TNT07C_NOAA <- read_csv(here::here("data_raw", "NOAA_TNT07C_SST.csv"))
+Ningaloo_TNT07C_NOAA <- Ningaloo_TNT07C_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+
+dat <- as_tibble(Ningaloo_TNT07C_CCI) %>% 
+  add_row(as_tibble(Ningaloo_TNT07C_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT07C_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_TNT07C_CCore) %>% 
+            rename(sst = `Tantabiddi Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with NOAA over CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 1.237 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+         # data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.312
+# use linear model
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 1.139 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+         # data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.726
+# use linear model
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##BUN05A
+##Only annual coral core data
+
+Ningaloo_BUN05A_CCI <- read_csv(here::here("data_raw", "CCI_BUN05A.csv"))
+Ningaloo_BUN05A_CCI <- Ningaloo_BUN05A_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Ningaloo_BUN05A_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_BUN05A_CCore <- read_csv(here::here("data_raw", "CCore_Ningaloo_BUN05A_year.csv"))
+Ningaloo_BUN05A_CCore <- Ningaloo_BUN05A_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `Bundegi Sr/Ca`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_BUN05A_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDEGI_BR.csv"))
+Ningaloo_BUN05A_Logger <- Ningaloo_BUN05A_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Ningaloo_BUN05A_NOAA <- read_csv(here::here("data_raw", "NOAA_BUN05A_SST.csv"))
+Ningaloo_BUN05A_NOAA <- Ningaloo_BUN05A_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Ningaloo_BUN05A_CCI) %>% 
+  add_row(as_tibble(Ningaloo_BUN05A_NOAA)) %>% 
+  # no data is available when logger data is added: add_row(as_tibble(Ningaloo_BUN05A_Logger)) %>% 
+  add_row(as_tibble(Ningaloo_BUN05A_CCore) %>% 
+            rename(sst = `Bundegi Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "ningaloo_CCI",
+                      data_type == "Logger" ~ "ningaloo_Logger", 
+                      data_type == "NOAA" ~ "ningaloo_NOAA",
+                      data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is more aligned with CCI than NOAA 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 1.032 so quadratic might not give a good approx to the trend
+
+# lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+        #  data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.610
+# use linear model
+
+lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend 
+# gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 1.221 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+        #  data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.816
+# use linear model
+
+lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+```
+
+
+
+## Comparison of SST time series in Houtman Abrolhos Island sites
+- Wallabi Island (-28.28, 113.46)
+- HAB10A (-28.4589, 113.749)
+- HAB05B (-28.4609, 113.772)
+
+```{r Houtman_Abrolhos_Islands, message = FALSE}
+##Wallabi Island
+Wallabi_Island_CCI <- read_csv(here::here("data_raw", "CCI_Wallabi_Island.csv"))
+Wallabi_Island_CCI <- Wallabi_Island_CCI %>% 
+  mutate(sst = as.numeric(str_sub(Wallabi_Island_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Wallabi_Island_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_Wallabi_Year_Month.csv"))
+Wallabi_Island_CCore <- Wallabi_Island_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `d18O`) %>%     #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Wallabi_Island_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+Wallabi_Island_Logger <- Wallabi_Island_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+Wallabi_Island_NOAA <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_SST.csv"))
+Wallabi_Island_NOAA <- Wallabi_Island_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(Wallabi_Island_CCI) %>% 
+  add_row(as_tibble(Wallabi_Island_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(Wallabi_Island_Logger)) %>% 
+  add_row(as_tibble(Wallabi_Island_CCore) %>% 
+            rename(sst = `d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# trend is explained by a curvature. 
+# gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 3.398 so linear + quadratic should give a good approx to the trend
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is significant
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# trend is explained by curvature. 
+# gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 2.975 so linear + quadratic should give a good approx to the trend
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is significant
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##HAB10A d18O Proxy
+##Only annual coral core data
+
+HAB10A_d18O_CCI <- read_csv(here::here("data_raw", "CCI_HAB10A.csv"))
+HAB10A_d18O_CCI <- HAB10A_d18O_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAB10A_d18O_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_d18O_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_HAB_year.csv"))
+
+HAB10A_d18O_CCore <- HAB10A_d18O_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `HAB10A d18O`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+HAB10A_d18O_Logger <- HAB10A_d18O_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_d18O_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB10A_d18O_Proxy_SST.csv"))
+HAB10A_d18O_NOAA <- HAB10A_d18O_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(HAB10A_d18O_CCI) %>% 
+  add_row(as_tibble(HAB10A_d18O_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB10A_d18O_Logger)) %>% 
+  add_row(as_tibble(HAB10A_d18O_CCore) %>% 
+            rename(sst = `HAB10A d18O`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with NOAA than CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf = 1.16 so linear + quadratic should give a good approx to the trend
+
+# lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+#          data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.0657
+# use linear model
+
+lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
+          data = dat_joint)
+# summary(lm1)
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend with a slight curvature. 
+# gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 0.9356 so quadratic model might not give a good approx to the trend
+
+# lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+#          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.272
+# use linear model
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+modelsummary::modelsummary(list(lm1, lm2))
+
+##HAB05B d18O Proxy
+##Only annual coral core data
+
+HAB05B_d18O_CCI <- read_csv(here::here("data_raw", "CCI_HAB05B.csv"))
+HAB05B_d18O_CCI <- HAB05B_d18O_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAB05B_d18O_CCI$`mean temperature deg C`, 3, 7))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_d18O_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_HAB_year.csv"))
+
+HAB05B_d18O_CCore <- HAB05B_d18O_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `HAB05B d18O`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+HAB05B_d18O_Logger <- HAB05B_d18O_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_d18O_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB05B_d18O_Proxy_SST.csv"))
+HAB05B_d18O_NOAA <- HAB05B_d18O_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+##HAB10A Sr/Ca Proxy
+##Only annual coral core data
+
+HAB10A_SrCa_CCI <- read_csv(here::here("data_raw", "CCI_HAB10A.csv"))
+HAB10A_SrCa_CCI <- HAB10A_SrCa_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAB10A_SrCa_CCI$`mean temperature deg C`, 3, 13))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_SrCa_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_HAB_year.csv"))
+
+HAB10A_SrCa_CCore <- HAB10A_SrCa_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `HAB10A Sr/Ca`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+HAB10A_SrCa_Logger <- HAB10A_SrCa_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB10A_SrCa_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB10A_SrCa_Proxy_SST.csv"))
+HAB10A_SrCa_NOAA <- HAB10A_SrCa_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+##HAB05B SrCa Proxy
+##Only annual coral core data
+
+HAB05B_SrCa_CCI <- read_csv(here::here("data_raw", "CCI_HAB05B.csv"))
+HAB05B_SrCa_CCI <- HAB05B_SrCa_CCI %>% 
+  mutate(sst = as.numeric(str_sub(HAB05B_SrCa_CCI$`mean temperature deg C`, 3, 7))) %>%  #remove punctuation [[ and ]] from temperature data
+  select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
+  mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
+  rename(date = daily_date) %>%  #prepare data for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_SrCa_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_HAB_year.csv"))
+
+HAB05B_SrCa_CCore <- HAB05B_SrCa_CCore %>% 
+  mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
+  mutate(month = "01") %>% 
+  mutate(date = str_c(year, month, sep = "-")) %>% 
+  mutate(date = ym(date)) %>% 
+  select(data_type, date, `HAB05B Sr/Ca`) %>% 
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+HAB05B_SrCa_Logger <- HAB05B_SrCa_Logger %>% 
+  rename(sst = mean_SST) %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  select(data_type, date, sst) %>%   #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+HAB05B_SrCa_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB05B_SrCa_Proxy_SST.csv"))
+HAB05B_SrCa_NOAA <- HAB05B_SrCa_NOAA %>% 
+  mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
+  select(-date) %>% #remove monthly date column
+  rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  select(data_type, date, sst) %>%  #select only useful columns
+  as_tsibble(index = date) # convert them to tsibble
+
+dat <- as_tibble(HAB05B_SrCa_CCI) %>% 
+  add_row(as_tibble(HAB05B_SrCa_NOAA)) %>% 
+  # no available data if logger data is included : add_row(as_tibble(HAB05B_SrCa_Logger)) %>% 
+  add_row(as_tibble(HAB05B_SrCa_CCore) %>% 
+            rename(sst = `HAB05B Sr/Ca`)) %>% 
+  mutate(data_type = 
+           case_when( data_type == "CCI" ~ "HAbrol_CCI",
+                      data_type == "Logger" ~ "HAbrol_Logger", 
+                      data_type == "NOAA" ~ "HAbrol_NOAA",
+                      data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      TRUE ~ data_type))
+
+dat_joint <- dat %>% 
+  pivot_wider(names_from = data_type, values_from = sst) %>% 
+  drop_na() 
+
+GGally::ggpairs(dat_joint)
+## coral core is slightly more aligned with CCI than NOAA
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear and slight decreasing trend
+# gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam1)
+# summary(gam1)
+# edf is 0.5599 LOW!
+
+# lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+#          data = dat_joint)
+# summary(lm1)
+
+# p-value for quadratic is 0.0828
+# use linear model
+
+# lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
+#          data = dat_joint)
+# summary(lm1)
+
+# p-value for linear model is not significant as well
+
+# repeat for CCI 
+ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+  geom_point() + 
+  geom_smooth(method = "gam")
+# linear decreasing trend
+# gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
+# plot(gam2)
+# summary(gam2)
+# edf = 0.9579 so linear + quadratic should give a good approx to the trend
+
+# lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+#          data = dat_joint)
+# summary(lm2)
+
+# p-value for quadratic is 0.217
+# use linear model
+
+lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
+          data = dat_joint)
+# summary(lm2)
+
+# p-value for linear model is significant
+
+modelsummary::modelsummary(list(lm2))
+```
+
+
+# No Coral Core Data for Scott Reef
+# Linear Relationship between Coral Core and CCI, Coral Core and NOAA, was found to be insignificant in HAB10A_SrCa and HAB05B_d18O
+# Linear Relationship between Coral Core and NOAA was found to be insignificant in HAB05B_SrCa (Significant for Coral Core and CCI in this site)
+# Too many missing gaps in Logger Data
+
+
