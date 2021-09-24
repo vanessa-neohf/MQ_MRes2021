@@ -991,10 +991,10 @@ write_csv(CCore_SST_DARL_CCI, here::here
 #####--------------------#####
 ## To run the calibration analysis
 # Need to run another script (Detrended.R files) to get the following tibbles:
-# DARL_CCI
-# DARL_Logger
-# DARL_CCore
-# DARL_NOAA
+# DAR3_CCI
+# DAR3_Logger
+# DAR3_CCore
+# DAR3_NOAA
 #
 
 library(TSclust)
