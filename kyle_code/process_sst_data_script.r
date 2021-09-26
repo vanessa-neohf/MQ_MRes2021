@@ -26,7 +26,7 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/CCI_Wallabi_Island.csv'
+csv_file <- 'kyle_code/data/CCI_SCOTT_RPO_1.csv'
 
 
 # ..... settings ====
@@ -65,8 +65,8 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = csv_file) %>% 
-  mutate(end_date = max(daily_date))  #only for CCI data
-  # mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
+  mutate(end_date = max(daily_date)) %>%   #only for CCI data
+  mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
 
 
 # ..... convert sst, lat, long and date column names ====
@@ -207,7 +207,8 @@ if(mmm_climatology_bool && mmm_from_sst_bool) {
 
 output_data <- sst_data_plus_mmm_and_dhw %>% 
   dplyr::select(-end_date) %>%
-  rename(DHW_value = degree_heating_week_mmm_from_sst)
+  rename(DHW_value = degree_heating_week_mmm_climatology) %>% 
+  filter(Date <= as_date("2016-05-18"))
 
 #output_data <- output_data %>%   #for NOAA combined file only
   #filter(subsite == "SCOTTSS2")
@@ -231,6 +232,24 @@ out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
 write_csv(x = output_data, out_name)
 
 unique(length(output_data$Date)) == nrow(output_data) #check for any duplicates
+
+#testing ggplot
+csv_file <- 'kyle_code/data/CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv'
+SCOTT_RPO_1_CCI <- read_csv(file = csv_file)
+SCOTT_RPO_1_NOAA <- read_csv(file = csv_file)
+SCOTT_RPO_1_CCI <- SCOTT_RPO_1_CCI %>% 
+  dplyr::select(Date, accum_DHW_12weeks) %>% 
+  rename(CCI_accum_DHW_12weeks = accum_DHW_12weeks)
+SCOTT_RPO_1_NOAA <- SCOTT_RPO_1_NOAA %>% 
+  dplyr::select(Date, accum_DHW_12weeks) %>% 
+  rename(NOAA_accum_DHW_12weeks = accum_DHW_12weeks)
+combined <- full_join(SCOTT_RPO_1_CCI, SCOTT_RPO_1_NOAA)
+combined %>% 
+  ggplot(aes(x = CCI_accum_DHW_12weeks, y = NOAA_accum_DHW_12weeks)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  xlim(4,20) +
+  labs(title = "Scott_RPO_1")
 
 # Will finish metrics calculation if needed
 
