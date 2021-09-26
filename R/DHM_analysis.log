@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  22 SEP 2021 17:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  26 SEP 2021 20:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -527,7 +527,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
 d
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-1.pdf, id=84, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-1.pdf, id=92, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-1.pdf Graphic file (type p
 df)
@@ -535,7 +535,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-1.pdf  
 used on input line 77.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-2.pdf, id=85, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-2.pdf, id=93, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-2.pdf Graphic file (type p
 df)
@@ -543,7 +543,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-2.pdf  
 used on input line 78.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-3.pdf, id=86, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-3.pdf, id=94, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-3.pdf Graphic file (type p
 df)
@@ -551,7 +551,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-3.pdf  
 used on input line 79.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-4.pdf, id=87, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-4.pdf, id=95, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-4.pdf Graphic file (type p
 df)
@@ -559,7 +559,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-4.pdf  
 used on input line 80.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-5.pdf, id=88, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-5.pdf, id=96, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-5.pdf Graphic file (type p
 df)
@@ -567,7 +567,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-5.pdf  
 used on input line 81.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-6.pdf, id=89, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-6.pdf, id=97, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-6.pdf Graphic file (type p
 df)
@@ -575,7 +575,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-6.pdf  
 used on input line 82.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-7.pdf, id=90, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-7.pdf, id=98, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-7.pdf Graphic file (type p
 df)
@@ -583,7 +583,7 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-7.pdf  
 used on input line 83.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-8.pdf, id=91, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-8.pdf, id=99, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-8.pdf Graphic file (type p
 df)
@@ -591,71 +591,71 @@ df)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-8.pdf  
 used on input line 84.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-9.pdf, id=92, 469.755pt x 325.2
-15pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-9.pdf, id=100, 469.755pt x 325.
+215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-9.pdf Graphic file (type p
 df)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-9.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-9.pdf  
 used on input line 85.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-10.pdf, id=93, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-10.pdf, id=101, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-10.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-10.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-10.pdf 
  used on input line 86.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-11.pdf, id=94, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-11.pdf, id=102, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-11.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-11.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-11.pdf 
  used on input line 87.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-12.pdf, id=95, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-12.pdf, id=103, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-12.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-12.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-12.pdf 
  used on input line 88.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-13.pdf, id=96, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-13.pdf, id=104, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-13.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-13.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-13.pdf 
  used on input line 89.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-14.pdf, id=97, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-14.pdf, id=105, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-14.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-14.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-14.pdf 
  used on input line 90.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-15.pdf, id=98, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-15.pdf, id=106, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-15.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-15.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-15.pdf 
  used on input line 91.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-16.pdf, id=99, 469.755pt x 325.
-215pt>
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-16.pdf, id=107, 469.755pt x 325
+.215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-16.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/SST_Anomaly_TS-16.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-16.pdf 
  used on input line 92.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-17.pdf, id=100, 469.755pt x 325
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-17.pdf, id=108, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-17.pdf Graphic file (type 
 pdf)
@@ -663,7 +663,7 @@ pdf)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-17.pdf 
  used on input line 93.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-18.pdf, id=101, 469.755pt x 325
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-18.pdf, id=109, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-18.pdf Graphic file (type 
 pdf)
@@ -671,7 +671,7 @@ pdf)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-18.pdf 
  used on input line 94.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-19.pdf, id=102, 469.755pt x 325
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-19.pdf, id=110, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-19.pdf Graphic file (type 
 pdf)
@@ -679,7 +679,7 @@ pdf)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-19.pdf 
  used on input line 95.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-20.pdf, id=103, 469.755pt x 325
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-20.pdf, id=111, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-20.pdf Graphic file (type 
 pdf)
@@ -687,7 +687,7 @@ pdf)
 Package pdftex.def Info: DHM_analysis_files/figure-latex/SST_Anomaly_TS-20.pdf 
  used on input line 96.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHM_analysis_files/figure-latex/SST_Anomaly_TS-21.pdf, id=104, 469.755pt x 325
+<DHM_analysis_files/figure-latex/SST_Anomaly_TS-21.pdf, id=112, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/SST_Anomaly_TS-21.pdf Graphic file (type 
 pdf)
@@ -827,7 +827,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 1940.
 
-<DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf, id=389, 469.755pt x 325.215pt
+<DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf, id=397, 469.755pt x 325.215pt
 >
 File: DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf>
@@ -838,7 +838,7 @@ on input line 1942.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 3785.
 
-<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=405, 469.755pt x 325.215pt
+<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=413, 469.755pt x 325.215pt
 >
 File: DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf>
@@ -849,7 +849,7 @@ on input line 3787.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 5630.
 
-<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=423, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=431, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf>
@@ -860,7 +860,7 @@ n input line 5632.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 7475.
 
-<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=439, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=447, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DARL-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DARL-1.pdf>
@@ -871,7 +871,7 @@ n input line 7477.
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [31]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=465, 469.755pt x 325
+<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=473, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf Graphic file (type 
 pdf)
@@ -883,7 +883,7 @@ Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [34]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=484, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=492, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf Graphic file (type pd
 f)
@@ -895,7 +895,7 @@ sed on input line 11172.
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [37]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=504, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=512, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf Graphic file (type pd
 f)
@@ -907,7 +907,7 @@ sed on input line 13019.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 14862.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=514, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=522, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf Graphic file (type pdf
 )
@@ -919,7 +919,7 @@ ed on input line 14864.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 16707.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=530, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=538, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf Graphic file (type pdf
 )
@@ -931,7 +931,7 @@ ed on input line 16709.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 18552.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=546, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=555, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf Graphic file (type pdf
 )
@@ -943,7 +943,7 @@ ed on input line 18554.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 20397.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=564, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=572, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf Graphic file (type pdf
 )
@@ -955,7 +955,7 @@ ed on input line 20399.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 22242.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=580, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=588, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf Graphic file (type pdf
 )
@@ -967,7 +967,7 @@ ed on input line 22244.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 24087.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=596, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=604, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf Graphic file (type pdf
 )
@@ -979,79 +979,102 @@ ed on input line 24089.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 25932.
 
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf, id=613, 469.755pt x 325.
+<DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf, id=621, 469.755pt x 325.215p
+t>
+File: DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf Graphic file (type pdf)
+<use DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>
+Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf  used
+ on input line 25934.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[51 <./DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>] [52]
+
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 27777.
+
+<DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf, id=637, 469.755pt x 325.215
+pt>
+File: DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf Graphic file (type pdf)
+
+<use DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf>
+Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf  use
+d on input line 27779.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[53 <./DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf>] [54]
+
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 29622.
+
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf, id=653, 469.755pt x 325.
 215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf Graphic file (type p
 df)
 <use DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf  
-used on input line 25934.
+used on input line 29624.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[51 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf>] [52]
+[55 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi-1.pdf>] [56]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 27777.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 31467.
 
-<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=629, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=670, 469.755pt x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf  used on
- input line 27779.
+ input line 31469.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[53 <./DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>] [54]
+[57 <./DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>] [58]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 29622.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 33312.
 
-<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=645, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=687, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf  used
- on input line 29624.
+ on input line 33314.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[55 <./DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>] [56]
+[59 <./DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>] [60]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 31468.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 35158.
 
-<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=662, 469.755pt x 
+<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=703, 469.755pt x 
 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf Graphic file (ty
 pe pdf)
 <use DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.p
-df  used on input line 31470.
+df  used on input line 35160.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[57 <./DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>] [58]
+[61 <./DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>] [62]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 33313.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 37003.
 
-<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=679, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=720, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf  used
- on input line 33315.
+ on input line 37005.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[59 <./DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>] [60]
+[63 <./DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>] [64]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 35158.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 38848.
 
-<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=695, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=736, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf  used
- on input line 35160.
+ on input line 38850.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[61 <./DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>] [62] (./DHM_analysis.
+[65 <./DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>] [66] (./DHM_analysis.
 aux)
 Package rerunfilecheck Info: File `DHM_analysis.out' has not changed.
-(rerunfilecheck)             Checksum: 8495A31126178A2482B31F7A7C5344CE;5408.
+(rerunfilecheck)             Checksum: 4651F5DE9AF4FBABF0B3E93ED3077ABB;5935.
  ) 
 Here is how much of TeX's memory you used:
- 10440 strings out of 480559
- 165713 string characters out of 5901528
- 693853 words of memory out of 5000000
- 27742 multiletter control sequences out of 15000+600000
+ 10470 strings out of 480559
+ 166729 string characters out of 5901528
+ 694392 words of memory out of 5000000
+ 27760 multiletter control sequences out of 15000+600000
  442722 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,8n,66p,353b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1061,10 +1084,10 @@ lm/lmbx12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 /public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/font
 s/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-di
 st/fonts/type1/public/lm/lmr17.pfb>
-Output written on DHM_analysis.pdf (62 pages, 939766 bytes).
+Output written on DHM_analysis.pdf (66 pages, 1006671 bytes).
 PDF statistics:
- 762 PDF objects out of 1000 (max. 8388607)
- 603 compressed objects within 7 object streams
- 119 named destinations out of 1000 (max. 500000)
- 361 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 804 PDF objects out of 1000 (max. 8388607)
+ 637 compressed objects within 7 object streams
+ 129 named destinations out of 1000 (max. 500000)
+ 387 words of extra memory for PDF output out of 10000 (max. 10000000)
 

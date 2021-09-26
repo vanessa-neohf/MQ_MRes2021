@@ -1639,6 +1639,131 @@ SCOTTSS2_Combined %>%
 ```
 
 \newpage
+# **BUN05A** Degree Heating Months Time Series
+```{r DHM_BUN05A, echo = FALSE, message = FALSE}
+
+#DHM calculations for CCI dataset 
+BUN05A_DHM <- rep(0,nrow(CCI_BUN05A))
+BUN05A_negative_anomaly <- 0
+for (i in 1:nrow(CCI_BUN05A)){
+  if(CCI_BUN05A$anomaly[i] > 0) {
+    BUN05A_negative_anomaly <- 
+      BUN05A_negative_anomaly + CCI_BUN05A$anomaly[i]
+  } else {
+    BUN05A_negative_anomaly <- 0
+  }
+  BUN05A_DHM[i] <- BUN05A_negative_anomaly
+}
+
+CCI_BUN05A <- CCI_BUN05A %>% 
+  add_column(BUN05A_DHM)
+
+#DHM calculations for NOAA dataset
+BUN05A_DHM <- rep(0,nrow(NOAA_BUN05A))
+BUN05A_negative_anomaly <- 0
+for (i in 1:nrow(NOAA_BUN05A)){
+  if(NOAA_BUN05A$anomaly[i] > 0) {
+    BUN05A_negative_anomaly <- 
+      BUN05A_negative_anomaly + NOAA_BUN05A$anomaly[i]
+  } else {
+    BUN05A_negative_anomaly <- 0
+  }
+  BUN05A_DHM[i] <- BUN05A_negative_anomaly
+}
+
+NOAA_BUN05A <- NOAA_BUN05A %>% 
+  add_column(BUN05A_DHM)
+
+#DHM calculations for Coral Core dataset
+#pending
+
+#Combining datasets with DHM calculations
+BUN05A_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
+
+#DHM in descending order
+Max_DHM_CCI_BUN05A <- CCI_BUN05A %>% 
+  arrange(desc(BUN05A_DHM)) %>% 
+  select(date, BUN05A_DHM)
+Max_DHM_NOAA_BUN05A <- NOAA_BUN05A %>% 
+  arrange(desc(BUN05A_DHM)) %>% 
+  select(date, BUN05A_DHM)
+
+
+knitr::kable(list(Max_DHM_CCI_BUN05A, Max_DHM_NOAA_BUN05A), caption = "Degree Heating Month values in BUN05A from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
+
+#Visualising DHM values in CCI, NOAA and CCore 
+BUN05A_Combined %>% 
+  ggplot()+
+  geom_line(aes(x = monthly_date, y = BUN05A_DHM, color = Data_Type)) +
+  labs(x = "Date", y = "Degree Heating Months", title = "BUN05A Degree Heating Month values time plot")+
+  scale_color_discrete_qualitative(name = "Data Source")
+```
+
+\newpage
+# **Bundegi** Degree Heating Months Time Series
+
+```{r DHM_Bundegi, echo = FALSE, message = FALSE}
+
+#DHM calculations for CCI dataset 
+Bundegi_DHM <- rep(0,nrow(CCI_Bundegi))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(CCI_Bundegi)){
+  if(CCI_Bundegi$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + CCI_Bundegi$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+CCI_Bundegi <- CCI_Bundegi %>% 
+  add_column(Bundegi_DHM)
+
+#DHM calculations for NOAA dataset
+Bundegi_DHM <- rep(0,nrow(NOAA_Bundegi))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(NOAA_Bundegi)){
+  if(NOAA_Bundegi$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + NOAA_Bundegi$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+NOAA_Bundegi <- NOAA_Bundegi %>% 
+  add_column(Bundegi_DHM)
+
+#DHM calculations for Coral Core dataset
+#pending
+
+#Combining datasets with DHM calculations
+Bundegi_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi)
+
+#DHM in descending order
+Max_DHM_CCI_Bundegi <- CCI_Bundegi %>% 
+  arrange(desc(Bundegi_DHM)) %>% 
+  select(date, Bundegi_DHM)
+Max_DHM_NOAA_Bundegi <- NOAA_Bundegi %>% 
+  arrange(desc(Bundegi_DHM)) %>% 
+  select(date, Bundegi_DHM)
+
+
+knitr::kable(list(Max_DHM_CCI_Bundegi, Max_DHM_NOAA_Bundegi), caption = "Degree Heating Month values in 08BND and 13BND from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
+
+#Visualising DHM values in CCI, NOAA and CCore 
+Bundegi_Combined %>% 
+  ggplot()+
+  geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type)) +
+  labs(x = "Date", y = "Degree Heating Months", title = "08BND and 13BND Degree Heating Month values time plot")+
+  scale_color_discrete_qualitative(name = "Data Source")
+```
+
+
+
+\newpage
 # **Tantabiddi** Degree Heating Months Time Series
 
 ```{r DHM_Tantabiddi, echo = FALSE, message = FALSE}

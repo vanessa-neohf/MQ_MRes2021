@@ -1425,6 +1425,141 @@ DHW4_daily / DHW8_daily
 ```
 
 \newpage
+# **BUN05A** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+
+```{r DHW_Count_BUN05A, echo = FALSE, message = FALSE}
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##BUN05A
+
+BUN05A_Sat_DHW_Sum_Days <- BUN05A_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- BUN05A_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- BUN05A_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- BUN05A_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- BUN05A_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = BUN05A_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BUN05A Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = BUN05A_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "BUN05A Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+
+```
+\newpage
+# **Bundegi** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
+```{r DHW_Count_Bundegi, echo = FALSE, message = FALSE}
+
+#Line Graph of yearly Moderate to High DHW values in CCI and NOAA
+##Bundegi
+
+Bundegi_Sat_DHW_Sum_Days <- Bundegi_Sat_Combined %>% 
+  mutate(Year = year(Date)) %>% 
+  mutate(DHW4 = if_else(accum_DHW_12weeks >= 4, 1, 0)) %>% 
+  mutate(DHW8 = if_else(accum_DHW_12weeks>= 8, 1, 0)) %>% 
+  mutate(DHW4 = DHW4 - DHW8) %>% #to include DHW values from 4 to <8 only
+  group_by(Year, Data_Type) %>% 
+  summarise(DHW4_sum_days = sum(DHW4), DHW8_sum_days = sum(DHW8)) %>% 
+  ungroup()
+
+#Table showing maximum number of DHW >= 4 days in CCI and NOAA
+Max_DHW4_CCI <- Bundegi_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(CCI_DHW4 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW4))
+
+
+Max_DHW4_NOAA <- Bundegi_Sat_DHW_Sum_Days %>% 
+  select(-DHW8_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW4_sum_days) %>% 
+  mutate(NOAA_DHW4 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW4))
+ 
+
+Max_DHW8_CCI <- Bundegi_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(CCI_DHW8 = CCI) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(CCI_DHW8))
+
+
+Max_DHW8_NOAA <- Bundegi_Sat_DHW_Sum_Days %>% 
+  select(-DHW4_sum_days) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DHW8_sum_days) %>% 
+  mutate(NOAA_DHW8 = NOAA) %>% 
+  select(-CCI, - NOAA) %>% 
+  arrange(desc(NOAA_DHW8))
+
+knitr::kable(list(Max_DHW4_CCI, Max_DHW4_NOAA), caption = "Number of Days with moderate Degree Heating Week values")
+
+knitr::kable(list(Max_DHW8_CCI, Max_DHW8_NOAA ), caption = "Number of Days with high Degree Heating Week values") 
+
+
+#Visualising DHW values of >=4 and >=8
+DHW4_daily <- ggplot(data = Bundegi_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW4_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Bundegi (13BND & 08BND) Number of days with moderate DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+  
+DHW8_daily <- ggplot(data = Bundegi_Sat_DHW_Sum_Days)+
+  geom_line(aes(x = Year, y = DHW8_sum_days, color = Data_Type))+
+  labs(y = "Count", title = "Bundegi (13BND & 08BND) Number of days with high DHW values")+
+  scale_color_discrete_qualitative(name = "Satellite")
+
+DHW4_daily / DHW8_daily 
+
+```
+
+\newpage
 # **Tantabiddi** Yearly Sum of Moderate and High DHW Values in CCI and NOAA data
 
 ```{r DHW_Count_Tantabiddi, echo = FALSE, message = FALSE}
