@@ -26,7 +26,7 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data file ====
-csv_file <- 'kyle_code/data/CCI_SCOTT_RPO_1.csv'
+csv_file <- 'kyle_code/data/CCI_Bundegi.csv'
 
 
 # ..... settings ====
@@ -65,8 +65,8 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = csv_file) %>% 
-  mutate(end_date = max(daily_date)) %>%   #only for CCI data
-  mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
+  mutate(end_date = max(daily_date)) #%>%   #only for CCI data
+  #mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
 
 
 # ..... convert sst, lat, long and date column names ====
@@ -207,8 +207,8 @@ if(mmm_climatology_bool && mmm_from_sst_bool) {
 
 output_data <- sst_data_plus_mmm_and_dhw %>% 
   dplyr::select(-end_date) %>%
-  rename(DHW_value = degree_heating_week_mmm_climatology) %>% 
-  filter(Date <= as_date("2016-05-18"))
+  rename(DHW_value = degree_heating_week_mmm_from_sst) 
+  #filter(Date <= as_date("2016-05-18"))
 
 #output_data <- output_data %>%   #for NOAA combined file only
   #filter(subsite == "SCOTTSS2")
