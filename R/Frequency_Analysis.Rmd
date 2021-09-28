@@ -1,7 +1,7 @@
 ---
 title: "Frequency_Analysis"
 author: "Vanessa Hui Fen Neo"
-date: "r lubridate::today()`"
+date: "r lubridate::today()"
 output: pdf_document
 ---
 
@@ -17,9 +17,10 @@ library(tsibble)
 library(TSclust)
 library(mgcv)
 library(broom)
+library(equatiomatic)
 ```
 
-## Comparison of SST time series in Browse Island sites
+## Comparison of CCI, NOAA and Coral Core SST variability in Browse Island sites
 - BRS05 (-14.105, 123.5356924)
 - BRS07 (-14.121, 123.5467277)
 
@@ -209,7 +210,7 @@ modelsummary::modelsummary(list(lm1, lm2))
 
 
 
-## Comparison of SST time series in Cocos (Keeling) Island sites
+## Comparison of CCI, NOAA and Coral Core SST variability in Cocos (Keeling) Island sites
 - DAR3 (-12.095, 96.8805)
 - DAR Long (-12.0875, 96.875)
 
@@ -408,7 +409,7 @@ modelsummary::modelsummary(list(lm1, lm2))
 ```
 
 
-## Comparison of SST time series in Ningaloo Reef sites
+## Comparison of CCI, NOAA and Coral Core SST variability in Ningaloo Reef sites
 - Tantabiddi (13TNT) and Tantabiddi (08TNT) (-21.91, 113.97)
 - TNT (-21.9, 113.97)
 - TNT07C (-21.893, 113.963)
@@ -1062,7 +1063,7 @@ modelsummary::modelsummary(list(lm1, lm2))
 
 
 
-## Comparison of SST time series in Houtman Abrolhos Island sites
+## Comparison of CCI, NOAA and Coral Core SST variability in Houtman Abrolhos Island sites
 - Wallabi Island (-28.28, 113.46)
 - HAB10A (-28.4589, 113.749)
 - HAB05B (-28.4609, 113.772)
@@ -1431,6 +1432,6 @@ modelsummary::modelsummary(list(lm2))
 # No Coral Core Data for Scott Reef
 # Linear Relationship between Coral Core and CCI, Coral Core and NOAA, was found to be insignificant in HAB10A_SrCa and HAB05B_d18O
 # Linear Relationship between Coral Core and NOAA was found to be insignificant in HAB05B_SrCa (Significant for Coral Core and CCI in this site)
-# Too many missing gaps in Logger Data
+# Too many missing gaps in Logger Data for comparison
 
 
