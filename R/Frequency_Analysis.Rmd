@@ -1,12 +1,12 @@
 ---
 title: "Frequency_Analysis"
 author: "Vanessa Hui Fen Neo"
-date: "r lubridate::today()"
+date: "`r lubridate::today()`"
 output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 ```
 
 ```{r Loading_Packages, include = FALSE}
@@ -17,9 +17,11 @@ library(tsibble)
 library(TSclust)
 library(mgcv)
 library(broom)
+library(kableExtra)
 library(equatiomatic)
 ```
 
+\newpage
 ## Comparison of CCI, NOAA and Coral Core SST variability in Browse Island sites
 - BRS05 (-14.105, 123.5356924)
 - BRS07 (-14.121, 123.5467277)
@@ -70,15 +72,17 @@ dat <- as_tibble(Browse_05_CCI) %>%
                       data_type == "Coral Core" ~ "browse_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+BRS05_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "BRS05")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
-ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+ggplot(BRS05_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core", y = "NOAA")
 # decreasing trend with curvature. 
 # gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -92,14 +96,15 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
 # p-value for quadratic is 0.175
 # use linear model
 
-lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
-          data = dat_joint)
+NOAA_BRS05 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
+          data = BRS05_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+ggplot(BRS05_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -113,12 +118,12 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) +
 # p-value for quadratic is 0.204
 # use linear model
 
-lm2 <- lm(browse_CCI ~ 1 + browse_coral_core, 
-          data = dat_joint)
+CCI_BRS05 <- lm(browse_CCI ~ 1 + browse_coral_core, 
+          data = BRS05_joint)
 # summary(lm2)
 
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_BRS05, CCI_BRS05))
 
 ##BRS07
 
@@ -163,15 +168,17 @@ dat <- as_tibble(Browse_07_CCI) %>%
                       data_type == "Coral Core" ~ "browse_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+BRS07_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "BRS07")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
-ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
+ggplot(BRS07_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -185,31 +192,32 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
 # p-value for quadratic is 0.146
 # use linear model
 
-lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
-          data = dat_joint)
+NOAA_BRS07 <- lm(browse_NOAA ~ 1 + browse_coral_core, 
+          data = BRS07_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
+ggplot(BRS07_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
 # summary(gam2)
 # edf = 3.166 so linear + quadratic should give a good approx to the trend
 
-lm2 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
-          data = dat_joint)
+CCI_BRS07 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2), 
+          data = BRS07_joint)
 # summary(lm2)
 
 # p-value for quadratic is significant, keep quadratic model
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_BRS07, CCI_BRS07))
 ```
 
 
-
+\newpage
 ## Comparison of CCI, NOAA and Coral Core SST variability in Cocos (Keeling) Island sites
 - DAR3 (-12.095, 96.8805)
 - DAR Long (-12.0875, 96.875)
@@ -260,15 +268,17 @@ dat <- as_tibble(DARL_CCI) %>%
                       data_type == "Coral Core" ~ "Cocos_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+DARL_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "DARL")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
-ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+ggplot(DARL_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core", y = "NOAA")
 
 # linear decreasing trend
 
@@ -284,14 +294,15 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
 # p-value for quadratic is 0.322
 # use linear model
 
-lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
-          data = dat_joint)
+NOAA_DARL <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
+          data = DARL_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+ggplot(DARL_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -305,11 +316,11 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
 # p-value for quadratic is 0.506
 # use linear model
 
-lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
-          data = dat_joint)
+CCI_DARL <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
+          data = DARL_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_DARL, CCI_DARL))
 
 ##DAR3
 DAR3_CCI <- read_csv(here::here("data_raw", "CCI_DAR3.csv"))
@@ -356,15 +367,17 @@ dat <- as_tibble(DAR3_CCI) %>%
                       data_type == "Coral Core" ~ "Cocos_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+DAR3_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "DAR3")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more align with NOAA over CCI 
-ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
+ggplot(DAR3_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -378,14 +391,15 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
 # p-value for quadratic is 0.322
 # use linear model
 
-lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
-          data = dat_joint)
+NOAA_DAR3 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core, 
+          data = DAR3_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
+ggplot(DAR3_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -399,16 +413,16 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
 # p-value for quadratic is 0.506
 # use linear model
 
-lm2 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
-          data = dat_joint)
+CCI_DAR3 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core, 
+          data = DAR3_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_DAR3, CCI_DAR3))
 
 
 ```
 
-
+\newpage
 ## Comparison of CCI, NOAA and Coral Core SST variability in Ningaloo Reef sites
 - Tantabiddi (13TNT) and Tantabiddi (08TNT) (-21.91, 113.97)
 - TNT (-21.9, 113.97)
@@ -461,40 +475,43 @@ dat <- as_tibble(Ningaloo_13TNT_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+Tantabiddi_13TNT_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "13TNT")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA than CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(Tantabiddi_13TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
 # summary(gam1)
 # edf = 2.677 so linear + quadratic should give a good approx to the trend
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
-          data = dat_joint)
+NOAA_Tantabiddi_13TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = Tantabiddi_13TNT_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(Tantabiddi_13TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
 # summary(gam2)
 # edf = 2.724 so linear + quadratic should give a good approx to the trend
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
-          data = dat_joint)
+CCI_Tantabiddi_13TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = Tantabiddi_13TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_Tantabiddi_13TNT, CCI_Tantabiddi_13TNT))
 
 
 ##Tantabiddi 08TNT
@@ -542,15 +559,17 @@ dat <- as_tibble(Ningaloo_08TNT_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+Tantabiddi_08TNT_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "08TNT")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA over CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(Tantabiddi_08TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -563,14 +582,15 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
 # p-value for quadratic is 0.564
 # use linear model instead
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+NOAA_Tantabiddi_08TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = Tantabiddi_08TNT_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(Tantabiddi_08TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -583,11 +603,11 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
 # p-value for quadratic is 0.329
 # use linear model instead
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+CCI_Tantabiddi_08TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = Tantabiddi_08TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_Tantabiddi_08TNT, CCI_Tantabiddi_08TNT))
 
 
 ##Bundegi 13BND
@@ -635,15 +655,17 @@ dat <- as_tibble(Ningaloo_13BND_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+Bundegi_13BND_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "13BND")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is much more aligned with NOAA over CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(Bundegi_13BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature for NOAA vs coral core. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -657,14 +679,15 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
 # p-value for quadratic is 0.195
 # use linear model instead
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+NOAA_Bundegi_13BND <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = Bundegi_13BND_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(Bundegi_13BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -678,11 +701,11 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
 # p-value for quadratic is 0.665
 # use linear model instead
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+CCI_Bundegi_13BND <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = Bundegi_13BND_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_Bundegi_13BND, CCI_Bundegi_13BND))
 
 
 ##Bundegi 08BND
@@ -729,44 +752,47 @@ dat <- as_tibble(Ningaloo_08BND_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+Bundegi_08BND_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "08BND")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is more aligned with NOAA over CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(Bundegi_08BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
 # summary(gam1)
 # edf = 3.657 so linear + quadratic should give a good approx to the trend
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
-          data = dat_joint)
+NOAA_Bundegi_08BND <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = Bundegi_08BND_joint)
 # summary(lm1)
 
 # significant p-value for quadratic
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(Bundegi_08BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core", y = "CCI")
 # linear decreasing trend with curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
 # summary(gam2)
 # edf = 2.88 so linear + quadratic should give a good approx to the trend
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
-          data = dat_joint)
+CCI_Bundegi_08BND <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2), 
+          data = Bundegi_08BND_joint)
 # summary(lm2)
 
 # significant p-value for quadratic
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_Bundegi_08BND, CCI_Bundegi_08BND))
 
 
 ##TNT
@@ -814,15 +840,17 @@ dat <- as_tibble(Ningaloo_TNT_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+TNT_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "TNT")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -836,14 +864,15 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
 # p-value for quadratic is 0.160
 # use linear model instead
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+NOAA_TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = TNT_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -857,11 +886,11 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
 # p-value for quadratic is 0.258
 # use linear model instead
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+CCI_TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_TNT, CCI_TNT))
 
 ##TNT07C
 ##Only annual coral core data
@@ -913,15 +942,17 @@ dat <- as_tibble(Ningaloo_TNT07C_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+TNT07C_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "TNT07C")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA over CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(TNT07C_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -935,14 +966,15 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
 # p-value for quadratic is 0.312
 # use linear model
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+NOAA_TNT07C <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = TNT07C_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(TNT07C_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -956,11 +988,11 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
 # p-value for quadratic is 0.726
 # use linear model
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+CCI_TNT07C <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = TNT07C_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_TNT07C, CCI_TNT07C))
 
 ##BUN05A
 ##Only annual coral core data
@@ -1010,15 +1042,17 @@ dat <- as_tibble(Ningaloo_BUN05A_CCI) %>%
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+BUN05A_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "BUN05A")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is more aligned with CCI than NOAA 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
+ggplot(BUN05A_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1032,14 +1066,15 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
 # p-value for quadratic is 0.610
 # use linear model
 
-lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+NOAA_BUN05A <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core, 
+          data = BUN05A_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
+ggplot(BUN05A_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1053,16 +1088,16 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
 # p-value for quadratic is 0.816
 # use linear model
 
-lm2 <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
-          data = dat_joint)
+CCI_BUN05A <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core, 
+          data = BUN05A_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_BUN05A, CCI_BUN05A))
 
 ```
 
 
-
+\newpage
 ## Comparison of CCI, NOAA and Coral Core SST variability in Houtman Abrolhos Island sites
 - Wallabi Island (-28.28, 113.46)
 - HAB10A (-28.4589, 113.749)
@@ -1114,44 +1149,47 @@ dat <- as_tibble(Wallabi_Island_CCI) %>%
                       data_type == "Coral Core" ~ "HAbrol_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+Wallabi_Island_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "Wallabi Island")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+ggplot(Wallabi_Island_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core", y = "NOAA")
 # trend is explained by a curvature. 
 # gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
 # summary(gam1)
 # edf = 3.398 so linear + quadratic should give a good approx to the trend
 
-lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
-          data = dat_joint)
+NOAA_Wallabi_Island <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = Wallabi_Island_joint)
 # summary(lm1)
 
 # p-value for quadratic is significant
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+ggplot(Wallabi_Island_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core", y = "CCI")
 # trend is explained by curvature. 
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
 # summary(gam2)
 # edf = 2.975 so linear + quadratic should give a good approx to the trend
 
-lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
-          data = dat_joint)
+CCI_Wallabi_Island <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_core^2), 
+          data = Wallabi_Island_joint)
 # summary(lm2)
 
 # p-value for quadratic is significant
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_Wallabi_Island, CCI_Wallabi_Island))
 
 ##HAB10A d18O Proxy
 ##Only annual coral core data
@@ -1202,15 +1240,17 @@ dat <- as_tibble(HAB10A_d18O_CCI) %>%
                       data_type == "Coral Core" ~ "HAbrol_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+HAB10A_d18O_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "HAB10A d18O")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA than CCI 
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+ggplot(HAB10A_d18O_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1224,14 +1264,15 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
 # p-value for quadratic is 0.0657
 # use linear model
 
-lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
-          data = dat_joint)
+NOAA_HAB10A_d18O <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core, 
+          data = HAB10A_d18O_joint)
 # summary(lm1)
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+ggplot(HAB10A_d18O_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1245,11 +1286,11 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
 # p-value for quadratic is 0.272
 # use linear model
 
-lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
-          data = dat_joint)
+CCI_HAB10A_d18O <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
+          data = HAB10A_d18O_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(lm1, lm2))
+modelsummary::modelsummary(list(NOAA_HAB10A_d18O, CCI_HAB10A_d18O))
 
 ##HAB05B d18O Proxy
 ##Only annual coral core data
@@ -1374,15 +1415,16 @@ dat <- as_tibble(HAB05B_SrCa_CCI) %>%
                       data_type == "Coral Core" ~ "HAbrol_coral_core",
                       TRUE ~ data_type))
 
-dat_joint <- dat %>% 
+HAB05B_SrCa_joint <- dat %>% 
   pivot_wider(names_from = data_type, values_from = sst) %>% 
-  drop_na() 
+  drop_na() %>% 
+  mutate(Site = "HAB05B SrCa")
 
-GGally::ggpairs(dat_joint)
+#GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
-  geom_point() + 
-  geom_smooth(method = "gam")
+#ggplot(HAB05B_SrCa_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
+#  geom_point() + 
+#  geom_smooth(method = "gam")
 # linear and slight decreasing trend
 # gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1403,9 +1445,10 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
 # p-value for linear model is not significant as well
 
 # repeat for CCI 
-ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
+ggplot(HAB05B_SrCa_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") %>% 
+  labs(title = "Sea Surface Temperature at HAB05B Sr/Ca", x = "Coral Core", y = "CCI")
 # linear decreasing trend
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1419,13 +1462,13 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
 # p-value for quadratic is 0.217
 # use linear model
 
-lm2 <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
-          data = dat_joint)
+CCI_HAB05B_SrCa <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core, 
+          data = HAB05B_SrCa_joint)
 # summary(lm2)
 
 # p-value for linear model is significant
 
-modelsummary::modelsummary(list(lm2))
+modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 ```
 
 
@@ -1434,4 +1477,150 @@ modelsummary::modelsummary(list(lm2))
 # Linear Relationship between Coral Core and NOAA was found to be insignificant in HAB05B_SrCa (Significant for Coral Core and CCI in this site)
 # Too many missing gaps in Logger Data for comparison
 
+
+\newpage
+```{r binding_data}
+
+Browse <- rbind(BRS05_joint, BRS07_joint)
+Cocos_Keeling <- rbind(DARL_joint, DAR3_joint)
+Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT_joint, TNT07C_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
+Ningaloo_B <- rbind(Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
+Ningaloo_T1 <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT07C_joint)
+Ningaloo_T2 <- TNT_joint
+HAbrol <- rbind(Wallabi_Island_joint, HAB10A_d18O_joint, HAB05B_SrCa_joint)
+
+
+```
+
+
+\newpage
+```{r Browse_island_Plots_Table}
+Browse_Plot_NOAA <- Browse %>% 
+  ggplot(aes(x = browse_coral_core, y = browse_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Browse_Plot_CCI <- Browse %>% 
+  ggplot(aes(x = browse_coral_core, y = browse_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Browse_Plot_NOAA / Browse_Plot_CCI
+
+
+```
+\newpage
+
+```{r Cocos_Keeling_Plots_Table}
+Cocos_Keeling_Plot_NOAA <- Cocos_Keeling %>% 
+  ggplot(aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Cocos_Keeling_Plot_CCI <- Cocos_Keeling %>% 
+  ggplot(aes(x = Cocos_coral_core, y = Cocos_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Cocos_Keeling_Plot_NOAA / Cocos_Keeling_Plot_CCI
+```
+\newpage
+```{r Ningaloo_Plots_Table}
+Ningaloo_Plot_NOAA <- Ningaloo %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Ningaloo_Plot_CCI <- Ningaloo %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Ningaloo_Bundegi_Plot_NOAA <- Ningaloo_B %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef Bundegi and BUN05A NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Ningaloo_Bundegi_Plot_CCI <- Ningaloo_B %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef Bundegi and BUN05A CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Ningaloo_Tantabiddi_Plot_NOAA <- Ningaloo_T1 %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef Tantabiddi NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Ningaloo_Tantabiddi_Plot_CCI <- Ningaloo_T1 %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef Tantabiddi CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Ningaloo_TNT_Plot_NOAA <- Ningaloo_T2 %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef TNT NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+Ningaloo_TNT_Plot_CCI <- Ningaloo_T2 %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef TNT CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+Ningaloo_Plot_NOAA 
+Ningaloo_Plot_CCI
+Ningaloo_Bundegi_Plot_NOAA/Ningaloo_Bundegi_Plot_CCI
+Ningaloo_Tantabiddi_Plot_NOAA/Ningaloo_Tantabiddi_Plot_CCI
+Ningaloo_TNT_Plot_NOAA/Ningaloo_TNT_Plot_CCI
+
+```
+\newpage
+```{r Houtman_Abrolhos_Plots_Table}
+HAbrol_Plot_NOAA <- HAbrol %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  facet_wrap("Site")
+
+HAbrol_Plot_CCI <- HAbrol %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
+  geom_point() +
+  geom_smooth() +
+  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  facet_wrap("Site")
+
+HAbrol_Plot_NOAA / HAbrol_Plot_CCI
+```
+\newpage
+```{r Tables}
+
+modelsummary::modelsummary(list("BRS05" = NOAA_BRS05, "BRS07" = NOAA_BRS07, "DARL" = NOAA_DARL, "DAR3" = NOAA_DAR3, "13TNT" = NOAA_Tantabiddi_13TNT, "08TNT" = NOAA_Tantabiddi_08TNT, "TNT" = NOAA_TNT, "TNT07C" = NOAA_TNT07C, "13BND" = NOAA_Bundegi_13BND, "08BND" = NOAA_Bundegi_08BND, "BUN05A" = NOAA_BUN05A, "Wallabi Island" = NOAA_Wallabi_Island, "HAB10A d18O" = NOAA_HAB10A_d18O), title = "NOAA", gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra')
+
+modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL" = CCI_DARL, "DAR3" = CCI_DAR3, "13TNT" = CCI_Tantabiddi_13TNT, "08TNT" = CCI_Tantabiddi_08TNT, "TNT" = CCI_TNT, "TNT07C" = CCI_TNT07C, "13BND" = CCI_Bundegi_13BND, "08BND" = CCI_Bundegi_08BND, "BUN05A" = CCI_BUN05A, "Wallabi Island" = CCI_Wallabi_Island, "HAB10A d18O" = CCI_HAB10A_d18O, "HAB05B SrCa" = CCI_HAB05B_SrCa), title = "CCI", gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra')
+
+```
 
