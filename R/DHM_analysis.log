@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  26 SEP 2021 20:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  28 SEP 2021 18:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1073,7 +1073,7 @@ Package rerunfilecheck Info: File `DHM_analysis.out' has not changed.
 Here is how much of TeX's memory you used:
  10470 strings out of 480559
  166729 string characters out of 5901528
- 694392 words of memory out of 5000000
+ 695360 words of memory out of 5000000
  27760 multiletter control sequences out of 15000+600000
  442722 words of font info for 63 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -1084,7 +1084,7 @@ lm/lmbx12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 /public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/font
 s/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-di
 st/fonts/type1/public/lm/lmr17.pfb>
-Output written on DHM_analysis.pdf (66 pages, 1006671 bytes).
+Output written on DHM_analysis.pdf (66 pages, 951565 bytes).
 PDF statistics:
  804 PDF objects out of 1000 (max. 8388607)
  637 compressed objects within 7 object streams
