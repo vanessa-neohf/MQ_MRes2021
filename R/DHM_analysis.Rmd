@@ -74,8 +74,44 @@ NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with
 ```
 
 ```{r CCore_Data_with_mmm_from_sst, include = FALSE}
-#check if there are missing time gaps by reading data as tsibble
-#CCore_BRS05_CCI <- as_tsibble(read_csv(here::here("data_raw", "CCore_SST_BRS05_CCI_with_mmm.csv")), index = Date)
+#CCI Data
+CCore_BRS05_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS05_CCI_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+CCore_BRS07_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS07_CCI_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+CCore_DARL_CCI <- read_csv(here::here("data_raw", "CCore_SST_DARL_CCI_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+CCore_Wallabi_Island_CCI <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_CCI_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+
+#CCI Data - read TNT data for importing MMM_from_SST column to 13TNT and 08TNT
+CCore_TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_CCI_with_mmm.csv"))
+CCore_13TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_CCI.csv")) %>% 
+  rename(Date = date) %>% 
+  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
+CCore_08TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_CCI.csv")) %>% 
+  rename(Date = date) %>% 
+  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
+
+#NOAA Data
+CCore_BRS05_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS05_NOAA_with_mmm.csv")) %>%
+  mutate(yearmonth = yearmonth(Date))
+CCore_BRS07_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS07_NOAA_with_mmm.csv")) %>%
+  mutate(yearmonth = yearmonth(Date))
+CCore_DARL_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DARL_NOAA_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+CCore_Wallabi_Island_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_NOAA_with_mmm.csv")) %>% 
+  mutate(yearmonth = yearmonth(Date))
+
+#NOAA Data - read TNT data for importing MMM_from_SST column to 13TNT and 08TNT
+CCore_TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_NOAA_with_mmm.csv"))
+CCore_13TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_NOAA.csv")) %>%
+  rename(Date = date) %>% 
+  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
+CCore_08TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_NOAA.csv")) %>%
+  rename(Date = date) %>% 
+  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
+
 ```
 
 ```{r scan_gaps, include = FALSE}
@@ -84,6 +120,52 @@ NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with
 
 #checked - no gaps in CCI and NOAA datasets 
 #using as_tsibble(data, index = date) and scan_gaps
+
+#read Coral Core calibrated by CCI  as tsibbles and scan gaps in Coral Cores
+ts_BRS05_CCI_Core <- as_tsibble(CCore_BRS05_CCI, index = yearmonth)
+scan_gaps(ts_BRS05_CCI_Core) #47 gaps
+
+ts_BRS07_CCI_Core <- as_tsibble(CCore_BRS07_CCI, index = yearmonth)
+scan_gaps(ts_BRS07_CCI_Core) #47 gaps
+
+ts_DARL_CCI_Core <- as_tsibble(CCore_DARL_CCI, index = yearmonth)
+scan_gaps(ts_DARL_CCI_Core) #41 gaps
+
+ts_TNT_CCI_Core <- as_tsibble(CCore_TNT_CCI, index = yearmonth)
+scan_gaps(ts_TNT_CCI_Core) 
+
+ts_13TNT_CCI_Core <- as_tsibble(CCore_13TNT_CCI, index = yearmonth)
+scan_gaps(ts_13TNT_CCI_Core) 
+
+ts_08TNT_CCI_Core <- as_tsibble(CCore_08TNT_CCI, index = yearmonth)
+scan_gaps(ts_08TNT_CCI_Core)
+
+ts_Wallabi_Island_CCI_Core <- as_tsibble(CCore_Wallabi_Island_CCI, index = yearmonth)
+scan_gaps(ts_Wallabi_Island_CCI_Core)
+
+#read Coral Core calibrated by NOAA  as tsibbles and scan gaps in Coral Cores
+
+ts_BRS05_NOAA_Core <- as_tsibble(CCore_BRS05_NOAA, index = yearmonth)
+scan_gaps(ts_BRS05_NOAA_Core) #no gaps
+
+ts_BRS07_NOAA_Core <- as_tsibble(CCore_BRS07_NOAA, index = yearmonth)
+scan_gaps(ts_BRS07_NOAA_Core) #no gaps
+
+ts_DARL_NOAA_Core <- as_tsibble(CCore_DARL_NOAA, index = yearmonth)
+scan_gaps(ts_DARL_NOAA_Core) #no gaps
+
+ts_TNT_NOAA_Core <- as_tsibble(CCore_TNT_NOAA, index = yearmonth)
+scan_gaps(ts_13TNT_NOAA_Core) 
+
+ts_13TNT_NOAA_Core <- as_tsibble(CCore_13TNT_NOAA, index = yearmonth)
+scan_gaps(ts_13TNT_NOAA_Core) 
+
+ts_08TNT_NOAA_Core <- as_tsibble(CCore_08TNT_NOAA, index = yearmonth)
+scan_gaps(ts_08TNT_NOAA_Core)
+
+ts_Wallabi_Island_NOAA_Core <- as_tsibble(CCore_Wallabi_Island_NOAA, index = yearmonth)
+scan_gaps(ts_Wallabi_Island_NOAA_Core)
+
 ```
 
 # Degree Heating Month Anomaly Time Series Plots:      
