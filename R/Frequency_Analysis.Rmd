@@ -1621,11 +1621,13 @@ HAbrol_Plot_NOAA / HAbrol_Plot_CCI
 
 modelsummary::modelsummary(list("BRS05" = NOAA_BRS05, "BRS07" = NOAA_BRS07, "DARL" = NOAA_DARL, "DAR3" = NOAA_DAR3, "13TNT" = NOAA_Tantabiddi_13TNT, "08TNT" = NOAA_Tantabiddi_08TNT, "TNT" = NOAA_TNT, "TNT07C" = NOAA_TNT07C, "13BND" = NOAA_Bundegi_13BND, "08BND" = NOAA_Bundegi_08BND, "BUN05A" = NOAA_BUN05A, "Wallabi Island" = NOAA_Wallabi_Island, "HAB10A d18O" = NOAA_HAB10A_d18O), title = "NOAA", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo", "HAbrol_coral_core" = "L_HAbrol", "I(HAbrol_coral_core^2)" = "Q_HAbrol"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
   kable_styling(position = "center", full_width = T) %>% 
-  column_spec(column = 1, color = "purple")
+  column_spec(column = 1, color = "purple") %>% 
+  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 7, "Houtman Abrolhos" = 2))
 
 modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL" = CCI_DARL, "DAR3" = CCI_DAR3, "13TNT" = CCI_Tantabiddi_13TNT, "08TNT" = CCI_Tantabiddi_08TNT, "TNT" = CCI_TNT, "TNT07C" = CCI_TNT07C, "13BND" = CCI_Bundegi_13BND, "08BND" = CCI_Bundegi_08BND, "BUN05A" = CCI_BUN05A, "Wallabi Island" = CCI_Wallabi_Island, "HAB10A d18O" = CCI_HAB10A_d18O, "HAB05B SrCa" = CCI_HAB05B_SrCa), title = "CCI", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "I(browse_coral_core^2)" = "Q_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo", "HAbrol_coral_core" = "L_HAbrol", "I(HAbrol_coral_core^2)" = "Q_HAbrol"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
   kable_styling(position = "center", full_width = T) %>% 
-  column_spec(column = 1, color = "purple")
+  column_spec(column = 1, color = "purple") %>% 
+  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 7, "Houtman Abrolhos" = 3))
 
 ```
 \end{landscape}
