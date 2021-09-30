@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 10:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 11:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1015,7 +1015,7 @@ on input line 282.
 
 LaTeX Warning: Float too large for page by 427.96947pt on input line 468.
 
-<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=437, 469.755pt x 325.215pt
+<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=438, 469.755pt x 325.215pt
 >
 File: DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf>
@@ -1026,7 +1026,7 @@ on input line 470.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 2313.
 
-<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=457, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=459, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf>
@@ -1043,7 +1043,7 @@ l.2317 \newpage
 
 LaTeX Warning: Float too large for page by 266.76955pt on input line 2475.
 
-<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=477, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=480, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DARL-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DARL-1.pdf>
@@ -1054,7 +1054,7 @@ n input line 2477.
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [32]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=506, 469.755pt x 325
+<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=510, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf Graphic file (type 
 pdf)
@@ -1066,7 +1066,7 @@ Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [35]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=529, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=534, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf Graphic file (type pd
 f)
@@ -1078,7 +1078,7 @@ sed on input line 6172.
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
 [38]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=554, 469.755pt x 325.2
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=560, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf Graphic file (type pd
 f)
@@ -1090,7 +1090,7 @@ sed on input line 8019.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 9862.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=568, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=575, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf Graphic file (type pdf
 )
@@ -1108,7 +1108,7 @@ l.9866 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 11707.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=588, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=596, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf Graphic file (type pdf
 )
@@ -1126,7 +1126,7 @@ l.11711 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 13552.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=609, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=618, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf Graphic file (type pdf
 )
@@ -1144,7 +1144,7 @@ l.13556 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 15397.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=629, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=639, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf Graphic file (type pdf
 )
@@ -1162,7 +1162,7 @@ l.15401 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 17242.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=649, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=660, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf Graphic file (type pdf
 )
@@ -1180,7 +1180,7 @@ l.17246 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 19087.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=670, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=683, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf Graphic file (type pdf
 )
@@ -1198,7 +1198,7 @@ l.19091 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 20932.
 
-<DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf, id=691, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf, id=704, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>
@@ -1215,7 +1215,7 @@ l.20936 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 22777.
 
-<DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf, id=711, 469.755pt x 325.215
+<DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf, id=725, 469.755pt x 325.215
 pt>
 File: DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf Graphic file (type pdf)
 
@@ -1230,7 +1230,7 @@ d, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.22781 \newpage
                 ]
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf, id=732, 469.755pt 
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf, id=747, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf Graphic file (
 type pdf)
@@ -1239,7 +1239,7 @@ Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1
 .pdf  used on input line 22824.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [56 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=747, 469.755pt 
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=763, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf Graphic file (
 type pdf)
@@ -1248,7 +1248,7 @@ Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1
 .pdf  used on input line 22869.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [57 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=762, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=779, 469.755pt x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf  used on
@@ -1258,7 +1258,7 @@ Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf  used on
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 24758.
 
-<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=777, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=796, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>
@@ -1272,7 +1272,7 @@ d, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.24762 \newpage
                 ]
-<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=798, 469.755pt x 
+<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=817, 469.755pt x 
 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf Graphic file (ty
 pe pdf)
@@ -1284,7 +1284,7 @@ df  used on input line 24863.
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 26706.
 
-<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=818, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=838, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>
@@ -1301,7 +1301,7 @@ l.26710 \newpage
 
 LaTeX Warning: Float too large for page by 5244.2671pt on input line 28551.
 
-<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=838, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=859, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>
@@ -1334,10 +1334,10 @@ ts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-d
 ist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb>
-Output written on DHM_analysis.pdf (66 pages, 909478 bytes).
+Output written on DHM_analysis.pdf (66 pages, 922951 bytes).
 PDF statistics:
- 917 PDF objects out of 1000 (max. 8388607)
- 741 compressed objects within 8 object streams
+ 939 PDF objects out of 1000 (max. 8388607)
+ 763 compressed objects within 8 object streams
  125 named destinations out of 1000 (max. 500000)
  405 words of extra memory for PDF output out of 10000 (max. 10000000)
 

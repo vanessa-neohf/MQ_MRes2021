@@ -1289,6 +1289,10 @@ kbl(High_BRS05_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 BRS05_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "BRS05 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1392,6 +1396,10 @@ kbl(High_BRS07_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 BRS07_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "BRS07 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1461,6 +1469,14 @@ knitr::kable(list(Max_DHM_CCI_DAR3, Max_DHM_NOAA_DAR3), caption = "Degree Heatin
 #Visualising DHM values in CCI, NOAA and CCore 
 DAR3_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "DAR3 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1564,6 +1580,14 @@ kbl(High_DARL_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 DARL_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "DARL Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1636,6 +1660,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTT_RPO_1, Max_DHM_NOAA_SCOTT_RPO_1), caption = 
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_RPO_1_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTT_RPO_1 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1707,6 +1739,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTT_SL4, Max_DHM_NOAA_SCOTT_SL4), caption = "Deg
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_SL4_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_SL4_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTT_SL4 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1778,6 +1818,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTT_SS3, Max_DHM_NOAA_SCOTT_SS3), caption = "Deg
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_SS3_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_SS3_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTT_SS3 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
@@ -1850,6 +1898,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTNR1, Max_DHM_NOAA_SCOTTNR1), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTNR1_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTNR1_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTNR1 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1922,6 +1978,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTSL1, Max_DHM_NOAA_SCOTTSL1), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTSL1_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTSL1 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -1994,6 +2058,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTSL2, Max_DHM_NOAA_SCOTTSL2), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTSL2_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL2_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTSL2 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2065,6 +2137,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTSL3, Max_DHM_NOAA_SCOTTSL3), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTSL3_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL3_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTSL3 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
@@ -2136,6 +2216,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTSS1, Max_DHM_NOAA_SCOTTSS1), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTSS1_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSS1_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTSS1 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2208,6 +2296,14 @@ knitr::kable(list(Max_DHM_CCI_SCOTTSS2, Max_DHM_NOAA_SCOTTSS2), caption = "Degre
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTTSS2_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSS2_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "SCOTTSS2 Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2277,6 +2373,10 @@ knitr::kable(list(Max_DHM_CCI_BUN05A, Max_DHM_NOAA_BUN05A), caption = "Degree He
 #Visualising DHM values in CCI, NOAA and CCore 
 BUN05A_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BUN05A_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "BUN05A Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2344,6 +2444,10 @@ knitr::kable(list(Max_DHM_CCI_Bundegi, Max_DHM_NOAA_Bundegi), caption = "Degree 
 #Visualising DHM values in CCI, NOAA and CCore 
 Bundegi_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "08BND and 13BND Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2448,6 +2552,10 @@ kbl(High_08TNT_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_08TNT_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = `08TNT_DHM`, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "08TNT Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2551,6 +2659,10 @@ kbl(High_13TNT_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_13TNT_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "13TNT Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2653,6 +2765,10 @@ kbl(High_TNT_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 TNT_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = TNT_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "TNT Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -2725,6 +2841,10 @@ knitr::kable(list(Max_DHM_CCI_TNT07C, Max_DHM_NOAA_TNT07C), caption = "Degree He
 #Visualising DHM values in CCI, NOAA and CCore 
 TNT07C_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = TNT07C_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "TNT07C Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
@@ -2829,6 +2949,10 @@ kbl(High_Wallabi_Island_DHM) %>%
 #Visualising DHM values in CCI, NOAA and CCore 
 Wallabi_Island_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Wallabi_Island_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "Wallabi Island Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
@@ -2901,6 +3025,10 @@ knitr::kable(list(Max_DHM_CCI_HAB05B, Max_DHM_NOAA_HAB05B), caption = "Degree He
 #Visualising DHM values in CCI, NOAA and CCore 
 HAB05B_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "HAB05B Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
@@ -2973,6 +3101,10 @@ knitr::kable(list(Max_DHM_CCI_HAB10A, Max_DHM_NOAA_HAB10A), caption = "Degree He
 #Visualising DHM values in CCI, NOAA and CCore 
 HAB10A_Combined %>% 
   ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "HAB10A Degree Heating Month values time plot")+
   scale_color_discrete_qualitative(name = "Data Source")  +
