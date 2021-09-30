@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  28 SEP 2021 18:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 11:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -844,7 +844,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 110.
-<DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf, id=393, 469.755pt x 325
+<DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf, id=414, 469.755pt x 325
 .215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf Graphic file (type 
 pdf)
@@ -853,7 +853,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf
  used on input line 468.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [22 <./DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf>] [23] [24]
-<DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf, id=414, 469.755pt x 325
+<DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf, id=436, 469.755pt x 325
 .215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf Graphic file (type 
 pdf)
@@ -862,7 +862,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf
  used on input line 839.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [25 <./DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf>] [26] [27]
-<DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf, id=437, 469.755pt x 325.
+<DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf, id=458, 469.755pt x 325.
 215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf Graphic file (type p
 df)
@@ -871,7 +871,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf
 used on input line 1210.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [28 <./DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf>] [29] [30]
-<DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf, id=458, 469.755pt x 325.
+<DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf, id=479, 469.755pt x 325.
 215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf Graphic file (type p
 df)
@@ -880,7 +880,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf
 used on input line 1581.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [31 <./DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf>] [32] [33]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf, id=480, 469.755pt
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf, id=501, 469.755pt
  x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf Graphic file 
 (type pdf)
@@ -889,7 +889,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-
 1.pdf  used on input line 1952.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [34 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf>] [35] [36]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf, id=501, 469.755pt x
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf, id=522, 469.755pt x
  325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf Graphic file (t
 ype pdf)
@@ -898,7 +898,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.
 pdf  used on input line 2323.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [37 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf>] [38] [39]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf, id=523, 469.755pt x
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf, id=544, 469.755pt x
  325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf Graphic file (t
 ype pdf)
@@ -907,7 +907,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.
 pdf  used on input line 2694.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [40 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf>] [41] [42]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf, id=544, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf, id=566, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf Graphic file (ty
 pe pdf)
@@ -916,7 +916,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.p
 df  used on input line 3065.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [43 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf>] [44] [45]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf, id=567, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf, id=588, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf Graphic file (ty
 pe pdf)
@@ -925,7 +925,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.p
 df  used on input line 3436.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [46 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf>] [47] [48]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf, id=588, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf, id=609, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf Graphic file (ty
 pe pdf)
@@ -934,7 +934,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.p
 df  used on input line 3807.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [49 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf>] [50] [51]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf, id=610, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf, id=631, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf Graphic file (ty
 pe pdf)
@@ -943,7 +943,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.p
 df  used on input line 4178.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [52 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf>] [53] [54]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf, id=631, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf, id=652, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf Graphic file (ty
 pe pdf)
@@ -952,7 +952,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.p
 df  used on input line 4549.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [55 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf>] [56] [57]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf, id=653, 469.755pt x 
+<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf, id=675, 469.755pt x 
 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf Graphic file (ty
 pe pdf)
@@ -961,7 +961,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.p
 df  used on input line 4920.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [58 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf>] [59] [60]
-<DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf, id=674, 469.755pt x 32
+<DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf, id=696, 469.755pt x 32
 5.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf Graphic file (type
  pdf)
@@ -970,7 +970,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf
   used on input line 5291.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [61 <./DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf>] [62] [63]
-<DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf, id=697, 469.755pt x 3
+<DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf, id=718, 469.755pt x 3
 25.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf Graphic file (typ
 e pdf)
@@ -979,7 +979,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pd
 f  used on input line 5657.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [64 <./DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf>] [65] [66]
-<DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf, id=718, 469.755pt 
+<DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf, id=739, 469.755pt 
 x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf Graphic file (
 type pdf)
@@ -988,7 +988,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1
 .pdf  used on input line 6028.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [67 <./DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf>] [68] [69]
-<DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf, id=740, 469.755pt x 325.2
+<DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf, id=761, 469.755pt x 325.2
 15pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf Graphic file (type pd
 f)
@@ -997,7 +997,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf  u
 sed on input line 6399.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [70 <./DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf>] [71] [72]
-<DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf, id=761, 469.755pt x 32
+<DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf, id=782, 469.755pt x 32
 5.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf Graphic file (type
  pdf)
@@ -1006,7 +1006,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf
   used on input line 6770.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [73 <./DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf>] [74] [75]
-<DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf, id=783, 469.75
+<DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf, id=805, 469.75
 5pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf Graphic fi
 le (type pdf)
@@ -1016,7 +1016,7 @@ nd-1.pdf  used on input line 7141.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [76 <./DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf>] [77] [7
 8]
-<DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf, id=804, 469.755pt x 32
+<DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf, id=826, 469.755pt x 32
 5.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf Graphic file (type
  pdf)
@@ -1025,7 +1025,7 @@ Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf
   used on input line 7512.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [79 <./DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf>] [80] [81]
-<DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf, id=827, 469.755pt x 32
+<DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf, id=848, 469.755pt x 32
 5.215pt>
 File: DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf Graphic file (type
  pdf)
@@ -1056,10 +1056,10 @@ lm/lmbx10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 ts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-d
 ist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmr17.pfb>
-Output written on DHW_analysis.pdf (84 pages, 1936524 bytes).
+Output written on DHW_analysis.pdf (84 pages, 2157174 bytes).
 PDF statistics:
- 913 PDF objects out of 1000 (max. 8388607)
- 725 compressed objects within 8 object streams
+ 934 PDF objects out of 1000 (max. 8388607)
+ 746 compressed objects within 8 object streams
  169 named destinations out of 1000 (max. 500000)
  379 words of extra memory for PDF output out of 10000 (max. 10000000)
 

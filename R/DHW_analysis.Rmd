@@ -88,6 +88,10 @@ NOAA_BRS05 <- NOAA_BRS05 %>%
 BRS05_Sat_Combined <- rbind(CCI_BRS05, NOAA_BRS05)
 
 ggplot(BRS05_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of BRS05 (-14.11, 123.54) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -110,6 +114,10 @@ NOAA_BRS07 <- NOAA_BRS07 %>%
 BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07)
 
 ggplot(BRS07_Sat_Combined)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of BRS07 (-14.12, 123.55) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -132,6 +140,14 @@ NOAA_DAR3 <- NOAA_DAR3 %>%
 DAR3_Sat_Combined <- rbind(CCI_DAR3, NOAA_DAR3)
 
 ggplot(DAR3_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of DAR3 (-12.10, 96.88) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -154,6 +170,14 @@ NOAA_DARL <- NOAA_DARL %>%
 DARL_Sat_Combined <- rbind(CCI_DARL, NOAA_DARL)
 
 ggplot(DARL_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of DAR Long (-12.09, 96.88) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -176,6 +200,15 @@ NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>%
 SCOTT_RPO_1_Sat_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1)
 
 ggplot(SCOTT_RPO_1_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_RPO_1 (-14.06, 121.78) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -198,6 +231,14 @@ NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>%
 SCOTT_SL4_Sat_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4)
 
 ggplot(SCOTT_SL4_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SL4 (-14.02, 121.86) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -220,6 +261,14 @@ NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>%
 SCOTT_SS3_Sat_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3)
 
 ggplot(SCOTT_SS3_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTT_SS3 (-13.64, 122.03) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -242,6 +291,14 @@ NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>%
 SCOTTNR1_Sat_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1)
 
 ggplot(SCOTTNR1_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTNR1 (-13.99, 121.88) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -264,6 +321,14 @@ NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>%
 SCOTTSL1_Sat_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1)
 
 ggplot(SCOTTSL1_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL1 (-14.08, 121.95) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -286,6 +351,14 @@ NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>%
 SCOTTSL2_Sat_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2)
 
 ggplot(SCOTTSL2_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL2 (-14.19, 121.80) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -308,6 +381,14 @@ NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>%
 SCOTTSL3_Sat_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3)
 
 ggplot(SCOTTSL3_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSL3 (-14.07, 121.78) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -330,6 +411,14 @@ NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>%
 SCOTTSS1_Sat_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1)
 
 ggplot(SCOTTSS1_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS1 (-14.08, 121.98) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -352,6 +441,14 @@ NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>%
 SCOTTSS2_Sat_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2)
 
 ggplot(SCOTTSS2_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of SCOTTSS2 (-13.92, 121.92) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -374,6 +471,10 @@ NOAA_BUN05A <- NOAA_BUN05A %>%
 BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
 
 ggplot(BUN05A_Sat_Combined)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of BUN05A (-21.84, 114.18) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -396,6 +497,10 @@ NOAA_Bundegi <- NOAA_Bundegi %>%
 Bundegi_Sat_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi)
 
 ggplot(Bundegi_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of 08BND and 13BND (-21.87, 114.16) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -418,6 +523,10 @@ NOAA_Tantabiddi <- NOAA_Tantabiddi %>%
 Tantabiddi_Sat_Combined <- rbind(CCI_Tantabiddi, NOAA_Tantabiddi)
 
 ggplot(Tantabiddi_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of 08TNT and 13TNT (-21.91, 113.97) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -440,6 +549,10 @@ NOAA_TNT <- NOAA_TNT %>%
 TNT_Sat_Combined <- rbind(CCI_TNT, NOAA_TNT)
 
 ggplot(TNT_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of TNT (-21.9, 113.97) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -462,6 +575,10 @@ NOAA_TNT07C <- NOAA_TNT07C %>%
 TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C)
 
 ggplot(TNT07C_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of TNT07C (-21.89, 113.96) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -484,6 +601,8 @@ NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>%
 Wallabi_Island_Sat_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
 
 ggplot(Wallabi_Island_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of Wallabi Island (-28.28, 113.46) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -506,6 +625,8 @@ NOAA_HAB05B <- NOAA_HAB05B %>%
 HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
 
 ggplot(HAB05B_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of HAB05B (-28.46, 113.77) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -528,6 +649,8 @@ NOAA_HAB10A <- NOAA_HAB10A %>%
 HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
 
 ggplot(HAB10A_Sat_Combined)+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of HAB10A (-28.46, 113.75) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
