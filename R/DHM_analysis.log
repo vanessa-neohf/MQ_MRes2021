@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 12:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 15:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1221,100 +1221,105 @@ ed, duplicate ignored
                                                   \__shipout_drop_firstpage_...
 l.22790 \newpage
                 ]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
+2797.
+(c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 <DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf, id=758, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf Graphic file (
 type pdf)
 <use DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1
-.pdf  used on input line 22836.
+.pdf  used on input line 22844.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [58 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=775, 469.755pt 
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=776, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf Graphic file (
 type pdf)
 <use DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1
-.pdf  used on input line 22884.
+.pdf  used on input line 22896.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [59 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=793, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=794, 469.755pt x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf  used on
- input line 22933.
+ input line 22945.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [60 <./DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 24776.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 24788.
 
-<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=810, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=811, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf  used
- on input line 24778.
+ on input line 24790.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [61 <./DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>] [62pdfTeX warning (ex
 t4): destination with the same identifier (name{table.16}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.24780 \newpage
+l.24792 \newpage
                 ]
-<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=832, 469.755pt x 
+<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=833, 469.755pt x 
 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf Graphic file (ty
 pe pdf)
 <use DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.p
-df  used on input line 24884.
+df  used on input line 24896.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [63] [64 <./DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 26727.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 26739.
 
-<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=853, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=854, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf  used
- on input line 26729.
+ on input line 26741.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [65 <./DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>] [66pdfTeX warning (ex
 t4): destination with the same identifier (name{table.18}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.26731 \newpage
+l.26743 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 28572.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 28584.
 
-<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=874, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=875, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf  used
- on input line 28574.
+ on input line 28586.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [67 <./DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>] [68pdfTeX warning (ex
 t4): destination with the same identifier (name{table.19}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.28576 \end{document}
+l.28588 \end{document}
                       ] (./DHM_analysis.aux)
 Package rerunfilecheck Info: File `DHM_analysis.out' has not changed.
 (rerunfilecheck)             Checksum: 3A2131848922090C8C9A8B4FA20A1357;6282.
  ) 
 Here is how much of TeX's memory you used:
- 12070 strings out of 480559
- 191344 string characters out of 5901528
- 708733 words of memory out of 5000000
- 29286 multiletter control sequences out of 15000+600000
- 450086 words of font info for 66 fonts, out of 8000000 for 9000
+ 12113 strings out of 480559
+ 192064 string characters out of 5901528
+ 708835 words of memory out of 5000000
+ 29325 multiletter control sequences out of 15000+600000
+ 450405 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,9n,66p,363b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
@@ -1324,11 +1329,12 @@ lm/lmbx10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 ts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-d
 ist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppData/Roaming/T
-inyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on DHM_analysis.pdf (68 pages, 925440 bytes).
+inyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/46217029/AppData/R
+oaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
+Output written on DHM_analysis.pdf (68 pages, 951061 bytes).
 PDF statistics:
- 957 PDF objects out of 1000 (max. 8388607)
- 779 compressed objects within 8 object streams
+ 962 PDF objects out of 1000 (max. 8388607)
+ 782 compressed objects within 8 object streams
  134 named destinations out of 1000 (max. 500000)
  405 words of extra memory for PDF output out of 10000 (max. 10000000)
 

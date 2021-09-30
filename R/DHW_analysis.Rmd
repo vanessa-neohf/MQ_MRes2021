@@ -18,6 +18,7 @@ library(dplyr)
 library(patchwork)
 library(colorspace)
 library(rmarkdown)
+library(kableExtra)
 ```
 
 ```{r Reading CCI & NOAA Degree Heating Week Raw Data, include = FALSE}
@@ -660,6 +661,137 @@ ggplot(HAB10A_Sat_Combined)+
         plot.title = element_text( face = "bold")
   )
 
+
+```
+
+\newpage
+# BRS05, BRS07, DAR Long, TNT, 13TNT, 08TNT, Wallabi Island, Scott Reef Sites 
+# Moderate and High Degree Heating Week values
+
+```{r Tables, echo = FALSE, message = FALSE}
+
+#BRS05
+t_BRS05_Sat_Combined <- BRS05_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_BRS05 <- t_BRS05_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date), ) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = as.numeric(mean(CCI)), Max_DHW_month_NOAA = as.numeric(mean(NOAA))) 
+
+BRS05.color.me.CCI <- which(Max_BRS05$Max_DHW_month_CCI > 8)
+BRS05.color.me.NOAA <- which(Max_BRS05$Max_DHW_month_NOAA > 8)
+
+Max_BRS05 %>% 
+  kbl(longtable = T, caption = "BRS05 Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(BRS05.color.me.CCI, color = "red") %>% 
+  row_spec(BRS05.color.me.NOAA, color = "red")
+
+  
+
+#BRS07
+t_BRS07_Sat_Combined <- BRS07_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_BRS07 <- t_BRS07_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date)) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+  ungroup()
+
+BRS07.color.me.CCI <- which(Max_BRS07$Max_DHW_month_CCI > 8)
+BRS07.color.me.NOAA <- which(Max_BRS07$Max_DHW_month_NOAA > 8)
+
+Max_BRS07 %>% 
+kbl(longtable = T, caption = "BRS07 Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(BRS07.color.me.CCI, color = "red") %>% 
+  row_spec(BRS07.color.me.NOAA, color = "red")
+
+
+#DARL
+t_DARL_Sat_Combined <- DARL_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_DARL <- t_DARL_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date)) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+  ungroup()
+
+DARL.color.me.CCI <- which(Max_DARL$Max_DHW_month_CCI > 8)
+DARL.color.me.NOAA <- which(Max_DARL$Max_DHW_month_NOAA > 8)
+
+Max_DARL %>% 
+kbl(longtable = T, caption = "DAR Long Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(DARL.color.me.CCI, color = "red") %>% 
+  row_spec(DARL.color.me.NOAA, color = "red")
+
+#Tantabiddi
+t_Tantabiddi_Sat_Combined <- Tantabiddi_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_Tantabiddi <- t_Tantabiddi_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date)) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+  ungroup()
+
+T.color.me.CCI <- which(Max_Tantabiddi$Max_DHW_month_CCI > 8)
+T.color.me.NOAA <- which(Max_Tantabiddi$Max_DHW_month_NOAA > 8)
+
+Max_Tantabiddi %>% 
+kbl(longtable = T, caption = "13TNT and 08TNT Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(T.color.me.CCI, color = "red") %>% 
+  row_spec(T.color.me.NOAA, color = "red")
+
+
+#TNT
+t_TNT_Sat_Combined <- TNT_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_TNT <- t_TNT_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date)) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+  ungroup()
+
+TNT.color.me.CCI <- which(Max_TNT$Max_DHW_month_CCI > 8)
+TNT.color.me.NOAA <- which(Max_TNT$Max_DHW_month_NOAA > 8)
+
+Max_TNT %>% 
+kbl(longtable = T, caption = "TNT Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(TNT.color.me.CCI, color = "red") %>% 
+  row_spec(TNT.color.me.NOAA, color = "red")
+
+#Wallabi Island
+t_Wallabi_Island_Sat_Combined <- Wallabi_Island_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+  filter(accum_DHW_12weeks >= 4) %>% 
+  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+Max_Wallabi_Island <- t_Wallabi_Island_Sat_Combined %>% 
+  mutate(Year = year(Date), Month = month(Date)) %>% 
+  group_by(Year, Month) %>% 
+  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+  ungroup()
+
+W.color.me.CCI <- which(Max_Wallabi_Island$Max_DHW_month_CCI > 8)
+W.color.me.NOAA <- which(Max_Wallabi_Island$Max_DHW_month_NOAA > 8)
+
+Max_Wallabi_Island %>% 
+kbl(longtable = T, caption = "Wallabi Island Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+  row_spec(W.color.me.CCI, color = "red") %>% 
+  row_spec(W.color.me.NOAA, color = "red")
 
 ```
 

@@ -1280,9 +1280,13 @@ High_BRS05_DHM <- BRS05_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_BRS05_DHM$`Coral Core (CCI)`> 0 | High_BRS05_DHM$`Coral Core (NOAA)` >0)
+
+
 kbl(High_BRS05_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 2011") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in BRS05" = 4), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in BRS05" = 4), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 
 #Visualising DHM values in CCI, NOAA and CCore 
@@ -1387,9 +1391,12 @@ High_BRS07_DHM <- BRS07_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_BRS07_DHM$`Coral Core (CCI)`> 0 | High_BRS07_DHM$`Coral Core (NOAA)` >0)
+
 kbl(High_BRS07_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 2011") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in BRS07" = 4), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in BRS07" = 4), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 BRS07_Combined %>% 
@@ -1570,9 +1577,12 @@ High_DARL_DHM <- DARL_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
-kbl(High_DARL_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 2009") %>% 
+color.me <- which(High_DARL_DHM$`Coral Core (CCI)`> 0 | High_DARL_DHM$`Coral Core (NOAA)` >0)
+
+kbl(High_DARL_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 2009") %>%
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in DAR Long" = 4), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in DAR Long" = 4), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 DARL_Combined %>% 
@@ -2541,9 +2551,12 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_08TNT_DHM$`Coral Core (CCI)`> 0 | High_08TNT_DHM$`Coral Core (NOAA)` >0)
+
 kbl(High_08TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 1996 to 2008") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in 08TNT" = 2), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in 08TNT" = 2), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_08TNT_Combined %>% 
@@ -2647,9 +2660,12 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_13TNT_DHM$`Coral Core (CCI)`> 0 | High_13TNT_DHM$`Coral Core (NOAA)` >0)
+
 kbl(High_13TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 2004 to 2013") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in 13TNT" = 3), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in 13TNT" = 3), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_13TNT_Combined %>% 
@@ -2752,9 +2768,12 @@ High_TNT_DHM <- TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_TNT_DHM$`Coral Core (CCI)`> 0 | High_TNT_DHM$`Coral Core (NOAA)` >0)
+
 kbl(High_TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 1994") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in TNT" = 4), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in TNT" = 4), bold = TRUE) %>% 
+  row_spec(color.me, color= "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 TNT_Combined %>% 
@@ -2935,9 +2954,12 @@ High_Wallabi_Island_DHM <- Wallabi_Island_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
+color.me <- which(High_Wallabi_Island_DHM$`Coral Core (CCI)`> 0 | High_Wallabi_Island_DHM$`Coral Core (NOAA)` >0)
+
 kbl(High_Wallabi_Island_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 1994") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in Wallabi Island" = 4), bold = TRUE)
+  add_header_above(c(" " = 2, "Degree Heating Month Values in Wallabi Island" = 4), bold = TRUE) %>% 
+  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Wallabi_Island_Combined %>% 
