@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  29 SEP 2021 11:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 17:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1063,434 +1063,518 @@ phic file (type pdf)
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_island_Pl
 ots_Table-1.pdf  used on input line 597.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[30 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf, id=351,
+<Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf, id=339,
+ 469.755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf Gra
+phic file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_island_Pl
+ots_Table-2.pdf  used on input line 598.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 597--599
+[][]
+ []
+
+[30 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf>] 
+[31 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf>]
+<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf, id=365,
  469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf Gra
 phic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Pl
-ots_Table-1.pdf  used on input line 600.
+ots_Table-1.pdf  used on input line 601.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[31 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf, id=365, 469.
+<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf, id=366,
+ 469.755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf Gra
+phic file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Pl
+ots_Table-2.pdf  used on input line 602.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 601--603
+[][]
+ []
+
+[32 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>] 
+[33 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf>]
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf, id=391, 469.
 755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-1.pdf  used on input line 602.
+able-1.pdf  used on input line 604.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf, id=366, 469.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf, id=392, 469.
 755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-2.pdf  used on input line 603.
+able-2.pdf  used on input line 605.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf, id=367, 469.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf, id=393, 469.
 755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-3.pdf  used on input line 604.
+able-3.pdf  used on input line 606.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf, id=368, 469.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf, id=394, 469.
 755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-4.pdf  used on input line 605.
+able-4.pdf  used on input line 607.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf, id=369, 469.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf, id=395, 469.
 755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-5.pdf  used on input line 606.
+able-5.pdf  used on input line 608.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf, id=396, 469.
+755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf Graphic 
+file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
+able-6.pdf  used on input line 609.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf, id=397, 469.
+755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf Graphic 
+file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
+able-7.pdf  used on input line 610.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--607
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--607
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--607
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 602--607
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
 []
  []
 
-[32 <./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>] [33 <
-./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>] [34 <./Fre
-quency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>] [35 <./Frequenc
-y_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>] [36 <./Frequency_Ana
-lysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
+[]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 604--611
+[]
+ []
+
+[34 <./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>] [35 <
+./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>] [36 <./Fre
+quency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>] [37 <./Frequenc
+y_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>] [38 <./Frequency_Ana
+lysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf>] [39 <./Frequency_Analysis
+_files/figure-latex/Ningaloo_Plots_Table-6.pdf>] [40 <./Frequency_Analysis_file
+s/figure-latex/Ningaloo_Plots_Table-7.pdf>]
 <Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf, id=4
-30, 469.755pt x 325.215pt>
+84, 469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf 
 Graphic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Plots_Table-1.pdf  used on input line 608.
+_Plots_Table-1.pdf  used on input line 612.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[37 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf
->]
-Overfull \hbox (6.22267pt too wide) in paragraph at lines 640--640
+<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf, id=4
+85, 469.755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf 
+Graphic file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
+_Plots_Table-2.pdf  used on input line 613.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf, id=4
+86, 469.755pt x 325.215pt>
+File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf 
+Graphic file (type pdf)
+<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf>
+Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
+_Plots_Table-3.pdf  used on input line 614.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--615
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--615
+[]
+ []
+
+[41 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf
+>] [42 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.
+pdf>] [43 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table
+-3.pdf>]
+Overfull \hbox (6.22267pt too wide) in paragraph at lines 646--646
  []\T1/lmr/m/n/10 TNT07C| 
  []
 
 
-Overfull \hbox (6.63966pt too wide) in paragraph at lines 640--640
+Overfull \hbox (6.63966pt too wide) in paragraph at lines 646--646
  []\T1/lmr/m/n/10 BUN05A| 
  []
 
 
-Overfull \hbox (6.63966pt too wide) in paragraph at lines 640--640
+Overfull \hbox (6.63966pt too wide) in paragraph at lines 646--646
  []\T1/lmr/m/n/10 HAB10A 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 892
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 18\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 394
 $| 
  []
 
 
-Overfull \hbox (7.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (7.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 344\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 02
 1$| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 13\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 498
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 825
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 12\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 655
 $| 
  []
 
 
-Overfull \hbox (7.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (7.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 502\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 39
 8$| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 12\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 498
 $| 
  []
 
 
-Overfull \hbox (7.61247pt too wide) in paragraph at lines 640--640
+Overfull \hbox (7.61247pt too wide) in paragraph at lines 646--646
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 129\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 197$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (2.61247pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61247pt too wide) in paragraph at lines 646--646
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 68\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 200$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 640--640
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 40\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 056
 $| 
  []
 
 
-Overfull \hbox (5.52963pt too wide) in paragraph at lines 616--641
+Overfull \hbox (5.52963pt too wide) in paragraph at lines 622--647
  [][] 
  []
 
 
-Overfull \hbox (2.2109pt too wide) in paragraph at lines 673--673
+Overfull \hbox (2.2109pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 13TNT| 
  []
 
 
-Overfull \hbox (2.2109pt too wide) in paragraph at lines 673--673
+Overfull \hbox (2.2109pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 08TNT| 
  []
 
 
-Overfull \hbox (9.4329pt too wide) in paragraph at lines 673--673
+Overfull \hbox (9.4329pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 TNT07C| 
  []
 
 
-Overfull \hbox (2.4889pt too wide) in paragraph at lines 673--673
+Overfull \hbox (2.4889pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 13BND| 
  []
 
 
-Overfull \hbox (2.4889pt too wide) in paragraph at lines 673--673
+Overfull \hbox (2.4889pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 08BND| 
  []
 
 
-Overfull \hbox (9.8499pt too wide) in paragraph at lines 673--673
+Overfull \hbox (9.8499pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 BUN05A| 
  []
 
 
-Overfull \hbox (3.60031pt too wide) in paragraph at lines 673--673
+Overfull \hbox (3.60031pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 Wallabi 
  []
 
 
-Overfull \hbox (9.8499pt too wide) in paragraph at lines 673--673
+Overfull \hbox (9.8499pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 HAB10A 
  []
 
 
-Overfull \hbox (9.43289pt too wide) in paragraph at lines 673--673
+Overfull \hbox (9.43289pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 HAB05B 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 16\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 577
 $| 
  []
 
 
-Overfull \hbox (3.0447pt too wide) in paragraph at lines 673--673
+Overfull \hbox (3.0447pt too wide) in paragraph at lines 679--679
  []$\OT1/lmr/m/n/10 531\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 158$| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 875$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (10.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (10.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 247\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 970$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 31\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 095
 $| 
  []
 
 
-Overfull \hbox (5.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 14\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 024$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 8\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 096$
 | 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 8\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 096$
 | 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 890$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 890$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (10.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (10.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 435\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 07
 6$| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 13\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 400
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 6\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 812$
 | 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 918
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 3\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 654$
 | 
  []
 
 
-Overfull \hbox (10.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (10.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 185\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 80
 7$| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 19\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 640
 $| 
  []
 
 
-Overfull \hbox (10.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (10.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 131\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 135$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 815$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 383$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 844$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 682$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 49\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 633$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 6\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 485$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 7\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 203$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 2\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 723$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 36\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 775
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 2\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 363$
 | 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 10\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 912
 $| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 7\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 852$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 1\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 115$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 886$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 124$
 | 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 673--673
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 943$\T1/
 lmr/m/n/10 )| 
  []
 
-[38pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+[44pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.675 \end{landscape}
-                     ] [39pdfTeX warning (ext4): destination with the same iden
+l.681 \end{landscape}
+                     ] [45pdfTeX warning (ext4): destination with the same iden
 tifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.675 \end{landscape}
+l.681 \end{landscape}
                      ] (./Frequency_Analysis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
@@ -1499,10 +1583,10 @@ Package rerunfilecheck Info: File `Frequency_Analysis.out' has not changed.
 (rerunfilecheck)             Checksum: F0C3B018FF2083FF815C21E2652F16F2;4098.
  ) 
 Here is how much of TeX's memory you used:
- 14365 strings out of 480559
- 263499 string characters out of 5901528
+ 14413 strings out of 480559
+ 266513 string characters out of 5901528
  598658 words of memory out of 5000000
- 31649 multiletter control sequences out of 15000+600000
+ 31685 multiletter control sequences out of 15000+600000
  446510 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,16n,81p,883b,786s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1520,10 +1604,10 @@ a/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029
 6217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:
 /Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10
 .pfb>
-Output written on Frequency_Analysis.pdf (39 pages, 830794 bytes).
+Output written on Frequency_Analysis.pdf (45 pages, 910989 bytes).
 PDF statistics:
- 512 PDF objects out of 1000 (max. 8388607)
- 381 compressed objects within 4 object streams
- 58 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 593 PDF objects out of 1000 (max. 8388607)
+ 443 compressed objects within 5 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 270 words of extra memory for PDF output out of 10000 (max. 10000000)
 

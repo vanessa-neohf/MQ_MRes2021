@@ -1484,6 +1484,7 @@ modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 Browse <- rbind(BRS05_joint, BRS07_joint)
 Cocos_Keeling <- rbind(DARL_joint, DAR3_joint)
 Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT_joint, TNT07C_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
+Ningaloo_no_TNT <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT07C_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
 Ningaloo_B <- rbind(Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
 Ningaloo_T1 <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT07C_joint)
 Ningaloo_T2 <- TNT_joint
@@ -1511,6 +1512,18 @@ Browse_Plot_CCI <- Browse %>%
 
 Browse_Plot_NOAA / Browse_Plot_CCI
 
+C_Browse_Plot_NOAA <- Browse %>% 
+  ggplot(aes(x = browse_coral_core, y = browse_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.497 to 0.570]")
+
+C_Browse_Plot_CCI <- Browse %>% 
+  ggplot(aes(x = browse_coral_core, y = browse_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.568 to 0.622]")
+
+C_Browse_Plot_NOAA / C_Browse_Plot_CCI 
+
 
 ```
 \newpage
@@ -1531,6 +1544,18 @@ Cocos_Keeling_Plot_CCI <- Cocos_Keeling %>%
   facet_wrap("Site")
 
 Cocos_Keeling_Plot_NOAA / Cocos_Keeling_Plot_CCI
+
+C_Cocos_Plot_NOAA <- Cocos_Keeling %>% 
+  ggplot(aes(x = Cocos_coral_core, y = Cocos_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[R Square values for both sites are 0.188]")
+
+C_Cocos_Plot_CCI <- Cocos_Keeling %>% 
+  ggplot(aes(x = Cocos_coral_core, y = Cocos_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[R Square values for both sites are 0.244]")
+
+C_Cocos_Plot_NOAA / C_Cocos_Plot_CCI
 ```
 \newpage
 ```{r Ningaloo_Plots_Table}
@@ -1596,6 +1621,30 @@ Ningaloo_Bundegi_Plot_NOAA/Ningaloo_Bundegi_Plot_CCI
 Ningaloo_Tantabiddi_Plot_NOAA/Ningaloo_Tantabiddi_Plot_CCI
 Ningaloo_TNT_Plot_NOAA/Ningaloo_TNT_Plot_CCI
 
+C_Ningaloo_Plot_NOAA <- Ningaloo %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.195 to 0.839]")
+
+C_Ningaloo_Plot_CCI <- Ningaloo %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.301 to 0.758]")
+
+C_Ningaloo_Plot_NOAA / C_Ningaloo_Plot_CCI
+
+C_Ningaloo_no_TNT_Plot_NOAA <- Ningaloo_no_TNT %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.195 to 0.839]")
+
+C_Ningaloo_no_TNT_Plot_CCI <- Ningaloo_no_TNT %>% 
+  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.301 to 0.758]")
+
+C_Ningaloo_no_TNT_Plot_NOAA / C_Ningaloo_no_TNT_Plot_CCI
+
 ```
 \newpage
 ```{r Houtman_Abrolhos_Plots_Table}
@@ -1614,6 +1663,30 @@ HAbrol_Plot_CCI <- HAbrol %>%
   facet_wrap("Site")
 
 HAbrol_Plot_NOAA / HAbrol_Plot_CCI
+
+C_HAbrol_Plot_NOAA <- HAbrol %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.155 to 0.282]")
+
+C_HAbrol_Plot_CCI <- HAbrol %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.142 to 0.336]") 
+
+C_HAbrol_Plot_NOAA / C_HAbrol_Plot_CCI
+
+Wallabi_Plot_NOAA <- Wallabi_Island_joint %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA, color = Site)) +
+  geom_smooth() +
+  labs(title = "Wallabi Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "R Square value is 0.282")
+
+Wallabi_Plot_CCI <- Wallabi_Island_joint %>% 
+  ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI, color = Site)) +
+  geom_smooth() +
+  labs(title = "Wallabi Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "R Square value is 0.336")
+
+Wallabi_Plot_NOAA / Wallabi_Plot_NOAA
 ```
 \newpage
 \begin{landscape}
