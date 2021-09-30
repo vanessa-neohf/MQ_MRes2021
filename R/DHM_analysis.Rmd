@@ -1112,85 +1112,85 @@ CCore_BRS05_CCI <- CCore_BRS05_CCI %>%
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "BRS05", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_BRS07_CCI <- CCore_BRS07_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "BRS07", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_DARL_CCI <- CCore_DARL_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "DARL", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_TNT_CCI <- CCore_TNT_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (CCI)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "BRS05", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_BRS07_NOAA <- CCore_BRS07_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "BRS07", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_DARL_NOAA <- CCore_DARL_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "DARL", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
   as_tsibble(index = date) %>% 
   fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (NOAA)") %>% 
   as_tibble() %>% 
-  mutate(monthly_date = date)
+  mutate(monthly_date = as.Date(date))
 
 
 ```
@@ -1271,9 +1271,9 @@ CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>%
 #Combining datasets with DHM calculations
 BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_BRS05_DHM <- BRS05_Combined %>% 
-  filter(BRS05_DHM >= 2) %>% 
+  filter(BRS05_DHM >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, BRS05_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = BRS05_DHM) %>% 
@@ -1375,9 +1375,9 @@ CCore_BRS07_NOAA <- CCore_BRS07_NOAA %>%
 #Combining datasets with DHM calculations
 BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_BRS07_DHM <- BRS07_Combined %>% 
-  filter(BRS07_DHM >= 2) %>% 
+  filter(BRS07_DHM >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, BRS07_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
@@ -1547,9 +1547,9 @@ CCore_DARL_NOAA <- CCore_DARL_NOAA %>%
 #Combining datasets with DHM calculations
 DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_DARL_DHM <- DARL_Combined %>% 
-  filter(DARL_DHM >= 2) %>% 
+  filter(DARL_DHM >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, DARL_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
@@ -2431,9 +2431,9 @@ CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>%
 #Combining datasets with DHM calculations
 Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>% 
-  filter(`08TNT_DHM` >= 2) %>% 
+  filter(`08TNT_DHM` >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, `08TNT_DHM`) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = `08TNT_DHM`) %>% 
@@ -2534,9 +2534,9 @@ CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>%
 #Combining datasets with DHM calculations
 Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>% 
-  filter(`13TNT_DHM` >= 2) %>% 
+  filter(`13TNT_DHM` >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, `13TNT_DHM`) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
@@ -2636,9 +2636,9 @@ CCore_TNT_NOAA <- CCore_TNT_NOAA %>%
 #Combining datasets with DHM calculations
 TNT_Combined <- rbind(CCI_TNT, NOAA_TNT, CCore_TNT_CCI, CCore_TNT_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_TNT_DHM <- TNT_Combined %>% 
-  filter(TNT_DHM >= 2) %>% 
+  filter(TNT_DHM >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, TNT_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = TNT_DHM) %>% 
@@ -2812,9 +2812,9 @@ CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>%
 #Combining datasets with DHM calculations
 Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island, CCore_Wallabi_Island_CCI, CCore_Wallabi_Island_NOAA)
 
-#DHM >= 2
+#DHM >= 1
 High_Wallabi_Island_DHM <- Wallabi_Island_Combined %>% 
-  filter(Wallabi_Island_DHM >= 2) %>% 
+  filter(Wallabi_Island_DHM >= 1) %>% 
   select(monthly_date, Reef_Site, Data_Type, Wallabi_Island_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
   pivot_wider(names_from = Data_Type, values_from = Wallabi_Island_DHM) %>% 
