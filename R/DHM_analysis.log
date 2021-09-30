@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 11:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 12:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1000,332 +1000,323 @@ T_Anomaly_TS-17.pdf>] [18 <./DHM_analysis_files/figure-latex/SST_Anomaly_TS-18.
 pdf>] [19 <./DHM_analysis_files/figure-latex/SST_Anomaly_TS-19.pdf>] [20 <./DHM
 _analysis_files/figure-latex/SST_Anomaly_TS-20.pdf>] [21 <./DHM_analysis_files/
 figure-latex/SST_Anomaly_TS-21.pdf>] [22 <./DHM_analysis_files/figure-latex/SST
-_Anomaly_TS-22.pdf>]
-
-LaTeX Warning: Float too large for page by 68.36964pt on input line 280.
-
-<DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf, id=415, 469.755pt x 325.215pt
+_Anomaly_TS-22.pdf>] [23]
+<DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf, id=422, 469.755pt x 325.215pt
 >
 File: DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf  used 
-on input line 282.
+on input line 285.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[23 <./DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf>] [24]
-
-LaTeX Warning: Float too large for page by 427.96947pt on input line 468.
-
-<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=438, 469.755pt x 325.215pt
+[24 <./DHM_analysis_files/figure-latex/DHM_BRS05-1.pdf>] [25]
+<DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf, id=446, 469.755pt x 325.215pt
 >
 File: DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf  used 
-on input line 470.
+on input line 476.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[25 <./DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf>] [26]
+[26] [27 <./DHM_analysis_files/figure-latex/DHM_BRS07-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 2313.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 2319.
 
-<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=459, 469.755pt x 325.215pt>
+<DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf, id=465, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf  used o
-n input line 2315.
+n input line 2321.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27 <./DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf>] [28pdfTeX warning (ext4
-): destination with the same identifier (name{table.1}) has been already used, 
+[28 <./DHM_analysis_files/figure-latex/DHM_DAR3-1.pdf>] [29pdfTeX warning (ext4
+): destination with the same identifier (name{table.3}) has been already used, 
 duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2317 \newpage
-               ]
-
-LaTeX Warning: Float too large for page by 266.76955pt on input line 2475.
-
-<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=480, 469.755pt x 325.215pt>
+l.2323 \newpage
+               ] [30]
+<DHM_analysis_files/figure-latex/DHM_DARL-1.pdf, id=492, 469.755pt x 325.215pt>
 
 File: DHM_analysis_files/figure-latex/DHM_DARL-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_DARL-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_DARL-1.pdf  used o
-n input line 2477.
+n input line 2486.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[29 <./DHM_analysis_files/figure-latex/DHM_DARL-1.pdf>] [30] [31]
+[31] [32 <./DHM_analysis_files/figure-latex/DHM_DARL-1.pdf>] [33]
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
-[32]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=510, 469.755pt x 325
+[34]
+<DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf, id=521, 469.755pt x 325
 .215pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf Graphic file (type 
 pdf)
 <use DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf 
- used on input line 4325.
+ used on input line 4334.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[33 <./DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf>] [34]
+[35 <./DHM_analysis_files/figure-latex/DHM_SCOTT_RPO_1-1.pdf>] [36]
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
-[35]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=534, 469.755pt x 325.2
+[37]
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf, id=546, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf Graphic file (type pd
 f)
 <use DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf  u
-sed on input line 6172.
+sed on input line 6181.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[36 <./DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf>] [37]
+[38 <./DHM_analysis_files/figure-latex/DHM_SCOTT_SL4-1.pdf>] [39]
 Overfull \vbox (5219.7671pt too high) has occurred while \output is active []
 
-[38]
-<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=560, 469.755pt x 325.2
+[40]
+<DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf, id=571, 469.755pt x 325.2
 15pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf Graphic file (type pd
 f)
 <use DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf  u
-sed on input line 8019.
+sed on input line 8028.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[39 <./DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf>]
+[41 <./DHM_analysis_files/figure-latex/DHM_SCOTT_SS3-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 9862.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 9871.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=575, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf, id=586, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf  us
-ed on input line 9864.
+ed on input line 9873.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[40 <./DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf>] [41pdfTeX warning (
-ext4): destination with the same identifier (name{table.2}) has been already us
+[42 <./DHM_analysis_files/figure-latex/DHM_SCOTTNR1-1.pdf>] [43pdfTeX warning (
+ext4): destination with the same identifier (name{table.5}) has been already us
 ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.9866 \newpage
+l.9875 \newpage
                ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 11707.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 11716.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=596, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf, id=608, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf  us
-ed on input line 11709.
+ed on input line 11718.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[42 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf>] [43pdfTeX warning (
-ext4): destination with the same identifier (name{table.3}) has been already us
+[44 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL1-1.pdf>] [45pdfTeX warning (
+ext4): destination with the same identifier (name{table.6}) has been already us
 ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.11711 \newpage
+l.11720 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 13552.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 13561.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=618, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf, id=629, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf  us
-ed on input line 13554.
+ed on input line 13563.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[44 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf>] [45pdfTeX warning (
-ext4): destination with the same identifier (name{table.4}) has been already us
+[46 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL2-1.pdf>] [47pdfTeX warning (
+ext4): destination with the same identifier (name{table.7}) has been already us
 ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.13556 \newpage
+l.13565 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 15397.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 15406.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=639, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf, id=650, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf  us
-ed on input line 15399.
+ed on input line 15408.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[46 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf>] [47pdfTeX warning (
-ext4): destination with the same identifier (name{table.5}) has been already us
+[48 <./DHM_analysis_files/figure-latex/DHM_SCOTTSL3-1.pdf>] [49pdfTeX warning (
+ext4): destination with the same identifier (name{table.8}) has been already us
 ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.15401 \newpage
+l.15410 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 17242.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 17251.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=660, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf, id=673, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf  us
-ed on input line 17244.
+ed on input line 17253.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[48 <./DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf>] [49pdfTeX warning (
-ext4): destination with the same identifier (name{table.6}) has been already us
+[50 <./DHM_analysis_files/figure-latex/DHM_SCOTTSS1-1.pdf>] [51pdfTeX warning (
+ext4): destination with the same identifier (name{table.9}) has been already us
 ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.17246 \newpage
+l.17255 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 19087.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 19096.
 
-<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=683, 469.755pt x 325.21
+<DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf, id=694, 469.755pt x 325.21
 5pt>
 File: DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf Graphic file (type pdf
 )
 <use DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf  us
-ed on input line 19089.
+ed on input line 19098.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[50 <./DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf>] [51pdfTeX warning (
-ext4): destination with the same identifier (name{table.7}) has been already us
-ed, duplicate ignored
+[52 <./DHM_analysis_files/figure-latex/DHM_SCOTTSS2-1.pdf>] [53pdfTeX warning (
+ext4): destination with the same identifier (name{table.10}) has been already u
+sed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.19091 \newpage
+l.19100 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 20932.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 20941.
 
-<DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf, id=704, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf, id=715, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf  used
- on input line 20934.
+ on input line 20943.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[52 <./DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>] [53pdfTeX warning (ex
-t4): destination with the same identifier (name{table.8}) has been already used
-, duplicate ignored
+[54 <./DHM_analysis_files/figure-latex/DHM_BUN05A-1.pdf>] [55pdfTeX warning (ex
+t4): destination with the same identifier (name{table.11}) has been already use
+d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.20936 \newpage
+l.20945 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 22777.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 22786.
 
-<DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf, id=725, 469.755pt x 325.215
+<DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf, id=737, 469.755pt x 325.215
 pt>
 File: DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf Graphic file (type pdf)
 
 <use DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf  use
-d on input line 22779.
+d on input line 22788.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[54 <./DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf>] [55pdfTeX warning (e
-xt4): destination with the same identifier (name{table.9}) has been already use
-d, duplicate ignored
+[56 <./DHM_analysis_files/figure-latex/DHM_Bundegi-1.pdf>] [57pdfTeX warning (e
+xt4): destination with the same identifier (name{table.12}) has been already us
+ed, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.22781 \newpage
+l.22790 \newpage
                 ]
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf, id=747, 469.755pt 
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf, id=758, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf Graphic file (
 type pdf)
 <use DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1
-.pdf  used on input line 22824.
+.pdf  used on input line 22836.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[56 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=763, 469.755pt 
+[58 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_08TNT-1.pdf>]
+<DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf, id=775, 469.755pt 
 x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf Graphic file (
 type pdf)
 <use DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1
-.pdf  used on input line 22869.
+.pdf  used on input line 22884.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[57 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>]
-<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=779, 469.755pt x 325.215pt>
+[59 <./DHM_analysis_files/figure-latex/DHM_Tantabiddi_13TNT-1.pdf>]
+<DHM_analysis_files/figure-latex/DHM_TNT-1.pdf, id=793, 469.755pt x 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT-1.pdf  used on
- input line 22915.
+ input line 22933.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[58 <./DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>]
+[60 <./DHM_analysis_files/figure-latex/DHM_TNT-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 24758.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 24776.
 
-<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=796, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf, id=810, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf  used
- on input line 24760.
+ on input line 24778.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[59 <./DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>] [60pdfTeX warning (ex
-t4): destination with the same identifier (name{table.10}) has been already use
+[61 <./DHM_analysis_files/figure-latex/DHM_TNT07C-1.pdf>] [62pdfTeX warning (ex
+t4): destination with the same identifier (name{table.16}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.24762 \newpage
+l.24780 \newpage
                 ]
-<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=817, 469.755pt x 
+<DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf, id=832, 469.755pt x 
 325.215pt>
 File: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf Graphic file (ty
 pe pdf)
 <use DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.p
-df  used on input line 24863.
+df  used on input line 24884.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[61 <./DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>] [62]
+[63] [64 <./DHM_analysis_files/figure-latex/DHM_Wallabi_Island-1.pdf>]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 26706.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 26727.
 
-<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=838, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf, id=853, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf  used
- on input line 26708.
+ on input line 26729.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[63 <./DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>] [64pdfTeX warning (ex
-t4): destination with the same identifier (name{table.11}) has been already use
+[65 <./DHM_analysis_files/figure-latex/DHM_HAB05B-1.pdf>] [66pdfTeX warning (ex
+t4): destination with the same identifier (name{table.18}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.26710 \newpage
+l.26731 \newpage
                 ]
 
-LaTeX Warning: Float too large for page by 5244.2671pt on input line 28551.
+LaTeX Warning: Float too large for page by 5244.2671pt on input line 28572.
 
-<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=859, 469.755pt x 325.215p
+<DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf, id=874, 469.755pt x 325.215p
 t>
 File: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf Graphic file (type pdf)
 <use DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>
 Package pdftex.def Info: DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf  used
- on input line 28553.
+ on input line 28574.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[65 <./DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>] [66pdfTeX warning (ex
-t4): destination with the same identifier (name{table.12}) has been already use
+[67 <./DHM_analysis_files/figure-latex/DHM_HAB10A-1.pdf>] [68pdfTeX warning (ex
+t4): destination with the same identifier (name{table.19}) has been already use
 d, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.28555 \end{document}
+l.28576 \end{document}
                       ] (./DHM_analysis.aux)
 Package rerunfilecheck Info: File `DHM_analysis.out' has not changed.
 (rerunfilecheck)             Checksum: 3A2131848922090C8C9A8B4FA20A1357;6282.
  ) 
 Here is how much of TeX's memory you used:
- 12047 strings out of 480559
- 191102 string characters out of 5901528
- 706764 words of memory out of 5000000
- 29272 multiletter control sequences out of 15000+600000
- 448815 words of font info for 66 fonts, out of 8000000 for 9000
+ 12070 strings out of 480559
+ 191344 string characters out of 5901528
+ 708733 words of memory out of 5000000
+ 29286 multiletter control sequences out of 15000+600000
+ 450086 words of font info for 66 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,13n,66p,363b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,66p,363b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
 c.enc}<c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/
 lm/lmbx10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
@@ -1333,11 +1324,11 @@ lm/lmbx10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
 ts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-d
 ist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppData/Roaming/T
-inyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb>
-Output written on DHM_analysis.pdf (66 pages, 922951 bytes).
+inyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
+Output written on DHM_analysis.pdf (68 pages, 925440 bytes).
 PDF statistics:
- 939 PDF objects out of 1000 (max. 8388607)
- 763 compressed objects within 8 object streams
- 125 named destinations out of 1000 (max. 500000)
+ 957 PDF objects out of 1000 (max. 8388607)
+ 779 compressed objects within 8 object streams
+ 134 named destinations out of 1000 (max. 500000)
  405 words of extra memory for PDF output out of 10000 (max. 10000000)
 
