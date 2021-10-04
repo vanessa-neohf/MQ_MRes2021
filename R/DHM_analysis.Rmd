@@ -131,7 +131,8 @@ CCore_08TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_NO
 
 ```
 
-#Date Range of Coral Cores
+Date Range of Coral Cores
+
 ```{r start_and_end_date_CCore, echo = FALSE, message = FALSE}
 Date_BRS05_CCI <- CCore_BRS05_CCI %>% 
   mutate(start_date = year(min(Date)), end_date = year(end_date)) %>% 
