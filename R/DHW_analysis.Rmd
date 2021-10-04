@@ -664,11 +664,9 @@ ggplot(HAB10A_Sat_Combined)+
 
 ```
 
-\newpage
-# BRS05, BRS07, DAR Long, TNT, 13TNT, 08TNT, Wallabi Island, Scott Reef Sites 
-# Moderate and High Degree Heating Week values
 
-```{r Tables, echo = FALSE, message = FALSE}
+
+```{r Tables, echo = FALSE, message = FALSE, include = FALSE}
 
 #BRS05
 t_BRS05_Sat_Combined <- BRS05_Sat_Combined %>% 
