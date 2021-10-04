@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 15:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 18:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -576,69 +576,6 @@ LaTeX Warning: Label `tab:Tables' multiply defined.
 
 LaTeX Warning: Label `tab:Tables' multiply defined.
 
-
-LaTeX Warning: Label `tab:DHW_Count_BRS05' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_BRS07' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_DAR3' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_DARL' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTT_RPO_1' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTT_SL4' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTT_SS3' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTNR1' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTSL1' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTSL2' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTSL3' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTSS1' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_SCOTTSS2' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_BUN05A' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_Bundegi' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_Tantabiddi' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_TNT' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_TNT07C' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_Wallabi_Island' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_HAB05B' multiply defined.
-
-
-LaTeX Warning: Label `tab:DHW_Count_HAB10A' multiply defined.
-
 )
 \openout1 = `DHW_analysis.aux'.
 
@@ -769,127 +706,127 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 86.
 d
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<DHW_analysis_files/figure-latex/DHW_TS-1.pdf, id=96, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-1.pdf, id=16, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-1.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-1.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-1.pdf  used on 
 input line 91.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-2.pdf, id=97, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-2.pdf, id=17, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-2.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-2.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-2.pdf  used on 
 input line 92.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-3.pdf, id=98, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-3.pdf, id=18, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-3.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-3.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-3.pdf  used on 
 input line 93.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-4.pdf, id=99, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-4.pdf, id=19, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-4.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-4.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-4.pdf  used on 
 input line 94.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-5.pdf, id=100, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-5.pdf, id=20, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-5.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-5.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-5.pdf  used on 
 input line 95.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-6.pdf, id=101, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-6.pdf, id=21, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-6.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-6.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-6.pdf  used on 
 input line 96.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-7.pdf, id=102, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-7.pdf, id=22, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-7.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-7.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-7.pdf  used on 
 input line 97.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-8.pdf, id=103, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-8.pdf, id=23, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-8.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-8.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-8.pdf  used on 
 input line 98.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-9.pdf, id=104, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-9.pdf, id=24, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-9.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-9.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-9.pdf  used on 
 input line 99.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-10.pdf, id=105, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-10.pdf, id=25, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-10.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-10.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-10.pdf  used on
  input line 100.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-11.pdf, id=106, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-11.pdf, id=26, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-11.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-11.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-11.pdf  used on
  input line 101.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-12.pdf, id=107, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-12.pdf, id=27, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-12.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-12.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-12.pdf  used on
  input line 102.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-13.pdf, id=108, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-13.pdf, id=28, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-13.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-13.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-13.pdf  used on
  input line 103.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-14.pdf, id=109, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-14.pdf, id=29, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-14.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-14.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-14.pdf  used on
  input line 104.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-15.pdf, id=110, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-15.pdf, id=30, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-15.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-15.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-15.pdf  used on
  input line 105.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-16.pdf, id=111, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-16.pdf, id=31, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-16.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-16.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-16.pdf  used on
  input line 106.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-17.pdf, id=112, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-17.pdf, id=32, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-17.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-17.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-17.pdf  used on
  input line 107.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-18.pdf, id=113, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-18.pdf, id=33, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-18.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-18.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-18.pdf  used on
  input line 108.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-19.pdf, id=114, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-19.pdf, id=34, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-19.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-19.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-19.pdf  used on
  input line 109.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-20.pdf, id=115, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-20.pdf, id=35, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-20.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-20.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-20.pdf  used on
  input line 110.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<DHW_analysis_files/figure-latex/DHW_TS-21.pdf, id=116, 469.755pt x 325.215pt>
+<DHW_analysis_files/figure-latex/DHW_TS-21.pdf, id=36, 469.755pt x 325.215pt>
 File: DHW_analysis_files/figure-latex/DHW_TS-21.pdf Graphic file (type pdf)
 <use DHW_analysis_files/figure-latex/DHW_TS-21.pdf>
 Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_TS-21.pdf  used on
@@ -1015,460 +952,32 @@ _TS-15.pdf>] [16 <./DHW_analysis_files/figure-latex/DHW_TS-16.pdf>] [17 <./DHW_
 analysis_files/figure-latex/DHW_TS-17.pdf>] [18 <./DHW_analysis_files/figure-la
 tex/DHW_TS-18.pdf>] [19 <./DHW_analysis_files/figure-latex/DHW_TS-19.pdf>] [20 
 <./DHW_analysis_files/figure-latex/DHW_TS-20.pdf>] [21 <./DHW_analysis_files/fi
-gure-latex/DHW_TS-21.pdf>] [22] [23] [24] [25] [26]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 619.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 619.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 619.
-<DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf, id=453, 469.755pt x 325
-.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf Graphic file (type 
-pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf 
- used on input line 977.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27 <./DHW_analysis_files/figure-latex/DHW_Count_BRS05-1.pdf>] [28pdfTeX warnin
-g (ext4): destination with the same identifier (name{table.7}) has been already
- used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.979 \newpage
-              ] [29pdfTeX warning (ext4): destination with the same identifier 
-(name{table.8}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.979 \newpage
-              ]
-<DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf, id=474, 469.755pt x 325
-.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf Graphic file (type 
-pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf 
- used on input line 1348.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[30 <./DHW_analysis_files/figure-latex/DHW_Count_BRS07-1.pdf>] [31pdfTeX warnin
-g (ext4): destination with the same identifier (name{table.9}) has been already
- used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1350 \newpage
-               ] [32pdfTeX warning (ext4): destination with the same identifier
- (name{table.10}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1350 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf, id=496, 469.755pt x 325.
-215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf Graphic file (type p
-df)
-<use DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf  
-used on input line 1719.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[33 <./DHW_analysis_files/figure-latex/DHW_Count_DAR3-1.pdf>] [34pdfTeX warning
- (ext4): destination with the same identifier (name{table.11}) has been already
- used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1721 \newpage
-               ] [35pdfTeX warning (ext4): destination with the same identifier
- (name{table.12}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.1721 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf, id=517, 469.755pt x 325.
-215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf Graphic file (type p
-df)
-<use DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf  
-used on input line 2090.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[36 <./DHW_analysis_files/figure-latex/DHW_Count_DARL-1.pdf>] [37pdfTeX warning
- (ext4): destination with the same identifier (name{table.13}) has been already
- used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2092 \newpage
-               ] [38pdfTeX warning (ext4): destination with the same identifier
- (name{table.14}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2092 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf, id=539, 469.755pt
- x 325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf Graphic file 
-(type pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-
-1.pdf  used on input line 2461.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[39 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_RPO_1-1.pdf>] [40pdfTeX 
-warning (ext4): destination with the same identifier (name{table.15}) has been 
-already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2463 \newpage
-               ] [41pdfTeX warning (ext4): destination with the same identifier
- (name{table.16}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2463 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf, id=561, 469.755pt x
- 325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf Graphic file (t
-ype pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.
-pdf  used on input line 2832.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[42 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SL4-1.pdf>] [43pdfTeX wa
-rning (ext4): destination with the same identifier (name{table.17}) has been al
-ready used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2834 \newpage
-               ] [44pdfTeX warning (ext4): destination with the same identifier
- (name{table.18}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2834 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf, id=583, 469.755pt x
- 325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf Graphic file (t
-ype pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.
-pdf  used on input line 3203.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[45 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTT_SS3-1.pdf>] [46pdfTeX wa
-rning (ext4): destination with the same identifier (name{table.19}) has been al
-ready used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3205 \newpage
-               ] [47pdfTeX warning (ext4): destination with the same identifier
- (name{table.20}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3205 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf, id=604, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.p
-df  used on input line 3574.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[48 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTNR1-1.pdf>] [49pdfTeX war
-ning (ext4): destination with the same identifier (name{table.21}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3576 \newpage
-               ] [50pdfTeX warning (ext4): destination with the same identifier
- (name{table.22}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3576 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf, id=626, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.p
-df  used on input line 3945.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[51 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL1-1.pdf>] [52pdfTeX war
-ning (ext4): destination with the same identifier (name{table.23}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3947 \newpage
-               ] [53pdfTeX warning (ext4): destination with the same identifier
- (name{table.24}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.3947 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf, id=647, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.p
-df  used on input line 4316.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[54 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL2-1.pdf>] [55pdfTeX war
-ning (ext4): destination with the same identifier (name{table.25}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.4318 \newpage
-               ] [56pdfTeX warning (ext4): destination with the same identifier
- (name{table.26}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.4318 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf, id=669, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.p
-df  used on input line 4687.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[57 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSL3-1.pdf>] [58pdfTeX war
-ning (ext4): destination with the same identifier (name{table.27}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.4689 \newpage
-               ] [59pdfTeX warning (ext4): destination with the same identifier
- (name{table.28}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.4689 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf, id=691, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.p
-df  used on input line 5058.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[60 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS1-1.pdf>] [61pdfTeX war
-ning (ext4): destination with the same identifier (name{table.29}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5060 \newpage
-               ] [62pdfTeX warning (ext4): destination with the same identifier
- (name{table.30}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5060 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf, id=713, 469.755pt x 
-325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf Graphic file (ty
-pe pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.p
-df  used on input line 5429.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[63 <./DHW_analysis_files/figure-latex/DHW_Count_SCOTTSS2-1.pdf>] [64pdfTeX war
-ning (ext4): destination with the same identifier (name{table.31}) has been alr
-eady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5431 \newpage
-               ] [65pdfTeX warning (ext4): destination with the same identifier
- (name{table.32}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5431 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf, id=734, 469.755pt x 32
-5.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf Graphic file (type
- pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf
-  used on input line 5800.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[66 <./DHW_analysis_files/figure-latex/DHW_Count_BUN05A-1.pdf>] [67pdfTeX warni
-ng (ext4): destination with the same identifier (name{table.33}) has been alrea
-dy used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5801 \newpage
-                \# \textbf{Bundegi} Yearly Sum of Moderate and High DHW Values]
-[68pdfTeX warning (ext4): destination with the same identifier (name{table.34})
- has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.5801 \newpage
-                \# \textbf{Bundegi} Yearly Sum of Moderate and High DHW Values]
-<DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf, id=756, 469.755pt x 3
-25.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf Graphic file (typ
-e pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pd
-f  used on input line 6166.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[69 <./DHW_analysis_files/figure-latex/DHW_Count_Bundegi-1.pdf>] [70pdfTeX warn
-ing (ext4): destination with the same identifier (name{table.35}) has been alre
-ady used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6168 \newpage
-               ] [71pdfTeX warning (ext4): destination with the same identifier
- (name{table.36}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6168 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf, id=777, 469.755pt 
-x 325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf Graphic file (
-type pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1
-.pdf  used on input line 6537.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[72 <./DHW_analysis_files/figure-latex/DHW_Count_Tantabiddi-1.pdf>] [73pdfTeX w
-arning (ext4): destination with the same identifier (name{table.37}) has been a
-lready used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6539 \newpage
-               ] [74pdfTeX warning (ext4): destination with the same identifier
- (name{table.38}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6539 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf, id=799, 469.755pt x 325.2
-15pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf Graphic file (type pd
-f)
-<use DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf  u
-sed on input line 6908.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[75 <./DHW_analysis_files/figure-latex/DHW_Count_TNT-1.pdf>] [76pdfTeX warning 
-(ext4): destination with the same identifier (name{table.39}) has been already 
-used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6910 \newpage
-               ] [77pdfTeX warning (ext4): destination with the same identifier
- (name{table.40}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.6910 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf, id=821, 469.755pt x 32
-5.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf Graphic file (type
- pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf
-  used on input line 7279.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[78 <./DHW_analysis_files/figure-latex/DHW_Count_TNT07C-1.pdf>] [79pdfTeX warni
-ng (ext4): destination with the same identifier (name{table.41}) has been alrea
-dy used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.7281 \newpage
-               ] [80pdfTeX warning (ext4): destination with the same identifier
- (name{table.42}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.7281 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf, id=843, 469.75
-5pt x 325.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf Graphic fi
-le (type pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Isla
-nd-1.pdf  used on input line 7650.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[81 <./DHW_analysis_files/figure-latex/DHW_Count_Wallabi_Island-1.pdf>] [82pdfT
-eX warning (ext4): destination with the same identifier (name{table.43}) has be
-en already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.7652 \newpage
-               ] [83pdfTeX warning (ext4): destination with the same identifier
- (name{table.44}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.7652 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf, id=864, 469.755pt x 32
-5.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf Graphic file (type
- pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf
-  used on input line 8021.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[84 <./DHW_analysis_files/figure-latex/DHW_Count_HAB05B-1.pdf>] [85pdfTeX warni
-ng (ext4): destination with the same identifier (name{table.45}) has been alrea
-dy used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.8023 \newpage
-               ] [86pdfTeX warning (ext4): destination with the same identifier
- (name{table.46}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.8023 \newpage
-               ]
-<DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf, id=886, 469.755pt x 32
-5.215pt>
-File: DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf Graphic file (type
- pdf)
-<use DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf>
-Package pdftex.def Info: DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf
-  used on input line 8392.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[87 <./DHW_analysis_files/figure-latex/DHW_Count_HAB10A-1.pdf>] [88pdfTeX warni
-ng (ext4): destination with the same identifier (name{table.47}) has been alrea
-dy used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.8394 \end{document}
-                     ] [89pdfTeX warning (ext4): destination with the same iden
-tifier (name{table.48}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.8394 \end{document}
-                     ] (./DHW_analysis.aux)
+gure-latex/DHW_TS-21.pdf>] [22] [23] [24] [25] [26] (./DHW_analysis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `DHW_analysis.out' has not changed.
-(rerunfilecheck)             Checksum: 897EE1D2F2264DDE5B5039EBAE5B4BFF;9964.
+(rerunfilecheck)             Checksum: FB1C6E04A6DCF64C0ECD2B087560F2BD;1108.
  ) 
 Here is how much of TeX's memory you used:
- 12105 strings out of 480559
- 191920 string characters out of 5901528
- 529606 words of memory out of 5000000
- 29273 multiletter control sequences out of 15000+600000
- 450086 words of font info for 66 fonts, out of 8000000 for 9000
+ 11719 strings out of 480559
+ 178324 string characters out of 5901528
+ 524517 words of memory out of 5000000
+ 29064 multiletter control sequences out of 15000+600000
+ 435060 words of font info for 50 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 60i,9n,66p,527b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,7n,66p,500b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-e
 c.enc}<c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/
-lm/lmbx10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
-/public/lm/lmbx12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fon
-ts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-d
-ist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/
-texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppData/Roaming/T
-inyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb>
-Output written on DHW_analysis.pdf (89 pages, 2187009 bytes).
+lm/lmbx12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
+/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/font
+s/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-di
+st/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/t
+exmf-dist/fonts/type1/public/lm/lmri10.pfb>
+Output written on DHW_analysis.pdf (26 pages, 1950235 bytes).
 PDF statistics:
- 979 PDF objects out of 1000 (max. 8388607)
- 784 compressed objects within 8 object streams
- 184 named destinations out of 1000 (max. 500000)
- 395 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 409 PDF objects out of 1000 (max. 8388607)
+ 325 compressed objects within 4 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

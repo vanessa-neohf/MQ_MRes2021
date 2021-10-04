@@ -1,5 +1,5 @@
 ---
-title: "Frequency_Analysis"
+title: "Coral Core Calibration"
 author: "Vanessa Hui Fen Neo"
 date: "`r lubridate::today()`"
 output: pdf_document
@@ -21,12 +21,8 @@ library(kableExtra)
 library(equatiomatic)
 ```
 
-\newpage
-## Comparison of CCI, NOAA and Coral Core SST variability in Browse Island sites
-- BRS05 (-14.105, 123.5356924)
-- BRS07 (-14.121, 123.5467277)
 
-```{r Browse_Island, message = FALSE}
+```{r Browse_Island, message = FALSE, include = FALSE}
 
 ##BRS05
 
@@ -217,12 +213,8 @@ modelsummary::modelsummary(list(NOAA_BRS07, CCI_BRS07))
 ```
 
 
-\newpage
-## Comparison of CCI, NOAA and Coral Core SST variability in Cocos (Keeling) Island sites
-- DAR3 (-12.095, 96.8805)
-- DAR Long (-12.0875, 96.875)
 
-```{r Cocos_Keeling_Island, message = FALSE}
+```{r Cocos_Keeling_Island, message = FALSE, include = FALSE}
 ##DAR Long
 DARL_CCI <- read_csv(here::here("data_raw", "CCI_DARL.csv"))
 DARL_CCI <- DARL_CCI %>% 
@@ -422,15 +414,9 @@ modelsummary::modelsummary(list(NOAA_DAR3, CCI_DAR3))
 
 ```
 
-\newpage
-## Comparison of CCI, NOAA and Coral Core SST variability in Ningaloo Reef sites
-- Tantabiddi (13TNT) and Tantabiddi (08TNT) (-21.91, 113.97)
-- TNT (-21.9, 113.97)
-- TNT07C (-21.893, 113.963)
-- Bundegi (13BND) and Bundegi (08BND) (-21.87, 114.156)
-- BUN05A (-21.836, 114.178)
 
-```{r Ningaloo_Reef, message = FALSE}
+
+```{r Ningaloo_Reef, message = FALSE, include = FALSE}
 ##Tantabiddi 13TNT
 Ningaloo_13TNT_CCI <- read_csv(here::here("data_raw", "CCI_Tantabiddi.csv"))
 Ningaloo_13TNT_CCI <- Ningaloo_13TNT_CCI %>% 
@@ -1097,13 +1083,8 @@ modelsummary::modelsummary(list(NOAA_BUN05A, CCI_BUN05A))
 ```
 
 
-\newpage
-## Comparison of CCI, NOAA and Coral Core SST variability in Houtman Abrolhos Island sites
-- Wallabi Island (-28.28, 113.46)
-- HAB10A (-28.4589, 113.749)
-- HAB05B (-28.4609, 113.772)
 
-```{r Houtman_Abrolhos_Islands, message = FALSE}
+```{r Houtman_Abrolhos_Islands, message = FALSE, include = FALSE}
 ##Wallabi Island
 Wallabi_Island_CCI <- read_csv(here::here("data_raw", "CCI_Wallabi_Island.csv"))
 Wallabi_Island_CCI <- Wallabi_Island_CCI %>% 
@@ -1472,10 +1453,6 @@ modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 ```
 
 
-# No Coral Core Data for Scott Reef
-# Linear Relationship between Coral Core and CCI, Coral Core and NOAA, was found to be insignificant in HAB10A_SrCa and HAB05B_d18O
-# Linear Relationship between Coral Core and NOAA was found to be insignificant in HAB05B_SrCa (Significant for Coral Core and CCI in this site)
-# Too many missing gaps in Logger Data for comparison
 
 
 \newpage

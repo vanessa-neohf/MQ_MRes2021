@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  30 SEP 2021 17:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.9.21)  4 OCT 2021 14:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -557,7 +557,7 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 )
 (c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/siunitx/siunitx
 .sty
-Package: siunitx 2021-09-22 v3.0.31 A comprehensive (SI) units package
+Package: siunitx 2021-09-29 v3.0.32 A comprehensive (SI) units package
 \l__siunitx_angle_tmp_dim=\dimen196
 \l__siunitx_angle_marker_box=\box71
 \l__siunitx_angle_unit_box=\box72
@@ -730,884 +730,562 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pd
 ftex.map}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
-9.
-(c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-04.
-(c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<Frequency_Analysis_files/figure-latex/Browse_Island-1.pdf, id=44, 469.755pt x 
-325.215pt>
-File: Frequency_Analysis_files/figure-latex/Browse_Island-1.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Browse_Island-1.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_Island-1.
-pdf  used on input line 108.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Browse_Island-2.pdf, id=45, 469.755pt x 
-325.215pt>
-File: Frequency_Analysis_files/figure-latex/Browse_Island-2.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Browse_Island-2.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_Island-2.
-pdf  used on input line 109.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 108--110
-[][]
- []
-
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 113.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 113.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 113.
-[2 <./Frequency_Analysis_files/figure-latex/Browse_Island-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Browse_Island-3.pdf, id=59, 469.755pt x 
-325.215pt>
-File: Frequency_Analysis_files/figure-latex/Browse_Island-3.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Browse_Island-3.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_Island-3.
-pdf  used on input line 137.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Browse_Island-4.pdf, id=60, 469.755pt x 
-325.215pt>
-File: Frequency_Analysis_files/figure-latex/Browse_Island-4.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Browse_Island-4.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_Island-4.
-pdf  used on input line 138.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 137--139
-[][]
- []
-
-[3 <./Frequency_Analysis_files/figure-latex/Browse_Island-2.pdf>] [4 <./Frequen
-cy_Analysis_files/figure-latex/Browse_Island-3.pdf>] [5 <./Frequency_Analysis_f
-iles/figure-latex/Browse_Island-4.pdf>]
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-1.pdf, id=91, 469.7
-55pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-1.pdf Graphic 
-file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-1.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Is
-land-1.pdf  used on input line 183.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-2.pdf, id=92, 469.7
-55pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-2.pdf Graphic 
-file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-2.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Is
-land-2.pdf  used on input line 184.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 183--185
-[][]
- []
-
-[6 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-3.pdf, id=103, 469.
-755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-3.pdf Graphic 
-file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-3.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Is
-land-3.pdf  used on input line 212.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-4.pdf, id=104, 469.
-755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-4.pdf Graphic 
-file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-4.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Is
-land-4.pdf  used on input line 213.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 212--214
-[][]
- []
-
-[7 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-2.pdf>] [8 <./
-Frequency_Analysis_files/figure-latex/Cocos_Keeling_Island-3.pdf>] [9 <./Freque
-ncy_Analysis_files/figure-latex/Cocos_Keeling_Island-4.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-1.pdf, id=133, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-1.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-1.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-1.
-pdf  used on input line 262.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-2.pdf, id=134, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-2.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-2.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-2.
-pdf  used on input line 263.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 262--264
-[][]
- []
-
-[10 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-3.pdf, id=145, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-3.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-3.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-3.
-pdf  used on input line 293.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-4.pdf, id=146, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-4.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-4.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-4.
-pdf  used on input line 294.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 293--295
-[][]
- []
-
-[11 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-2.pdf>] [12 <./Frequ
-ency_Analysis_files/figure-latex/Ningaloo_Reef-3.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-5.pdf, id=166, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-5.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-5.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-5.
-pdf  used on input line 322.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-6.pdf, id=167, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-6.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-6.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-6.
-pdf  used on input line 323.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 322--324
-[][]
- []
-
-[13 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-4.pdf>] [14 <./Frequ
-ency_Analysis_files/figure-latex/Ningaloo_Reef-5.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-7.pdf, id=187, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-7.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-7.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-7.
-pdf  used on input line 351.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-8.pdf, id=188, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-8.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-8.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-8.
-pdf  used on input line 352.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 351--353
-[][]
- []
-
-[15 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-6.pdf>] [16 <./Frequ
-ency_Analysis_files/figure-latex/Ningaloo_Reef-7.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-9.pdf, id=207, 469.755pt x
- 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-9.pdf Graphic file (t
-ype pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-9.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-9.
-pdf  used on input line 382.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-10.pdf, id=208, 469.755pt 
-x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-10.pdf Graphic file (
-type pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-10.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-10
-.pdf  used on input line 383.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 382--384
-[][]
- []
-
-[17 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-8.pdf>] [18 <./Frequ
-ency_Analysis_files/figure-latex/Ningaloo_Reef-9.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-11.pdf, id=227, 469.755pt 
-x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-11.pdf Graphic file (
-type pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-11.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-11
-.pdf  used on input line 411.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-12.pdf, id=228, 469.755pt 
-x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-12.pdf Graphic file (
-type pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-12.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-12
-.pdf  used on input line 412.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 411--413
-[][]
- []
-
-[19 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-10.pdf>] [20 <./Freq
-uency_Analysis_files/figure-latex/Ningaloo_Reef-11.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-13.pdf, id=248, 469.755pt 
-x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-13.pdf Graphic file (
-type pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-13.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-13
-.pdf  used on input line 440.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Reef-14.pdf, id=249, 469.755pt 
-x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-14.pdf Graphic file (
-type pdf)
-<use Frequency_Analysis_files/figure-latex/Ningaloo_Reef-14.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Reef-14
-.pdf  used on input line 441.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 440--442
-[][]
- []
-
-[21 <./Frequency_Analysis_files/figure-latex/Ningaloo_Reef-12.pdf>] [22 <./Freq
-uency_Analysis_files/figure-latex/Ningaloo_Reef-13.pdf>] [23 <./Frequency_Analy
-sis_files/figure-latex/Ningaloo_Reef-14.pdf>]
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-1.pdf, id=277, 
+<Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf, id=12, 
 469.755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-1.pdf Grap
-hic file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-1.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Islands-1.pdf  used on input line 486.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-2.pdf, id=278, 
-469.755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-2.pdf Grap
-hic file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-2.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Islands-2.pdf  used on input line 487.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 486--488
-[][]
- []
-
-[24 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-1.pdf>]
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-3.pdf, id=289, 
-469.755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-3.pdf Grap
-hic file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-3.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Islands-3.pdf  used on input line 517.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-4.pdf, id=290, 
-469.755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-4.pdf Grap
-hic file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-4.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Islands-4.pdf  used on input line 518.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 517--519
-[][]
- []
-
-[25 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-2.pdf>] [
-26 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-3.pdf>]
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-5.pdf, id=311, 
-469.755pt x 325.215pt>
-File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-5.pdf Grap
-hic file (type pdf)
-<use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-5.pdf>
-Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Islands-5.pdf  used on input line 550.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[27 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-4.pdf>] [
-28 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Islands-5.pdf>] [2
-9]
-<Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf, id=338,
- 469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf Gra
 phic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_island_Pl
-ots_Table-1.pdf  used on input line 597.
+ots_Table-1.pdf  used on input line 93.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf, id=339,
- 469.755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf, id=13, 
+469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf Gra
 phic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Browse_island_Pl
-ots_Table-2.pdf  used on input line 598.
+ots_Table-2.pdf  used on input line 94.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--599
+Underfull \hbox (badness 10000) in paragraph at lines 93--95
 [][]
  []
 
-[30 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf>] 
-[31 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf>]
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf, id=365,
- 469.755pt x 325.215pt>
+[2 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-1.pdf>] [
+3 <./Frequency_Analysis_files/figure-latex/Browse_island_Plots_Table-2.pdf>]
+<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf, id=38, 
+469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf Gra
 phic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Pl
-ots_Table-1.pdf  used on input line 601.
+ots_Table-1.pdf  used on input line 97.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf, id=366,
- 469.755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf, id=39, 
+469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf Gra
 phic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Cocos_Keeling_Pl
-ots_Table-2.pdf  used on input line 602.
+ots_Table-2.pdf  used on input line 98.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 601--603
+Underfull \hbox (badness 10000) in paragraph at lines 97--99
 [][]
  []
 
-[32 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>] 
-[33 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf>]
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf, id=391, 469.
-755pt x 325.215pt>
+[4 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-1.pdf>] [
+5 <./Frequency_Analysis_files/figure-latex/Cocos_Keeling_Plots_Table-2.pdf>]
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf, id=64, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-1.pdf  used on input line 604.
+able-1.pdf  used on input line 100.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf, id=392, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf, id=65, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-2.pdf  used on input line 605.
+able-2.pdf  used on input line 101.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf, id=393, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf, id=66, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-3.pdf  used on input line 606.
+able-3.pdf  used on input line 102.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf, id=394, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf, id=67, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-4.pdf  used on input line 607.
+able-4.pdf  used on input line 103.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf, id=395, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf, id=68, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-5.pdf  used on input line 608.
+able-5.pdf  used on input line 104.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf, id=396, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf, id=69, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-6.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-6.pdf  used on input line 609.
+able-6.pdf  used on input line 105.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf, id=397, 469.
-755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf, id=70, 469.7
+55pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf Graphic 
 file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-7.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Ningaloo_Plots_T
-able-7.pdf  used on input line 610.
+able-7.pdf  used on input line 106.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--611
+Underfull \hbox (badness 10000) in paragraph at lines 100--107
 []
  []
 
-[34 <./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>] [35 <
-./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>] [36 <./Fre
-quency_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>] [37 <./Frequenc
-y_Analysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>] [38 <./Frequency_Ana
-lysis_files/figure-latex/Ningaloo_Plots_Table-5.pdf>] [39 <./Frequency_Analysis
-_files/figure-latex/Ningaloo_Plots_Table-6.pdf>] [40 <./Frequency_Analysis_file
-s/figure-latex/Ningaloo_Plots_Table-7.pdf>]
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf, id=4
-84, 469.755pt x 325.215pt>
+[6 <./Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-1.pdf>] [7 <./
+Frequency_Analysis_files/figure-latex/Ningaloo_Plots_Table-2.pdf>] [8 <./Freque
+ncy_Analysis_files/figure-latex/Ningaloo_Plots_Table-3.pdf>] [9 <./Frequency_An
+alysis_files/figure-latex/Ningaloo_Plots_Table-4.pdf>] [10 <./Frequency_Analysi
+s_files/figure-latex/Ningaloo_Plots_Table-5.pdf>] [11 <./Frequency_Analysis_fil
+es/figure-latex/Ningaloo_Plots_Table-6.pdf>] [12 <./Frequency_Analysis_files/fi
+gure-latex/Ningaloo_Plots_Table-7.pdf>]
+<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf, id=1
+57, 469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf 
 Graphic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Plots_Table-1.pdf  used on input line 612.
+_Plots_Table-1.pdf  used on input line 108.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf, id=4
-85, 469.755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf, id=1
+58, 469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf 
 Graphic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Plots_Table-2.pdf  used on input line 613.
+_Plots_Table-2.pdf  used on input line 109.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf, id=4
-86, 469.755pt x 325.215pt>
+<Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf, id=1
+59, 469.755pt x 325.215pt>
 File: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf 
 Graphic file (type pdf)
 <use Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-3.pdf>
 Package pdftex.def Info: Frequency_Analysis_files/figure-latex/Houtman_Abrolhos
-_Plots_Table-3.pdf  used on input line 614.
+_Plots_Table-3.pdf  used on input line 110.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 612--615
+Underfull \hbox (badness 10000) in paragraph at lines 108--111
 [][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 612--615
+Underfull \hbox (badness 10000) in paragraph at lines 108--111
 []
  []
 
-[41 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf
->] [42 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.
-pdf>] [43 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table
+[13 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-1.pdf
+>] [14 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table-2.
+pdf>] [15 <./Frequency_Analysis_files/figure-latex/Houtman_Abrolhos_Plots_Table
 -3.pdf>]
-Overfull \hbox (6.22267pt too wide) in paragraph at lines 646--646
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 118.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 118.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 118.
+
+Overfull \hbox (6.22267pt too wide) in paragraph at lines 142--142
  []\T1/lmr/m/n/10 TNT07C| 
  []
 
 
-Overfull \hbox (6.63966pt too wide) in paragraph at lines 646--646
+Overfull \hbox (6.63966pt too wide) in paragraph at lines 142--142
  []\T1/lmr/m/n/10 BUN05A| 
  []
 
 
-Overfull \hbox (6.63966pt too wide) in paragraph at lines 646--646
+Overfull \hbox (6.63966pt too wide) in paragraph at lines 142--142
  []\T1/lmr/m/n/10 HAB10A 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 892
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 18\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 394
 $| 
  []
 
 
-Overfull \hbox (7.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (7.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 344\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 02
 1$| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 13\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 498
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 825
 $| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 12\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 655
 $| 
  []
 
 
-Overfull \hbox (7.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (7.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 502\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 39
 8$| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 12\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 498
 $| 
  []
 
 
-Overfull \hbox (7.61247pt too wide) in paragraph at lines 646--646
+Overfull \hbox (7.61247pt too wide) in paragraph at lines 142--142
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 129\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 197$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (2.61247pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61247pt too wide) in paragraph at lines 142--142
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 68\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 200$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (2.61226pt too wide) in paragraph at lines 646--646
+Overfull \hbox (2.61226pt too wide) in paragraph at lines 142--142
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 40\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 056
 $| 
  []
 
 
-Overfull \hbox (5.52963pt too wide) in paragraph at lines 622--647
+Overfull \hbox (5.52963pt too wide) in paragraph at lines 118--143
  [][] 
  []
 
 
-Overfull \hbox (2.2109pt too wide) in paragraph at lines 679--679
+Overfull \hbox (2.2109pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 13TNT| 
  []
 
 
-Overfull \hbox (2.2109pt too wide) in paragraph at lines 679--679
+Overfull \hbox (2.2109pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 08TNT| 
  []
 
 
-Overfull \hbox (9.4329pt too wide) in paragraph at lines 679--679
+Overfull \hbox (9.4329pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 TNT07C| 
  []
 
 
-Overfull \hbox (2.4889pt too wide) in paragraph at lines 679--679
+Overfull \hbox (2.4889pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 13BND| 
  []
 
 
-Overfull \hbox (2.4889pt too wide) in paragraph at lines 679--679
+Overfull \hbox (2.4889pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 08BND| 
  []
 
 
-Overfull \hbox (9.8499pt too wide) in paragraph at lines 679--679
+Overfull \hbox (9.8499pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 BUN05A| 
  []
 
 
-Overfull \hbox (3.60031pt too wide) in paragraph at lines 679--679
+Overfull \hbox (3.60031pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 Wallabi 
  []
 
 
-Overfull \hbox (9.8499pt too wide) in paragraph at lines 679--679
+Overfull \hbox (9.8499pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 HAB10A 
  []
 
 
-Overfull \hbox (9.43289pt too wide) in paragraph at lines 679--679
+Overfull \hbox (9.43289pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 HAB05B 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 16\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 577
 $| 
  []
 
 
-Overfull \hbox (3.0447pt too wide) in paragraph at lines 679--679
+Overfull \hbox (3.0447pt too wide) in paragraph at lines 175--175
  []$\OT1/lmr/m/n/10 531\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 158$| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 875$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (10.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (10.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 247\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 970$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 31\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 095
 $| 
  []
 
 
-Overfull \hbox (5.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 14\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 024$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 8\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 096$
 | 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 8\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 096$
 | 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 890$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 890$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (10.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (10.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 435\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 07
 6$| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 13\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 400
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 6\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 812$
 | 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 15\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 918
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 3\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 654$
 | 
  []
 
 
-Overfull \hbox (10.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (10.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 185\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 80
 7$| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 19\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 640
 $| 
  []
 
 
-Overfull \hbox (10.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (10.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 131\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 135$\T
 1/lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 815$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 383$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 844$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 682$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 49\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 633$\T1
 /lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 6\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 485$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 7\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 203$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 2\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 723$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 36\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 775
 $| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 2\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 363$
 | 
  []
 
 
-Overfull \hbox (5.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (5.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 10\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 912
 $| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 7\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 852$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 1\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 115$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 886$\T1/
 lmr/m/n/10 )| 
  []
 
 
-Overfull \hbox (0.8225pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.8225pt too wide) in paragraph at lines 175--175
  []$\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 4\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 124$
 | 
  []
 
 
-Overfull \hbox (0.82271pt too wide) in paragraph at lines 679--679
+Overfull \hbox (0.82271pt too wide) in paragraph at lines 175--175
  []\T1/lmr/m/n/10 ($\OT1/lmr/m/n/10 0\OML/lmm/m/it/10 :\OT1/lmr/m/n/10 943$\T1/
 lmr/m/n/10 )| 
  []
 
-[44pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+[16pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.681 \end{landscape}
-                     ] [45pdfTeX warning (ext4): destination with the same iden
+l.177 \end{landscape}
+                     ] [17pdfTeX warning (ext4): destination with the same iden
 tifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.681 \end{landscape}
+l.177 \end{landscape}
                      ] (./Frequency_Analysis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Frequency_Analysis.out' has not changed.
-(rerunfilecheck)             Checksum: F0C3B018FF2083FF815C21E2652F16F2;4098.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 14413 strings out of 480559
- 266513 string characters out of 5901528
- 598658 words of memory out of 5000000
- 31685 multiletter control sequences out of 15000+600000
- 446510 words of font info for 67 fonts, out of 8000000 for 9000
+ 14083 strings out of 480559
+ 251259 string characters out of 5901528
+ 597850 words of memory out of 5000000
+ 31435 multiletter control sequences out of 15000+600000
+ 436831 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 70i,16n,81p,883b,786s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 70i,16n,81p,285b,786s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-m
-athsy.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips
-/lm/lm-mathit.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/e
-nc/dvips/lm/lm-rm.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fon
-ts/enc/dvips/lm/lm-ec.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist
-/fonts/enc/dvips/lm/lm-ts1.enc}<c:/Users/46217029/AppData/Roaming/TinyTeX/texmf
--dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/46217029/AppData/Roaming/TinyT
-eX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/46217029/AppData/Roami
-ng/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppDat
-a/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029
-/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/4
-6217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:
-/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10
-.pfb>
-Output written on Frequency_Analysis.pdf (45 pages, 910989 bytes).
+athit.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips
+/lm/lm-rm.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/d
+vips/lm/lm-mathsy.enc}{c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist/fon
+ts/enc/dvips/lm/lm-ec.enc}<c:/Users/46217029/AppData/Roaming/TinyTeX/texmf-dist
+/fonts/type1/public/lm/lmmi10.pfb><c:/Users/46217029/AppData/Roaming/TinyTeX/te
+xmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/46217029/AppData/Roaming/Tin
+yTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/46217029/AppData/Roam
+ing/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/46217029/AppDa
+ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on Frequency_Analysis.pdf (17 pages, 529926 bytes).
 PDF statistics:
- 593 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 64 named destinations out of 1000 (max. 500000)
- 270 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 245 PDF objects out of 1000 (max. 8388607)
+ 185 compressed objects within 2 object streams
+ 20 named destinations out of 1000 (max. 500000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 
