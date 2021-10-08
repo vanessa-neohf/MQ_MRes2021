@@ -1220,6 +1220,8 @@ for (i in 1:nrow(CCI_BRS05)){
 CCI_BRS05 <- CCI_BRS05 %>% 
   add_column(BRS05_DHM)
 
+write_csv(CCI_BRS05, here::here("data_raw/DHM/CCI_BRS05_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 BRS05_DHM <- rep(0,nrow(NOAA_BRS05))
 BRS05_negative_anomaly <- 0
@@ -1235,6 +1237,8 @@ for (i in 1:nrow(NOAA_BRS05)){
 
 NOAA_BRS05 <- NOAA_BRS05 %>% 
   add_column(BRS05_DHM)
+
+write_csv(NOAA_BRS05, here::here("data_raw/DHM/NOAA_BRS05_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 BRS05_DHM <- rep(0,nrow(CCore_BRS05_CCI))
@@ -1253,6 +1257,8 @@ CCore_BRS05_CCI <- CCore_BRS05_CCI %>%
   add_column(BRS05_DHM) %>% 
   mutate(date = as.Date(date))
 
+write_csv(CCore_BRS05_CCI, here::here("data_raw/DHM/CCore_BRS05_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 BRS05_DHM <- rep(0,nrow(CCore_BRS05_NOAA))
 BRS05_negative_anomaly <- 0
@@ -1268,6 +1274,8 @@ for (i in 1:nrow(CCore_BRS05_NOAA)){
 
 CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>%
   add_column(BRS05_DHM) 
+
+write_csv(CCore_BRS05_NOAA, here::here("data_raw/DHM/CCore_BRS05_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
@@ -1294,8 +1302,6 @@ kbl(High_BRS05_DHM, longtable = T, caption = "Coral Core Date Range is from 1985
 BRS05_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "BRS05 Degree Heating Month values time plot")+
@@ -1332,6 +1338,8 @@ for (i in 1:nrow(CCI_BRS07)){
 CCI_BRS07 <- CCI_BRS07 %>% 
   add_column(BRS07_DHM)
 
+write_csv(CCI_BRS07, here::here("data_raw/DHM/CCI_BRS07_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 BRS07_DHM <- rep(0,nrow(NOAA_BRS07))
 BRS07_negative_anomaly <- 0
@@ -1347,6 +1355,8 @@ for (i in 1:nrow(NOAA_BRS07)){
 
 NOAA_BRS07 <- NOAA_BRS07 %>% 
   add_column(BRS07_DHM)
+
+write_csv(NOAA_BRS07, here::here("data_raw/DHM/NOAA_BRS07_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 BRS07_DHM <- rep(0,nrow(CCore_BRS07_CCI))
@@ -1364,6 +1374,8 @@ for (i in 1:nrow(CCore_BRS07_CCI)){
 CCore_BRS07_CCI <- CCore_BRS07_CCI %>% 
   add_column(BRS07_DHM)
 
+write_csv(CCore_BRS07_CCI, here::here("data_raw/DHM/CCore_BRS07_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 BRS07_DHM <- rep(0,nrow(CCore_BRS07_NOAA))
 BRS07_negative_anomaly <- 0
@@ -1379,6 +1391,8 @@ for (i in 1:nrow(CCore_BRS07_NOAA)){
 
 CCore_BRS07_NOAA <- CCore_BRS07_NOAA %>% 
   add_column(BRS07_DHM)
+
+write_csv(CCore_BRS07_NOAA, here::here("data_raw/DHM/CCore_BRS07_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
@@ -1403,8 +1417,6 @@ kbl(High_BRS07_DHM, longtable = T, caption = "Coral Core Date Range is from 1985
 BRS07_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Date", y = "Degree Heating Months", title = "BRS07 Degree Heating Month values time plot")+
@@ -1439,6 +1451,8 @@ for (i in 1:nrow(CCI_DAR3)){
 CCI_DAR3 <- CCI_DAR3 %>% 
   add_column(DAR3_DHM)
 
+write_csv(CCI_DAR3, here::here("data_raw/DHM/CCI_DAR3_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 DAR3_DHM <- rep(0,nrow(NOAA_DAR3))
 DAR3_negative_anomaly <- 0
@@ -1454,6 +1468,8 @@ for (i in 1:nrow(NOAA_DAR3)){
 
 NOAA_DAR3 <- NOAA_DAR3 %>% 
   add_column(DAR3_DHM)
+
+write_csv(NOAA_DAR3, here::here("data_raw/DHM/NOAA_DAR3_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending
@@ -1518,6 +1534,8 @@ for (i in 1:nrow(CCI_DARL)){
 CCI_DARL <- CCI_DARL %>% 
   add_column(DARL_DHM)
 
+write_csv(CCI_DARL, here::here("data_raw/DHM/CCI_DARL_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 DARL_DHM <- rep(0,nrow(NOAA_DARL))
 DARL_negative_anomaly <- 0
@@ -1533,6 +1551,8 @@ for (i in 1:nrow(NOAA_DARL)){
 
 NOAA_DARL <- NOAA_DARL %>% 
   add_column(DARL_DHM)
+
+write_csv(NOAA_DARL, here::here("data_raw/DHM/NOAA_DARL_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 DARL_DHM <- rep(0,nrow(CCore_DARL_CCI))
@@ -1550,6 +1570,8 @@ for (i in 1:nrow(CCore_DARL_CCI)){
 CCore_DARL_CCI <- CCore_DARL_CCI %>% 
   add_column(DARL_DHM)
 
+write_csv(CCore_DARL_CCI, here::here("data_raw/DHM/CCore_DARL_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 DARL_DHM <- rep(0,nrow(CCore_DARL_NOAA))
 DARL_negative_anomaly <- 0
@@ -1565,6 +1587,8 @@ for (i in 1:nrow(CCore_DARL_NOAA)){
 
 CCore_DARL_NOAA <- CCore_DARL_NOAA %>% 
   add_column(DARL_DHM)
+
+write_csv(CCore_DARL_NOAA, here::here("data_raw/DHM/CCore_DARL_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
@@ -1632,6 +1656,8 @@ for (i in 1:nrow(CCI_SCOTT_RPO_1)){
 CCI_SCOTT_RPO_1 <- CCI_SCOTT_RPO_1 %>% 
   add_column(SCOTT_RPO_1_DHM)
 
+write_csv(CCI_SCOTT_RPO_1, here::here("data_raw/DHM/CCI_SCOTT_RPO_1_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTT_RPO_1_DHM <- rep(0,nrow(NOAA_SCOTT_RPO_1))
 SCOTT_RPO_1_negative_anomaly <- 0
@@ -1647,6 +1673,8 @@ for (i in 1:nrow(NOAA_SCOTT_RPO_1)){
 
 NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>% 
   add_column(SCOTT_RPO_1_DHM)
+
+write_csv(NOAA_SCOTT_RPO_1, here::here("data_raw/DHM/NOAA_SCOTT_RPO_1_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -1711,6 +1739,8 @@ for (i in 1:nrow(CCI_SCOTT_SL4)){
 CCI_SCOTT_SL4 <- CCI_SCOTT_SL4 %>% 
   add_column(SCOTT_SL4_DHM)
 
+write_csv(CCI_SCOTT_SL4, here::here("data_raw/DHM/CCI_SCOTT_SL4_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTT_SL4_DHM <- rep(0,nrow(NOAA_SCOTT_SL4))
 SCOTT_SL4_negative_anomaly <- 0
@@ -1726,6 +1756,8 @@ for (i in 1:nrow(NOAA_SCOTT_SL4)){
 
 NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>% 
   add_column(SCOTT_SL4_DHM)
+
+write_csv(NOAA_SCOTT_SL4, here::here("data_raw/DHM/NOAA_SCOTT_SL4_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -1790,6 +1822,8 @@ for (i in 1:nrow(CCI_SCOTT_SS3)){
 CCI_SCOTT_SS3 <- CCI_SCOTT_SS3 %>% 
   add_column(SCOTT_SS3_DHM)
 
+write_csv(CCI_SCOTT_SS3, here::here("data_raw/DHM/CCI_SCOTT_SS3_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTT_SS3_DHM <- rep(0,nrow(NOAA_SCOTT_SS3))
 SCOTT_SS3_negative_anomaly <- 0
@@ -1805,6 +1839,8 @@ for (i in 1:nrow(NOAA_SCOTT_SS3)){
 
 NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>% 
   add_column(SCOTT_SS3_DHM)
+
+write_csv(NOAA_SCOTT_SS3, here::here("data_raw/DHM/NOAA_SCOTT_SS3_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -1870,6 +1906,8 @@ for (i in 1:nrow(CCI_SCOTTNR1)){
 CCI_SCOTTNR1 <- CCI_SCOTTNR1 %>% 
   add_column(SCOTTNR1_DHM)
 
+write_csv(CCI_SCOTTNR1, here::here("data_raw/DHM/CCI_SCOTTNR1_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTNR1_DHM <- rep(0,nrow(NOAA_SCOTTNR1))
 SCOTTNR1_negative_anomaly <- 0
@@ -1885,6 +1923,8 @@ for (i in 1:nrow(NOAA_SCOTTNR1)){
 
 NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>% 
   add_column(SCOTTNR1_DHM)
+
+write_csv(NOAA_SCOTTNR1, here::here("data_raw/DHM/NOAA_SCOTTNR1_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -1950,6 +1990,8 @@ for (i in 1:nrow(CCI_SCOTTSL1)){
 CCI_SCOTTSL1 <- CCI_SCOTTSL1 %>% 
   add_column(SCOTTSL1_DHM)
 
+write_csv(CCI_SCOTTSL1, here::here("data_raw/DHM/CCI_SCOTTSL1_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTSL1_DHM <- rep(0,nrow(NOAA_SCOTTSL1))
 SCOTTSL1_negative_anomaly <- 0
@@ -1965,6 +2007,8 @@ for (i in 1:nrow(NOAA_SCOTTSL1)){
 
 NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>% 
   add_column(SCOTTSL1_DHM)
+
+write_csv(NOAA_SCOTTSL1, here::here("data_raw/DHM/NOAA_SCOTTSL1_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -2030,6 +2074,8 @@ for (i in 1:nrow(CCI_SCOTTSL2)){
 CCI_SCOTTSL2 <- CCI_SCOTTSL2 %>% 
   add_column(SCOTTSL2_DHM)
 
+write_csv(CCI_SCOTTSL2, here::here("data_raw/DHM/CCI_SCOTTSL2_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTSL2_DHM <- rep(0,nrow(NOAA_SCOTTSL2))
 SCOTTSL2_negative_anomaly <- 0
@@ -2045,6 +2091,8 @@ for (i in 1:nrow(NOAA_SCOTTSL2)){
 
 NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>% 
   add_column(SCOTTSL2_DHM)
+
+write_csv(NOAA_SCOTTSL2, here::here("data_raw/DHM/NOAA_SCOTTSL2_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -2109,6 +2157,8 @@ for (i in 1:nrow(CCI_SCOTTSL3)){
 CCI_SCOTTSL3 <- CCI_SCOTTSL3 %>% 
   add_column(SCOTTSL3_DHM)
 
+write_csv(CCI_SCOTTSL3, here::here("data_raw/DHM/CCI_SCOTTSL3_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTSL3_DHM <- rep(0,nrow(NOAA_SCOTTSL3))
 SCOTTSL3_negative_anomaly <- 0
@@ -2124,6 +2174,8 @@ for (i in 1:nrow(NOAA_SCOTTSL3)){
 
 NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>% 
   add_column(SCOTTSL3_DHM)
+
+write_csv(NOAA_SCOTTSL3, here::here("data_raw/DHM/NOAA_SCOTTSL3_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -2188,6 +2240,8 @@ for (i in 1:nrow(CCI_SCOTTSS1)){
 CCI_SCOTTSS1 <- CCI_SCOTTSS1 %>% 
   add_column(SCOTTSS1_DHM)
 
+write_csv(CCI_SCOTTSS1, here::here("data_raw/DHM/CCI_SCOTTSS1_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTSS1_DHM <- rep(0,nrow(NOAA_SCOTTSS1))
 SCOTTSS1_negative_anomaly <- 0
@@ -2203,6 +2257,8 @@ for (i in 1:nrow(NOAA_SCOTTSS1)){
 
 NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>% 
   add_column(SCOTTSS1_DHM)
+
+write_csv(NOAA_SCOTTSS1, here::here("data_raw/DHM/NOAA_SCOTTSS1_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -2268,6 +2324,8 @@ for (i in 1:nrow(CCI_SCOTTSS2)){
 CCI_SCOTTSS2 <- CCI_SCOTTSS2 %>% 
   add_column(SCOTTSS2_DHM)
 
+write_csv(CCI_SCOTTSS2, here::here("data_raw/DHM/CCI_SCOTTSS2_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 SCOTTSS2_DHM <- rep(0,nrow(NOAA_SCOTTSS2))
 SCOTTSS2_negative_anomaly <- 0
@@ -2283,6 +2341,8 @@ for (i in 1:nrow(NOAA_SCOTTSS2)){
 
 NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>% 
   add_column(SCOTTSS2_DHM)
+
+write_csv(NOAA_SCOTTSS2, here::here("data_raw/DHM/NOAA_SCOTTSS2_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #no coral core at this site
@@ -2345,6 +2405,8 @@ for (i in 1:nrow(CCI_BUN05A)){
 CCI_BUN05A <- CCI_BUN05A %>% 
   add_column(BUN05A_DHM)
 
+write_csv(CCI_BUN05A, here::here("data_raw/DHM/CCI_BUN05A_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 BUN05A_DHM <- rep(0,nrow(NOAA_BUN05A))
 BUN05A_negative_anomaly <- 0
@@ -2360,6 +2422,8 @@ for (i in 1:nrow(NOAA_BUN05A)){
 
 NOAA_BUN05A <- NOAA_BUN05A %>% 
   add_column(BUN05A_DHM)
+
+write_csv(NOAA_BUN05A, here::here("data_raw/DHM/NOAA_BUN05A_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending
@@ -2416,6 +2480,8 @@ for (i in 1:nrow(CCI_Bundegi)){
 CCI_Bundegi <- CCI_Bundegi %>% 
   add_column(Bundegi_DHM)
 
+write_csv(CCI_Bundegi, here::here("data_raw/DHM/CCI_Bundegi_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 Bundegi_DHM <- rep(0,nrow(NOAA_Bundegi))
 Bundegi_negative_anomaly <- 0
@@ -2431,6 +2497,8 @@ for (i in 1:nrow(NOAA_Bundegi)){
 
 NOAA_Bundegi <- NOAA_Bundegi %>% 
   add_column(Bundegi_DHM)
+
+write_csv(NOAA_Bundegi, here::here("data_raw/DHM/NOAA_Bundegi_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending
@@ -2491,6 +2559,8 @@ CCI_Tantabiddi_08TNT <- CCI_Tantabiddi_08TNT %>%
   add_column(Tantabiddi_DHM) %>% 
   rename(`08TNT_DHM` = Tantabiddi_DHM)
 
+write_csv(CCI_Tantabiddi_08TNT, here::here("data_raw/DHM/CCI_Tantabiddi_08TNT_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 Tantabiddi_DHM <- rep(0,nrow(NOAA_Tantabiddi_08TNT))
 Tantabiddi_negative_anomaly <- 0
@@ -2508,6 +2578,8 @@ NOAA_Tantabiddi_08TNT <- NOAA_Tantabiddi_08TNT %>%
   add_column(Tantabiddi_DHM) %>% 
   rename(`08TNT_DHM` = Tantabiddi_DHM)
 
+write_csv(NOAA_Tantabiddi_08TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_08TNT_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 `08TNT_DHM` <- rep(0,nrow(CCore_08TNT_CCI))
 `08TNT_negative_anomaly` <- 0
@@ -2524,6 +2596,8 @@ for (i in 1:nrow(CCore_08TNT_CCI)){
 CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
   add_column(`08TNT_DHM`)
 
+write_csv(CCore_08TNT_CCI, here::here("data_raw/DHM/CCore_08TNT_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 `08TNT_DHM` <- rep(0,nrow(CCore_08TNT_NOAA))
 `08TNT_negative_anomaly` <- 0
@@ -2539,6 +2613,8 @@ for (i in 1:nrow(CCore_08TNT_NOAA)){
 
 CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
   add_column(`08TNT_DHM`)
+
+write_csv(CCore_08TNT_NOAA, here::here("data_raw/DHM/CCore_08TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
@@ -2600,6 +2676,8 @@ CCI_Tantabiddi_13TNT <- CCI_Tantabiddi_13TNT %>%
   add_column(Tantabiddi_DHM) %>% 
   rename(`13TNT_DHM` = Tantabiddi_DHM)
 
+write_csv(CCI_Tantabiddi_13TNT, here::here("data_raw/DHM/CCI_Tantabiddi_13TNT_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 Tantabiddi_DHM <- rep(0,nrow(NOAA_Tantabiddi_13TNT))
 Tantabiddi_negative_anomaly <- 0
@@ -2617,6 +2695,8 @@ NOAA_Tantabiddi_13TNT <- NOAA_Tantabiddi_13TNT %>%
   add_column(Tantabiddi_DHM) %>% 
   rename(`13TNT_DHM` = Tantabiddi_DHM)
 
+write_csv(NOAA_Tantabiddi_13TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_13TNT_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 `13TNT_DHM` <- rep(0,nrow(CCore_13TNT_CCI))
 `13TNT_negative_anomaly` <- 0
@@ -2633,6 +2713,8 @@ for (i in 1:nrow(CCore_13TNT_CCI)){
 CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
   add_column(`13TNT_DHM`)
 
+write_csv(CCore_13TNT_CCI, here::here("data_raw/DHM/CCore_13TNT_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 `13TNT_DHM` <- rep(0,nrow(CCore_13TNT_NOAA))
 `13TNT_negative_anomaly` <- 0
@@ -2648,6 +2730,8 @@ for (i in 1:nrow(CCore_13TNT_NOAA)){
 
 CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
   add_column(`13TNT_DHM`)
+
+write_csv(CCore_13TNT_NOAA, here::here("data_raw/DHM/CCore_13TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
@@ -2709,6 +2793,8 @@ for (i in 1:nrow(CCI_TNT)){
 CCI_TNT <- CCI_TNT %>% 
   add_column(TNT_DHM)
 
+write_csv(CCI_TNT, here::here("data_raw/DHM/CCI_TNT_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 TNT_DHM <- rep(0,nrow(NOAA_TNT))
 TNT_negative_anomaly <- 0
@@ -2724,6 +2810,8 @@ for (i in 1:nrow(NOAA_TNT)){
 
 NOAA_TNT <- NOAA_TNT %>% 
   add_column(TNT_DHM)
+
+write_csv(NOAA_TNT, here::here("data_raw/DHM/NOAA_TNT_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 TNT_DHM <- rep(0,nrow(CCore_TNT_CCI))
@@ -2741,6 +2829,8 @@ for (i in 1:nrow(CCore_TNT_CCI)){
 CCore_TNT_CCI <- CCore_TNT_CCI %>% 
   add_column(TNT_DHM)
 
+write_csv(CCore_TNT_CCI, here::here("data_raw/DHM/CCore_TNT_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 TNT_DHM <- rep(0,nrow(CCore_TNT_NOAA))
 TNT_negative_anomaly <- 0
@@ -2756,6 +2846,8 @@ for (i in 1:nrow(CCore_TNT_NOAA)){
 
 CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
   add_column(TNT_DHM)
+
+write_csv(CCore_TNT_NOAA, here::here("data_raw/DHM/CCore_TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 TNT_Combined <- rbind(CCI_TNT, NOAA_TNT, CCore_TNT_CCI, CCore_TNT_NOAA)
@@ -2819,6 +2911,8 @@ for (i in 1:nrow(CCI_TNT07C)){
 CCI_TNT07C <- CCI_TNT07C %>% 
   add_column(TNT07C_DHM)
 
+write_csv(CCI_TNT07C, here::here("data_raw/DHM/CCI_TNT07C_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 TNT07C_DHM <- rep(0,nrow(NOAA_TNT07C))
 TNT07C_negative_anomaly <- 0
@@ -2834,6 +2928,8 @@ for (i in 1:nrow(NOAA_TNT07C)){
 
 NOAA_TNT07C <- NOAA_TNT07C %>% 
   add_column(TNT07C_DHM)
+
+write_csv(NOAA_TNT07C, here::here("data_raw/DHM/NOAA_TNT07C_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending
@@ -2895,6 +2991,8 @@ for (i in 1:nrow(CCI_Wallabi_Island)){
 CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
   add_column(Wallabi_Island_DHM)
 
+write_csv(CCI_Wallabi_Island, here::here("data_raw/DHM/CCI_Wallabi_Island_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 Wallabi_Island_DHM <- rep(0,nrow(NOAA_Wallabi_Island))
 Wallabi_Island_negative_anomaly <- 0
@@ -2910,6 +3008,8 @@ for (i in 1:nrow(NOAA_Wallabi_Island)){
 
 NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
   add_column(Wallabi_Island_DHM)
+
+write_csv(NOAA_Wallabi_Island, here::here("data_raw/DHM/NOAA_Wallabi_Island_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_CCI))
@@ -2927,6 +3027,8 @@ for (i in 1:nrow(CCore_Wallabi_Island_CCI)){
 CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
   add_column(Wallabi_Island_DHM)
 
+write_csv(CCore_Wallabi_Island_CCI, here::here("data_raw/DHM/CCore_Wallabi_Island_CCI_DHM.csv"))
+
 #DHM calculations for Coral Core (NOAA) dataset
 Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_NOAA))
 Wallabi_Island_negative_anomaly <- 0
@@ -2942,6 +3044,8 @@ for (i in 1:nrow(CCore_Wallabi_Island_NOAA)){
 
 CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
   add_column(Wallabi_Island_DHM)
+
+write_csv(CCore_Wallabi_Island_NOAA, here::here("data_raw/DHM/CCore_Wallabi_Island_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island, CCore_Wallabi_Island_CCI, CCore_Wallabi_Island_NOAA)
@@ -3005,6 +3109,8 @@ for (i in 1:nrow(CCI_HAB05B)){
 CCI_HAB05B <- CCI_HAB05B %>% 
   add_column(HAB05B_DHM)
 
+write_csv(CCI_HAB05B, here::here("data_raw/DHM/CCI_HAB05B_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 HAB05B_DHM <- rep(0,nrow(NOAA_HAB05B))
 HAB05B_negative_anomaly <- 0
@@ -3020,6 +3126,8 @@ for (i in 1:nrow(NOAA_HAB05B)){
 
 NOAA_HAB05B <- NOAA_HAB05B %>% 
   add_column(HAB05B_DHM)
+
+write_csv(NOAA_HAB05B, here::here("data_raw/DHM/NOAA_HAB05B_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending
@@ -3081,6 +3189,8 @@ for (i in 1:nrow(CCI_HAB10A)){
 CCI_HAB10A <- CCI_HAB10A %>% 
   add_column(HAB10A_DHM)
 
+write_csv(CCI_HAB10A, here::here("data_raw/DHM/CCI_HAB10A_DHM.csv"))
+
 #DHM calculations for NOAA dataset
 HAB10A_DHM <- rep(0,nrow(NOAA_HAB10A))
 HAB10A_negative_anomaly <- 0
@@ -3096,6 +3206,8 @@ for (i in 1:nrow(NOAA_HAB10A)){
 
 NOAA_HAB10A <- NOAA_HAB10A %>% 
   add_column(HAB10A_DHM)
+
+write_csv(NOAA_HAB10A, here::here("data_raw/DHM/NOAA_HAB10A_DHM.csv"))
 
 #DHM calculations for Coral Core dataset
 #pending

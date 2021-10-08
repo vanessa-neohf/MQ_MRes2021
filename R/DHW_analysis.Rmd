@@ -91,8 +91,6 @@ BRS05_Sat_Combined <- rbind(CCI_BRS05, NOAA_BRS05)
 ggplot(BRS05_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of BRS05 (-14.11, 123.54) Degree Heating Week values") +
   scale_color_discrete_qualitative(name = "Satellite") +
@@ -116,8 +114,6 @@ BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07)
 
 ggplot(BRS07_Sat_Combined)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "Time Series of BRS07 (-14.12, 123.55) Degree Heating Week values") +
