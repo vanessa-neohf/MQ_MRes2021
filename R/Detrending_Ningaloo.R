@@ -6,6 +6,9 @@ library(feasts)
 library(forecast)
 library(tsibble)
 
+#lm(.resid ~ cos(2*pi * Year/365) + sin(2*pi*Year/365) )
+
+
 ##Ningaloo Reef##
 ##Tantabiddi 13TNT
 Ningaloo_13TNT_CCI <- read_csv(here::here("data_raw", "CCI_Tantabiddi.csv"))

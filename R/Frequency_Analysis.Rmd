@@ -1,5 +1,5 @@
 ---
-title: "Coral Core Calibration"
+title: "Coral Core Calibration and Frequency Analysis"
 author: "Vanessa Hui Fen Neo"
 date: "`r lubridate::today()`"
 output: pdf_document
@@ -1681,3 +1681,20 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 
 ```
 \end{landscape}
+
+##Frequency Analysis - Spectral Analysis of Time Series
+```{r Frequency_Analysis, echo = FALSE}
+#Browse Island
+#use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
+
+library(dplR)
+
+
+
+
+
+
+
+
+```
+
