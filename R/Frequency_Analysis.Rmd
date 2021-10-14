@@ -1684,13 +1684,44 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 
 ##Frequency Analysis - Spectral Analysis of Time Series
 ```{r Frequency_Analysis, echo = FALSE}
+library(dplR)
+
 #Browse Island
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 
-library(dplR)
+#BRS05 CCI
+wave.out <- morlet(y1 = BRS05_joint$browse_CCI, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+wavelet.plot(wave.out, wavelet.levels = levs)
 
+wave.avg_BRS05_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+plot(wave.avg_BRS05_CCI$period, wave.avg$power, type = "l")
 
+#BRS05 NOAA
+wave.out <- morlet(y1 = BRS05_joint$browse_NOAA, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+wavelet.plot(wave.list = wave.out, wavelet.levels = levs)
 
+wave.avg_BRS05_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+plot(wave.avg_BRS05_NOAA$period, wave.avg$power, type = "l")
+
+#BRS05 Coral Core
+
+wave.out <- morlet(y1 = BRS05_joint$browse_coral_core, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+wavelet.plot(wave.out, wavelet.levels = levs)
+
+wave.avg_BRS05_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+plot(wave.avg_BRS05_CCore$period, wave.avg$power, type = "l")
+
+#combined BRS05 plot
+wave.avg_BRS05_Combined <- as_tibble(rbind(wave.avg_BRS05_CCI, wave.avg_BRS05_CCore, wave.avg_BRS05_NOAA))
+
+ggplot(wave.avg_BRS05_Combined) +
+  geom_line(aes(x = period, y = power, color = Type))
 
 
 
