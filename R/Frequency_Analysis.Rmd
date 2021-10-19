@@ -1682,8 +1682,10 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 ```
 \end{landscape}
 
-##Frequency Analysis - Spectral Analysis of Time Series
-```{r Frequency_Analysis, echo = FALSE}
+## Frequency Analysis - Spectral Analysis of Time Series for Sr/Ca Coral Proxy sites
+
+\newpage
+```{r Frequency_Analysis_Browse, echo = FALSE}
 library(dplR)
 
 #Browse Island
@@ -1693,39 +1695,484 @@ library(dplR)
 wave.out <- morlet(y1 = BRS05_joint$browse_CCI, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
 wave.out$period <- wave.out$period/12
 levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
-wavelet.plot(wave.out, wavelet.levels = levs)
+
 
 wave.avg_BRS05_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
-plot(wave.avg_BRS05_CCI$period, wave.avg$power, type = "l")
+#plot(wave.avg_BRS05_CCI$period, wave.avg_BRS05_CCI$power, type = "l")
 
 #BRS05 NOAA
 wave.out <- morlet(y1 = BRS05_joint$browse_NOAA, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
 wave.out$period <- wave.out$period/12
 levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
-wavelet.plot(wave.list = wave.out, wavelet.levels = levs)
+
 
 wave.avg_BRS05_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
-plot(wave.avg_BRS05_NOAA$period, wave.avg$power, type = "l")
+#plot(wave.avg_BRS05_NOAA$period, wave.avg_BRS05_NOAA$power, type = "l")
 
 #BRS05 Coral Core
 
 wave.out <- morlet(y1 = BRS05_joint$browse_coral_core, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
 wave.out$period <- wave.out$period/12
 levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
-wavelet.plot(wave.out, wavelet.levels = levs)
 
 wave.avg_BRS05_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
-plot(wave.avg_BRS05_CCore$period, wave.avg$power, type = "l")
+#plot(wave.avg_BRS05_CCore$period, wave.avg_BRS05_CCore$power, type = "l")
 
 #combined BRS05 plot
-wave.avg_BRS05_Combined <- as_tibble(rbind(wave.avg_BRS05_CCI, wave.avg_BRS05_CCore, wave.avg_BRS05_NOAA))
+wave.avg_BRS05_Combined <- as_tibble(rbind(wave.avg_BRS05_CCI, wave.avg_BRS05_NOAA))
 
-ggplot(wave.avg_BRS05_Combined) +
-  geom_line(aes(x = period, y = power, color = Type))
+wave.avg_BRS05_CCore <- as_tibble(wave.avg_BRS05_CCore)
+BRS05_CCore <- ggplot(wave.avg_BRS05_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+BRS05_Sat <- ggplot(wave.avg_BRS05_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("BRS05")
+
+BRS05_Sat / BRS05_CCore #plot using patchwork
+  
+#BRS07 CCI
+wave.out <- morlet(y1 = BRS07_joint$browse_CCI, x1 = as.numeric(year(BRS07_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
 
 
+wave.avg_BRS07_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_BRS07_CCI$period, wave.avg_BRS07_CCI$power, type = "l")
+
+#BRS07 NOAA
+wave.out <- morlet(y1 = BRS07_joint$browse_NOAA, x1 = as.numeric(year(BRS07_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
 
 
+wave.avg_BRS07_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_BRS07_NOAA$period, wave.avg_BRS07_NOAA$power, type = "l")
+
+#BRS07 Coral Core
+
+wave.out <- morlet(y1 = BRS07_joint$browse_coral_core, x1 = as.numeric(year(BRS07_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_BRS07_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_BRS07_CCore$period, wave.avg_BRS07_CCore$power, type = "l")
+
+#combined BRS07 plot
+wave.avg_BRS07_Combined <- as_tibble(rbind(wave.avg_BRS07_CCI, wave.avg_BRS07_NOAA))
+
+wave.avg_BRS07_CCore <- as_tibble(wave.avg_BRS07_CCore)
+BRS07_CCore <- ggplot(wave.avg_BRS07_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+BRS07_Sat <- ggplot(wave.avg_BRS07_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("BRS07")
+
+BRS07_Sat / BRS07_CCore #plot using patchwork
 
 ```
 
+```{r Frequency_Analysis_Cocos, echo = FALSE}
+
+#Cocos (Keeling) Island
+#use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
+
+#DAR3 CCI
+wave.out <- morlet(y1 = DAR3_joint$Cocos_CCI, x1 = as.numeric(year(DAR3_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_DAR3_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_DAR3_CCI$period, wave.avg_DAR3_CCI$power, type = "l")
+
+#DAR3 NOAA
+wave.out <- morlet(y1 = DAR3_joint$Cocos_NOAA, x1 = as.numeric(year(DAR3_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_DAR3_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_DAR3_NOAA$period, wave.avg_DAR3_NOAA$power, type = "l")
+
+#DAR3 Coral Core
+
+wave.out <- morlet(y1 = DAR3_joint$Cocos_coral_core, x1 = as.numeric(year(DAR3_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_DAR3_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_DAR3_CCore$period, wave.avg_DAR3_CCore$power, type = "l")
+
+#combined DAR3 plot
+wave.avg_DAR3_Combined <- as_tibble(rbind(wave.avg_DAR3_CCI, wave.avg_DAR3_NOAA))
+
+wave.avg_DAR3_CCore <- as_tibble(wave.avg_DAR3_CCore)
+DAR3_CCore <- ggplot(wave.avg_DAR3_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+DAR3_Sat <- ggplot(wave.avg_DAR3_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("DAR3")
+
+DAR3_Sat / DAR3_CCore #plot using patchwork
+  
+#DARL CCI
+wave.out <- morlet(y1 = DARL_joint$Cocos_CCI, x1 = as.numeric(year(DARL_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_DARL_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_DARL_CCI$period, wave.avg_DARL_CCI$power, type = "l")
+
+#DARL NOAA
+wave.out <- morlet(y1 = DARL_joint$Cocos_NOAA, x1 = as.numeric(year(DARL_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_DARL_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_DARL_NOAA$period, wave.avg_DARL_NOAA$power, type = "l")
+
+#DARL Coral Core
+
+wave.out <- morlet(y1 = DARL_joint$Cocos_coral_core, x1 = as.numeric(year(DARL_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_DARL_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_DARL_CCore$period, wave.avg_DARL_CCore$power, type = "l")
+
+#combined DARL plot
+wave.avg_DARL_Combined <- as_tibble(rbind(wave.avg_DARL_CCI, wave.avg_DARL_NOAA))
+
+wave.avg_DARL_CCore <- as_tibble(wave.avg_DARL_CCore)
+DARL_CCore <- ggplot(wave.avg_DARL_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+DARL_Sat <- ggplot(wave.avg_DARL_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("DARL")
+
+DARL_Sat / DARL_CCore #plot using patchwork
+
+```
+
+
+```{r Frequency_Analysis_Ningaloo, echo = FALSE}
+
+#Ningaloo Reef
+#use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
+
+#Tantabiddi 13TNT CCI
+wave.out <- morlet(y1 = Tantabiddi_13TNT_joint$ningaloo_CCI, x1 = as.numeric(year(Tantabiddi_13TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Tantabiddi_13TNT_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_Tantabiddi_13TNT_CCI$period, wave.avg_Tantabiddi_13TNT_CCI$power, type = "l")
+
+#Tantabiddi 13TNT NOAA
+wave.out <- morlet(y1 = Tantabiddi_13TNT_joint$ningaloo_NOAA, x1 = as.numeric(year(Tantabiddi_13TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Tantabiddi_13TNT_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_Tantabiddi_13TNT_NOAA$period, wave.avg_Tantabiddi_13TNT_NOAA$power, type = "l")
+
+#Tantabiddi 13TNT Coral Core
+
+wave.out <- morlet(y1 = Tantabiddi_13TNT_joint$ningaloo_coral_core, x1 = as.numeric(year(Tantabiddi_13TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_Tantabiddi_13TNT_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_Tantabiddi_13TNT_CCore$period, wave.avg_Tantabiddi_13TNT_CCore$power, type = "l")
+
+#combined Tantabiddi 13TNT plot
+wave.avg_Tantabiddi_13TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_13TNT_CCI, wave.avg_Tantabiddi_13TNT_NOAA))
+
+wave.avg_Tantabiddi_13TNT_CCore <- as_tibble(wave.avg_Tantabiddi_13TNT_CCore)
+Tantabiddi_13TNT_CCore <- ggplot(wave.avg_Tantabiddi_13TNT_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+Tantabiddi_13TNT_Sat <- ggplot(wave.avg_Tantabiddi_13TNT_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("13TNT")
+
+Tantabiddi_13TNT_Sat / Tantabiddi_13TNT_CCore #plot using patchwork
+  
+
+#Tantabiddi 08TNT CCI
+wave.out <- morlet(y1 = Tantabiddi_08TNT_joint$ningaloo_CCI, x1 = as.numeric(year(Tantabiddi_08TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Tantabiddi_08TNT_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_Tantabiddi_08TNT_CCI$period, wave.avg_Tantabiddi_08TNT_CCI$power, type = "l")
+
+#Tantabiddi 08TNT NOAA
+wave.out <- morlet(y1 = Tantabiddi_08TNT_joint$ningaloo_NOAA, x1 = as.numeric(year(Tantabiddi_08TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Tantabiddi_08TNT_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_Tantabiddi_08TNT_NOAA$period, wave.avg_Tantabiddi_08TNT_NOAA$power, type = "l")
+
+#Tantabiddi 08TNT Coral Core
+
+wave.out <- morlet(y1 = Tantabiddi_08TNT_joint$ningaloo_coral_core, x1 = as.numeric(year(Tantabiddi_08TNT_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_Tantabiddi_08TNT_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_Tantabiddi_08TNT_CCore$period, wave.avg_Tantabiddi_08TNT_CCore$power, type = "l")
+
+#combined Tantabiddi 08TNT plot
+wave.avg_Tantabiddi_08TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_08TNT_CCI, wave.avg_Tantabiddi_08TNT_NOAA))
+
+wave.avg_Tantabiddi_08TNT_CCore <- as_tibble(wave.avg_Tantabiddi_08TNT_CCore)
+Tantabiddi_08TNT_CCore <- ggplot(wave.avg_Tantabiddi_08TNT_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+Tantabiddi_08TNT_Sat <- ggplot(wave.avg_Tantabiddi_08TNT_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("08TNT")
+
+Tantabiddi_08TNT_Sat / Tantabiddi_08TNT_CCore #plot using patchwork
+
+#Bundegi 13BND CCI
+wave.out <- morlet(y1 = Bundegi_13BND_joint$ningaloo_CCI, x1 = as.numeric(year(Bundegi_13BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Bundegi_13BND_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_Bundegi_13BND_CCI$period, wave.avg_Bundegi_13BND_CCI$power, type = "l")
+
+#Bundegi 13BND NOAA
+wave.out <- morlet(y1 = Bundegi_13BND_joint$ningaloo_NOAA, x1 = as.numeric(year(Bundegi_13BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Bundegi_13BND_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_Bundegi_13BND_NOAA$period, wave.avg_Bundegi_13BND_NOAA$power, type = "l")
+
+#Bundegi 13BND Coral Core
+
+wave.out <- morlet(y1 = Bundegi_13BND_joint$ningaloo_coral_core, x1 = as.numeric(year(Bundegi_13BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_Bundegi_13BND_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_Bundegi_13BND_CCore$period, wave.avg_Bundegi_13BND_CCore$power, type = "l")
+
+#combined Bundegi 13BND plot
+wave.avg_Bundegi_13BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_13BND_CCI, wave.avg_Bundegi_13BND_NOAA))
+
+wave.avg_Bundegi_13BND_CCore <- as_tibble(wave.avg_Bundegi_13BND_CCore)
+Bundegi_13BND_CCore <- ggplot(wave.avg_Bundegi_13BND_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+Bundegi_13BND_Sat <- ggplot(wave.avg_Bundegi_13BND_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("13BND")
+
+Bundegi_13BND_Sat / Bundegi_13BND_CCore #plot using patchwork
+  
+#Bundegi 08BND CCI
+wave.out <- morlet(y1 = Bundegi_08BND_joint$ningaloo_CCI, x1 = as.numeric(year(Bundegi_08BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Bundegi_08BND_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_Bundegi_08BND_CCI$period, wave.avg_Bundegi_08BND_CCI$power, type = "l")
+
+#Bundegi 08BND NOAA
+wave.out <- morlet(y1 = Bundegi_08BND_joint$ningaloo_NOAA, x1 = as.numeric(year(Bundegi_08BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_Bundegi_08BND_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_Bundegi_08BND_NOAA$period, wave.avg_Bundegi_08BND_NOAA$power, type = "l")
+
+#Bundegi 08BND Coral Core
+
+wave.out <- morlet(y1 = Bundegi_08BND_joint$ningaloo_coral_core, x1 = as.numeric(year(Bundegi_08BND_joint$date)), dj = 0.1, siglvl = 0.95)
+wave.out$period <- wave.out$period/12
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_Bundegi_08BND_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_Bundegi_08BND_CCore$period, wave.avg_Bundegi_08BND_CCore$power, type = "l")
+
+#combined Bundegi 08BND plot
+wave.avg_Bundegi_08BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_08BND_CCI, wave.avg_Bundegi_08BND_NOAA))
+
+wave.avg_Bundegi_08BND_CCore <- as_tibble(wave.avg_Bundegi_08BND_CCore)
+Bundegi_08BND_CCore <- ggplot(wave.avg_Bundegi_08BND_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+Bundegi_08BND_Sat <- ggplot(wave.avg_Bundegi_08BND_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("08BND")
+
+Bundegi_08BND_Sat / Bundegi_08BND_CCore #plot using patchwork
+
+#TNT07C CCI
+wave.out <- morlet(y1 = TNT07C_joint$ningaloo_CCI, x1 = as.numeric(year(TNT07C_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12 
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_TNT07C_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_TNT07C_CCI$period, wave.avg_TNT07C_CCI$power, type = "l")
+
+#TNT07C NOAA
+wave.out <- morlet(y1 = TNT07C_joint$ningaloo_NOAA, x1 = as.numeric(year(TNT07C_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_TNT07C_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_TNT07C_NOAA$period, wave.avg_TNT07C_NOAA$power, type = "l")
+
+#TNT07C Coral Core
+
+wave.out <- morlet(y1 = TNT07C_joint$ningaloo_coral_core, x1 = as.numeric(year(TNT07C_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_TNT07C_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_TNT07C_CCore$period, wave.avg_TNT07C_CCore$power, type = "l")
+
+#combined TNT07C plot
+wave.avg_TNT07C_Combined <- as_tibble(rbind(wave.avg_TNT07C_CCI, wave.avg_TNT07C_NOAA))
+
+wave.avg_TNT07C_CCore <- as_tibble(wave.avg_TNT07C_CCore)
+TNT07C_CCore <- ggplot(wave.avg_TNT07C_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+TNT07C_Sat <- ggplot(wave.avg_TNT07C_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("TNT07C")
+
+TNT07C_Sat / TNT07C_CCore #plot using patchwork
+
+
+#BUN05A CCI
+wave.out <- morlet(y1 = BUN05A_joint$ningaloo_CCI, x1 = as.numeric(year(BUN05A_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12 
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_BUN05A_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_BUN05A_CCI$period, wave.avg_BUN05A_CCI$power, type = "l")
+
+#BUN05A NOAA
+wave.out <- morlet(y1 = BUN05A_joint$ningaloo_NOAA, x1 = as.numeric(year(BUN05A_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_BUN05A_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_BUN05A_NOAA$period, wave.avg_BUN05A_NOAA$power, type = "l")
+
+#BUN05A Coral Core
+
+wave.out <- morlet(y1 = BUN05A_joint$ningaloo_coral_core, x1 = as.numeric(year(BUN05A_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary because dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_BUN05A_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_BUN05A_CCore$period, wave.avg_BUN05A_CCore$power, type = "l")
+
+#combined BUN05A plot
+wave.avg_BUN05A_Combined <- as_tibble(rbind(wave.avg_BUN05A_CCI, wave.avg_BUN05A_NOAA))
+
+wave.avg_BUN05A_CCore <- as_tibble(wave.avg_BUN05A_CCore)
+BUN05A_CCore <- ggplot(wave.avg_BUN05A_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+BUN05A_Sat <- ggplot(wave.avg_BUN05A_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("BUN05A")
+
+BUN05A_Sat / BUN05A_CCore #plot using patchwork
+
+```
+
+```{r Frequency_Analysis_Houtman_Abrol, echo = FALSE}
+
+#Houtman Abrolhos Island
+#use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
+
+#HAB05B SrCa CCI
+wave.out <- morlet(y1 = HAB05B_SrCa_joint$HAbrol_CCI, x1 = as.numeric(year(HAB05B_SrCa_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary as dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_HAB05B_SrCa_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
+#plot(wave.avg_HAB05B_SrCa_CCI$period, wave.avg_HAB05B_SrCa_CCI$power, type = "l")
+
+#HAB05B SrCa NOAA
+wave.out <- morlet(y1 = HAB05B_SrCa_joint$HAbrol_NOAA, x1 = as.numeric(year(HAB05B_SrCa_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary as dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+
+wave.avg_HAB05B_SrCa_NOAA <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "NOAA")
+#plot(wave.avg_HAB05B_SrCa_NOAA$period, wave.avg_HAB05B_SrCa_NOAA$power, type = "l")
+
+#HAB05B SrCa Coral Core
+
+wave.out <- morlet(y1 = HAB05B_SrCa_joint$HAbrol_coral_core, x1 = as.numeric(year(HAB05B_SrCa_joint$date)), dj = 0.1, siglvl = 0.95)
+#wave.out$period <- wave.out$period/12
+#not necessary as dataset is annual
+levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
+
+wave.avg_HAB05B_SrCa_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "Coral Core")
+#plot(wave.avg_HAB05B_SrCa_CCore$period, wave.avg_HAB05B_SrCa_CCore$power, type = "l")
+
+#combined HAB05B SrCa plot
+wave.avg_HAB05B_SrCa_Combined <- as_tibble(rbind(wave.avg_HAB05B_SrCa_CCI, wave.avg_HAB05B_SrCa_NOAA))
+
+wave.avg_HAB05B_SrCa_CCore <- as_tibble(wave.avg_HAB05B_SrCa_CCore)
+HAB05B_SrCa_CCore <- ggplot(wave.avg_HAB05B_SrCa_CCore) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  scale_color_manual(values = "brown")
+  
+HAB05B_SrCa_Sat <- ggplot(wave.avg_HAB05B_SrCa_Combined) +
+  geom_line(aes(x = period, y = power, color = Type)) +
+  ggtitle("HAB05B")
+
+HAB05B_SrCa_Sat / HAB05B_SrCa_CCore #plot using patchwork
+
+```
