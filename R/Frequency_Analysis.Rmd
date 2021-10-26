@@ -1725,10 +1725,19 @@ wave.avg_BRS05_CCore <- as_tibble(wave.avg_BRS05_CCore)
 BRS05_CCore <- ggplot(wave.avg_BRS05_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
-  
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_BRS05_Combined$power) / max(wave.avg_BRS05_CCore$power))
+
+#transform coral core data
+wave.avg_BRS05_CCore <- wave.avg_BRS05_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_BRS05_Combined <- rbind(wave.avg_BRS05_Combined, wave.avg_BRS05_CCore)
+
 BRS05_Sat <- ggplot(wave.avg_BRS05_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("BRS05")
+  ggtitle("BRS05 NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 BRS05_Sat / BRS05_CCore #plot using patchwork
   
@@ -1766,10 +1775,19 @@ wave.avg_BRS07_CCore <- as_tibble(wave.avg_BRS07_CCore)
 BRS07_CCore <- ggplot(wave.avg_BRS07_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_BRS07_Combined$power) / max(wave.avg_BRS07_CCore$power))
+
+#transform coral core data
+wave.avg_BRS07_CCore <- wave.avg_BRS07_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_BRS07_Combined <- rbind(wave.avg_BRS07_Combined, wave.avg_BRS07_CCore)
   
 BRS07_Sat <- ggplot(wave.avg_BRS07_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("BRS07")
+  ggtitle("BRS07 NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 BRS07_Sat / BRS07_CCore #plot using patchwork
 
@@ -1814,10 +1832,19 @@ wave.avg_DAR3_CCore <- as_tibble(wave.avg_DAR3_CCore)
 DAR3_CCore <- ggplot(wave.avg_DAR3_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_DAR3_Combined$power) / max(wave.avg_DAR3_CCore$power))
+
+#transform coral core data
+wave.avg_DAR3_CCore <- wave.avg_DAR3_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_DAR3_Combined <- rbind(wave.avg_DAR3_Combined, wave.avg_DAR3_CCore)
   
 DAR3_Sat <- ggplot(wave.avg_DAR3_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("DAR3")
+  ggtitle("DAR3 NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 DAR3_Sat / DAR3_CCore #plot using patchwork
   
@@ -1855,10 +1882,19 @@ wave.avg_DARL_CCore <- as_tibble(wave.avg_DARL_CCore)
 DARL_CCore <- ggplot(wave.avg_DARL_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_DARL_Combined$power) / max(wave.avg_DARL_CCore$power))
+
+#transform coral core data
+wave.avg_DARL_CCore <- wave.avg_DARL_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_DARL_Combined <- rbind(wave.avg_DARL_Combined, wave.avg_DARL_CCore)
   
 DARL_Sat <- ggplot(wave.avg_DARL_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("DARL")
+  ggtitle("DARL NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 DARL_Sat / DARL_CCore #plot using patchwork
 
@@ -1904,10 +1940,19 @@ wave.avg_Tantabiddi_13TNT_CCore <- as_tibble(wave.avg_Tantabiddi_13TNT_CCore)
 Tantabiddi_13TNT_CCore <- ggplot(wave.avg_Tantabiddi_13TNT_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_Tantabiddi_13TNT_Combined$power) / max(wave.avg_Tantabiddi_13TNT_CCore$power))
+
+#transform coral core data
+wave.avg_Tantabiddi_13TNT_CCore <- wave.avg_Tantabiddi_13TNT_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_Tantabiddi_13TNT_Combined <- rbind(wave.avg_Tantabiddi_13TNT_Combined, wave.avg_Tantabiddi_13TNT_CCore)
   
 Tantabiddi_13TNT_Sat <- ggplot(wave.avg_Tantabiddi_13TNT_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("13TNT")
+  ggtitle("13TNT NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 Tantabiddi_13TNT_Sat / Tantabiddi_13TNT_CCore #plot using patchwork
   
@@ -1946,10 +1991,19 @@ wave.avg_Tantabiddi_08TNT_CCore <- as_tibble(wave.avg_Tantabiddi_08TNT_CCore)
 Tantabiddi_08TNT_CCore <- ggplot(wave.avg_Tantabiddi_08TNT_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_Tantabiddi_08TNT_Combined$power) / max(wave.avg_Tantabiddi_08TNT_CCore$power))
+
+#transform coral core data
+wave.avg_Tantabiddi_08TNT_CCore <- wave.avg_Tantabiddi_08TNT_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_Tantabiddi_08TNT_Combined <- rbind(wave.avg_Tantabiddi_08TNT_Combined, wave.avg_Tantabiddi_08TNT_CCore)
   
 Tantabiddi_08TNT_Sat <- ggplot(wave.avg_Tantabiddi_08TNT_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("08TNT")
+  ggtitle("08TNT NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 Tantabiddi_08TNT_Sat / Tantabiddi_08TNT_CCore #plot using patchwork
 
@@ -1987,10 +2041,19 @@ wave.avg_Bundegi_13BND_CCore <- as_tibble(wave.avg_Bundegi_13BND_CCore)
 Bundegi_13BND_CCore <- ggplot(wave.avg_Bundegi_13BND_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_Bundegi_13BND_Combined$power) / max(wave.avg_Bundegi_13BND_CCore$power))
+
+#transform coral core data
+wave.avg_Bundegi_13BND_CCore <- wave.avg_Bundegi_13BND_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_Bundegi_13BND_Combined <- rbind(wave.avg_Bundegi_13BND_Combined, wave.avg_Bundegi_13BND_CCore)
   
 Bundegi_13BND_Sat <- ggplot(wave.avg_Bundegi_13BND_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("13BND")
+  ggtitle("13BND NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 Bundegi_13BND_Sat / Bundegi_13BND_CCore #plot using patchwork
   
@@ -2028,10 +2091,19 @@ wave.avg_Bundegi_08BND_CCore <- as_tibble(wave.avg_Bundegi_08BND_CCore)
 Bundegi_08BND_CCore <- ggplot(wave.avg_Bundegi_08BND_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_Bundegi_08BND_Combined$power) / max(wave.avg_Bundegi_08BND_CCore$power))
+
+#transform coral core data
+wave.avg_Bundegi_08BND_CCore <- wave.avg_Bundegi_08BND_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_Bundegi_08BND_Combined <- rbind(wave.avg_Bundegi_08BND_Combined, wave.avg_Bundegi_08BND_CCore)
   
 Bundegi_08BND_Sat <- ggplot(wave.avg_Bundegi_08BND_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("08BND")
+  ggtitle("08BND NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 Bundegi_08BND_Sat / Bundegi_08BND_CCore #plot using patchwork
 
@@ -2072,10 +2144,19 @@ wave.avg_TNT07C_CCore <- as_tibble(wave.avg_TNT07C_CCore)
 TNT07C_CCore <- ggplot(wave.avg_TNT07C_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_TNT07C_Combined$power) / max(wave.avg_TNT07C_CCore$power))
+
+#transform coral core data
+wave.avg_TNT07C_CCore <- wave.avg_TNT07C_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_TNT07C_Combined <- rbind(wave.avg_TNT07C_Combined, wave.avg_TNT07C_CCore)
   
 TNT07C_Sat <- ggplot(wave.avg_TNT07C_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("TNT07C")
+  ggtitle("TNT07C NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 TNT07C_Sat / TNT07C_CCore #plot using patchwork
 
@@ -2117,10 +2198,19 @@ wave.avg_BUN05A_CCore <- as_tibble(wave.avg_BUN05A_CCore)
 BUN05A_CCore <- ggplot(wave.avg_BUN05A_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_BUN05A_Combined$power) / max(wave.avg_BUN05A_CCore$power))
+
+#transform coral core data
+wave.avg_BUN05A_CCore <- wave.avg_BUN05A_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_BUN05A_Combined <- rbind(wave.avg_BUN05A_Combined, wave.avg_BUN05A_CCore)
   
 BUN05A_Sat <- ggplot(wave.avg_BUN05A_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("BUN05A")
+  ggtitle("BUN05A NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 BUN05A_Sat / BUN05A_CCore #plot using patchwork
 
@@ -2168,10 +2258,19 @@ wave.avg_HAB05B_SrCa_CCore <- as_tibble(wave.avg_HAB05B_SrCa_CCore)
 HAB05B_SrCa_CCore <- ggplot(wave.avg_HAB05B_SrCa_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
+
+#setting value to transform coral core data 
+coeff <- (max(wave.avg_HAB05B_SrCa_Combined$power) / max(wave.avg_HAB05B_SrCa_CCore$power))
+
+#transform coral core data
+wave.avg_HAB05B_SrCa_CCore <- wave.avg_HAB05B_SrCa_CCore %>% 
+  mutate(power = power*coeff)
+
+wave.avg_HAB05B_SrCa_Combined <- rbind(wave.avg_HAB05B_SrCa_Combined, wave.avg_HAB05B_SrCa_CCore)
   
 HAB05B_SrCa_Sat <- ggplot(wave.avg_HAB05B_SrCa_Combined) +
   geom_line(aes(x = period, y = power, color = Type)) +
-  ggtitle("HAB05B")
+  ggtitle("HAB05B NOAA, CCI and Adjusted Coral Core SST Time Series Power")
 
 HAB05B_SrCa_Sat / HAB05B_SrCa_CCore #plot using patchwork
 
