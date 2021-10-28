@@ -1664,16 +1664,16 @@ NOAA_CM_DHM %>%
 ```{r Combined_Confusion_Matrix, echo = FALSE, warning = FALSE, message = FALSE}
 
 CCI_CM_DHW <- xtable(CCI_CM_DHW %>% 
-  select(Reef, `Balanced Accuracy`))
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
 
 NOAA_CM_DHW <- xtable(NOAA_CM_DHW %>% 
-  select(Reef, `Balanced Accuracy`))
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
 
 CCI_CM_DHM <- xtable(CCI_CM_DHM %>% 
-  select(Reef, `Balanced Accuracy`))
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
 
 NOAA_CM_DHM <- xtable(NOAA_CM_DHM %>% 
-  select(Reef, `Balanced Accuracy`))
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
 
 CM_Combined_DHW <- cbind(CCI_CM_DHW, NOAA_CM_DHW) 
 CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM)
@@ -1681,11 +1681,15 @@ CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM)
 
 xtable2kable(CM_Combined_DHW) %>% 
   kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix") %>% 
-  add_header_above(c("CCI DHW" = 2, "NOAA DHW" = 2))
+  add_header_above(c(" " = 1, "CCI DHW" = 4, "NOAA DHW" = 4)) %>% 
+  kable_styling(full_width = T) %>% 
+  landscape()
 
 xtable2kable(CM_Combined_DHM) %>% 
   kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix", ) %>% 
-  add_header_above(c("CCI DHM" = 2, "NOAA DHM" = 2))
+  add_header_above(c(" " = 1, "CCI DHM" = 4, "NOAA DHM" = 4)) %>% 
+  kable_styling(full_width = T) %>% 
+  landscape()
 
 
   
