@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  27 OCT 2021 21:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  28 OCT 2021 12:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -527,6 +527,9 @@ LaTeX Warning: Label `tab:Confusion_Matrix_DHW' multiply defined.
 
 LaTeX Warning: Label `tab:Confusion_Matrix_DHM' multiply defined.
 
+
+LaTeX Warning: Label `tab:Combined_Confusion_Matrix' multiply defined.
+
 )
 \openout1 = `Confusion-Matrix-Binary.aux'.
 
@@ -881,7 +884,17 @@ as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.172 \end{landscape}
-                     ] (./Confusion-Matrix-Binary.aux)
+                     ] [6pdfTeX warning (ext4): destination with the same ident
+ifier (name{table.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.215 \end{document}
+                    pdfTeX warning (ext4): destination with the same identifier
+ (name{table.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.215 \end{document}
+                    ] (./Confusion-Matrix-Binary.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -890,10 +903,10 @@ Package rerunfilecheck Info: File `Confusion-Matrix-Binary.out' has not changed
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 11582 strings out of 480539
- 170503 string characters out of 5901304
- 493157 words of memory out of 5000000
- 28988 multiletter control sequences out of 15000+600000
+ 11586 strings out of 480539
+ 170554 string characters out of 5901304
+ 493246 words of memory out of 5000000
+ 28989 multiletter control sequences out of 15000+600000
  436831 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  60i,15n,66p,331b,514s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -902,10 +915,10 @@ Here is how much of TeX's memory you used:
 fb><c:/Users/Sam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12
 .pfb><c:/Users/Sam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
 17.pfb>
-Output written on Confusion-Matrix-Binary.pdf (5 pages, 89505 bytes).
+Output written on Confusion-Matrix-Binary.pdf (6 pages, 90827 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 37 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
+ 58 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

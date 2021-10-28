@@ -15,6 +15,7 @@ library(lubridate)
 library(cvms)
 library(knitr)
 library(kableExtra)
+library(xtable)
 
 ```
 
@@ -737,14 +738,14 @@ NOAA_Combined_DHW <- rbind(NOAA_BRS05, NOAA_BRS07, NOAA_BUN05A, NOAA_Bundegi, NO
 
 ```{r Confusion_Matrix_DHW, echo = FALSE, warning = FALSE, message = FALSE}
 
-CCI_CM <- as_tibble(CCI_Combined_DHW %>% 
+CCI_CM_DHW <- as_tibble(CCI_Combined_DHW %>% 
   group_by(Reef) %>% 
   cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
   ungroup() 
 ) %>% 
   select(-c(Predictions, `Confusion Matrix`, Process, ROC))
 
-NOAA_CM <- as_tibble(NOAA_Combined_DHW %>%
+NOAA_CM_DHW <- as_tibble(NOAA_Combined_DHW %>%
   rename(Reef = Site) %>% 
   group_by(Reef) %>% 
   cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
@@ -752,12 +753,12 @@ NOAA_CM <- as_tibble(NOAA_Combined_DHW %>%
 ) %>% 
   select(-c(Predictions, `Confusion Matrix`, Process, ROC))
 
-CCI_CM %>% 
+CCI_CM_DHW %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Week values from CCI data", digits = 2) %>% 
   kable_styling(full_width = TRUE) %>% 
   landscape()
 
-NOAA_CM %>% 
+NOAA_CM_DHW %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Week values from NOAA data", digits = 2) %>% 
   kable_styling(full_width = TRUE) %>% 
   landscape()
@@ -1635,28 +1636,57 @@ NOAA_Combined_DHM <- rbind(NOAA_BRS05_DHM, NOAA_BRS07_DHM, NOAA_BUN05A_DHM, NOAA
 
 ```{r Confusion_Matrix_DHM, echo = FALSE, warning = FALSE, message = FALSE}
 
-CCI_CM <- as_tibble(CCI_Combined_DHM %>%
+CCI_CM_DHM <- as_tibble(CCI_Combined_DHM %>%
   group_by(Reef) %>% 
   cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
   ungroup() 
 ) %>% 
   select(-c(Predictions, `Confusion Matrix`, Process, ROC))
 
-NOAA_CM <- as_tibble(NOAA_Combined_DHM %>%
+NOAA_CM_DHM <- as_tibble(NOAA_Combined_DHM %>%
   group_by(Reef) %>% 
   cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
   ungroup() 
 ) %>% 
   select(-c(Predictions, `Confusion Matrix`, Process, ROC))
 
-CCI_CM %>% 
+CCI_CM_DHM %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from CCI data", digits = 2) %>% 
   kable_styling(full_width = TRUE) %>% 
   landscape()
 
-NOAA_CM %>% 
+NOAA_CM_DHM %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from NOAA data", digits = 2) %>% 
   kable_styling(full_width = TRUE) %>% 
   landscape()
 
 ```
+```{r Combined_Confusion_Matrix, echo = FALSE, warning = FALSE, message = FALSE}
+
+CCI_CM_DHW <- xtable(CCI_CM_DHW %>% 
+  select(Reef, `Balanced Accuracy`))
+
+NOAA_CM_DHW <- xtable(NOAA_CM_DHW %>% 
+  select(Reef, `Balanced Accuracy`))
+
+CCI_CM_DHM <- xtable(CCI_CM_DHM %>% 
+  select(Reef, `Balanced Accuracy`))
+
+NOAA_CM_DHM <- xtable(NOAA_CM_DHM %>% 
+  select(Reef, `Balanced Accuracy`))
+
+CM_Combined_DHW <- cbind(CCI_CM_DHW, NOAA_CM_DHW) 
+CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM)
+
+
+xtable2kable(CM_Combined_DHW) %>% 
+  kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix of CCI (left) and NOAA (right)")
+
+xtable2kable(CM_Combined_DHM) %>% 
+  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix of CCI (left) and NOAA (right)")
+
+
+  
+
+```
+
