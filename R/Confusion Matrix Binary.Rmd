@@ -1680,10 +1680,12 @@ CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM)
 
 
 xtable2kable(CM_Combined_DHW) %>% 
-  kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix of CCI (left) and NOAA (right)")
+  kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix") %>% 
+  add_header_above(c("CCI DHW" = 2, "NOAA DHW" = 2))
 
 xtable2kable(CM_Combined_DHM) %>% 
-  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix of CCI (left) and NOAA (right)")
+  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix", ) %>% 
+  add_header_above(c("CCI DHM" = 2, "NOAA DHM" = 2))
 
 
   

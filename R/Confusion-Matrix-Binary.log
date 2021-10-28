@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  28 OCT 2021 12:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.10.27)  28 OCT 2021 12:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -888,12 +888,12 @@ l.172 \end{landscape}
 ifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.215 \end{document}
+l.219 \end{document}
                     pdfTeX warning (ext4): destination with the same identifier
  (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.215 \end{document}
+l.219 \end{document}
                     ] (./Confusion-Matrix-Binary.aux)
 
 LaTeX Warning: There were multiply-defined labels.
@@ -905,7 +905,7 @@ Package rerunfilecheck Info: File `Confusion-Matrix-Binary.out' has not changed
 Here is how much of TeX's memory you used:
  11586 strings out of 480539
  170554 string characters out of 5901304
- 493246 words of memory out of 5000000
+ 493215 words of memory out of 5000000
  28989 multiletter control sequences out of 15000+600000
  436831 words of font info for 62 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -915,7 +915,7 @@ Here is how much of TeX's memory you used:
 fb><c:/Users/Sam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12
 .pfb><c:/Users/Sam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
 17.pfb>
-Output written on Confusion-Matrix-Binary.pdf (6 pages, 90827 bytes).
+Output written on Confusion-Matrix-Binary.pdf (6 pages, 90886 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  43 compressed objects within 1 object stream
