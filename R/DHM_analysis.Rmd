@@ -85,22 +85,22 @@ CCore_BRS07_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS07_CCI_with_mmm
 CCore_DARL_CCI <- read_csv(here::here("data_raw", "CCore_SST_DARL_CCI_with_mmm.csv")) %>% 
   mutate(Date = round_date(Date, unit = "month")) %>% 
   mutate(yearmonth = yearmonth(Date))
-CCore_Wallabi_Island_CCI <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_CCI_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
+#CCore_Wallabi_Island_CCI <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_CCI_with_mmm.csv")) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(yearmonth = yearmonth(Date))
 
 #CCI Data - read TNT data for importing MMM_from_SST column to 13TNT and 08TNT
-CCore_TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_CCI_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_13TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_CCI.csv")) %>% 
-  rename(Date = date) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
-CCore_08TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_CCI.csv")) %>% 
-  rename(Date = date) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
+#CCore_TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_CCI_with_mmm.csv")) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(yearmonth = yearmonth(Date))
+#CCore_13TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_CCI.csv")) %>% 
+#  rename(Date = date) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
+#CCore_08TNT_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_CCI.csv")) %>% 
+#  rename(Date = date) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "27.92379", yearmonth = yearmonth(Date))
 
 #NOAA Data
 CCore_BRS05_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS05_NOAA_with_mmm.csv")) %>%
@@ -112,22 +112,22 @@ CCore_BRS07_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS07_NOAA_with_m
 CCore_DARL_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DARL_NOAA_with_mmm.csv")) %>% 
   mutate(Date = round_date(Date, unit = "month")) %>% 
   mutate(yearmonth = yearmonth(Date))
-CCore_Wallabi_Island_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_NOAA_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
+#CCore_Wallabi_Island_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Wallabi_Island_NOAA_with_mmm.csv")) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(yearmonth = yearmonth(Date))
 
 #NOAA Data - read TNT data for importing MMM_from_SST column to 13TNT and 08TNT
-CCore_TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_NOAA_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_13TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_NOAA.csv")) %>%
-  rename(Date = date) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
-CCore_08TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_NOAA.csv")) %>%
-  rename(Date = date) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
+#CCore_TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_TNT_NOAA_with_mmm.csv")) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(yearmonth = yearmonth(Date))
+#CCore_13TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_NOAA.csv")) %>%
+#  rename(Date = date) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
+#CCore_08TNT_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_NOAA.csv")) %>%
+#  rename(Date = date) %>% 
+#  mutate(Date = round_date(Date, unit = "month")) %>% 
+#  mutate(Latitude = "-21.91", Longitude = "113.97", mmm_from_sst = "28.43935", yearmonth = yearmonth(Date))
 
 ```
 
@@ -161,46 +161,46 @@ Date_DARL_NOAA <- CCore_DARL_NOAA %>%
   select(Site, start_date, end_date) %>% 
   distinct()
 
-Date_TNT_CCI <- CCore_TNT_CCI %>% 
-  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
-  select(Site, start_date, end_date) %>% 
-  distinct()
-Date_TNT_NOAA <- CCore_TNT_NOAA %>% 
-  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
-  select(Site, start_date, end_date) %>% 
-  distinct()
+#Date_TNT_CCI <- CCore_TNT_CCI %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
+#Date_TNT_NOAA <- CCore_TNT_NOAA %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
 
-Date_13TNT_CCI <- CCore_13TNT_CCI %>% 
-  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "13TNT") %>% 
-  select(Site, start_date, end_date,) %>% 
-  distinct()
-Date_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
-  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "13TNT") %>% 
-  select(Site, start_date, end_date) %>% 
-  distinct()
+#Date_13TNT_CCI <- CCore_13TNT_CCI %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "13TNT") %>% 
+#  select(Site, start_date, end_date,) %>% 
+#  distinct()
+#Date_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "13TNT") %>% 
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
 
-Date_08TNT_CCI <- CCore_08TNT_CCI %>% 
-  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "08TNT") %>% 
-  select(Site, start_date, end_date) %>% 
-  distinct()
-Date_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
-  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "08TNT") %>% 
-  select(Site, start_date, end_date) %>% 
-  distinct()
+#Date_08TNT_CCI <- CCore_08TNT_CCI %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "08TNT") %>% 
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
+#Date_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(max(Date)), Site = "08TNT") %>% 
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
 
-Date_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
-  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
-  select(Site, start_date, end_date) %>% 
-  distinct()
-Date_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
-  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
-  select(Site, start_date, end_date) %>% 
-  distinct()
+#Date_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
+#Date_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
+#  mutate(start_date = year(min(Date)), end_date = year(end_date)) %>%
+#  select(Site, start_date, end_date) %>% 
+#  distinct()
 
-Date_Coral_Core <- rbind(Date_BRS05_CCI, Date_BRS05_NOAA, Date_BRS07_CCI, Date_BRS07_NOAA, Date_DARL_CCI, Date_DARL_NOAA, Date_TNT_CCI, Date_TNT_NOAA, Date_13TNT_CCI, Date_13TNT_NOAA, Date_08TNT_CCI, Date_08TNT_NOAA, Date_Wallabi_Island_CCI, Date_Wallabi_Island_NOAA)
+Date_Coral_Core <- rbind(Date_BRS05_CCI, Date_BRS05_NOAA, Date_BRS07_CCI, Date_BRS07_NOAA, Date_DARL_CCI, Date_DARL_NOAA)
 
 kbl(Date_Coral_Core, col.names = c("Site", "Start Year", "End Year")) %>% 
-  kable_styling(position = "center")
+  kable_styling(position = "center") 
   
 
 ```
@@ -223,29 +223,29 @@ scan_gaps(ts_BRS07_CCI_Core) #47 gaps
 ts_DARL_CCI_Core <- as_tsibble(CCore_DARL_CCI, index = yearmonth)
 scan_gaps(ts_DARL_CCI_Core) #41 gaps
 
-ts_TNT_CCI_Core <- as_tsibble(CCore_TNT_CCI, index = yearmonth)
-scan_gaps(ts_TNT_CCI_Core) #15 gaps
+#ts_TNT_CCI_Core <- as_tsibble(CCore_TNT_CCI, index = yearmonth)
+#scan_gaps(ts_TNT_CCI_Core) #15 gaps
 
-ts_13TNT_CCI_Core <- CCore_13TNT_CCI %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  as_tsibble(., index = yearmonth)
-scan_gaps(ts_13TNT_CCI_Core)  #23 gaps
+#ts_13TNT_CCI_Core <- CCore_13TNT_CCI %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>% 
+#  distinct() %>% 
+#  as_tsibble(., index = yearmonth)
+#scan_gaps(ts_13TNT_CCI_Core)  #23 gaps
 
-ts_08TNT_CCI_Core <- CCore_08TNT_CCI %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  as_tsibble(., index = yearmonth)
-scan_gaps(ts_08TNT_CCI_Core) #24 gaps
+#ts_08TNT_CCI_Core <- CCore_08TNT_CCI %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>% 
+#  distinct() %>% 
+#  as_tsibble(., index = yearmonth)
+#scan_gaps(ts_08TNT_CCI_Core) #24 gaps
 
-ts_Wallabi_Island_CCI_Core <- as_tsibble(CCore_Wallabi_Island_CCI, index = yearmonth)
-scan_gaps(ts_Wallabi_Island_CCI_Core) #15 gaps
+#ts_Wallabi_Island_CCI_Core <- as_tsibble(CCore_Wallabi_Island_CCI, index = yearmonth)
+#scan_gaps(ts_Wallabi_Island_CCI_Core) #15 gaps
 
 #read Coral Core calibrated by NOAA  as tsibbles and scan gaps in Coral Cores
 
@@ -258,29 +258,29 @@ scan_gaps(ts_BRS07_NOAA_Core) #47 gaps
 ts_DARL_NOAA_Core <- as_tsibble(CCore_DARL_NOAA, index = yearmonth)
 scan_gaps(ts_DARL_NOAA_Core) #41 gaps
 
-ts_TNT_NOAA_Core <- as_tsibble(CCore_TNT_NOAA, index = yearmonth)
-scan_gaps(ts_TNT_NOAA_Core) #15 gaps
+#ts_TNT_NOAA_Core <- as_tsibble(CCore_TNT_NOAA, index = yearmonth)
+#scan_gaps(ts_TNT_NOAA_Core) #15 gaps
 
-ts_13TNT_NOAA_Core <- CCore_13TNT_NOAA %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>% 
-  distinct() %>% 
-  as_tsibble(., index = yearmonth)
-scan_gaps(ts_13TNT_NOAA_Core) #23 gaps
+#ts_13TNT_NOAA_Core <- CCore_13TNT_NOAA %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>% 
+#  distinct() %>% 
+#  as_tsibble(., index = yearmonth)
+#scan_gaps(ts_13TNT_NOAA_Core) #23 gaps
 
-ts_08TNT_NOAA_Core <- CCore_08TNT_NOAA %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup %>%
-  distinct() %>% 
-  as_tsibble(., index = yearmonth)
-scan_gaps(ts_08TNT_NOAA_Core) #24 gaps
+#ts_08TNT_NOAA_Core <- CCore_08TNT_NOAA %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup %>%
+#  distinct() %>% 
+#  as_tsibble(., index = yearmonth)
+#scan_gaps(ts_08TNT_NOAA_Core) #24 gaps
 
-ts_Wallabi_Island_NOAA_Core <- as_tsibble(CCore_Wallabi_Island_NOAA, index = yearmonth)
-scan_gaps(ts_Wallabi_Island_NOAA_Core) #15 gaps
+#ts_Wallabi_Island_NOAA_Core <- as_tsibble(CCore_Wallabi_Island_NOAA, index = yearmonth)
+#scan_gaps(ts_Wallabi_Island_NOAA_Core) #15 gaps
 
 ```
 
@@ -833,29 +833,29 @@ NOAA_Tantabiddi_13TNT <- NOAA_Tantabiddi %>%
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
 
-CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>%  
-  select(-sst) %>%
-  distinct() %>% 
-  rename(date = yearmonth) %>% 
-  mutate(Reef_Site = "13TNT", Data_Type = "Coral Core (CCI)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>%  
+#  select(-sst) %>%
+#  distinct() %>% 
+#  rename(date = yearmonth) %>% 
+#  mutate(Reef_Site = "13TNT", Data_Type = "Coral Core (CCI)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>%  
-  select(-sst) %>%
-  distinct() %>% 
-  rename(date = yearmonth) %>% 
-  mutate(Reef_Site = "13TNT", Data_Type = "Coral Core (NOAA)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>%  
+#  select(-sst) %>%
+#  distinct() %>% 
+#  rename(date = yearmonth) %>% 
+#  mutate(Reef_Site = "13TNT", Data_Type = "Coral Core (NOAA)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
+Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT)
 
 ggplot(Tantabiddi_13TNT_Combined)+
   geom_line(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.3, size = 2) +
@@ -888,29 +888,29 @@ NOAA_Tantabiddi_08TNT <- NOAA_Tantabiddi %>%
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
 
-CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>% 
-  select(-sst) %>% 
-  distinct() %>%  
-  rename(date = yearmonth) %>% 
-  mutate(Reef_Site = "08TNT", Data_Type = "Coral Core (CCI)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>% 
+#  select(-sst) %>% 
+#  distinct() %>%  
+#  rename(date = yearmonth) %>% 
+#  mutate(Reef_Site = "08TNT", Data_Type = "Coral Core (CCI)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
-  select(-Date) %>% 
-  group_by(yearmonth) %>% 
-  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
-  ungroup() %>%  
-  select(-sst) %>%
-  distinct() %>% 
-  rename(date = yearmonth) %>% 
-  mutate(Reef_Site = "08TNT", Data_Type = "Coral Core (NOAA)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
+#  select(-Date) %>% 
+#  group_by(yearmonth) %>% 
+#  mutate(sst_monthly = mean(sst), SrCa = mean(SrCa)) %>% 
+#  ungroup() %>%  
+#  select(-sst) %>%
+#  distinct() %>% 
+#  rename(date = yearmonth) %>% 
+#  mutate(Reef_Site = "08TNT", Data_Type = "Coral Core (NOAA)", anomaly = ( as.numeric(sst_monthly) - as.numeric(mmm_from_sst)), monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
+Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT)
 
 ggplot(Tantabiddi_08TNT_Combined)+
   geom_line(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.3, size = 2) +
@@ -943,17 +943,17 @@ NOAA_TNT <- NOAA_TNT %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-CCore_TNT_CCI <- CCore_TNT_CCI %>% 
-  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_TNT_CCI <- CCore_TNT_CCI %>% 
+#  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
+#  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
-  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
+#  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
+#  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-TNT_Combined <- rbind(CCI_TNT, NOAA_TNT, CCore_TNT_CCI, CCore_TNT_NOAA)
+TNT_Combined <- rbind(CCI_TNT, NOAA_TNT)
 
 ggplot(TNT_Combined)+
   geom_line(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.3, size = 2) +
@@ -1017,17 +1017,17 @@ NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
-  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
+#  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
+#  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
-  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
-  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
+#CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
+#  rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
+#  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+#  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island, CCore_Wallabi_Island_CCI, CCore_Wallabi_Island_NOAA)
+Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
 
 ggplot(Wallabi_Island_Combined)+
   geom_line(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.3, size = 2) +
@@ -1127,28 +1127,28 @@ CCore_DARL_CCI <- CCore_DARL_CCI %>%
   as_tibble() %>% 
   mutate(monthly_date = as.Date(date))
 
-CCore_TNT_CCI <- CCore_TNT_CCI %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (CCI)") %>% 
-  as_tibble() 
+#CCore_TNT_CCI <- CCore_TNT_CCI %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (CCI)") %>% 
+#  as_tibble() 
 
-CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (CCI)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (CCI)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
-CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (CCI)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (CCI)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
-CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (CCI)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (CCI)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
 CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>% 
   as_tsibble(index = date) %>%  
@@ -1168,29 +1168,29 @@ CCore_DARL_NOAA <- CCore_DARL_NOAA %>%
   as_tibble() %>% 
   mutate(monthly_date = as.Date(date))
 
-CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
-  as_tsibble(index = date) %>%   
-  fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (NOAA)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
+#  as_tsibble(index = date) %>%   
+#  fill_gaps(anomaly = 0, Reef_Site = "TNT", Data_Type = "Coral Core (NOAA)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
-CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
-  as_tsibble(index = date) %>%   
-  fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (NOAA)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
+#  as_tsibble(index = date) %>%   
+#  fill_gaps(anomaly = 0, Reef_Site = "13TNT", Data_Type = "Coral Core (NOAA)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
-CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (NOAA)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date)) 
+#CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "08TNT", Data_Type = "Coral Core (NOAA)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date)) 
 
-CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
-  as_tsibble(index = date) %>%  
-  fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (NOAA)") %>% 
-  as_tibble() %>% 
-  mutate(monthly_date = as.Date(date))
+#CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
+#  as_tsibble(index = date) %>%  
+#  fill_gaps(anomaly = 0, Reef_Site = "Wallabi Island", Data_Type = "Coral Core (NOAA)") %>% 
+#  as_tibble() %>% 
+#  mutate(monthly_date = as.Date(date))
 
 
 ```
@@ -1695,7 +1695,7 @@ Max_DHM_NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>%
   select(date, SCOTT_RPO_1_DHM)
 
 
-knitr::kable(list(Max_DHM_CCI_SCOTT_RPO_1, Max_DHM_NOAA_SCOTT_RPO_1), caption = "Degree Heating Month values in SCOTT_RPO_1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
+knitr::kable(list(Max_DHM_CCI_SCOTT_RPO_1, Max_DHM_NOAA_SCOTT_RPO_1), caption = "Degree Heating Month values in SCOTT\\_RPO\\_1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_RPO_1_Combined %>% 
@@ -1778,7 +1778,7 @@ Max_DHM_NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>%
   select(date, SCOTT_SL4_DHM)
 
 
-knitr::kable(list(Max_DHM_CCI_SCOTT_SL4, Max_DHM_NOAA_SCOTT_SL4), caption = "Degree Heating Month values in SCOTT_SL4 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
+knitr::kable(list(Max_DHM_CCI_SCOTT_SL4, Max_DHM_NOAA_SCOTT_SL4), caption = "Degree Heating Month values in SCOTT\\_SL4 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_SL4_Combined %>% 
@@ -1861,7 +1861,7 @@ Max_DHM_NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>%
   select(date, SCOTT_SS3_DHM)
 
 
-knitr::kable(list(Max_DHM_CCI_SCOTT_SS3, Max_DHM_NOAA_SCOTT_SS3), caption = "Degree Heating Month values in SCOTT_SS3 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
+knitr::kable(list(Max_DHM_CCI_SCOTT_SS3, Max_DHM_NOAA_SCOTT_SS3), caption = "Degree Heating Month values in SCOTT\\_SS3 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
 #Visualising DHM values in CCI, NOAA and CCore 
 SCOTT_SS3_Combined %>% 
@@ -2585,45 +2585,45 @@ NOAA_Tantabiddi_08TNT <- NOAA_Tantabiddi_08TNT %>%
 write_csv(NOAA_Tantabiddi_08TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_08TNT_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
-`08TNT_DHM` <- rep(0,nrow(CCore_08TNT_CCI))
-`08TNT_negative_anomaly` <- 0
-for (i in 1:nrow(CCore_08TNT_CCI)){
-  if(CCore_08TNT_CCI$anomaly[i] > 0) {
-    `08TNT_negative_anomaly` <- 
-      `08TNT_negative_anomaly` + CCore_08TNT_CCI$anomaly[i]
-  } else {
-    `08TNT_negative_anomaly` <- 0
-  }
-  `08TNT_DHM`[i] <- `08TNT_negative_anomaly`
-}
+#`08TNT_DHM` <- rep(0,nrow(CCore_08TNT_CCI))
+#`08TNT_negative_anomaly` <- 0
+#for (i in 1:nrow(CCore_08TNT_CCI)){
+#  if(CCore_08TNT_CCI$anomaly[i] > 0) {
+#    `08TNT_negative_anomaly` <- 
+#      `08TNT_negative_anomaly` + CCore_08TNT_CCI$anomaly[i]
+#  } else {
+#    `08TNT_negative_anomaly` <- 0
+#  }
+#  `08TNT_DHM`[i] <- `08TNT_negative_anomaly`
+#}
 
-CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
-  add_column(`08TNT_DHM`) %>% 
-  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
+#CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
+#  add_column(`08TNT_DHM`) %>% 
+#  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
 
-write_csv(CCore_08TNT_CCI, here::here("data_raw/DHM/CCore_08TNT_CCI_DHM.csv"))
+#write_csv(CCore_08TNT_CCI, here::here("data_raw/DHM/CCore_08TNT_CCI_DHM.csv"))
 
 #DHM calculations for Coral Core (NOAA) dataset
-`08TNT_DHM` <- rep(0,nrow(CCore_08TNT_NOAA))
-`08TNT_negative_anomaly` <- 0
-for (i in 1:nrow(CCore_08TNT_NOAA)){
-  if(CCore_08TNT_NOAA$anomaly[i] > 0) {
-   ` 08TNT_negative_anomaly` <- 
-      `08TNT_negative_anomaly` + CCore_08TNT_NOAA$anomaly[i]
-  } else {
-    `08TNT_negative_anomaly` <- 0
-  }
- `08TNT_DHM`[i] <- `08TNT_negative_anomaly`
-}
+#`08TNT_DHM` <- rep(0,nrow(CCore_08TNT_NOAA))
+#`08TNT_negative_anomaly` <- 0
+#for (i in 1:nrow(CCore_08TNT_NOAA)){
+#  if(CCore_08TNT_NOAA$anomaly[i] > 0) {
+#   ` 08TNT_negative_anomaly` <- 
+#      `08TNT_negative_anomaly` + CCore_08TNT_NOAA$anomaly[i]
+#  } else {
+#    `08TNT_negative_anomaly` <- 0
+#  }
+# `08TNT_DHM`[i] <- `08TNT_negative_anomaly`
+#}
 
-CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
-  add_column(`08TNT_DHM`) %>% 
-  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
+#CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
+#  add_column(`08TNT_DHM`) %>% 
+#  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
 
-write_csv(CCore_08TNT_NOAA, here::here("data_raw/DHM/CCore_08TNT_NOAA_DHM.csv"))
+#write_csv(CCore_08TNT_NOAA, here::here("data_raw/DHM/CCore_08TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
+Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT)
 
 #DHM >= 1
 High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>% 
@@ -2634,12 +2634,12 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
-color.me <- which(High_08TNT_DHM$`Coral Core (CCI)`> 0 | High_08TNT_DHM$`Coral Core (NOAA)` >0)
+#color.me <- which(High_08TNT_DHM$`Coral Core (CCI)`> 0 | High_08TNT_DHM$`Coral Core (NOAA)` >0)
 
 kbl(High_08TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 1996 to 2008") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in 08TNT" = 2), bold = TRUE) %>% 
-  row_spec(color.me, color = "red")
+  add_header_above(c(" " = 2, "Degree Heating Month Values in 08TNT" = 2), bold = TRUE) #%>% 
+#  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_08TNT_Combined %>% 
@@ -2704,45 +2704,45 @@ NOAA_Tantabiddi_13TNT <- NOAA_Tantabiddi_13TNT %>%
 write_csv(NOAA_Tantabiddi_13TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_13TNT_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
-`13TNT_DHM` <- rep(0,nrow(CCore_13TNT_CCI))
-`13TNT_negative_anomaly` <- 0
-for (i in 1:nrow(CCore_13TNT_CCI)){
-  if(CCore_13TNT_CCI$anomaly[i] > 0) {
-    `13TNT_negative_anomaly` <- 
-      `13TNT_negative_anomaly` + CCore_13TNT_CCI$anomaly[i]
-  } else {
-    `13TNT_negative_anomaly` <- 0
-  }
-  `13TNT_DHM`[i] <- `13TNT_negative_anomaly`
-}
+#`13TNT_DHM` <- rep(0,nrow(CCore_13TNT_CCI))
+#`13TNT_negative_anomaly` <- 0
+#for (i in 1:nrow(CCore_13TNT_CCI)){
+#  if(CCore_13TNT_CCI$anomaly[i] > 0) {
+#    `13TNT_negative_anomaly` <- 
+#      `13TNT_negative_anomaly` + CCore_13TNT_CCI$anomaly[i]
+#  } else {
+#    `13TNT_negative_anomaly` <- 0
+#  }
+#  `13TNT_DHM`[i] <- `13TNT_negative_anomaly`
+#}
 
-CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
-  add_column(`13TNT_DHM`) %>% 
-  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
+#CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
+#  add_column(`13TNT_DHM`) %>% 
+#  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
 
-write_csv(CCore_13TNT_CCI, here::here("data_raw/DHM/CCore_13TNT_CCI_DHM.csv"))
+#write_csv(CCore_13TNT_CCI, here::here("data_raw/DHM/CCore_13TNT_CCI_DHM.csv"))
 
 #DHM calculations for Coral Core (NOAA) dataset
-`13TNT_DHM` <- rep(0,nrow(CCore_13TNT_NOAA))
-`13TNT_negative_anomaly` <- 0
-for (i in 1:nrow(CCore_13TNT_NOAA)){
-  if(CCore_13TNT_NOAA$anomaly[i] > 0) {
-   ` 13TNT_negative_anomaly` <- 
-      `13TNT_negative_anomaly` + CCore_13TNT_NOAA$anomaly[i]
-  } else {
-    `13TNT_negative_anomaly` <- 0
-  }
- `13TNT_DHM`[i] <- `13TNT_negative_anomaly`
-}
+#`13TNT_DHM` <- rep(0,nrow(CCore_13TNT_NOAA))
+#`13TNT_negative_anomaly` <- 0
+#for (i in 1:nrow(CCore_13TNT_NOAA)){
+#  if(CCore_13TNT_NOAA$anomaly[i] > 0) {
+#   ` 13TNT_negative_anomaly` <- 
+#      `13TNT_negative_anomaly` + CCore_13TNT_NOAA$anomaly[i]
+#  } else {
+#    `13TNT_negative_anomaly` <- 0
+#  }
+# `13TNT_DHM`[i] <- `13TNT_negative_anomaly`
+#}
 
-CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
-  add_column(`13TNT_DHM`) %>% 
-  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
+#CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
+#  add_column(`13TNT_DHM`) %>% 
+#  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
 
-write_csv(CCore_13TNT_NOAA, here::here("data_raw/DHM/CCore_13TNT_NOAA_DHM.csv"))
+#write_csv(CCore_13TNT_NOAA, here::here("data_raw/DHM/CCore_13TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
+Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT)
 
 #DHM >= 1
 High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>% 
@@ -2753,12 +2753,12 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
-color.me <- which(High_13TNT_DHM$`Coral Core (CCI)`> 0 | High_13TNT_DHM$`Coral Core (NOAA)` >0)
+#color.me <- which(High_13TNT_DHM$`Coral Core (CCI)`> 0 | High_13TNT_DHM$`Coral Core (NOAA)` >0)
 
 kbl(High_13TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 2004 to 2013") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in 13TNT" = 3), bold = TRUE) %>% 
-  row_spec(color.me, color = "red")
+  add_header_above(c(" " = 2, "Degree Heating Month Values in 13TNT" = 2), bold = TRUE) #%>% 
+#  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Tantabiddi_13TNT_Combined %>% 
@@ -2782,7 +2782,7 @@ Tantabiddi_13TNT_Combined %>%
 \newpage
 # **TNT** Degree Heating Months Time Series
 
-```{r DHM_TNT, echo = FALSE, message = FALSE}
+```{r DHM_TNT, echo = FALSE, message = FALSE, include = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2822,45 +2822,45 @@ NOAA_TNT <- NOAA_TNT %>%
 write_csv(NOAA_TNT, here::here("data_raw/DHM/NOAA_TNT_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
-TNT_DHM <- rep(0,nrow(CCore_TNT_CCI))
-TNT_negative_anomaly <- 0
-for (i in 1:nrow(CCore_TNT_CCI)){
-  if(CCore_TNT_CCI$anomaly[i] > 0) {
-    TNT_negative_anomaly <- 
-      TNT_negative_anomaly + CCore_TNT_CCI$anomaly[i]
-  } else {
-    TNT_negative_anomaly <- 0
-  }
-  TNT_DHM[i] <- TNT_negative_anomaly
-}
+#TNT_DHM <- rep(0,nrow(CCore_TNT_CCI))
+#TNT_negative_anomaly <- 0
+#for (i in 1:nrow(CCore_TNT_CCI)){
+#  if(CCore_TNT_CCI$anomaly[i] > 0) {
+#    TNT_negative_anomaly <- 
+#      TNT_negative_anomaly + CCore_TNT_CCI$anomaly[i]
+#  } else {
+#    TNT_negative_anomaly <- 0
+#  }
+#  TNT_DHM[i] <- TNT_negative_anomaly
+#}
 
-CCore_TNT_CCI <- CCore_TNT_CCI %>% 
-  add_column(TNT_DHM) %>% 
-  mutate(TNT_DHM = if_else(is.na(sst_monthly), NA_real_ , TNT_DHM))
+#CCore_TNT_CCI <- CCore_TNT_CCI %>% 
+#  add_column(TNT_DHM) %>% 
+#  mutate(TNT_DHM = if_else(is.na(sst_monthly), NA_real_ , TNT_DHM))
 
-write_csv(CCore_TNT_CCI, here::here("data_raw/DHM/CCore_TNT_CCI_DHM.csv"))
+#write_csv(CCore_TNT_CCI, here::here("data_raw/DHM/CCore_TNT_CCI_DHM.csv"))
 
 #DHM calculations for Coral Core (NOAA) dataset
-TNT_DHM <- rep(0,nrow(CCore_TNT_NOAA))
-TNT_negative_anomaly <- 0
-for (i in 1:nrow(CCore_TNT_NOAA)){
-  if(CCore_TNT_NOAA$anomaly[i] > 0) {
-    TNT_negative_anomaly <- 
-      TNT_negative_anomaly + CCore_TNT_NOAA$anomaly[i]
-  } else {
-    TNT_negative_anomaly <- 0
-  }
-  TNT_DHM[i] <- TNT_negative_anomaly
-}
+#TNT_DHM <- rep(0,nrow(CCore_TNT_NOAA))
+#TNT_negative_anomaly <- 0
+#for (i in 1:nrow(CCore_TNT_NOAA)){
+#  if(CCore_TNT_NOAA$anomaly[i] > 0) {
+#    TNT_negative_anomaly <- 
+#      TNT_negative_anomaly + CCore_TNT_NOAA$anomaly[i]
+#  } else {
+#    TNT_negative_anomaly <- 0
+#  }
+#  TNT_DHM[i] <- TNT_negative_anomaly
+#}
 
-CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
-  add_column(TNT_DHM) %>% 
-  mutate(TNT_DHM = if_else(is.na(sst_monthly), NA_real_ , TNT_DHM))
+#CCore_TNT_NOAA <- CCore_TNT_NOAA %>% 
+#  add_column(TNT_DHM) %>% 
+#  mutate(TNT_DHM = if_else(is.na(sst_monthly), NA_real_ , TNT_DHM))
 
-write_csv(CCore_TNT_NOAA, here::here("data_raw/DHM/CCore_TNT_NOAA_DHM.csv"))
+#write_csv(CCore_TNT_NOAA, here::here("data_raw/DHM/CCore_TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-TNT_Combined <- rbind(CCI_TNT, NOAA_TNT, CCore_TNT_CCI, CCore_TNT_NOAA)
+TNT_Combined <- rbind(CCI_TNT, NOAA_TNT)
 
 #DHM >= 1
 High_TNT_DHM <- TNT_Combined %>% 
@@ -2871,12 +2871,12 @@ High_TNT_DHM <- TNT_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
-color.me <- which(High_TNT_DHM$`Coral Core (CCI)`> 0 | High_TNT_DHM$`Coral Core (NOAA)` >0)
+#color.me <- which(High_TNT_DHM$`Coral Core (CCI)`> 0 | High_TNT_DHM$`Coral Core (NOAA)` >0)
 
 kbl(High_TNT_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 1994") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in TNT" = 4), bold = TRUE) %>% 
-  row_spec(color.me, color= "red")
+  add_header_above(c(" " = 2, "Degree Heating Month Values in TNT" = 2), bold = TRUE) #%>% 
+#  row_spec(color.me, color= "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 TNT_Combined %>% 
@@ -2901,7 +2901,7 @@ TNT_Combined %>%
 \newpage
 # **TNT07C** Degree Heating Months Time Series
 
-```{r DHM_TNT07C, echo = FALSE, message = FALSE}
+```{r DHM_TNT07C, echo = FALSE, message = FALSE, include = FALSE}
 
 
 
@@ -2982,7 +2982,7 @@ TNT07C_Combined %>%
 \newpage
 # **Wallabi Island** Degree Heating Months Time Series
 
-```{r DHM_Wallabi_Island, echo = FALSE, message = FALSE}
+```{r DHM_Wallabi_Island, echo = FALSE, message = FALSE, include = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3022,45 +3022,45 @@ NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>%
 write_csv(NOAA_Wallabi_Island, here::here("data_raw/DHM/NOAA_Wallabi_Island_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
-Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_CCI))
-Wallabi_Island_negative_anomaly <- 0
-for (i in 1:nrow(CCore_Wallabi_Island_CCI)){
-  if(CCore_Wallabi_Island_CCI$anomaly[i] > 0) {
-    Wallabi_Island_negative_anomaly <- 
-      Wallabi_Island_negative_anomaly + CCore_Wallabi_Island_CCI$anomaly[i]
-  } else {
-    Wallabi_Island_negative_anomaly <- 0
-  }
-  Wallabi_Island_DHM[i] <- Wallabi_Island_negative_anomaly
-}
+#Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_CCI))
+#Wallabi_Island_negative_anomaly <- 0
+#for (i in 1:nrow(CCore_Wallabi_Island_CCI)){
+#  if(CCore_Wallabi_Island_CCI$anomaly[i] > 0) {
+#    Wallabi_Island_negative_anomaly <- 
+#      Wallabi_Island_negative_anomaly + CCore_Wallabi_Island_CCI$anomaly[i]
+#  } else {
+#    Wallabi_Island_negative_anomaly <- 0
+#  }
+#  Wallabi_Island_DHM[i] <- Wallabi_Island_negative_anomaly
+#}
 
-CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
-  add_column(Wallabi_Island_DHM) %>% 
-  mutate(Wallabi_Island_DHM = if_else(is.na(sst_monthly), NA_real_ , Wallabi_Island_DHM))
+#CCore_Wallabi_Island_CCI <- CCore_Wallabi_Island_CCI %>% 
+#  add_column(Wallabi_Island_DHM) %>% 
+#  mutate(Wallabi_Island_DHM = if_else(is.na(sst_monthly), NA_real_ , Wallabi_Island_DHM))
 
-write_csv(CCore_Wallabi_Island_CCI, here::here("data_raw/DHM/CCore_Wallabi_Island_CCI_DHM.csv"))
+#write_csv(CCore_Wallabi_Island_CCI, here::here("data_raw/DHM/CCore_Wallabi_Island_CCI_DHM.csv"))
 
 #DHM calculations for Coral Core (NOAA) dataset
-Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_NOAA))
-Wallabi_Island_negative_anomaly <- 0
-for (i in 1:nrow(CCore_Wallabi_Island_NOAA)){
-  if(CCore_Wallabi_Island_NOAA$anomaly[i] > 0) {
-    Wallabi_Island_negative_anomaly <- 
-      Wallabi_Island_negative_anomaly + CCore_Wallabi_Island_NOAA$anomaly[i]
-  } else {
-    Wallabi_Island_negative_anomaly <- 0
-  }
-  Wallabi_Island_DHM[i] <- Wallabi_Island_negative_anomaly
-}
+#Wallabi_Island_DHM <- rep(0,nrow(CCore_Wallabi_Island_NOAA))
+#Wallabi_Island_negative_anomaly <- 0
+#for (i in 1:nrow(CCore_Wallabi_Island_NOAA)){
+#  if(CCore_Wallabi_Island_NOAA$anomaly[i] > 0) {
+#    Wallabi_Island_negative_anomaly <- 
+#      Wallabi_Island_negative_anomaly + CCore_Wallabi_Island_NOAA$anomaly[i]
+#  } else {
+#    Wallabi_Island_negative_anomaly <- 0
+#  }
+#  Wallabi_Island_DHM[i] <- Wallabi_Island_negative_anomaly
+#}
 
-CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
-  add_column(Wallabi_Island_DHM) %>% 
-  mutate(Wallabi_Island_DHM = if_else(is.na(sst_monthly), NA_real_ , Wallabi_Island_DHM))
+#CCore_Wallabi_Island_NOAA <- CCore_Wallabi_Island_NOAA %>% 
+#  add_column(Wallabi_Island_DHM) %>% 
+#  mutate(Wallabi_Island_DHM = if_else(is.na(sst_monthly), NA_real_ , Wallabi_Island_DHM))
 
-write_csv(CCore_Wallabi_Island_NOAA, here::here("data_raw/DHM/CCore_Wallabi_Island_NOAA_DHM.csv"))
+#write_csv(CCore_Wallabi_Island_NOAA, here::here("data_raw/DHM/CCore_Wallabi_Island_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island, CCore_Wallabi_Island_CCI, CCore_Wallabi_Island_NOAA)
+Wallabi_Island_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
 
 #DHM >= 1
 High_Wallabi_Island_DHM <- Wallabi_Island_Combined %>% 
@@ -3071,12 +3071,12 @@ High_Wallabi_Island_DHM <- Wallabi_Island_Combined %>%
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
-color.me <- which(High_Wallabi_Island_DHM$`Coral Core (CCI)`> 0 | High_Wallabi_Island_DHM$`Coral Core (NOAA)` >0)
+#color.me <- which(High_Wallabi_Island_DHM$`Coral Core (CCI)`> 0 | High_Wallabi_Island_DHM$`Coral Core (NOAA)` >0)
 
 kbl(High_Wallabi_Island_DHM, longtable = T, caption = "Coral Core Date Range is from 1985 to 1994") %>% 
   kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  add_header_above(c(" " = 2, "Degree Heating Month Values in Wallabi Island" = 4), bold = TRUE) %>% 
-  row_spec(color.me, color = "red")
+  add_header_above(c(" " = 2, "Degree Heating Month Values in Wallabi Island" = 2), bold = TRUE) #%>% 
+#  row_spec(color.me, color = "red")
 
 #Visualising DHM values in CCI, NOAA and CCore 
 Wallabi_Island_Combined %>% 
@@ -3102,7 +3102,7 @@ Wallabi_Island_Combined %>%
 \newpage
 # **HAB05B** Degree Heating Months Time Series
 
-```{r DHM_HAB05B, echo = FALSE, message = FALSE}
+```{r DHM_HAB05B, echo = FALSE, message = FALSE, include = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3182,7 +3182,7 @@ HAB05B_Combined %>%
 \newpage
 # **HAB10A** Degree Heating Months Time Series
 
-```{r DHM_HAB10A, echo = FALSE, message = FALSE}
+```{r DHM_HAB10A, echo = FALSE, message = FALSE, include = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3258,3 +3258,4 @@ HAB10A_Combined %>%
  
 ```
 
+\end
