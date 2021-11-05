@@ -1460,11 +1460,7 @@ modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 
 Browse <- rbind(BRS05_joint, BRS07_joint)
 Cocos_Keeling <- rbind(DARL_joint, DAR3_joint)
-Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT_joint, TNT07C_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
-Ningaloo_no_TNT <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT07C_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
-Ningaloo_B <- rbind(Bundegi_13BND_joint, Bundegi_08BND_joint, BUN05A_joint)
-Ningaloo_T1 <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, TNT07C_joint)
-Ningaloo_T2 <- TNT_joint
+Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, Bundegi_13BND_joint, Bundegi_08BND_joint)
 HAbrol <- rbind(Wallabi_Island_joint, HAB10A_d18O_joint, HAB05B_SrCa_joint)
 
 
@@ -1550,81 +1546,27 @@ Ningaloo_Plot_CCI <- Ningaloo %>%
   labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
   facet_wrap("Site")
 
-Ningaloo_Bundegi_Plot_NOAA <- Ningaloo_B %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef Bundegi and BUN05A NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
-  facet_wrap("Site")
-
-Ningaloo_Bundegi_Plot_CCI <- Ningaloo_B %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef Bundegi and BUN05A CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
-  facet_wrap("Site")
-
-Ningaloo_Tantabiddi_Plot_NOAA <- Ningaloo_T1 %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef Tantabiddi NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
-  facet_wrap("Site")
-
-Ningaloo_Tantabiddi_Plot_CCI <- Ningaloo_T1 %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef Tantabiddi CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
-  facet_wrap("Site")
-
-Ningaloo_TNT_Plot_NOAA <- Ningaloo_T2 %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef TNT NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
-  facet_wrap("Site")
-
-Ningaloo_TNT_Plot_CCI <- Ningaloo_T2 %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
-  geom_point() +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef TNT CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
-  facet_wrap("Site")
 
 Ningaloo_Plot_NOAA 
 Ningaloo_Plot_CCI
-Ningaloo_Bundegi_Plot_NOAA/Ningaloo_Bundegi_Plot_CCI
-Ningaloo_Tantabiddi_Plot_NOAA/Ningaloo_Tantabiddi_Plot_CCI
-Ningaloo_TNT_Plot_NOAA/Ningaloo_TNT_Plot_CCI
+
 
 C_Ningaloo_Plot_NOAA <- Ningaloo %>% 
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.195 to 0.839]")
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.631 to 0.839]")
 
 C_Ningaloo_Plot_CCI <- Ningaloo %>% 
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.301 to 0.758]")
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.320 to 0.668]")
 
 C_Ningaloo_Plot_NOAA / C_Ningaloo_Plot_CCI
 
-C_Ningaloo_no_TNT_Plot_NOAA <- Ningaloo_no_TNT %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA, color = Site)) +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.195 to 0.839]")
-
-C_Ningaloo_no_TNT_Plot_CCI <- Ningaloo_no_TNT %>% 
-  ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI, color = Site)) +
-  geom_smooth() +
-  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.301 to 0.758]")
-
-C_Ningaloo_no_TNT_Plot_NOAA / C_Ningaloo_no_TNT_Plot_CCI
 
 ```
 \newpage
-```{r Houtman_Abrolhos_Plots_Table}
+```{r Houtman_Abrolhos_Plots_Table, include = FALSE}
 HAbrol_Plot_NOAA <- HAbrol %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_point() +
@@ -1669,15 +1611,15 @@ Wallabi_Plot_NOAA / Wallabi_Plot_NOAA
 \begin{landscape}
 ```{r Tables}
 
-modelsummary::modelsummary(list("BRS05" = NOAA_BRS05, "BRS07" = NOAA_BRS07, "DARL" = NOAA_DARL, "DAR3" = NOAA_DAR3, "13TNT" = NOAA_Tantabiddi_13TNT, "08TNT" = NOAA_Tantabiddi_08TNT, "TNT" = NOAA_TNT, "TNT07C" = NOAA_TNT07C, "13BND" = NOAA_Bundegi_13BND, "08BND" = NOAA_Bundegi_08BND, "BUN05A" = NOAA_BUN05A, "Wallabi Island" = NOAA_Wallabi_Island, "HAB10A d18O" = NOAA_HAB10A_d18O), title = "NOAA", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo", "HAbrol_coral_core" = "L_HAbrol", "I(HAbrol_coral_core^2)" = "Q_HAbrol"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
+modelsummary::modelsummary(list("BRS05" = NOAA_BRS05, "BRS07" = NOAA_BRS07, "DARL" = NOAA_DARL, "DAR3" = NOAA_DAR3, "13TNT" = NOAA_Tantabiddi_13TNT, "08TNT" = NOAA_Tantabiddi_08TNT, "13BND" = NOAA_Bundegi_13BND, "08BND" = NOAA_Bundegi_08BND), title = "NOAA", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
   kable_styling(position = "center", full_width = T) %>% 
   column_spec(column = 1, color = "purple") %>% 
-  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 7, "Houtman Abrolhos" = 2))
+  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 4))
 
-modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL" = CCI_DARL, "DAR3" = CCI_DAR3, "13TNT" = CCI_Tantabiddi_13TNT, "08TNT" = CCI_Tantabiddi_08TNT, "TNT" = CCI_TNT, "TNT07C" = CCI_TNT07C, "13BND" = CCI_Bundegi_13BND, "08BND" = CCI_Bundegi_08BND, "BUN05A" = CCI_BUN05A, "Wallabi Island" = CCI_Wallabi_Island, "HAB10A d18O" = CCI_HAB10A_d18O, "HAB05B SrCa" = CCI_HAB05B_SrCa), title = "CCI", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "I(browse_coral_core^2)" = "Q_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo", "HAbrol_coral_core" = "L_HAbrol", "I(HAbrol_coral_core^2)" = "Q_HAbrol"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
+modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL" = CCI_DARL, "DAR3" = CCI_DAR3, "13TNT" = CCI_Tantabiddi_13TNT, "08TNT" = CCI_Tantabiddi_08TNT, "13BND" = CCI_Bundegi_13BND, "08BND" = CCI_Bundegi_08BND), title = "CCI", coef_omit = "(Intercept)", coef_rename = c("browse_coral_core" = "L_Browse", "I(browse_coral_core^2)" = "Q_Browse", "Cocos_coral_core" = "L_Cocos", "ningaloo_coral_core" = "L_Ningaloo", "I(ningaloo_coral_core^2)" = "Q_Ningaloo"), gof_omit = "BIC|Log.Lik.|F", output = 'kableExtra') %>% 
   kable_styling(position = "center", full_width = T) %>% 
   column_spec(column = 1, color = "purple") %>% 
-  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 7, "Houtman Abrolhos" = 3))
+  add_header_above(c(" " = 1, "Browse" = 2, "Cocos Keeling" = 2, "Ningaloo" = 4))
 
 ```
 \end{landscape}
