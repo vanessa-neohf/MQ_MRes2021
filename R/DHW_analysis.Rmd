@@ -457,29 +457,29 @@ ggplot(SCOTTSS2_Sat_Combined)+
 
 
 #Ningaloo BUN05A
-CCI_BUN05A <- CCI_BUN05A %>% 
-  mutate(Reef_Site = "BUN05A", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_BUN05A <- CCI_BUN05A %>% 
+#  mutate(Reef_Site = "BUN05A", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_BUN05A <- NOAA_BUN05A %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_BUN05A <- NOAA_BUN05A %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
+#BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A)
 
-ggplot(BUN05A_Sat_Combined)+
-   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of BUN05A (-21.84, 114.18) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(BUN05A_Sat_Combined)+
+#   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of BUN05A (-21.84, 114.18) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 #Ningaloo Bundegi
@@ -535,127 +535,127 @@ ggplot(Tantabiddi_Sat_Combined)+
 
 
 #Ningaloo TNT
-CCI_TNT <- CCI_TNT %>% 
-  mutate(Reef_Site = "TNT", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_TNT <- CCI_TNT %>% 
+#  mutate(Reef_Site = "TNT", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_TNT <- NOAA_TNT %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_TNT <- NOAA_TNT %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-TNT_Sat_Combined <- rbind(CCI_TNT, NOAA_TNT)
+#TNT_Sat_Combined <- rbind(CCI_TNT, NOAA_TNT)
 
-ggplot(TNT_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of TNT (-21.9, 113.97) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(TNT_Sat_Combined)+
+#  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of TNT (-21.9, 113.97) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 #Ningaloo TNT07C
-CCI_TNT07C <- CCI_TNT07C %>% 
-  mutate(Reef_Site = "TNT07C", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_TNT07C <- CCI_TNT07C %>% 
+#  mutate(Reef_Site = "TNT07C", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_TNT07C <- NOAA_TNT07C %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_TNT07C <- NOAA_TNT07C %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C)
+#TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C)
 
-ggplot(TNT07C_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of TNT07C (-21.89, 113.96) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(TNT07C_Sat_Combined)+
+#  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of TNT07C (-21.89, 113.96) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 #Houtman Abrolhos Wallabi Island
-CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
-  mutate(Reef_Site = "Wallabi Island", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
+#  mutate(Reef_Site = "Wallabi Island", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-Wallabi_Island_Sat_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
+#Wallabi_Island_Sat_Combined <- rbind(CCI_Wallabi_Island, NOAA_Wallabi_Island)
 
-ggplot(Wallabi_Island_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of Wallabi Island (-28.28, 113.46) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(Wallabi_Island_Sat_Combined)+
+#  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of Wallabi Island (-28.28, 113.46) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 #Houtman Abrolhos HAB05B
-CCI_HAB05B <- CCI_HAB05B %>% 
-  mutate(Reef_Site = "HAB05B", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_HAB05B <- CCI_HAB05B %>% 
+#  mutate(Reef_Site = "HAB05B", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_HAB05B <- NOAA_HAB05B %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_HAB05B <- NOAA_HAB05B %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
+#HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
 
-ggplot(HAB05B_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of HAB05B (-28.46, 113.77) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(HAB05B_Sat_Combined)+
+#  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of HAB05B (-28.46, 113.77) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 #Houtman Abrolhos HAB10A
-CCI_HAB10A <- CCI_HAB10A %>% 
-  mutate(Reef_Site = "HAB10A", Data_Type = "CCI") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#CCI_HAB10A <- CCI_HAB10A %>% 
+#  mutate(Reef_Site = "HAB10A", Data_Type = "CCI") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-NOAA_HAB10A <- NOAA_HAB10A %>% 
-  mutate(Data_Type = "NOAA") %>% 
-  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
+#NOAA_HAB10A <- NOAA_HAB10A %>% 
+#  mutate(Data_Type = "NOAA") %>% 
+#  select(sst, Latitude, Longitude, Date, hotspot, degree_heating_week_mmm_from_sst, accum_DHW_12weeks, Reef_Site, Data_Type)
 
-HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
+#HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
 
-ggplot(HAB10A_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
-  labs(x = "Time", y = "DHW value", title = "Time Series of HAB10A (-28.46, 113.75) Degree Heating Week values") +
-  scale_color_discrete_qualitative(name = "Satellite") +
-  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
-  )
+#ggplot(HAB10A_Sat_Combined)+
+#  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+#                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+#  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+#  labs(x = "Time", y = "DHW value", title = "Time Series of HAB10A (-28.46, 113.75) Degree Heating Week values") +
+#  scale_color_discrete_qualitative(name = "Satellite") +
+#  scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
+#  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+#        legend.key = element_rect(fill = "transparent"),
+#        plot.title = element_text( face = "bold")
+#  )
 
 
 ```
@@ -748,44 +748,44 @@ kbl(longtable = T, caption = "13TNT and 08TNT Maximum Monthly Degree Heating Wee
 
 
 #TNT
-t_TNT_Sat_Combined <- TNT_Sat_Combined %>% 
-  select(Date, accum_DHW_12weeks, Data_Type) %>% 
-  filter(accum_DHW_12weeks >= 4) %>% 
-  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
-Max_TNT <- t_TNT_Sat_Combined %>% 
-  mutate(Year = year(Date), Month = month(Date)) %>% 
-  group_by(Year, Month) %>% 
-  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
-  ungroup()
+#t_TNT_Sat_Combined <- TNT_Sat_Combined %>% 
+#  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+#  filter(accum_DHW_12weeks >= 4) %>% 
+#  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+#Max_TNT <- t_TNT_Sat_Combined %>% 
+#  mutate(Year = year(Date), Month = month(Date)) %>% 
+#  group_by(Year, Month) %>% 
+#  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+#  ungroup()
 
-TNT.color.me.CCI <- which(Max_TNT$Max_DHW_month_CCI > 8)
-TNT.color.me.NOAA <- which(Max_TNT$Max_DHW_month_NOAA > 8)
+#TNT.color.me.CCI <- which(Max_TNT$Max_DHW_month_CCI > 8)
+#TNT.color.me.NOAA <- which(Max_TNT$Max_DHW_month_NOAA > 8)
 
-Max_TNT %>% 
-kbl(longtable = T, caption = "TNT Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
-  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  row_spec(TNT.color.me.CCI, color = "red") %>% 
-  row_spec(TNT.color.me.NOAA, color = "red")
+#Max_TNT %>% 
+#kbl(longtable = T, caption = "TNT Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+#  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+#  row_spec(TNT.color.me.CCI, color = "red") %>% 
+#  row_spec(TNT.color.me.NOAA, color = "red")
 
 #Wallabi Island
-t_Wallabi_Island_Sat_Combined <- Wallabi_Island_Sat_Combined %>% 
-  select(Date, accum_DHW_12weeks, Data_Type) %>% 
-  filter(accum_DHW_12weeks >= 4) %>% 
-  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
-Max_Wallabi_Island <- t_Wallabi_Island_Sat_Combined %>% 
-  mutate(Year = year(Date), Month = month(Date)) %>% 
-  group_by(Year, Month) %>% 
-  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
-  ungroup()
+#t_Wallabi_Island_Sat_Combined <- Wallabi_Island_Sat_Combined %>% 
+#  select(Date, accum_DHW_12weeks, Data_Type) %>% 
+#  filter(accum_DHW_12weeks >= 4) %>% 
+#  pivot_wider(names_from = Data_Type, values_from = accum_DHW_12weeks)
+#Max_Wallabi_Island <- t_Wallabi_Island_Sat_Combined %>% 
+#  mutate(Year = year(Date), Month = month(Date)) %>% 
+#  group_by(Year, Month) %>% 
+#  summarise(Max_DHW_month_CCI = mean(CCI), Max_DHW_month_NOAA = mean(NOAA)) %>%
+#  ungroup()
 
-W.color.me.CCI <- which(Max_Wallabi_Island$Max_DHW_month_CCI > 8)
-W.color.me.NOAA <- which(Max_Wallabi_Island$Max_DHW_month_NOAA > 8)
+#W.color.me.CCI <- which(Max_Wallabi_Island$Max_DHW_month_CCI > 8)
+#W.color.me.NOAA <- which(Max_Wallabi_Island$Max_DHW_month_NOAA > 8)
 
-Max_Wallabi_Island %>% 
-kbl(longtable = T, caption = "Wallabi Island Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
-  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
-  row_spec(W.color.me.CCI, color = "red") %>% 
-  row_spec(W.color.me.NOAA, color = "red")
+#Max_Wallabi_Island %>% 
+#kbl(longtable = T, caption = "Wallabi Island Maximum Monthly Degree Heating Week values from CCI and NOAA") %>% 
+#  kable_styling(position = "center", latex_options = c("repeat_header")) %>% 
+#  row_spec(W.color.me.CCI, color = "red") %>% 
+#  row_spec(W.color.me.NOAA, color = "red")
 
 ```
 
