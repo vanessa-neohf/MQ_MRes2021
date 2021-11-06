@@ -1,5 +1,5 @@
 ---
-title: "Confusion Matrix for NOAA and CCI predictability of Coral Bleaching"
+title: "Confusion Matrix for NOAA, CCI, and Coral Core predictability of Coral Bleaching"
 author: "Vanessa Hui Fen Neo"
 date: "`r lubridate::today()`"
 output: pdf_document
@@ -104,6 +104,7 @@ NOAA_Tantabiddi <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_with_mmm_and
 NOAA_TNT <- read_csv(here::here("data_raw", "NOAA_TNT_with_mmm_and_dhw.csv"))
 NOAA_TNT07C <- read_csv(here::here("data_raw", "NOAA_TNT07C_with_mmm_and_dhw.csv"))
 NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with_mmm_and_dhw.csv"))
+
 ```
 
 ```{r preparing_DHW_data_for_confusion_matrix, include = FALSE}
@@ -902,6 +903,16 @@ NOAA_TNT07C_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_TNT07C_DHM.csv")) %
 NOAA_Wallabi_Island_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_Wallabi_Island_DHM.csv")) %>% 
   mutate(Reef = "Houtman Abrolhos")
 
+#Coral Core Data from CCI
+CCore_CCI_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS05_CCI_DHM.csv"))
+CCore_CCI_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS07_CCI_DHM.csv"))
+CCore_CCI_DARL_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DARL_CCI_DHM.csv"))
+
+#Coral Core Data from NOAA
+CCore_NOAA_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS05_NOAA_DHM.csv"))
+CCore_NOAA_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS07_NOAA_DHM.csv"))
+CCore_NOAA_DARL_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DARL_NOAA_DHM.csv"))
+
 ```
 
 
@@ -1632,9 +1643,123 @@ NOAA_Combined_DHM <- rbind(NOAA_BRS05_DHM, NOAA_BRS07_DHM, NOAA_BUN05A_DHM, NOAA
   mutate(bleaching = as.character(bleaching)) %>% 
   mutate(prediction = as.character(prediction))
 
+#Coral Core
+CCore_CCI_BRS05_DHM <- CCore_CCI_BRS05_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+  
+  
+CCore_CCI_BRS07_DHM <- CCore_CCI_BRS07_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_DARL_DHM <- CCore_CCI_DARL_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1996" | year == "1998" | year == "2014" | year == "2016" ~ "1",
+                               year != "1996" | year != "1998" | year != "2014" | year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+#combine Coral Core (CCI) data
+CCore_CCI_Combined_DHM <- rbind(CCore_CCI_BRS05_DHM, CCore_CCI_BRS07_DHM, CCore_CCI_DARL_DHM)
+
+#Coral Core (NOAA)
+CCore_NOAA_BRS05_DHM <- CCore_NOAA_BRS05_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+  
+  
+CCore_NOAA_BRS07_DHM <- CCore_NOAA_BRS07_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+CCore_NOAA_DARL_DHM <- CCore_NOAA_DARL_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1996" | year == "1998" | year == "2014" | year == "2016" ~ "1",
+                               year != "1996" | year != "1998" | year != "2014" | year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+#combine Coral Core (NOAA) data
+CCore_NOAA_Combined_DHM <- rbind(CCore_NOAA_BRS05_DHM, CCore_NOAA_BRS07_DHM, CCore_NOAA_DARL_DHM)
+
 ```
 
 ```{r Confusion_Matrix_DHM, echo = FALSE, warning = FALSE, message = FALSE}
+
+#confusion matrix cannot be generated for Coral Core DHMs - less than 2 levels in target column
 
 CCI_CM_DHM <- as_tibble(CCI_Combined_DHM %>%
   group_by(Reef) %>% 
@@ -1650,6 +1775,22 @@ NOAA_CM_DHM <- as_tibble(NOAA_Combined_DHM %>%
 ) %>% 
   select(-c(Predictions, `Confusion Matrix`, Process, ROC))
 
+CCore_CCI_CM_DHM <- as_tibble(CCore_CCI_Combined_DHM %>%
+  filter(Reef != "Browse Island") %>% 
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup()
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+CCore_NOAA_CM_DHM <- as_tibble(CCore_NOAA_Combined_DHM %>%
+  filter(Reef != "Browse Island") %>% 
+  group_by(Reef) %>%
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup()
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
 CCI_CM_DHM %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from CCI data", digits = 2) %>% 
   kable_styling(full_width = TRUE) %>% 
@@ -1657,6 +1798,16 @@ CCI_CM_DHM %>%
 
 NOAA_CM_DHM %>% 
   kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from NOAA data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+CCore_CCI_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from Coral Core CCI data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+CCore_NOAA_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from Coral Core NOAA data", digits = 2) %>%
   kable_styling(full_width = TRUE) %>% 
   landscape()
 
@@ -1675,8 +1826,15 @@ CCI_CM_DHM <- xtable(CCI_CM_DHM %>%
 NOAA_CM_DHM <- xtable(NOAA_CM_DHM %>% 
   select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
 
+CCore_CCI_CM_DHM <- xtable(CCore_CCI_CM_DHM %>% 
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+CCore_NOAA_CM_DHM <- xtable(CCore_NOAA_CM_DHM %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
 CM_Combined_DHW <- cbind(CCI_CM_DHW, NOAA_CM_DHW) 
 CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM)
+CM_CCore_DHM <- cbind(CCore_CCI_CM_DHM, CCore_NOAA_CM_DHM)
 
 
 xtable2kable(CM_Combined_DHW) %>% 
@@ -1688,6 +1846,12 @@ xtable2kable(CM_Combined_DHW) %>%
 xtable2kable(CM_Combined_DHM) %>% 
   kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix", ) %>% 
   add_header_above(c(" " = 1, "CCI DHM" = 4, "NOAA DHM" = 4)) %>% 
+  kable_styling(full_width = T) %>% 
+  landscape()
+
+xtable2kable(CM_CCore_DHM) %>% 
+  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix for Coral Core", ) %>% 
+  add_header_above(c(" " = 1, "CCore CCI DHM" = 4, "CCore NOAA DHM" = 4)) %>% 
   kable_styling(full_width = T) %>% 
   landscape()
 
