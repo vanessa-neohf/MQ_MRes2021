@@ -1661,9 +1661,11 @@ wave.avg_BRS05_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), perio
 #plot(wave.avg_BRS05_CCore$period, wave.avg_BRS05_CCore$power, type = "l")
 
 #combined BRS05 plot
-wave.avg_BRS05_Combined <- as_tibble(rbind(wave.avg_BRS05_CCI, wave.avg_BRS05_NOAA))
+wave.avg_BRS05_Combined <- as_tibble(rbind(wave.avg_BRS05_CCI, wave.avg_BRS05_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_BRS05_CCore <- as_tibble(wave.avg_BRS05_CCore)
+wave.avg_BRS05_CCore <- as_tibble(wave.avg_BRS05_CCore) %>% 
+  filter(period <= 10)
 BRS05_CCore <- ggplot(wave.avg_BRS05_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -1715,9 +1717,11 @@ wave.avg_BRS07_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), perio
 #plot(wave.avg_BRS07_CCore$period, wave.avg_BRS07_CCore$power, type = "l")
 
 #combined BRS07 plot
-wave.avg_BRS07_Combined <- as_tibble(rbind(wave.avg_BRS07_CCI, wave.avg_BRS07_NOAA))
+wave.avg_BRS07_Combined <- as_tibble(rbind(wave.avg_BRS07_CCI, wave.avg_BRS07_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_BRS07_CCore <- as_tibble(wave.avg_BRS07_CCore)
+wave.avg_BRS07_CCore <- as_tibble(wave.avg_BRS07_CCore) %>% 
+  filter(period <= 10)
 BRS07_CCore <- ggplot(wave.avg_BRS07_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -1776,9 +1780,11 @@ wave.avg_DAR3_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period
 #plot(wave.avg_DAR3_CCore$period, wave.avg_DAR3_CCore$power, type = "l")
 
 #combined DAR3 plot
-wave.avg_DAR3_Combined <- as_tibble(rbind(wave.avg_DAR3_CCI, wave.avg_DAR3_NOAA))
+wave.avg_DAR3_Combined <- as_tibble(rbind(wave.avg_DAR3_CCI, wave.avg_DAR3_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_DAR3_CCore <- as_tibble(wave.avg_DAR3_CCore)
+wave.avg_DAR3_CCore <- as_tibble(wave.avg_DAR3_CCore) %>% 
+  filter(period <= 10)
 DAR3_CCore <- ggplot(wave.avg_DAR3_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -1830,9 +1836,11 @@ wave.avg_DARL_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), period
 #plot(wave.avg_DARL_CCore$period, wave.avg_DARL_CCore$power, type = "l")
 
 #combined DARL plot
-wave.avg_DARL_Combined <- as_tibble(rbind(wave.avg_DARL_CCI, wave.avg_DARL_NOAA))
+wave.avg_DARL_Combined <- as_tibble(rbind(wave.avg_DARL_CCI, wave.avg_DARL_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_DARL_CCore <- as_tibble(wave.avg_DARL_CCore)
+wave.avg_DARL_CCore <- as_tibble(wave.avg_DARL_CCore) %>% 
+  filter(period <= 10)
 DARL_CCore <- ggplot(wave.avg_DARL_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -1892,9 +1900,11 @@ wave.avg_Tantabiddi_13TNT_CCore <- data.frame(power = apply(wave.out$Power, 2, m
 #plot(wave.avg_Tantabiddi_13TNT_CCore$period, wave.avg_Tantabiddi_13TNT_CCore$power, type = "l")
 
 #combined Tantabiddi 13TNT plot
-wave.avg_Tantabiddi_13TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_13TNT_CCI, wave.avg_Tantabiddi_13TNT_NOAA))
+wave.avg_Tantabiddi_13TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_13TNT_CCI, wave.avg_Tantabiddi_13TNT_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_Tantabiddi_13TNT_CCore <- as_tibble(wave.avg_Tantabiddi_13TNT_CCore)
+wave.avg_Tantabiddi_13TNT_CCore <- as_tibble(wave.avg_Tantabiddi_13TNT_CCore) %>% 
+  filter(period <= 10)
 Tantabiddi_13TNT_CCore <- ggplot(wave.avg_Tantabiddi_13TNT_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -1947,9 +1957,11 @@ wave.avg_Tantabiddi_08TNT_CCore <- data.frame(power = apply(wave.out$Power, 2, m
 #plot(wave.avg_Tantabiddi_08TNT_CCore$period, wave.avg_Tantabiddi_08TNT_CCore$power, type = "l")
 
 #combined Tantabiddi 08TNT plot
-wave.avg_Tantabiddi_08TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_08TNT_CCI, wave.avg_Tantabiddi_08TNT_NOAA))
+wave.avg_Tantabiddi_08TNT_Combined <- as_tibble(rbind(wave.avg_Tantabiddi_08TNT_CCI, wave.avg_Tantabiddi_08TNT_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_Tantabiddi_08TNT_CCore <- as_tibble(wave.avg_Tantabiddi_08TNT_CCore)
+wave.avg_Tantabiddi_08TNT_CCore <- as_tibble(wave.avg_Tantabiddi_08TNT_CCore) %>% 
+  filter(period <= 10)
 Tantabiddi_08TNT_CCore <- ggplot(wave.avg_Tantabiddi_08TNT_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -2001,9 +2013,11 @@ wave.avg_Bundegi_13BND_CCore <- data.frame(power = apply(wave.out$Power, 2, mean
 #plot(wave.avg_Bundegi_13BND_CCore$period, wave.avg_Bundegi_13BND_CCore$power, type = "l")
 
 #combined Bundegi 13BND plot
-wave.avg_Bundegi_13BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_13BND_CCI, wave.avg_Bundegi_13BND_NOAA))
+wave.avg_Bundegi_13BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_13BND_CCI, wave.avg_Bundegi_13BND_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_Bundegi_13BND_CCore <- as_tibble(wave.avg_Bundegi_13BND_CCore)
+wave.avg_Bundegi_13BND_CCore <- as_tibble(wave.avg_Bundegi_13BND_CCore) %>% 
+  filter(period <= 10)
 Bundegi_13BND_CCore <- ggplot(wave.avg_Bundegi_13BND_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -2055,9 +2069,11 @@ wave.avg_Bundegi_08BND_CCore <- data.frame(power = apply(wave.out$Power, 2, mean
 #plot(wave.avg_Bundegi_08BND_CCore$period, wave.avg_Bundegi_08BND_CCore$power, type = "l")
 
 #combined Bundegi 08BND plot
-wave.avg_Bundegi_08BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_08BND_CCI, wave.avg_Bundegi_08BND_NOAA))
+wave.avg_Bundegi_08BND_Combined <- as_tibble(rbind(wave.avg_Bundegi_08BND_CCI, wave.avg_Bundegi_08BND_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_Bundegi_08BND_CCore <- as_tibble(wave.avg_Bundegi_08BND_CCore)
+wave.avg_Bundegi_08BND_CCore <- as_tibble(wave.avg_Bundegi_08BND_CCore) %>% 
+  filter(period <= 10)
 Bundegi_08BND_CCore <- ggplot(wave.avg_Bundegi_08BND_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -2112,9 +2128,11 @@ wave.avg_TNT07C_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), peri
 #plot(wave.avg_TNT07C_CCore$period, wave.avg_TNT07C_CCore$power, type = "l")
 
 #combined TNT07C plot
-wave.avg_TNT07C_Combined <- as_tibble(rbind(wave.avg_TNT07C_CCI, wave.avg_TNT07C_NOAA))
+wave.avg_TNT07C_Combined <- as_tibble(rbind(wave.avg_TNT07C_CCI, wave.avg_TNT07C_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_TNT07C_CCore <- as_tibble(wave.avg_TNT07C_CCore)
+wave.avg_TNT07C_CCore <- as_tibble(wave.avg_TNT07C_CCore) %>% 
+  filter(period <= 10)
 TNT07C_CCore <- ggplot(wave.avg_TNT07C_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -2170,9 +2188,11 @@ wave.avg_BUN05A_CCore <- data.frame(power = apply(wave.out$Power, 2, mean), peri
 #plot(wave.avg_BUN05A_CCore$period, wave.avg_BUN05A_CCore$power, type = "l")
 
 #combined BUN05A plot
-wave.avg_BUN05A_Combined <- as_tibble(rbind(wave.avg_BUN05A_CCI, wave.avg_BUN05A_NOAA))
+wave.avg_BUN05A_Combined <- as_tibble(rbind(wave.avg_BUN05A_CCI, wave.avg_BUN05A_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_BUN05A_CCore <- as_tibble(wave.avg_BUN05A_CCore)
+wave.avg_BUN05A_CCore <- as_tibble(wave.avg_BUN05A_CCore) %>% 
+  filter(period <= 10)
 BUN05A_CCore <- ggplot(wave.avg_BUN05A_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
@@ -2234,9 +2254,11 @@ wave.avg_HAB05B_SrCa_CCore <- data.frame(power = apply(wave.out$Power, 2, mean),
 #plot(wave.avg_HAB05B_SrCa_CCore$period, wave.avg_HAB05B_SrCa_CCore$power, type = "l")
 
 #combined HAB05B SrCa plot
-wave.avg_HAB05B_SrCa_Combined <- as_tibble(rbind(wave.avg_HAB05B_SrCa_CCI, wave.avg_HAB05B_SrCa_NOAA))
+wave.avg_HAB05B_SrCa_Combined <- as_tibble(rbind(wave.avg_HAB05B_SrCa_CCI, wave.avg_HAB05B_SrCa_NOAA)) %>% 
+  filter(period <= 10)
 
-wave.avg_HAB05B_SrCa_CCore <- as_tibble(wave.avg_HAB05B_SrCa_CCore)
+wave.avg_HAB05B_SrCa_CCore <- as_tibble(wave.avg_HAB05B_SrCa_CCore) %>% 
+  filter(period <= 10)
 HAB05B_SrCa_CCore <- ggplot(wave.avg_HAB05B_SrCa_CCore) +
   geom_line(aes(x = period, y = power, color = Type)) +
   scale_color_manual(values = "brown")
