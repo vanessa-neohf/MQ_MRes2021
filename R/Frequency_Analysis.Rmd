@@ -78,7 +78,7 @@ BRS05_joint <- dat %>%
 ggplot(BRS05_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # decreasing trend with curvature. 
 # gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -100,7 +100,7 @@ NOAA_BRS05 <- lm(browse_NOAA ~ 1 + browse_coral_core,
 ggplot(BRS05_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at BRS05", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -174,7 +174,7 @@ BRS07_joint <- dat %>%
 ggplot(BRS07_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -196,7 +196,7 @@ NOAA_BRS07 <- lm(browse_NOAA ~ 1 + browse_coral_core,
 ggplot(BRS07_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at BRS07", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -270,7 +270,7 @@ DARL_joint <- dat %>%
 ggplot(DARL_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 
 # linear decreasing trend
 
@@ -294,7 +294,7 @@ NOAA_DARL <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core,
 ggplot(DARL_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at DAR Long", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -369,7 +369,7 @@ DAR3_joint <- dat %>%
 ggplot(DAR3_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -391,7 +391,7 @@ NOAA_DAR3 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core,
 ggplot(DAR3_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at DAR3", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -471,7 +471,7 @@ Tantabiddi_13TNT_joint <- dat %>%
 ggplot(Tantabiddi_13TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -486,7 +486,7 @@ NOAA_Tantabiddi_13TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo
 ggplot(Tantabiddi_13TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at 13TNT", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -555,7 +555,7 @@ Tantabiddi_08TNT_joint <- dat %>%
 ggplot(Tantabiddi_08TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -576,7 +576,7 @@ NOAA_Tantabiddi_08TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 ggplot(Tantabiddi_08TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at 08TNT", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -651,7 +651,7 @@ Bundegi_13BND_joint <- dat %>%
 ggplot(Bundegi_13BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature for NOAA vs coral core. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -673,7 +673,7 @@ NOAA_Bundegi_13BND <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 ggplot(Bundegi_13BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at 13BND", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -748,7 +748,7 @@ Bundegi_08BND_joint <- dat %>%
 ggplot(Bundegi_08BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -765,7 +765,7 @@ NOAA_Bundegi_08BND <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_co
 ggplot(Bundegi_08BND_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at 08BND", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -836,7 +836,7 @@ TNT_joint <- dat %>%
 ggplot(TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -858,7 +858,7 @@ NOAA_TNT <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 ggplot(TNT_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at TNT", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -938,7 +938,7 @@ TNT07C_joint <- dat %>%
 ggplot(TNT07C_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -960,7 +960,7 @@ NOAA_TNT07C <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 ggplot(TNT07C_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at TNT07C", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1038,7 +1038,7 @@ BUN05A_joint <- dat %>%
 ggplot(BUN05A_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend 
 # gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1060,7 +1060,7 @@ NOAA_BUN05A <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 ggplot(BUN05A_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at BUN05A", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend 
 # gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1140,7 +1140,7 @@ Wallabi_Island_joint <- dat %>%
 ggplot(Wallabi_Island_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # trend is explained by a curvature. 
 # gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1157,7 +1157,7 @@ NOAA_Wallabi_Island <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core + I(HAbrol_coral_c
 ggplot(Wallabi_Island_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at Wallabi Island", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # trend is explained by curvature. 
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1231,7 +1231,7 @@ HAB10A_d18O_joint <- dat %>%
 ggplot(HAB10A_d18O_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core", y = "NOAA")
+  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core Sr/Ca Ratio", y = "NOAA")
 # linear decreasing trend with a slight curvature. 
 # gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam1)
@@ -1253,7 +1253,7 @@ NOAA_HAB10A_d18O <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core,
 ggplot(HAB10A_d18O_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at HAB10A d18O", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend with a slight curvature. 
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1429,7 +1429,7 @@ HAB05B_SrCa_joint <- dat %>%
 ggplot(HAB05B_SrCa_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam") %>% 
-  labs(title = "Sea Surface Temperature at HAB05B Sr/Ca", x = "Coral Core", y = "CCI")
+  labs(title = "Sea Surface Temperature at HAB05B Sr/Ca", x = "Coral Core Sr/Ca Ratio", y = "CCI")
 # linear decreasing trend
 # gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 # plot(gam2)
@@ -1473,14 +1473,14 @@ Browse_Plot_NOAA <- Browse %>%
   ggplot(aes(x = browse_coral_core, y = browse_NOAA)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA") +
   facet_wrap("Site")
 
 Browse_Plot_CCI <- Browse %>% 
   ggplot(aes(x = browse_coral_core, y = browse_CCI)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI") +
   facet_wrap("Site")
 
 Browse_Plot_NOAA / Browse_Plot_CCI
@@ -1488,12 +1488,12 @@ Browse_Plot_NOAA / Browse_Plot_CCI
 C_Browse_Plot_NOAA <- Browse %>% 
   ggplot(aes(x = browse_coral_core, y = browse_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.497 to 0.570]")
+  labs(title = "Browse Island NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA", caption = "[Range of R Square values is from 0.497 to 0.570]")
 
 C_Browse_Plot_CCI <- Browse %>% 
   ggplot(aes(x = browse_coral_core, y = browse_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.568 to 0.622]")
+  labs(title = "Browse Island CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI", caption = "[Range of R Square values is from 0.568 to 0.622]")
 
 C_Browse_Plot_NOAA / C_Browse_Plot_CCI 
 
@@ -1506,14 +1506,14 @@ Cocos_Keeling_Plot_NOAA <- Cocos_Keeling %>%
   ggplot(aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA") +
   facet_wrap("Site")
 
 Cocos_Keeling_Plot_CCI <- Cocos_Keeling %>% 
   ggplot(aes(x = Cocos_coral_core, y = Cocos_CCI)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI") +
   facet_wrap("Site")
 
 Cocos_Keeling_Plot_NOAA / Cocos_Keeling_Plot_CCI
@@ -1521,12 +1521,12 @@ Cocos_Keeling_Plot_NOAA / Cocos_Keeling_Plot_CCI
 C_Cocos_Plot_NOAA <- Cocos_Keeling %>% 
   ggplot(aes(x = Cocos_coral_core, y = Cocos_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[R Square values for both sites are 0.188]")
+  labs(title = "Cocos Keeling Island NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA", caption = "[R Square values for both sites are 0.188]")
 
 C_Cocos_Plot_CCI <- Cocos_Keeling %>% 
   ggplot(aes(x = Cocos_coral_core, y = Cocos_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[R Square values for both sites are 0.244]")
+  labs(title = "Cocos Keeling Island CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI", caption = "[R Square values for both sites are 0.244]")
 
 C_Cocos_Plot_NOAA / C_Cocos_Plot_CCI
 ```
@@ -1536,14 +1536,14 @@ Ningaloo_Plot_NOAA <- Ningaloo %>%
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA") +
   facet_wrap("Site")
 
 Ningaloo_Plot_CCI <- Ningaloo %>% 
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI") +
   facet_wrap("Site")
 
 
@@ -1554,12 +1554,12 @@ Ningaloo_Plot_CCI
 C_Ningaloo_Plot_NOAA <- Ningaloo %>% 
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.631 to 0.839]")
+  labs(title = "Ningaloo Reef NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA", caption = "[Range of R Square values is from 0.631 to 0.839]")
 
 C_Ningaloo_Plot_CCI <- Ningaloo %>% 
   ggplot(aes(x = ningaloo_coral_core, y = ningaloo_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.320 to 0.668]")
+  labs(title = "Ningaloo Reef CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI", caption = "[Range of R Square values is from 0.320 to 0.668]")
 
 C_Ningaloo_Plot_NOAA / C_Ningaloo_Plot_CCI
 
@@ -1571,14 +1571,14 @@ HAbrol_Plot_NOAA <- HAbrol %>%
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA") +
+  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA") +
   facet_wrap("Site")
 
 HAbrol_Plot_CCI <- HAbrol %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   geom_point() +
   geom_smooth() +
-  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI") +
+  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI") +
   facet_wrap("Site")
 
 HAbrol_Plot_NOAA / HAbrol_Plot_CCI
@@ -1586,24 +1586,24 @@ HAbrol_Plot_NOAA / HAbrol_Plot_CCI
 C_HAbrol_Plot_NOAA <- HAbrol %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "[Range of R Square values is from 0.155 to 0.282]")
+  labs(title = "Houtman Abrolhos NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA", caption = "[Range of R Square values is from 0.155 to 0.282]")
 
 C_HAbrol_Plot_CCI <- HAbrol %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "[Range of R Square values is from 0.142 to 0.336]") 
+  labs(title = "Houtman Abrolhos CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI", caption = "[Range of R Square values is from 0.142 to 0.336]") 
 
 C_HAbrol_Plot_NOAA / C_HAbrol_Plot_CCI
 
 Wallabi_Plot_NOAA <- Wallabi_Island_joint %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA, color = Site)) +
   geom_smooth() +
-  labs(title = "Wallabi Island NOAA SST and Coral Core Proxy", x = "Coral Core", y = "NOAA", caption = "R Square value is 0.282")
+  labs(title = "Wallabi Island NOAA SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "NOAA", caption = "R Square value is 0.282")
 
 Wallabi_Plot_CCI <- Wallabi_Island_joint %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_CCI, color = Site)) +
   geom_smooth() +
-  labs(title = "Wallabi Island CCI SST and Coral Core Proxy", x = "Coral Core", y = "CCI", caption = "R Square value is 0.336")
+  labs(title = "Wallabi Island CCI SST and Coral Core Proxy", x = "Coral Core Sr/Ca Ratio", y = "CCI", caption = "R Square value is 0.336")
 
 Wallabi_Plot_NOAA / Wallabi_Plot_NOAA
 ```
