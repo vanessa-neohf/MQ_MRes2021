@@ -1629,18 +1629,97 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 \newpage
 ```{r Frequency_Analysis_Browse, echo = FALSE}
 library(dplR)
-
+library(WaveletComp)
+library(patchwork)
 #Browse Island
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
-
-#BRS05 CCI
-wave.out <- morlet(y1 = BRS05_joint$browse_CCI, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
+# CCI vs CCore and NOAA vs CCore for bivariate analysis
+# BRS05 CCI
+wave.out <- morlet(y1 = BRS05_joint$browse_CCI, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)  
 wave.out$period <- wave.out$period/12
 levs <- quantile(wave.out$Power, c(0, 0.25, 0.5, 0.75, 0.95, 1))
-
-
 wave.avg_BRS05_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period = (wave.out$period), Type = "CCI")
 #plot(wave.avg_BRS05_CCI$period, wave.avg_BRS05_CCI$power, type = "l")
+
+
+wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI", loess.span = 0,
+                            dt = 1/12,
+                            dj = 1/10)
+wt.image(wave_out, n.levels = 250,
+         legend.params = list(lab = "wavelet power levels"))
+wt.avg(wave_out)
+#loess.span = 0 if the series is detrended already
+# otherwise, the algorithm will do the detrending for you. 
+# Just use the default value would be fine. 
+# dt = time resolution. We want to interpret things in yearly manner but 
+# we got monthly data. So setting dt = 1/12 means 12 observation equalling one 
+# time unit which is a year. 
+# dj = frequency resolution. Sampling resolution in the freq domain. 
+# The default is to have 20 samples within each octave. 
+# The avg power plot is in landscape mode. 
+# This is great if you want to put it along side the wt.image plot 
+# The avg power is what you get if you average all the values for each period 
+# in the wt.image plot. 
+# Obviously we can plot it ourselves
+
+par(mfrow= c(1,2))
+par(mar = c(3, 4, 1, 2))
+par(cex = 0.6)
+wt.avg(wave_out)
+wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+         legend.params = list(mar = 7))
+
+# I tried all the tricks but the average power plot refused to be shown on the right. 
+# Or if you just want the average power plot in ggplot format.
+ggplot(tibble(Period = wave_out$Period, 
+              Power.avg = wave_out$Power.avg,
+              Power.avg.pval = wave_out$Power.avg.pval)) + 
+  geom_line(aes(x = Period, y = Power.avg)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "P-val")
+# the green dots are covered by the pinkish ones 
+
+# bivariate wavelet analysis
+# CCI vs CCORE
+
+wave_out_CCI_CCORE <- 
+  analyze.coherency(BRS05_joint, 
+                    my.pair = c("browse_CCI", "browse_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_CCI_CCORE)
+wc.image(wave_out_CCI_CCORE)
+wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI")
+wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core")
+wc.image(wave_out_CCI_CCORE, which.image = "wc")
+
+# NOAA vs CCORE
+wave_out_NOAA_CCORE <- 
+  analyze.coherency(BRS05_joint, 
+                    my.pair = c("browse_NOAA", "browse_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_NOAA_CCORE)
+wc.image(wave_out_NOAA_CCORE)
+wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA")
+wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core")
+# cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
+# CCI vs CCORE has a slightly higher power around period 1 than NOAA vs CCORE.
+# NOAA vs CCORE has higher power around period 2 and 0.5. 
+par(mfrow=c(2,1))
+par(mar = c(3, 4, 1, 2))
+par(cex = 0.6)
+wc.avg(wave_out_CCI_CCORE, maximum.level = 8)
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 8)
+
+par(mfrow=c(1,1))
+wc.image(wave_out_CCI_CCORE, which.image = "wc")
+wc.image(wave_out_NOAA_CCORE, which.image = "wc")
+# CCI vs CCORE also appears to have a slightly higher correlation around period 1. 
 
 #BRS05 NOAA
 wave.out <- morlet(y1 = BRS05_joint$browse_NOAA, x1 = as.numeric(year(BRS05_joint$date)), dj = 0.1, siglvl = 0.95)
