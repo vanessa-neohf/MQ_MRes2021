@@ -1642,11 +1642,12 @@ wave.avg_BRS05_CCI <- data.frame(power = apply(wave.out$Power, 2, mean), period 
 #plot(wave.avg_BRS05_CCI$period, wave.avg_BRS05_CCI$power, type = "l")
 
 
-wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI", loess.span = 0,
+wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"))
+         legend.params = list(lab = "wavelet power levels"),
+         show.date = TRUE)
 wt.avg(wave_out)
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
@@ -1680,7 +1681,7 @@ ggplot(tibble(Period = wave_out$Period,
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "P-val")
+  scale_colour_discrete(name = "Sig. Level")
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -1692,10 +1693,15 @@ wave_out_CCI_CCORE <-
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
 wc.avg(wave_out_CCI_CCORE)
-wc.image(wave_out_CCI_CCORE)
+wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE)
 wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI")
 wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core")
-wc.image(wave_out_CCI_CCORE, which.image = "wc")
+wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE)
+wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
+       legend.coords = "topleft", 
+       main = "CCI vs Coral Core")
 
 # NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
@@ -1707,6 +1713,10 @@ wc.avg(wave_out_NOAA_CCORE)
 wc.image(wave_out_NOAA_CCORE)
 wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA")
 wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core")
+wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "NOAA vs Coral Core")
+
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI vs CCORE has a slightly higher power around period 1 than NOAA vs CCORE.
 # NOAA vs CCORE has higher power around period 2 and 0.5. 
