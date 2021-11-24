@@ -2614,6 +2614,7 @@ Annual Coral Core Proxy Sites
 \end{center}
 
 \newpage
+**TNT07C**
 ```{r Frequency_Analysis_Ningaloo_TNT07C, echo = FALSE, message = FALSE}
 
 #TNT07C site
@@ -2734,6 +2735,7 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 ```
 
 \newpage
+**BUN05A**
 ```{r Frequency_Analysis_Ningaloo_BUN05A, echo = FALSE, message = FALSE}
 
 #BUN05A site
@@ -2854,6 +2856,7 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 ```
 
 \newpage
+**HAB05B**
 ```{r Frequency_Analysis_HAbrol_HAB05B, echo = FALSE, message = FALSE}
 
 #Houtman Abrolhos HAB05B site
