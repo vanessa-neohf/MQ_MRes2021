@@ -1771,7 +1771,24 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a slightly higher correlation around period 1. 
 
+## Ploting the two sets of average power together
 
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level")
 ```
 
 \newpage
