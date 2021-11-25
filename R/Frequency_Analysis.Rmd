@@ -1692,10 +1692,26 @@ ggplot(tibble(Period = wave_out$Period,
 
 ## CCI vs CCORE
 
+BRS05_joint_smooth <- BRS05_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  browse_CCI = 
+  analyze.wavelet(BRS05_joint, "browse_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_CCI,
+  browse_NOAA = 
+  analyze.wavelet(BRS05_joint, "browse_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_NOAA,
+  browse_coral_core =
+    analyze.wavelet(BRS05_joint, "browse_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_coral_core)
+  
 wave_out_CCI_CCORE <- 
-  analyze.coherency(BRS05_joint, 
-                    my.pair = c("browse_CCI", "browse_coral_core"),
-                    loess.span = 0, 
+  analyze.coherency(BRS05_joint_smooth, 
+                    my.pair = c("browse_CCI", "browse_coral_core"), 
+                    loess.span = 0,
                     dt = 1/12, dj = 1/10)
 wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 
@@ -1717,7 +1733,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(BRS05_joint, 
+  analyze.coherency(BRS05_joint_smooth, 
                     my.pair = c("browse_NOAA", "browse_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -1745,8 +1761,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 8, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 8, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = NULL, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = NULL, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
