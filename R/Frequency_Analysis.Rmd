@@ -24,7 +24,7 @@ library(equatiomatic)
 ```
 
 
-```{r Browse_Island, message = FALSE, include = FALSE}
+```{r Browse_Island, message=FALSE, include = FALSE}
 
 ##BRS05
 
@@ -1644,8 +1644,23 @@ library(WaveletComp)
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
+BRS05_joint_smooth <- BRS05_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  browse_CCI = 
+  analyze.wavelet(BRS05_joint, "browse_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_CCI,
+  browse_NOAA = 
+  analyze.wavelet(BRS05_joint, "browse_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_NOAA,
+  browse_coral_core =
+    analyze.wavelet(BRS05_joint, "browse_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_coral_core)
 # BRS05 CCI
-wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI",
+wave_out <- analyze.wavelet(BRS05_joint_smooth, "browse_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -1691,22 +1706,6 @@ ggplot(tibble(Period = wave_out$Period,
 # bivariate wavelet analysis
 
 ## CCI vs CCORE
-
-BRS05_joint_smooth <- BRS05_joint %>% 
-  select(date, Site) %>% 
-  add_column(
-  browse_CCI = 
-  analyze.wavelet(BRS05_joint, "browse_CCI",
-                            dt = 1/12,
-                            dj = 1/10)$series$browse_CCI,
-  browse_NOAA = 
-  analyze.wavelet(BRS05_joint, "browse_NOAA",
-                            dt = 1/12,
-                            dj = 1/10)$series$browse_NOAA,
-  browse_coral_core =
-    analyze.wavelet(BRS05_joint, "browse_coral_core",
-                            dt = 1/12,
-                            dj = 1/10)$series$browse_coral_core)
   
 wave_out_CCI_CCORE <- 
   analyze.coherency(BRS05_joint_smooth, 
@@ -1761,8 +1760,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = NULL, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = NULL, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -1800,7 +1799,24 @@ ggplot(temp) +
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # BRS07 CCI
-wave_out <- analyze.wavelet(BRS07_joint, "browse_CCI",
+BRS07_joint_smooth <- BRS07_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  browse_CCI = 
+  analyze.wavelet(BRS07_joint, "browse_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_CCI,
+  browse_NOAA = 
+  analyze.wavelet(BRS07_joint, "browse_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_NOAA,
+  browse_coral_core =
+    analyze.wavelet(BRS07_joint, "browse_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$browse_coral_core)
+
+
+wave_out <- analyze.wavelet(BRS07_joint_smooth, "browse_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -1848,7 +1864,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(BRS07_joint, 
+  analyze.coherency(BRS07_joint_smooth, 
                     my.pair = c("browse_CCI", "browse_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -1872,7 +1888,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(BRS07_joint, 
+  analyze.coherency(BRS07_joint_smooth, 
                     my.pair = c("browse_NOAA", "browse_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -1900,8 +1916,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -1921,7 +1937,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # DAR3 CCI
-wave_out <- analyze.wavelet(DAR3_joint, "Cocos_CCI",
+DAR3_joint_smooth <- DAR3_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  Cocos_CCI = 
+  analyze.wavelet(DAR3_joint, "Cocos_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_CCI,
+  Cocos_NOAA = 
+  analyze.wavelet(DAR3_joint, "Cocos_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_NOAA,
+  Cocos_coral_core =
+    analyze.wavelet(DAR3_joint, "Cocos_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_coral_core)
+
+wave_out <- analyze.wavelet(DAR3_joint_smooth, "Cocos_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -1969,7 +2001,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(DAR3_joint, 
+  analyze.coherency(DAR3_joint_smooth, 
                     my.pair = c("Cocos_CCI", "Cocos_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -1994,7 +2026,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(DAR3_joint, 
+  analyze.coherency(DAR3_joint_smooth, 
                     my.pair = c("Cocos_NOAA", "Cocos_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2022,8 +2054,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2043,7 +2075,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # DARL CCI
-wave_out <- analyze.wavelet(DARL_joint, "Cocos_CCI",
+DARL_joint_smooth <- DARL_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  Cocos_CCI = 
+  analyze.wavelet(DARL_joint, "Cocos_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_CCI,
+  Cocos_NOAA = 
+  analyze.wavelet(DARL_joint, "Cocos_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_NOAA,
+  Cocos_coral_core =
+    analyze.wavelet(DARL_joint, "Cocos_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$Cocos_coral_core)
+
+wave_out <- analyze.wavelet(DARL_joint_smooth, "Cocos_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2091,7 +2139,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(DARL_joint, 
+  analyze.coherency(DARL_joint_smooth, 
                     my.pair = c("Cocos_CCI", "Cocos_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2115,7 +2163,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(DARL_joint, 
+  analyze.coherency(DARL_joint_smooth, 
                     my.pair = c("Cocos_NOAA", "Cocos_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2143,8 +2191,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2164,7 +2212,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # 13TNT CCI
-wave_out <- analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_CCI",
+Tantabiddi_13TNT_joint_smooth <- Tantabiddi_13TNT_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(Tantabiddi_13TNT_joint_smooth, "ningaloo_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2212,7 +2276,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(Tantabiddi_13TNT_joint, 
+  analyze.coherency(Tantabiddi_13TNT_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2236,7 +2300,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(Tantabiddi_13TNT_joint, 
+  analyze.coherency(Tantabiddi_13TNT_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2264,8 +2328,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 11, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 11, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 13, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 13, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2285,7 +2349,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # 08TNT CCI
-wave_out <- analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_CCI",
+Tantabiddi_08TNT_joint_smooth <- Tantabiddi_08TNT_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(Tantabiddi_08TNT_joint_smooth, "ningaloo_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2333,7 +2413,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(Tantabiddi_08TNT_joint, 
+  analyze.coherency(Tantabiddi_08TNT_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2357,7 +2437,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(Tantabiddi_08TNT_joint, 
+  analyze.coherency(Tantabiddi_08TNT_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2406,7 +2486,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # 13BND CCI
-wave_out <- analyze.wavelet(Bundegi_13BND_joint, "ningaloo_CCI",
+Bundegi_13BND_joint_smooth <- Bundegi_13BND_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(Bundegi_13BND_joint, "ningaloo_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(Bundegi_13BND_joint, "ningaloo_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(Bundegi_13BND_joint, "ningaloo_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(Bundegi_13BND_joint_smooth, "ningaloo_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2454,7 +2550,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(Bundegi_13BND_joint, 
+  analyze.coherency(Bundegi_13BND_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2478,7 +2574,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(Bundegi_13BND_joint, 
+  analyze.coherency(Bundegi_13BND_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2506,8 +2602,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 9.5, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 9.5, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2527,7 +2623,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # 08BND CCI
-wave_out <- analyze.wavelet(Bundegi_08BND_joint, "ningaloo_CCI",
+Bundegi_08BND_joint_smooth <- Bundegi_08BND_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(Bundegi_08BND_joint, "ningaloo_CCI",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(Bundegi_08BND_joint, "ningaloo_NOAA",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(Bundegi_08BND_joint, "ningaloo_coral_core",
+                            dt = 1/12,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(Bundegi_08BND_joint_smooth, "ningaloo_CCI",
                             dt = 1/12,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2575,7 +2687,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(Bundegi_08BND_joint, 
+  analyze.coherency(Bundegi_08BND_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2599,7 +2711,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(Bundegi_08BND_joint, 
+  analyze.coherency(Bundegi_08BND_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2627,8 +2739,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 12, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 12, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 12.5, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 12.5, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2655,8 +2767,24 @@ Annual Coral Core Proxy Sites
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # TNT07C CCI
-wave_out <- analyze.wavelet(TNT07C_joint, "ningaloo_CCI",
-                            dt = 1,
+TNT07C_joint_smooth <- TNT07C_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(TNT07C_joint, "ningaloo_CCI",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(TNT07C_joint, "ningaloo_NOAA",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(TNT07C_joint, "ningaloo_coral_core",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(TNT07C_joint_smooth, "ningaloo_CCI",
+                            dt = 1/10,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
          legend.params = list(lab = "wavelet power levels"),
@@ -2703,10 +2831,10 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(TNT07C_joint, 
+  analyze.coherency(TNT07C_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
-                    dt = 1, dj = 1/10)
+                    dt = 1/10, dj = 1/10)
 wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 
 #Covariance
@@ -2727,10 +2855,10 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(TNT07C_joint, 
+  analyze.coherency(TNT07C_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
-                    dt = 1/12, dj = 1/10)
+                    dt = 1/10, dj = 1/10)
 wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 
 #Covariance
@@ -2755,8 +2883,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 11, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 11, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 3, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 3, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2776,7 +2904,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # BUN05A CCI
-wave_out <- analyze.wavelet(BUN05A_joint, "ningaloo_CCI",
+BUN05A_joint_smooth <- BUN05A_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  ningaloo_CCI = 
+  analyze.wavelet(BUN05A_joint, "ningaloo_CCI",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_CCI,
+  ningaloo_NOAA = 
+  analyze.wavelet(BUN05A_joint, "ningaloo_NOAA",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_NOAA,
+  ningaloo_coral_core =
+    analyze.wavelet(BUN05A_joint, "ningaloo_coral_core",
+                            dt = 1/10,
+                            dj = 1/10)$series$ningaloo_coral_core)
+
+wave_out <- analyze.wavelet(BUN05A_joint_smooth, "ningaloo_CCI",
                             dt = 1,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2824,7 +2968,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(BUN05A_joint, 
+  analyze.coherency(BUN05A_joint_smooth, 
                     my.pair = c("ningaloo_CCI", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1, dj = 1/10)
@@ -2848,7 +2992,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(BUN05A_joint, 
+  analyze.coherency(BUN05A_joint_smooth, 
                     my.pair = c("ningaloo_NOAA", "ningaloo_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
@@ -2876,8 +3020,8 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 par(mfrow=c(2,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 2, main = "CCI vs CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 2, main = "NOAA vs CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 6, main = "CCI vs CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 6, main = "NOAA vs CCORE")
 
 par(mfrow=c(1,1))
 wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2897,7 +3041,23 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE,
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
 # HAB05B CCI
-wave_out <- analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_CCI",
+HAB05B_SrCa_joint_smooth <- HAB05B_SrCa_joint %>% 
+  select(date, Site) %>% 
+  add_column(
+  HAbrol_CCI = 
+  analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_CCI",
+                            dt = 1/10,
+                            dj = 1/10)$series$HAbrol_CCI,
+  HAbrol_NOAA = 
+  analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_NOAA",
+                            dt = 1/10,
+                            dj = 1/10)$series$HAbrol_NOAA,
+  HAbrol_coral_core =
+    analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_coral_core",
+                            dt = 1/10,
+                            dj = 1/10)$series$HAbrol_coral_core)
+
+wave_out <- analyze.wavelet(HAB05B_SrCa_joint_smooth, "HAbrol_CCI",
                             dt = 1,
                             dj = 1/10)
 wt.image(wave_out, n.levels = 250,
@@ -2946,7 +3106,7 @@ ggplot(tibble(Period = wave_out$Period,
 ## CCI vs CCORE
 
 wave_out_CCI_CCORE <- 
-  analyze.coherency(HAB05B_SrCa_joint, 
+  analyze.coherency(HAB05B_SrCa_joint_smooth, 
                     my.pair = c("HAbrol_CCI", "HAbrol_coral_core"),
                     loess.span = 0, 
                     dt = 1, dj = 1/10)
@@ -2970,7 +3130,7 @@ wc.image(wave_out_CCI_CCORE, which.image = "wc",
 
 ## NOAA vs CCORE
 wave_out_NOAA_CCORE <- 
-  analyze.coherency(HAB05B_SrCa_joint, 
+  analyze.coherency(HAB05B_SrCa_joint_smooth, 
                     my.pair = c("HAbrol_NOAA", "HAbrol_coral_core"),
                     loess.span = 0, 
                     dt = 1/12, dj = 1/10)
