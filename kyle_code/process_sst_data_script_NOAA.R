@@ -46,6 +46,7 @@ sst_data <- read_csv(file = paste0(in_dir,sst_file))
 # additional_data
 scott_reef_dhw_from_app <- read_csv('kyle_code/data/DHW/NOAA_scott_reef_dhw_data_2016-05-18_from_app.csv')
 
+
 # ..... settings ====
 lat_input <- 'Latitude'  # latitude column
 lon_input <- 'Longitude'  # longitude column
@@ -56,7 +57,10 @@ days <- 84  # number of days to calculate metrics for based on the date value fo
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
 mmm_from_sst_start_year = 1985
-mmm_from_sst_end_year = 1990
+mmm_from_sst_end_year = 1993
+
+recenter_to_noaa50km_time = TRUE
+recenter_year =  1988.2857  # NOAA recenter year
 
 mmm_climatology_bool <- TRUE  # mean monthly maximum using NOAAs provided MMM climatology layer
 
@@ -106,8 +110,9 @@ if(mmm_from_sst_bool) {
                                                       mmm_from_sst_end_year, 
                                                       mmm_from_sst_start_year,
                                                       group_vars,
-                                                      continue_with_missing_sst_data = F
-                                                      ) {
+                                                      continue_with_missing_sst_data = F,
+                                                      recenter_to_noaa50km_time = T,
+                                                      recenter_year = 1988.2857) {
   
   mmm_from_sst_year_range <- paste0(mmm_from_sst_start_year,'_to_',mmm_from_sst_end_year)
   
@@ -126,31 +131,66 @@ if(mmm_from_sst_bool) {
     }
   }
   
-  out <- mmm_data %>%
+  mmms <- mmm_data %>%
     group_by(across(c(group_vars, 'year', 'month'))) %>%
     distinct() %>%
     summarise(monthly_means = mean(sst)) %>%
-    ungroup() %>%
-    group_by(across(c(group_vars, 'month'))) %>%
-    summarise(monthly_means = mean(monthly_means)) %>%
-    ungroup() %>%
-    group_by(across(c(group_vars))) %>%
-    summarise(mmm_from_sst = max(monthly_means)) %>%
-    mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
-    distinct()
+    ungroup()
+  
+  
+  if(recenter_to_noaa50km_time) {
     
+    print(paste0('recentering MMMs to ',recenter_year))
+    
+    locations_and_months <- mmms %>% dplyr::select(all_of(c(group_vars, 'month'))) %>% distinct()
+    
+    mmms_recentered <- lapply(1:nrow(locations_and_months), function(x) {
+      
+      selected_data <- locations_and_months[x,] %>% left_join(mmms)
+      
+      model <- lm(monthly_means ~ year, data = selected_data)
+      
+      mmm_recentered <- predict(object = model, newdata = data_frame(year = recenter_year))
+      
+      mmm_recentered <- data_frame(mmm_recentered = mmm_recentered, recenter_year = recenter_year)
+      
+      out <- bind_cols(selected_data[1,group_vars], mmm_recentered)
+      
+    }) %>% bind_rows()
+    
+    out <- mmms_recentered %>%
+      group_by(across(c(group_vars))) %>%
+      summarise(mmm_from_sst = max(mmm_recentered),
+                recenter_year = first(recenter_year)) %>%
+      mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
+      distinct()
+    
+  } else {
+    
+    out <- mmms %>%
+      group_by(across(c(group_vars, 'month'))) %>%
+      summarise(monthly_means = mean(monthly_means)) %>%
+      ungroup() %>%
+      group_by(across(c(group_vars))) %>%
+      summarise(mmm_from_sst = max(monthly_means)) %>%
+      mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
+      distinct()
+    
+  }
   
   return(out)
   
-}
+  }
+  
 
-
-mmm_from_sst <- 
-  calculate_maximum_monthly_mean_from_sst(sst_data = sst_data,
-                                          mmm_from_sst_end_year = mmm_from_sst_end_year,
-                                          mmm_from_sst_start_year = mmm_from_sst_start_year,
-                                          group_vars = c('Latitude', 'Longitude'),
-                                          continue_with_missing_sst_data = F)
+  mmm_from_sst <- 
+    calculate_maximum_monthly_mean_from_sst(sst_data = sst_data,
+                                            mmm_from_sst_end_year = mmm_from_sst_end_year,
+                                            mmm_from_sst_start_year = mmm_from_sst_start_year,
+                                            group_vars = c('Latitude', 'Longitude'),
+                                            continue_with_missing_sst_data = F,
+                                            recenter_to_noaa50km_time = recenter_to_noaa50km_time,
+                                            recenter_year = recenter_year)
 
 }
 
