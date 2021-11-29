@@ -26,10 +26,10 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data files ====
-in_dir <- 'kyle_code/data/SST/noaa/'
+in_dir <- 'kyle_code/data/'
 out_dir <- 'kyle_code/data/DHW/'
 
-sst_file <- 'NOAA_SST_scott_reef_1985to2021.csv'
+sst_file <- 'CCI_Wallabi_Island.csv'
 
 
 # Local data directories
@@ -41,18 +41,20 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 
 # ..... import SST data ====
-sst_data <- read_csv(file = paste0(in_dir,sst_file))
+sst_data <- read_csv(file = paste0(in_dir,sst_file)) %>% 
+  mutate(end_date = max(daily_date))
 
 # additional_data
-scott_reef_dhw_from_app <- read_csv('kyle_code/data/DHW/NOAA_scott_reef_dhw_data_2016-05-18_from_app.csv')
+# scott_reef_dhw_from_app <- read_csv('kyle_code/data/DHW/NOAA_scott_reef_dhw_data_2016-05-18_from_app.csv')
 
 
 # ..... settings ====
-lat_input <- 'Latitude'  # latitude column
-lon_input <- 'Longitude'  # longitude column
-date_input <- 'Date'  # date column
+sst_input <- 'mean temperature deg C'
+lat_input <- 'Lat'  # latitude column
+lon_input <- 'Lon'  # longitude column
+date_input <- 'daily_date'  # date column
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
-date_format <- 'dmy'  # date column format. e.g. 31/02/1998 = 'dmy'
+date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
 days <- 84  # number of days to calculate metrics for based on the date value for each row
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
@@ -75,12 +77,20 @@ threshold <- 1  # threshold in degrees Celsius on top of MMM to calculate DHW, h
 # Main ====
 # ..... convert lat, long and date column names ====
 sst_data <- sst_data %>%
-  rename(Date = date_input,
+  rename(sst = sst_input,
+         Date = date_input,
          Latitude = lat_input,
          Longitude = lon_input,
          end_date = end_date_input) %>%
   mutate(Date = date(parse_date_time(Date, orders = date_format)),
          end_date = date(parse_date_time(end_date, orders = date_format)))
+
+# ..... fix for brackets around sst data ====
+#only for CCI data
+sst_data <- sst_data %>%
+  mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
+  mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
+  mutate(sst = as.numeric(sst))
 
 
 # ..... MMM Climatology recalculation ====
@@ -222,33 +232,29 @@ sst_data_plus_mmm_and_dhw <- sst_data %>%
 
 # Output
 
+# Calculating running sum of DHW
+#unique(sst_data$Reef_Site) #for NOAA combined file
+#unique(sst_data$subsite) for NOAA Scott reef combined file
+
+
 output_data <- sst_data_plus_mmm_and_dhw %>% 
-  group_by(Latitude, Longitude) %>% 
-  mutate(accum_DHW_12_weeks_kz = runner(x = degree_heating_week_mmm_from_sst, f = sum, k = days))
-
-
-# Old accumulation code.
-# output_data <- sst_data_plus_mmm_and_dhw %>% 
-#   dplyr::select(-end_date) %>%
-#   mutate(Date = as.character(Date)) %>%
-#   mutate(DHW_value = degree_heating_week_mmm_from_sst + dhw_threshold) %>% 
-#   mutate(DHW_value = if_else(DHW_value <= 1, 0, DHW_value)) %>% 
-#   group_by(Latitude, Longitude) %>% 
-#   run_by(idx = "Date", lag = 84, na_pad = FALSE) %>% 
-#   mutate(accum_DHW_12weeks = runner(
-#     x = DHW_value,
-#     f = sum
-#     )) %>% 
-#   mutate(accum_DHW_12weeks = accum_DHW_12weeks/7) %>% #calculate DHW with sum of SST (84 days) divided by 7
-#   ungroup(Latitude, Longitude)
+  #group_by(subsite) %>% #change group_by to Reef_Site for NOAA combined file to avoid duplicates by 13TNT/08TNT and 13BND/08BND
+  mutate(accum_DHW_12weeks = runner(x = degree_heating_week_mmm_from_sst, f = sum, k = days))
   
+#output_data <- output_data %>%   #for NOAA combined file only
+#filter(subsite == "SCOTTSS2")
 
-output_data <- output_data %>% mutate(as_date(Date))
+#output_data <- output_data %>% 
+  #filter(subsite == "SCOTTSS2")#, Data_Type == "Coral Core d18O Proxy")
+
+max(output_data$accum_DHW_12weeks) #check accumulated DHW values
 
 out_name <- sst_file %>% str_replace(pattern = '.csv', replacement = '')
 out_name <- paste0(out_dir, out_name,'_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
+
+length(unique(output_data$Date)) == nrow(output_data) #check for any duplicates
 
 
 # ..... Compare to DHW from app ====
