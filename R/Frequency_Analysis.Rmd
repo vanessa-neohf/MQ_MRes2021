@@ -8,10 +8,10 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
-```{r Loading_Packages, include = FALSE, message = FALSE}
+```{r Loading_Packages, include = FALSE}
 library(tidyverse)
 library(lubridate)
 library(patchwork)
@@ -1631,12 +1631,13 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 \begin{center}
 
 Monthly Coral Core Proxy Sites
+Period of 1 represents 1 year
 
 \end{center}
 
 \newpage
 **BRS05**
-```{r Frequency_Analysis_Browse_BRS05, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Browse_BRS05, echo = FALSE, message = FALSE, warning = FALSE}
 
 library(WaveletComp)
 
@@ -1660,13 +1661,14 @@ BRS05_joint_smooth <- BRS05_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$browse_coral_core)
 # BRS05 CCI
-wave_out <- analyze.wavelet(BRS05_joint_smooth, "browse_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -1684,23 +1686,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -1718,11 +1721,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -1742,11 +1745,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -1763,14 +1766,14 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a slightly higher correlation around period 1. 
 
-## Ploting the two sets of average power together
+## Plotting the two sets of average power together
 
 temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
               Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
@@ -1787,18 +1790,18 @@ ggplot(temp) +
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level")
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 5)
 ```
 
 \newpage
 **BRS07**
-```{r Frequency_Analysis_Browse_BRS07, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Browse_BRS07, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Browse Island BRS07 site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# BRS07 CCI
 BRS07_joint_smooth <- BRS07_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -1816,13 +1819,15 @@ BRS07_joint_smooth <- BRS07_joint %>%
                             dj = 1/10)$series$browse_coral_core)
 
 
-wave_out <- analyze.wavelet(BRS07_joint_smooth, "browse_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+# BRS07 CCI
+#wave_out <- analyze.wavelet(BRS07_joint, "browse_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -1840,23 +1845,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -1874,11 +1880,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "browse_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "browse_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -1898,11 +1904,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "browse_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "browse_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -1919,24 +1925,43 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a slightly higher correlation around period 1. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 5)
 
 ```
 
 \newpage
 **DAR3**
-```{r Frequency_Analysis_Cocos_DAR3, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Cocos_DAR3, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Cocos Island DAR3 site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# DAR3 CCI
 DAR3_joint_smooth <- DAR3_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -1953,13 +1978,15 @@ DAR3_joint_smooth <- DAR3_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$Cocos_coral_core)
 
-wave_out <- analyze.wavelet(DAR3_joint_smooth, "Cocos_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#DAR3 CCI
+#wave_out <- analyze.wavelet(DAR3_joint, "Cocos_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -1977,23 +2004,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2011,11 +2039,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "Cocos_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "Cocos_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2036,11 +2064,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2057,24 +2085,43 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a slightly higher correlation around period 1. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 5)
 
 ```
 
 \newpage
 **DAR Long**
-```{r Frequency_Analysis_Cocos_DARL, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Cocos_DARL, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Cocos Island DARL site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# DARL CCI
 DARL_joint_smooth <- DARL_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2091,13 +2138,15 @@ DARL_joint_smooth <- DARL_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$Cocos_coral_core)
 
-wave_out <- analyze.wavelet(DARL_joint_smooth, "Cocos_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#DARL CCI
+#wave_out <- analyze.wavelet(DARL_joint, "Cocos_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2115,23 +2164,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2149,11 +2199,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "Cocos_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "Cocos_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2173,11 +2223,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "Cocos_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2194,24 +2244,43 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a similar correlation to NOAA vs CCORE around period 1. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 5)
 
 ```
 
 \newpage
 **Tantabiddi 13TNT**
-```{r Frequency_Analysis_Ningaloo_13TNT, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_13TNT, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Tantabiddi 13TNT site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# 13TNT CCI
 Tantabiddi_13TNT_joint_smooth <- Tantabiddi_13TNT_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2228,13 +2297,15 @@ Tantabiddi_13TNT_joint_smooth <- Tantabiddi_13TNT_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(Tantabiddi_13TNT_joint_smooth, "ningaloo_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#13TNT CCI
+#wave_out <- analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2252,23 +2323,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2286,11 +2358,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2310,11 +2382,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2331,24 +2403,44 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 13, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 13, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a similar correlation to NOAA vs CCORE around period 0.5 and 1. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 3)
 
 ```
 
 \newpage
 **Tantabiddi 08TNT**
-```{r Frequency_Analysis_Ningaloo_08TNT, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_08TNT, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Tantabiddi 08TNT site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# 08TNT CCI
+
 Tantabiddi_08TNT_joint_smooth <- Tantabiddi_08TNT_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2365,13 +2457,15 @@ Tantabiddi_08TNT_joint_smooth <- Tantabiddi_08TNT_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(Tantabiddi_08TNT_joint_smooth, "ningaloo_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#08TNT CCI
+#wave_out <- analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2389,23 +2483,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2423,11 +2518,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2447,11 +2542,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2468,24 +2563,44 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a similar correlation to NOAA vs CCORE around period 1 and 2. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 2)
 
 ```
 
 \newpage
 **Bundegi 13BND**
-```{r Frequency_Analysis_Ningaloo_13BND, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_13BND, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Bundegi 13BND site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# 13BND CCI
+
 Bundegi_13BND_joint_smooth <- Bundegi_13BND_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2502,13 +2617,15 @@ Bundegi_13BND_joint_smooth <- Bundegi_13BND_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(Bundegi_13BND_joint_smooth, "ningaloo_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#13BND CCI
+#wave_out <- analyze.wavelet(Bundegi_13BND_joint, "ningaloo_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2526,23 +2643,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2560,11 +2678,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2584,11 +2702,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2605,24 +2723,44 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 9.5, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 9.5, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a much higher correlation than NOAA vs CCORE around period 1. 
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 2)
 
 ```
 
 \newpage
 **Bundegi 08BND**
-```{r Frequency_Analysis_Ningaloo_08BND, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_08BND, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Bundegi 08BND site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# 08BND CCI
+
 Bundegi_08BND_joint_smooth <- Bundegi_08BND_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2639,13 +2777,15 @@ Bundegi_08BND_joint_smooth <- Bundegi_08BND_joint %>%
                             dt = 1/12,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(Bundegi_08BND_joint_smooth, "ningaloo_CCI",
-                            dt = 1/12,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#08BND CCI
+#wave_out <- analyze.wavelet(Bundegi_08BND_joint, "ningaloo_CCI",
+#                            dt = 1/12,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2663,23 +2803,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2697,11 +2838,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2721,11 +2862,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2742,31 +2883,52 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 12.5, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 12.5, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 # CCI vs CCORE also appears to have a similar correlation to NOAA vs CCORE at period 1. 
 # NOAA vs CCORE shows significant correlation as compared to CCI vs CCORE which does not show correlation at period 2.
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 4)
 
 ```
 \newpage
 \begin{center}
 
 Annual Coral Core Proxy Sites
+Period of one represents 10 years
 
 \end{center}
 
 \newpage
 **TNT07C**
-```{r Frequency_Analysis_Ningaloo_TNT07C, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_TNT07C, echo = FALSE, message = FALSE, warning = FALSE}
 
 #TNT07C site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# TNT07C CCI
+
 TNT07C_joint_smooth <- TNT07C_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2783,13 +2945,15 @@ TNT07C_joint_smooth <- TNT07C_joint %>%
                             dt = 1/10,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(TNT07C_joint_smooth, "ningaloo_CCI",
-                            dt = 1/10,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#TNT07C CCI
+#wave_out <- analyze.wavelet(TNT07C_joint, "ningaloo_CCI",
+#                            dt = 1/10,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2807,23 +2971,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
-             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2841,11 +3006,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -2865,11 +3030,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -2886,24 +3051,43 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 3, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 3, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 #  NOAA vs CCORE shows significant correlation at period 0.5, whereas CCI vs CCORE shows no significant correlation.
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 1)
 
 ```
 
 \newpage
 **BUN05A**
-```{r Frequency_Analysis_Ningaloo_BUN05A, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_Ningaloo_BUN05A, echo = FALSE, message = FALSE, warning = FALSE}
 
 #BUN05A site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# BUN05A CCI
 BUN05A_joint_smooth <- BUN05A_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -2920,13 +3104,15 @@ BUN05A_joint_smooth <- BUN05A_joint %>%
                             dt = 1/10,
                             dj = 1/10)$series$ningaloo_coral_core)
 
-wave_out <- analyze.wavelet(BUN05A_joint_smooth, "ningaloo_CCI",
-                            dt = 1,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#BUN05A CCI
+#wave_out <- analyze.wavelet(BUN05A_joint, "ningaloo_CCI",
+#                            dt = 1,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -2944,23 +3130,24 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   #geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
    #          data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -2978,11 +3165,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -3002,11 +3189,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "ningaloo_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -3023,24 +3210,43 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 6, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 6, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 #  NOAA vs CCORE shows significant correlation around period 0.4, whereas CCI vs CCORE significant correlation around period 2 and 5.
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 7)
 
 ```
 
 \newpage
 **HAB05B**
-```{r Frequency_Analysis_HAbrol_HAB05B, echo = FALSE, message = FALSE}
+```{r Frequency_Analysis_HAbrol_HAB05B, echo = FALSE, message = FALSE, warning = FALSE}
 
 #Houtman Abrolhos HAB05B site
 #use _joint file with combined SST/Proxy values from NOAA, CCI and CCore
 # CCI vs CCore and NOAA vs CCore for bivariate analysis
 
-# HAB05B CCI
 HAB05B_SrCa_joint_smooth <- HAB05B_SrCa_joint %>% 
   select(date, Site) %>% 
   add_column(
@@ -3057,13 +3263,15 @@ HAB05B_SrCa_joint_smooth <- HAB05B_SrCa_joint %>%
                             dt = 1/10,
                             dj = 1/10)$series$HAbrol_coral_core)
 
-wave_out <- analyze.wavelet(HAB05B_SrCa_joint_smooth, "HAbrol_CCI",
-                            dt = 1,
-                            dj = 1/10)
-wt.image(wave_out, n.levels = 250,
-         legend.params = list(lab = "wavelet power levels"),
-         show.date = TRUE, main = "CCI")
-wt.avg(wave_out, main = "CCI")
+#HAB05B CCI
+#wave_out <- analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_CCI",
+#                            dt = 1,
+#                            dj = 1/10)
+#wt.image(wave_out, n.levels = 250,
+#         legend.params = list(lab = "wavelet power levels"),
+#         show.date = TRUE, main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+
 #loess.span = 0 if the series is detrended already
 # otherwise, the algorithm will do the detrending for you. 
 # Just use the default value would be fine. 
@@ -3081,24 +3289,25 @@ wt.avg(wave_out, main = "CCI")
 par(mfrow= c(1,2))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wt.avg(wave_out, main = "CCI")
-wt.image(wave_out, n.levels = 250, show.date = TRUE, 
-         legend.params = list(mar = 7), main = "CCI")
+#wt.avg(wave_out, main = "CCI")
+#wt.image(wave_out, n.levels = 250, show.date = TRUE, 
+#         legend.params = list(mar = 7), main = "CCI")
 
 # I tried all the tricks but the average power plot refused to be shown on the right. 
 # Or if you just want the average power plot in ggplot format.
-ggplot(tibble(Period = wave_out$Period, 
-              Power.avg = wave_out$Power.avg,
-              Power.avg.pval = wave_out$Power.avg.pval)) + 
-  geom_line(aes(x = Period, y = Power.avg)) + 
-  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
-             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+#ggplot(tibble(Period = wave_out$Period, 
+#              Power.avg = wave_out$Power.avg,
+#              Power.avg.pval = wave_out$Power.avg.pval)) + 
+#  geom_line(aes(x = Period, y = Power.avg)) + 
+#  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+#             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   #geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
    #          data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   #no points for pval significance 0.05
-  ylab("Average Wavelet Power") + 
-  scale_colour_discrete(name = "Sig. Level") +
-  ggtitle("CCI")
+#  ylab("Average Wavelet Power") + 
+#  scale_colour_discrete(name = "Sig. Level") +
+#  ggtitle("CCI")
+
 # the green dots are covered by the pinkish ones 
 
 # bivariate wavelet analysis
@@ -3116,11 +3325,11 @@ wc.avg(wave_out_CCI_CCORE, main = "CCI vs CCORE")
 wc.image(wave_out_CCI_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "CCI vs CCORE")
 #Individual Series
-wt.image(wave_out_CCI_CCORE, my.series = "HAbrol_CCI", main = "CCI")
-wt.image(wave_out_CCI_CCORE, my.series = "HAbrol_coral_core", main = "CCORE")
+#wt.image(wave_out_CCI_CCORE, my.series = "HAbrol_CCI", main = "CCI")
+#wt.image(wave_out_CCI_CCORE, my.series = "HAbrol_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_CCI_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "CCI vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_CCI_CCORE, which.avg = "wc",
        legend.coords = "topleft", 
@@ -3140,11 +3349,11 @@ wc.avg(wave_out_NOAA_CCORE, main = "NOAA vs CCORE")
 wc.image(wave_out_NOAA_CCORE, show.date = TRUE, 
          plot.arrow = FALSE, main = "NOAA vs CCORE")
 #Individual Series
-wt.image(wave_out_NOAA_CCORE, my.series = "HAbrol_NOAA", main = "NOAA")
-wt.image(wave_out_NOAA_CCORE, my.series = "HAbrol_coral_core", main = "CCORE")
+#wt.image(wave_out_NOAA_CCORE, my.series = "HAbrol_NOAA", main = "NOAA")
+#wt.image(wave_out_NOAA_CCORE, my.series = "HAbrol_coral_core", main = "CCORE")
 #Correlation
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
-         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", 
+#         show.date = TRUE, plot.arrow = FALSE, main = "NOAA vs CCORE")
 #add-on to correlation
 wc.avg(wave_out_NOAA_CCORE, which.avg = "wc",
        legend.coords = "topleft",
@@ -3161,12 +3370,32 @@ par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 6, main = "CCI vs CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 6, main = "NOAA vs CCORE")
 
-par(mfrow=c(1,1))
-wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "CCI vs CCORE")
-wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
-         plot.arrow = FALSE, main = "NOAA vs CCORE")
+#par(mfrow=c(1,1))
+#wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "CCI vs CCORE")
+#wc.image(wave_out_NOAA_CCORE, which.image = "wc", show.date = TRUE, 
+#         plot.arrow = FALSE, main = "NOAA vs CCORE")
 #  NOAA vs CCORE shows significant correlation around period 0.4, whereas CCI vs CCORE significant correlation around period 2 and 5.
+
+## Plotting the two sets of average power together
+
+temp <- tibble(Period = wave_out_CCI_CCORE$Period, 
+              Power.avg = wave_out_CCI_CCORE$Power.xy.avg,
+              Power.avg.pval = wave_out_CCI_CCORE$Power.xy.avg.pval, 
+              type = "CCI vs CCore") %>% 
+         add_row(Period = wave_out_NOAA_CCORE$Period,
+                  Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
+                  type = "NOAA vs CCore")
+ggplot(temp) + 
+  geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
+             data = ~ filter(.x, Power.avg.pval < 0.1)) + 
+  geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
+             data = ~ filter(.x, Power.avg.pval < 0.05)) + 
+  ylab("Average Wavelet Power") + 
+  scale_colour_discrete(name = "Sig. Level and Series") +
+  xlim(0, 9)
 
 ```
 
