@@ -1630,7 +1630,7 @@ modelsummary::modelsummary(list("BRS05" = CCI_BRS05, "BRS07" = CCI_BRS07, "DARL"
 \newpage
 \begin{center}
 
-Monthly Coral Core Proxy Sites
+Monthly Coral Core Proxy Sites -
 Period of 1 represents 1 year
 
 \end{center}
@@ -1791,7 +1791,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5)
+  xlim(0, 3) +
+  ggtitle("BRS05")
 ```
 
 \newpage
@@ -1950,7 +1951,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5)
+  xlim(0, 5) +
+  ggtitle("BRS07")
 
 ```
 
@@ -2110,7 +2112,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5)
+  xlim(0, 5) +
+  ggtitle("DAR3")
 
 ```
 
@@ -2269,7 +2272,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5)
+  xlim(0, 5) +
+  ggtitle("DAR Long")
 
 ```
 
@@ -2428,7 +2432,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 3)
+  xlim(0, 3) +
+  ggtitle("13TNT")
 
 ```
 
@@ -2588,7 +2593,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 2)
+  xlim(0, 2.5) +
+  ggtitle("08TNT")
 
 ```
 
@@ -2748,7 +2754,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 2)
+  xlim(0, 2) +
+  ggtitle("13BND")
 
 ```
 
@@ -2909,13 +2916,14 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 4)
+  xlim(0, 4) +
+  ggtitle("08BND")
 
 ```
 \newpage
 \begin{center}
 
-Annual Coral Core Proxy Sites
+Annual Coral Core Proxy Sites -
 Period of one represents 10 years
 
 \end{center}
@@ -3076,7 +3084,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 1)
+  xlim(0, 1) +
+  ggtitle("TNT07C")
 
 ```
 
@@ -3235,7 +3244,8 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 7)
+  xlim(0, 1) +
+  ggtitle("BUN05A")
 
 ```
 
@@ -3395,11 +3405,12 @@ ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 9)
+  xlim(0, 1) +
+  ggtitle("HAB05B")
 
 ```
 
-\end
+
 ```{r Frequency_Analysis_Cocos, echo = FALSE, include = FALSE}
 #previous method for analysing wavelets
 library(dplR)
