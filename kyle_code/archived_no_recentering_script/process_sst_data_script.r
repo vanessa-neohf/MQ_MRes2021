@@ -25,12 +25,35 @@ cron_run = FALSE
 source('kyle_code/app_functions.r')  # This loads the functions from a separate file
 
 
-# ..... Data files ====
-in_dir <- 'kyle_code/data/'
-out_dir <- 'kyle_code/data/DHW/'
+# ..... Data file ====
+csv_file <- 'kyle_code/data/CCI_Bundegi.csv'
 
-sst_file <- 'CCI_Wallabi_Island.csv'
 
+# ..... settings ====
+sst_input <- 'mean temperature deg C'
+lat_input <- 'Lat'  # latitude column
+lon_input <- 'Lon'  # longitude column
+date_input <- 'daily_date'  # date column
+
+end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
+date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
+days <- 84  # number of days to calculate metrics for based on the date value for each row
+
+mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
+mmm_from_sst_start_year = 1985  # NOAA defaults, minus 1993
+mmm_from_sst_end_year = 1990  # NOAA defaults, minus 1993
+
+mmm_climatology_bool <- TRUE  # mean monthly maximum using NOAAs provided MMM climatology layer
+
+pros_sst <- TRUE  # get sea surface temperature metrics
+pros_dhw <- TRUE  # get degree heating weeks metrics
+pros_high_spells <- TRUE  # get high spells metrics
+pros_low_spells <- TRUE  # get low spells metrics
+
+threshold <- 1  # threshold in degrees celcius on top of MMM to calculate DHW, high spells and low spells. NOAA default is 1
+
+
+# ..... Constants ====
 
 # Local data directories
 local_dir_mmm_climatology = 'kyle_code/data/'
@@ -41,41 +64,12 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 
 # ..... import SST data ====
-sst_data <- read_csv(file = paste0(in_dir,sst_file)) %>% 
-  mutate(end_date = max(daily_date))
-
-# additional_data
-# scott_reef_dhw_from_app <- read_csv('kyle_code/data/DHW/NOAA_scott_reef_dhw_data_2016-05-18_from_app.csv')
+sst_data <- read_csv(file = csv_file) %>% 
+  mutate(end_date = max(daily_date)) #%>%   #only for CCI data
+  #mutate(Lat = -13.9238, Lon = 121.915) #only for CCI SCOTT REEF DATA
 
 
-# ..... settings ====
-sst_input <- 'mean temperature deg C'
-lat_input <- 'Lat'  # latitude column
-lon_input <- 'Lon'  # longitude column
-date_input <- 'daily_date'  # date column
-end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
-date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
-days <- 84  # number of days to calculate metrics for based on the date value for each row
-
-mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
-mmm_from_sst_start_year = 1985
-mmm_from_sst_end_year = 1993
-
-recenter_to_noaa50km_time = TRUE
-recenter_year =  1988.2857  # NOAA recenter year
-
-mmm_climatology_bool <- TRUE  # mean monthly maximum using NOAAs provided MMM climatology layer
-
-pros_sst <- TRUE  # get sea surface temperature metrics
-pros_dhw <- TRUE  # get degree heating weeks metrics
-pros_high_spells <- TRUE  # get high spells metrics
-pros_low_spells <- TRUE  # get low spells metrics
-
-threshold <- 1  # threshold in degrees Celsius on top of MMM to calculate DHW, high spells and low spells. NOAA default is 1
-
-
-# Main ====
-# ..... convert lat, long and date column names ====
+# ..... convert sst, lat, long and date column names ====
 sst_data <- sst_data %>%
   rename(sst = sst_input,
          Date = date_input,
@@ -85,12 +79,15 @@ sst_data <- sst_data %>%
   mutate(Date = date(parse_date_time(Date, orders = date_format)),
          end_date = date(parse_date_time(end_date, orders = date_format)))
 
+
 # ..... fix for brackets around sst data ====
 #only for CCI data
 sst_data <- sst_data %>%
   mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
   mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
   mutate(sst = as.numeric(sst))
+
+
 
 
 # ..... MMM Climatology recalculation ====
@@ -119,19 +116,15 @@ if(mmm_from_sst_bool) {
   calculate_maximum_monthly_mean_from_sst <- function(sst_data, 
                                                       mmm_from_sst_end_year, 
                                                       mmm_from_sst_start_year,
-                                                      group_vars,
-                                                      continue_with_missing_sst_data = F,
-                                                      recenter_to_noaa50km_time = T,
-                                                      recenter_year = 1988.2857) {
-  
+                                                      continue_with_missing_sst_data = F) {
+    
   mmm_from_sst_year_range <- paste0(mmm_from_sst_start_year,'_to_',mmm_from_sst_end_year)
   
   mmm_data <- sst_data %>%
     mutate(year = year(Date),
            month = month(Date)) %>%
     filter(year <= mmm_from_sst_end_year,
-           year >= mmm_from_sst_start_year) %>%
-    filter(!year %in% c(1991, 1992))
+           year >= mmm_from_sst_start_year)
   
   
   if(sum(is.na(mmm_data[['sst']])) > 0) {
@@ -141,71 +134,33 @@ if(mmm_from_sst_bool) {
     }
   }
   
-  mmms <- mmm_data %>%
-    group_by(across(c(group_vars, 'year', 'month'))) %>%
+  out <- mmm_data %>%
+    group_by(Latitude, Longitude, year, month) %>%
     distinct() %>%
     summarise(monthly_means = mean(sst)) %>%
-    ungroup()
-  
-  
-  if(recenter_to_noaa50km_time) {
+    ungroup() %>%
+    group_by(Latitude, Longitude, year) %>%
+    summarise(monthly_means = mean(monthly_means)) %>%
+    ungroup() %>%
+    group_by(Latitude, Longitude) %>%
+    filter(monthly_means == max(monthly_means)) %>%
+    rename(mmm_from_sst = monthly_means) %>%
+    mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
+    distinct()
     
-    print(paste0('recentering MMMs to ',recenter_year))
-    
-    locations_and_months <- mmms %>% dplyr::select(all_of(c(group_vars, 'month'))) %>% distinct()
-    
-    mmms_recentered <- lapply(1:nrow(locations_and_months), function(x) {
-      
-      selected_data <- locations_and_months[x,] %>% left_join(mmms)
-      
-      model <- lm(monthly_means ~ year, data = selected_data)
-      
-      mmm_recentered <- predict(object = model, newdata = data_frame(year = recenter_year))
-      
-      mmm_recentered <- data_frame(mmm_recentered = mmm_recentered, recenter_year = recenter_year)
-      
-      out <- bind_cols(selected_data[1,group_vars], mmm_recentered)
-      
-    }) %>% bind_rows()
-    
-    out <- mmms_recentered %>%
-      group_by(across(c(group_vars))) %>%
-      summarise(mmm_from_sst = max(mmm_recentered),
-                recenter_year = first(recenter_year)) %>%
-      mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
-      distinct()
-    
-  } else {
-    
-    out <- mmms %>%
-      group_by(across(c(group_vars, 'month'))) %>%
-      summarise(monthly_means = mean(monthly_means)) %>%
-      ungroup() %>%
-      group_by(across(c(group_vars))) %>%
-      summarise(mmm_from_sst = max(monthly_means)) %>%
-      mutate(mmm_from_sst_year_range = mmm_from_sst_year_range) %>%
-      distinct()
-    
-  }
   
   return(out)
   
-  }
-  
+}
 
+  
   mmm_from_sst <- 
     calculate_maximum_monthly_mean_from_sst(sst_data = sst_data,
                                             mmm_from_sst_end_year = mmm_from_sst_end_year,
                                             mmm_from_sst_start_year = mmm_from_sst_start_year,
-                                            group_vars = c('Latitude', 'Longitude'),
-                                            continue_with_missing_sst_data = F,
-                                            recenter_to_noaa50km_time = recenter_to_noaa50km_time,
-                                            recenter_year = recenter_year)
+                                            continue_with_missing_sst_data = F)
 
 }
-
-
-
 
 # ..... Add MMMs to SST and calculate DHW ====
 sst_data_plus_mmm_and_dhw <- sst_data %>% 
@@ -230,89 +185,71 @@ sst_data_plus_mmm_and_dhw <- sst_data %>%
   mutate(dhw_threshold = threshold)
 
 
-# Output
+# Check how your sst derived mmm's match up with the NOAA provided ones
+if(mmm_climatology_bool && mmm_from_sst_bool) {
+  
+  mean_absolute_deviation_from_noaa_mmm <- sst_data_plus_mmm_and_dhw %>%
+    mutate(mad = mmm_from_sst - mmm_climatology) %>%
+    group_by(Latitude, Longitude) %>%
+    summarise(mad = mean(abs(mad))) %>%
+    print() %>%
+    ungroup() %>%
+    summarise(mad = mean(abs(mad))) %>%
+    print()
+
+}
+
+
 
 # Calculating running sum of DHW
 #unique(sst_data$Reef_Site) #for NOAA combined file
 #unique(sst_data$subsite) for NOAA Scott reef combined file
 
-
 output_data <- sst_data_plus_mmm_and_dhw %>% 
-  #group_by(subsite) %>% #change group_by to Reef_Site for NOAA combined file to avoid duplicates by 13TNT/08TNT and 13BND/08BND
-  mutate(accum_DHW_12weeks = runner(x = degree_heating_week_mmm_from_sst, f = sum, k = days))
-  
-#output_data <- output_data %>%   #for NOAA combined file only
-#filter(subsite == "SCOTTSS2")
+  dplyr::select(-end_date) %>%
+  rename(DHW_value = degree_heating_week_mmm_from_sst) 
+  #filter(Date <= as_date("2016-05-18"))
 
-#output_data <- output_data %>% 
-  #filter(subsite == "SCOTTSS2")#, Data_Type == "Coral Core d18O Proxy")
+#output_data <- output_data %>%   #for NOAA combined file only
+  #filter(subsite == "SCOTTSS2")
+
+output_data <- output_data %>% 
+  mutate(accum_DHW_12weeks = runner(
+    x = output_data$DHW_value,
+    f = sum, 
+    k = "84 days",
+    idx = output_data$Date,
+    na_pad = TRUE
+  )) %>% 
+  mutate(Date = as.character(Date)) 
 
 max(output_data$accum_DHW_12weeks) #check accumulated DHW values
+ 
 
-out_name <- sst_file %>% str_replace(pattern = '.csv', replacement = '')
-out_name <- paste0(out_dir, out_name,'_with_mmm_and_dhw.csv')
+out_name <- csv_file %>% str_replace(pattern = '.csv', replacement = '')
+out_name <- paste0(out_name,'_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
-length(unique(output_data$Date)) == nrow(output_data) #check for any duplicates
+unique(length(output_data$Date)) == nrow(output_data) #check for any duplicates
 
-
-# ..... Compare to DHW from app ====
-
-compare_data <- scott_reef_dhw_from_app %>% 
-  dplyr::select(-end_date) %>%
-  left_join(output_data, 
-            by = c('Latitude', 'Longitude', 'Date'), 
-            suffix = c('.app', '.script'))
-
-# MMM climatology VS MMM from SST
-ggplot(data = compare_data,
-       aes(y = mmm_climatology.app,
-           x = mmm_from_sst)) + 
-  geom_point(size = 3, shape = 21, fill = 'red') +
-  geom_abline(intercept = 0, slope = 1) +
-  
-  labs(title = 'MMM from NOAA climatology vs MMM from SST (1985 to 1990 + 1993)',
-       subtitle = 'MMM from SST is consistently ~ 0.1 C lower (see 1:1 line)',
-       y = 'MMM from NOAA climatology',
-       x = 'MMM from SST (1985 to 1990 + 1993)') +
-  theme_minimal()
-
-
-# DHW product VS DHW from MMM from SST
-ggplot(data = compare_data,
-       aes(y = dhw_from_noaa_layers,
-           x = accum_DHW_12_weeks_kz)) + 
-  geom_point(size = 3, shape = 21, fill = 'red') +
-  geom_abline(intercept = 0, slope = 1) +
-  
-  labs(title = 'DHW from NOAA DHW layer vs DHW from MMM from SST (1985 to 1990 + 1993)',
-       subtitle = 'DHW from MMM from SST is consistently ~ 0.5 dhw higher (see 1:1 line)',
-       y = 'DHW from NOAA DHW layer',
-       x = 'DHW from MMM from SST (1985 to 1990 + 1993)') +
-  theme_minimal()
-
-
-# .... Combining files from the same data source ====
-csv_file_NOAA_1 <- 'kyle_code/data/coral_core_coordinates_scott_reef_NOAA_SST_data_with_mmm_and_dhw.csv'
-csv_file_NOAA_2 <- 'kyle_code/data/NOAA_SST_with_mmm_and_dhw.csv'
-NOAA_Scott_Reef <- read_csv(file = csv_file_NOAA_1)
-NOAA_Others <- read_csv(file = csv_file_NOAA_2)
-NOAA_Scott_Reef <- NOAA_Scott_Reef %>% #align column names with NOAA_Others
-  rename(Site = site,
-         Reef_Site = subsite) %>% 
-  mutate(Data_Type = "NOAA")
-NOAA_Others <- NOAA_Others %>% 
-  mutate(Data_Type = if_else(Data_Type == "NOAA", "NOAA", "NOAA"))
-
-NOAA_Combined <- bind_rows(csv_file_NOAA_1, csv_file_NOAA_2)
-
-out_name <- csv_file_NOAA_2 %>% str_replace(pattern = 'SST', replacement = 'Combined')
-
-#why does this not work?? <- out_name <- ('NOAA_Combined_with_mmm_and_dhw.csv')
-
-write_csv(x = NOAA_Combined, out_name)
-
+#testing ggplot
+csv_file <- 'kyle_code/data/CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv'
+SCOTT_RPO_1_CCI <- read_csv(file = csv_file)
+SCOTT_RPO_1_NOAA <- read_csv(file = csv_file)
+SCOTT_RPO_1_CCI <- SCOTT_RPO_1_CCI %>% 
+  dplyr::select(Date, accum_DHW_12weeks) %>% 
+  rename(CCI_accum_DHW_12weeks = accum_DHW_12weeks)
+SCOTT_RPO_1_NOAA <- SCOTT_RPO_1_NOAA %>% 
+  dplyr::select(Date, accum_DHW_12weeks) %>% 
+  rename(NOAA_accum_DHW_12weeks = accum_DHW_12weeks)
+combined <- full_join(SCOTT_RPO_1_CCI, SCOTT_RPO_1_NOAA)
+combined %>% 
+  ggplot(aes(x = CCI_accum_DHW_12weeks, y = NOAA_accum_DHW_12weeks)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  xlim(4,20) +
+  labs(title = "Scott_RPO_1")
 
 # Will finish metrics calculation if needed
 
