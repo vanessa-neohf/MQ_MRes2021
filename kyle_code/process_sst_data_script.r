@@ -26,10 +26,10 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 
 
 # ..... Data files ====
-in_dir <- 'kyle_code/data/'
+in_dir <- 'kyle_code/data/GCM/'
 out_dir <- 'kyle_code/data/DHW/'
 
-sst_file <- 'scott_reef_NOAA_SST_data.csv'
+sst_file <- 'GCM_SCOTTSS2.csv'
 
 
 # Local data directories
@@ -42,7 +42,9 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = paste0(in_dir,sst_file)) %>% 
-  mutate(end_date = max(date))  
+  mutate(date = as.Date(Time), subsite = "SCOTTSS2", sst = tos) %>% 
+  mutate(latitude = as.numeric("-13.9238"), longitude = as.numeric("121.915")) %>% 
+  mutate(end_date = max(date))
 
 # additional_data
 # scott_reef_dhw_from_app <- read_csv('kyle_code/data/DHW/NOAA_scott_reef_dhw_data_2016-05-18_from_app.csv')
@@ -54,7 +56,7 @@ lat_input <- 'latitude'  # latitude column
 lon_input <- 'longitude'  # longitude column
 date_input <- 'date'  # date column
 end_date_input <- 'end_date'  # date column indicating site date of interest i.e. the date to calculate metrics to
-date_format <- 'dmy'  # date column format. e.g. 31/02/1998 = 'dmy'
+date_format <- 'ymd'  # date column format. e.g. 31/02/1998 = 'dmy'
 days <- 84  # number of days to calculate metrics for based on the date value for each row
 
 mmm_from_sst_bool = TRUE  # Calculate mean monthly maximum from sst data based on a start and end date
@@ -87,10 +89,10 @@ sst_data <- sst_data %>%
 
 # ..... fix for brackets around sst data ====
 #only for CCI data (excluding Scott Reef)
-sst_data <- sst_data %>%
-  mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
-  mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
-  mutate(sst = as.numeric(sst))
+#sst_data <- sst_data %>%
+#  mutate(sst = str_replace(string = sst, pattern = '\\[\\[', replacement = '')) %>%
+#  mutate(sst = str_replace(string = sst, pattern = '\\]\\]', replacement = '')) %>%
+#  mutate(sst = as.numeric(sst))
 
 
 # ..... MMM Climatology recalculation ====
@@ -238,7 +240,7 @@ sst_data_plus_mmm_and_dhw <- sst_data %>%
 
 
 output_data <- sst_data_plus_mmm_and_dhw %>% 
-  group_by(subsite) %>% #change group_by to Reef_Site for NOAA combined file to avoid duplicates by 13TNT/08TNT and 13BND/08BND
+  #group_by(subsite) %>% #change group_by to Reef_Site for NOAA combined file to avoid duplicates by 13TNT/08TNT and 13BND/08BND
   mutate(accum_DHW_12weeks = runner(x = degree_heating_week_mmm_from_sst, f = sum, k = days))
   
 #output_data <- output_data %>%   #for NOAA scott combined file only
@@ -249,8 +251,8 @@ output_data <- sst_data_plus_mmm_and_dhw %>%
 
 max(output_data$accum_DHW_12weeks) #check accumulated DHW values
 
-out_name <- sst_file %>% str_replace(pattern = 'scott_reef_NOAA_SST_data.csv', replacement = '')
-out_name <- paste0(out_dir, out_name,'NOAA_SCOTTSS2_with_mmm_and_dhw.csv')
+out_name <- sst_file %>% str_replace(pattern = '.csv', replacement = '')
+out_name <- paste0(out_dir, out_name,'_with_mmm_and_dhw.csv')
 
 write_csv(x = output_data, out_name)
 
