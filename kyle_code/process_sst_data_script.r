@@ -29,7 +29,7 @@ source('kyle_code/app_functions.r')  # This loads the functions from a separate 
 in_dir <- 'kyle_code/data/GCM/'
 out_dir <- 'kyle_code/data/DHW/'
 
-sst_file <- 'GCM_SCOTTSS2.csv'
+sst_file <- 'GCM_Tantabiddi.csv'
 
 
 # Local data directories
@@ -42,8 +42,8 @@ mmm_climatology_file = 'ct5km_climatology_v3.1_20190101.nc'  # Used for NOAA's D
 
 # ..... import SST data ====
 sst_data <- read_csv(file = paste0(in_dir,sst_file)) %>% 
-  mutate(date = as.Date(Time), subsite = "SCOTTSS2", sst = tos) %>% 
-  mutate(latitude = as.numeric("-13.9238"), longitude = as.numeric("121.915")) %>% 
+  mutate(date = as.Date(Time), subsite = "Tantabiddi", sst = tos) %>% 
+  mutate(latitude = as.numeric("-21.91"), longitude = as.numeric("113.97")) %>% 
   mutate(end_date = max(date))
 
 # additional_data
