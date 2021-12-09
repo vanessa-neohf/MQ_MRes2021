@@ -1,4 +1,4 @@
-sst_monthly,Latitude,Longitude,monthly_date,Reef_Site,Data_Type,mmm_from_sst,date,anomaly,08TNT_DHM
+sst_monthly,Latitude,Longitude,monthly_date,Reef_Site,Data_Type,mmm_from_sst,date,anomaly,Tantabiddi_DHM
 26.319173720383645,-21.91,113.97,1996-04-01,08TNT,Coral Core (NOAA),27.87600302357453,1996 Apr,-1.5568293031908844,0
 24.874862367737208,-21.91,113.97,1996-05-01,08TNT,Coral Core (NOAA),27.87600302357453,1996 May,-3.0011406558373217,0
 NA,NA,NA,1996-06-01,08TNT,Coral Core (NOAA),NA,1996 Jun,0,NA

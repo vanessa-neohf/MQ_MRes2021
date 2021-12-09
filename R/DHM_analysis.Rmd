@@ -78,26 +78,27 @@ NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_SST_HAB10A_SrCa_with_mmm_an
 
 ```
 
-```{r CCore_Data_with_mmm_from_sst, include = FALSE}
-
-#Coral Core SST data calibrated from CCI data (with mmm)
-#maximum monthly mean (mmm) calculated from 1985-1990
-#BRS05, BRS07, DAR Long sites - with SST data from 1985-1990
-#exclude d18O coral proxy sites with monthly data - Wallabi Island, TNT
-#exclude coral proxy data with annual SST - HAB10A, HAB05B, BUN05A, TNT07C
-
-CCore_BRS05_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS05_CCI_with_mmm.csv")) %>%
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_BRS07_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS07_CCI_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_DARL_CCI <- read_csv(here::here("data_raw", "CCore_SST_DARL_CCI_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
+```{r CCore_Calibrated_SST_Data, include = FALSE}
 
 #Coral Core SST data calibrated from CCI data (without mmm)
 #DAR3, 13TNT, 08TNT, 13BND, 08BND - will use mmm from CCI satellite data
+#exclude d18O coral proxy sites with monthly data - Wallabi Island, TNT
+#exclude coral proxy data with annual SST - HAB10A, HAB05B, BUN05A, TNT07C
+
+CCore_BRS05_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS05_CCI.csv")) %>%
+  rename(Date = date) %>% 
+  mutate(Date = round_date(Date, unit = "month")) %>% 
+  mutate(Latitude = "-14.105", Longitude = "123.5356924", yearmonth = yearmonth(Date), end_date = max(Date), Site = "BRS05")
+
+CCore_BRS07_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS07_CCI.csv")) %>% 
+  rename(Date = date) %>% 
+  mutate(Date = round_date(Date, unit = "month")) %>% 
+  mutate(Latitude = "-14.121", Longitude = "123.5467277", yearmonth = yearmonth(Date), end_date = max(Date), Site = "BRS07")
+
+CCore_DARL_CCI <- read_csv(here::here("data_raw", "CCore_SST_DARL_CCI.csv")) %>% 
+  rename(Date = date) %>% 
+  mutate(Date = round_date(Date, unit = "month")) %>% 
+  mutate(Latitude = "-12.0875", Longitude = "96.875", yearmonth = yearmonth(Date), end_date = max(Date), Site = "DARL")
 
 CCore_DAR3_CCI <- read_csv(here::here("data_raw", "CCore_SST_DAR3_CCI.csv")) %>% 
   rename(Date = date) %>% 
@@ -125,24 +126,25 @@ CCore_08BND_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08BND_CCI
   mutate(Latitude = "-21.87", Longitude = "114.156", yearmonth = yearmonth(Date), end_date = max(Date), Site = "08BND")
 
 
-#Coral Core SST data calibrated from NOAA data (with mmm)
-#maximum monthly mean (mmm) calculated from 1985-1990
-#BRS05, BRS07, DAR Long sites - with SST data from 1985-1990
+#Coral Core SST data calibrated from NOAA data (without mmm)
+#DAR3, 13TNT, 08TNT, 13BND, 08BND - will use mmm from NOAA satellite data
 #exclude d18O coral proxy sites with monthly data - Wallabi Island, TNT
 #exclude coral proxy data with annual SST - HAB10A, HAB05B, BUN05A, TNT07C
 
-CCore_BRS05_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS05_NOAA_with_mmm.csv")) %>%
+CCore_BRS05_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS05_NOAA.csv")) %>%
+  rename(Date = date) %>% 
   mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_BRS07_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS07_NOAA_with_mmm.csv")) %>%
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
-CCore_DARL_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DARL_NOAA_with_mmm.csv")) %>% 
-  mutate(Date = round_date(Date, unit = "month")) %>% 
-  mutate(yearmonth = yearmonth(Date))
+  mutate(Latitude = "-14.105", Longitude = "123.5356924", yearmonth = yearmonth(Date), end_date = max(Date), Site = "BRS05")
 
-#Coral Core SST data calibrated from NOAA data (without mmm)
-#DAR3, 13TNT, 08TNT, 13BND, 08BND - will use mmm from NOAA satellite data
+CCore_BRS07_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS07_NOAA.csv")) %>%
+  rename(Date = date) %>% 
+  mutate(Date = round_date(Date, unit = "month")) %>% 
+  mutate(Latitude = "-14.121", Longitude = "123.5467277", yearmonth = yearmonth(Date), end_date = max(Date), Site = "BRS07")
+
+CCore_DARL_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DARL_NOAA.csv")) %>% 
+  rename(Date = date) %>% 
+  mutate(Date = round_date(Date, unit = "month")) %>% 
+  mutate(Latitude = "-12.0875", Longitude = "96.875", yearmonth = yearmonth(Date), end_date = max(Date), Site = "DARL")
 
 CCore_DAR3_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DAR3_NOAA.csv")) %>% 
   rename(Date = date) %>% 
@@ -168,6 +170,104 @@ CCore_08BND_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08BND_NO
   rename(Date = date) %>% 
   mutate(Date = round_date(Date, unit = "month")) %>% 
   mutate(Latitude = "-21.87", Longitude = "114.156", yearmonth = yearmonth(Date), end_date = max(Date), Site = "08BND")
+
+```
+
+```{r GCM_with_mmm_from_sst, include = FALSE}
+GCM_BRS05 <- read_csv(here::here("data_raw/GCM", "GCM_BRS05_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_BRS07 <- read_csv(here::here("data_raw/GCM", "GCM_BRS07_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_BUN05A <- read_csv(here::here("data_raw/GCM", "GCM_BUN05A_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_Bundegi <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_DARL <- read_csv(here::here("data_raw/GCM", "GCM_DAR_Long_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_DAR3 <- read_csv(here::here("data_raw/GCM", "GCM_DAR3_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_HAB05B <- read_csv(here::here("data_raw/GCM", "GCM_HAB05B_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_HAB10A <- read_csv(here::here("data_raw/GCM", "GCM_HAB10A_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTT_RPO_1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTT_SL4 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_SL4_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTT_SS3 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_SS3_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTNR1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTNR1_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTSL1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTSL2 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL2_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTSL3 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL3_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTSS1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSS1_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_SCOTTSS2 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSS2_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_Tantabiddi <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
+
+GCM_TNT07C <- read_csv(here::here("data_raw/GCM", "GCM_TNT07C_with_mmm_and_dhw.csv")) %>% 
+  rename(Reef_Site = subsite) %>% 
+  mutate(Data_Type = "GCM", Year = year(Time), Month = month(Time, label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-"))
 
 ```
 
@@ -405,18 +505,25 @@ NOAA_BRS05 <- NOAA_BRS05 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_BRS05 <- GCM_BRS05 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
 CCore_BRS05_CCI <- CCore_BRS05_CCI %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (CCI)", mmm_from_sst = unique(CCI_BRS05$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_BRS05$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
+BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, GCM_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
 
 ggplot(BRS05_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -449,18 +556,26 @@ NOAA_BRS07 <- NOAA_BRS07 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_BRS07 <- GCM_BRS07 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
 CCore_BRS07_CCI <- CCore_BRS07_CCI %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (CCI)", mmm_from_sst = unique(CCI_BRS07$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 CCore_BRS07_NOAA <- CCore_BRS07_NOAA %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_BRS07$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 
-BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
+BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
 
 ggplot(BRS07_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -492,6 +607,14 @@ NOAA_DAR3 <- NOAA_DAR3 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_DAR3 <- GCM_DAR3 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
 CCore_DAR3_CCI <- CCore_DAR3_CCI %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
   mutate(Data_Type = "Coral Core (CCI)", mmm_from_sst = unique(CCI_DAR3$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
@@ -503,7 +626,7 @@ CCore_DAR3_NOAA <- CCore_DAR3_NOAA %>%
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 
-DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, CCore_DAR3_CCI, CCore_DAR3_NOAA)
+DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, GCM_DAR3, CCore_DAR3_CCI, CCore_DAR3_NOAA)
 
 ggplot(DAR3_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -535,18 +658,26 @@ NOAA_DARL <- NOAA_DARL %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_DARL <- GCM_DARL %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
 
 CCore_DARL_CCI <- CCore_DARL_CCI %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (CCI)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (CCI)", mmm_from_sst = unique(CCI_DARL$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 CCore_DARL_NOAA <- CCore_DARL_NOAA %>% 
   rename(sst_monthly = sst, date = yearmonth, Reef_Site = Site) %>% 
-  mutate(Data_Type = "Coral Core (NOAA)", anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
+  mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_DARL$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
+DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, GCM_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
 
 ggplot(DARL_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -578,7 +709,15 @@ NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTT_RPO_1_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1)
+GCM_SCOTT_RPO_1 <- GCM_SCOTT_RPO_1 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTT_RPO_1_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1, GCM_SCOTT_RPO_1)
 
 ggplot(SCOTT_RPO_1_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -610,7 +749,15 @@ NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTT_SL4_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4)
+GCM_SCOTT_SL4 <- GCM_SCOTT_SL4 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTT_SL4_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4, GCM_SCOTT_SL4)
 
 ggplot(SCOTT_SL4_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -642,7 +789,15 @@ NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTT_SS3_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3)
+GCM_SCOTT_SS3 <- GCM_SCOTT_SS3 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTT_SS3_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3, GCM_SCOTT_SS3)
 
 ggplot(SCOTT_SS3_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -674,7 +829,15 @@ NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTNR1_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1)
+GCM_SCOTTNR1 <- GCM_SCOTTNR1 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTNR1_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1, GCM_SCOTTNR1)
 
 ggplot(SCOTTNR1_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -706,7 +869,15 @@ NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTSL1_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1)
+GCM_SCOTTSL1 <- GCM_SCOTTSL1 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTSL1_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1, GCM_SCOTTSL1)
 
 ggplot(SCOTTSL1_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -738,7 +909,15 @@ NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTSL2_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2)
+GCM_SCOTTSL2 <- GCM_SCOTTSL2 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTSL2_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2, GCM_SCOTTSL2)
 
 ggplot(SCOTTSL2_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -770,7 +949,15 @@ NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTSL3_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3)
+GCM_SCOTTSL3 <- GCM_SCOTTSL3 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTSL3_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3, GCM_SCOTTSL3)
 
 ggplot(SCOTTSL3_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -802,7 +989,15 @@ NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTSS1_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1)
+GCM_SCOTTSS1 <- GCM_SCOTTSS1 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTSS1_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1, GCM_SCOTTSS1)
 
 ggplot(SCOTTSS1_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -834,7 +1029,15 @@ NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-SCOTTSS2_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2)
+GCM_SCOTTSS2 <- GCM_SCOTTSS2 %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+SCOTTSS2_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2, GCM_SCOTTSS2)
 
 ggplot(SCOTTSS2_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -847,8 +1050,8 @@ ggplot(SCOTTSS2_Combined)+
 
 
 #Ningaloo Bundegi
-CCI_Bundegi <- CCI_Bundegi %>% 
-  mutate(Reef_Site = "Bundegi", Data_Type = "CCI") %>% 
+CCI_Bundegi_13BND <- CCI_Bundegi %>% 
+  mutate(Reef_Site = "13BND", Data_Type = "CCI") %>% 
   group_by(monthly_date) %>% 
   mutate(sst_monthly = mean(sst)) %>% 
   ungroup() %>% 
@@ -856,12 +1059,22 @@ CCI_Bundegi <- CCI_Bundegi %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-NOAA_Bundegi <- NOAA_Bundegi %>% 
+NOAA_Bundegi_13BND <- NOAA_Bundegi %>% 
   mutate(Data_Type = "NOAA", Year = year(Date), Month = month((Date), label = TRUE)) %>% 
   mutate(monthly_date = str_c(Year, Month, sep = "-")) %>% 
   group_by(monthly_date) %>% 
   mutate(sst_monthly = mean(sst)) %>% 
   ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "13BND")) %>%
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+GCM_Bundegi_13BND <- GCM_Bundegi %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "13BND")) %>%
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
@@ -886,7 +1099,7 @@ CCore_13BND_NOAA <- CCore_13BND_NOAA %>%
   mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_Bundegi$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Bundegi_13BND_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi, CCore_13BND_CCI, CCore_13BND_NOAA)
+Bundegi_13BND_Combined <- rbind(CCI_Bundegi_13BND, NOAA_Bundegi_13BND, GCM_Bundegi_13BND, CCore_13BND_CCI, CCore_13BND_NOAA)
 
 ggplot(Bundegi_13BND_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -896,6 +1109,36 @@ ggplot(Bundegi_13BND_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
   )
+
+
+CCI_Bundegi_08BND <- CCI_Bundegi %>% 
+  mutate(Reef_Site = "08BND", Data_Type = "CCI") %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+NOAA_Bundegi_08BND <- NOAA_Bundegi %>% 
+  mutate(Data_Type = "NOAA", Year = year(Date), Month = month((Date), label = TRUE)) %>% 
+  mutate(monthly_date = str_c(Year, Month, sep = "-")) %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "08BND")) %>%
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+GCM_Bundegi_08BND <- GCM_Bundegi %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "08BND")) %>%
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
 CCore_08BND_CCI <- CCore_08BND_CCI %>% 
   #to handle duplicates for filling gaps later
@@ -917,7 +1160,7 @@ CCore_08BND_NOAA <- CCore_08BND_NOAA %>%
   mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_Bundegi$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Bundegi_08BND_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi, CCore_08BND_CCI, CCore_08BND_NOAA)
+Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bundegi_08BND, CCore_08BND_CCI, CCore_08BND_NOAA)
 
 ggplot(Bundegi_08BND_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -949,6 +1192,15 @@ NOAA_Tantabiddi_13TNT <- NOAA_Tantabiddi %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_Tantabiddi_13TNT <- GCM_Tantabiddi %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Tantabiddi", "13TNT")) %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
 CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
   #to handle duplicates for filling gaps later
   group_by(yearmonth) %>% 
@@ -969,7 +1221,7 @@ CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>%
   mutate(Data_Type = "Coral Core (NOAA)", mmm_from_sst = unique(NOAA_Tantabiddi_13TNT$mmm_from_sst), anomaly = sst_monthly - mmm_from_sst, monthly_date = date) %>% 
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
-Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
+Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, GCM_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
 
 ggplot(Tantabiddi_13TNT_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -1001,6 +1253,15 @@ NOAA_Tantabiddi_08TNT <- NOAA_Tantabiddi %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
+GCM_Tantabiddi_08TNT <- GCM_Tantabiddi %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Tantabiddi", "08TNT")) %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
 CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
   #to handle duplicates for filling gaps later
   group_by(yearmonth) %>% 
@@ -1022,7 +1283,7 @@ CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>%
   select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst, date, anomaly)
 
 
-Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
+Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, GCM_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
 
 ggplot(Tantabiddi_08TNT_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -1054,7 +1315,15 @@ NOAA_HAB05B <- NOAA_HAB05B %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-HAB05B_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
+GCM_HAB05B <- GCM_HAB05B %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+HAB05B_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B, GCM_HAB05B)
 
 ggplot(HAB05B_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -1086,7 +1355,15 @@ NOAA_HAB10A <- NOAA_HAB10A %>%
   distinct() %>% 
   mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
 
-HAB10A_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
+GCM_HAB10A <- GCM_HAB10A %>% 
+  group_by(monthly_date) %>% 
+  mutate(sst_monthly = mean(sst)) %>% 
+  ungroup() %>% 
+  select(sst_monthly, Latitude, Longitude, monthly_date, Reef_Site, Data_Type, mmm_from_sst) %>% 
+  distinct() %>% 
+  mutate(date = monthly_date, monthly_date = ym(monthly_date), anomaly = sst_monthly - mmm_from_sst)
+
+HAB10A_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A, GCM_HAB10A)
 
 ggplot(HAB10A_Combined)+
   geom_path(aes(x = monthly_date, y = anomaly, color = Data_Type), alpha = 0.5, size = 1.3) +
@@ -1249,6 +1526,24 @@ NOAA_BRS05 <- NOAA_BRS05 %>%
 
 write_csv(NOAA_BRS05, here::here("data_raw/DHM/NOAA_BRS05_DHM.csv"))
 
+#DHM calculations for GCM dataset
+BRS05_DHM <- rep(0,nrow(GCM_BRS05))
+BRS05_negative_anomaly <- 0
+for (i in 1:nrow(GCM_BRS05)){
+  if(GCM_BRS05$anomaly[i] > 0) {
+    BRS05_negative_anomaly <- 
+      BRS05_negative_anomaly + GCM_BRS05$anomaly[i]
+  } else {
+    BRS05_negative_anomaly <- 0
+  }
+  BRS05_DHM[i] <- BRS05_negative_anomaly
+}
+
+GCM_BRS05 <- GCM_BRS05 %>% 
+  add_column(BRS05_DHM)
+
+write_csv(GCM_BRS05, here::here("data_raw/DHM/GCM_BRS05_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 BRS05_DHM <- rep(0,nrow(CCore_BRS05_CCI))
 BRS05_negative_anomaly <- 0
@@ -1288,7 +1583,7 @@ CCore_BRS05_NOAA <- CCore_BRS05_NOAA %>%
 write_csv(CCore_BRS05_NOAA, here::here("data_raw/DHM/CCore_BRS05_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
+BRS05_Combined <- rbind(CCI_BRS05, NOAA_BRS05, GCM_BRS05, CCore_BRS05_CCI, CCore_BRS05_NOAA)
 
 #DHM >= 1
 High_BRS05_DHM <- BRS05_Combined %>% 
@@ -1381,6 +1676,24 @@ NOAA_BRS07 <- NOAA_BRS07 %>%
 
 write_csv(NOAA_BRS07, here::here("data_raw/DHM/NOAA_BRS07_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+BRS07_DHM <- rep(0,nrow(GCM_BRS07))
+BRS07_negative_anomaly <- 0
+for (i in 1:nrow(GCM_BRS07)){
+  if(GCM_BRS07$anomaly[i] > 0) {
+    BRS07_negative_anomaly <- 
+      BRS07_negative_anomaly + GCM_BRS07$anomaly[i]
+  } else {
+    BRS07_negative_anomaly <- 0
+  }
+  BRS07_DHM[i] <- BRS07_negative_anomaly
+}
+
+GCM_BRS07 <- GCM_BRS07 %>% 
+  add_column(BRS07_DHM) 
+
+write_csv(GCM_BRS07, here::here("data_raw/DHM/GCM_BRS07_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 BRS07_DHM <- rep(0,nrow(CCore_BRS07_CCI))
 BRS07_negative_anomaly <- 0
@@ -1420,7 +1733,7 @@ CCore_BRS07_NOAA <- CCore_BRS07_NOAA %>%
 write_csv(CCore_BRS07_NOAA, here::here("data_raw/DHM/CCore_BRS07_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
+BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
 
 #DHM >= 1
 High_BRS07_DHM <- BRS07_Combined %>% 
@@ -1511,6 +1824,24 @@ NOAA_DAR3 <- NOAA_DAR3 %>%
 
 write_csv(NOAA_DAR3, here::here("data_raw/DHM/NOAA_DAR3_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+DAR3_DHM <- rep(0,nrow(GCM_DAR3))
+DAR3_negative_anomaly <- 0
+for (i in 1:nrow(GCM_DAR3)){
+  if(GCM_DAR3$anomaly[i] > 0) {
+    DAR3_negative_anomaly <- 
+      DAR3_negative_anomaly + GCM_DAR3$anomaly[i]
+  } else {
+    DAR3_negative_anomaly <- 0
+  }
+  DAR3_DHM[i] <- DAR3_negative_anomaly
+}
+
+GCM_DAR3 <- GCM_DAR3 %>% 
+  add_column(DAR3_DHM)
+
+write_csv(GCM_DAR3, here::here("data_raw/DHM/GCM_DAR3_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 DAR3_DHM <- rep(0,nrow(CCore_DAR3_CCI))
 DAR3_negative_anomaly <- 0
@@ -1550,7 +1881,7 @@ CCore_DAR3_NOAA <- CCore_DAR3_NOAA %>%
 write_csv(CCore_DAR3_NOAA, here::here("data_raw/DHM/CCore_DAR3_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, CCore_DAR3_CCI, CCore_DAR3_NOAA)
+DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, GCM_DAR3, CCore_DAR3_CCI, CCore_DAR3_NOAA)
 
 #DHM in descending order
 #Max_DHM_CCI_DAR3 <- CCI_DAR3 %>% 
@@ -1648,6 +1979,24 @@ NOAA_DARL <- NOAA_DARL %>%
 
 write_csv(NOAA_DARL, here::here("data_raw/DHM/NOAA_DARL_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+DARL_DHM <- rep(0,nrow(GCM_DARL))
+DARL_negative_anomaly <- 0
+for (i in 1:nrow(GCM_DARL)){
+  if(GCM_DARL$anomaly[i] > 0) {
+    DARL_negative_anomaly <- 
+      DARL_negative_anomaly + GCM_DARL$anomaly[i]
+  } else {
+    DARL_negative_anomaly <- 0
+  }
+  DARL_DHM[i] <- DARL_negative_anomaly
+}
+
+GCM_DARL <- GCM_DARL %>% 
+  add_column(DARL_DHM)
+
+write_csv(GCM_DARL, here::here("data_raw/DHM/GCM_DARL_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 DARL_DHM <- rep(0,nrow(CCore_DARL_CCI))
 DARL_negative_anomaly <- 0
@@ -1687,7 +2036,7 @@ CCore_DARL_NOAA <- CCore_DARL_NOAA %>%
 write_csv(CCore_DARL_NOAA, here::here("data_raw/DHM/CCore_DARL_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
+DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, GCM_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
 
 #DHM >= 1
 High_DARL_DHM <- DARL_Combined %>% 
@@ -1792,11 +2141,29 @@ NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>%
 
 write_csv(NOAA_SCOTT_RPO_1, here::here("data_raw/DHM/NOAA_SCOTT_RPO_1_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTT_RPO_1_DHM <- rep(0,nrow(GCM_SCOTT_RPO_1))
+SCOTT_RPO_1_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTT_RPO_1)){
+  if(GCM_SCOTT_RPO_1$anomaly[i] > 0) {
+    SCOTT_RPO_1_negative_anomaly <- 
+      SCOTT_RPO_1_negative_anomaly + GCM_SCOTT_RPO_1$anomaly[i]
+  } else {
+    SCOTT_RPO_1_negative_anomaly <- 0
+  }
+  SCOTT_RPO_1_DHM[i] <- SCOTT_RPO_1_negative_anomaly
+}
+
+GCM_SCOTT_RPO_1 <- GCM_SCOTT_RPO_1 %>% 
+  add_column(SCOTT_RPO_1_DHM)
+
+write_csv(GCM_SCOTT_RPO_1, here::here("data_raw/DHM/GCM_SCOTT_RPO_1_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTT_RPO_1_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1)
+SCOTT_RPO_1_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1, GCM_SCOTT_RPO_1)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTT_RPO_1 <- CCI_SCOTT_RPO_1 %>% 
@@ -1875,11 +2242,29 @@ NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>%
 
 write_csv(NOAA_SCOTT_SL4, here::here("data_raw/DHM/NOAA_SCOTT_SL4_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTT_SL4_DHM <- rep(0,nrow(GCM_SCOTT_SL4))
+SCOTT_SL4_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTT_SL4)){
+  if(GCM_SCOTT_SL4$anomaly[i] > 0) {
+    SCOTT_SL4_negative_anomaly <- 
+      SCOTT_SL4_negative_anomaly + GCM_SCOTT_SL4$anomaly[i]
+  } else {
+    SCOTT_SL4_negative_anomaly <- 0
+  }
+  SCOTT_SL4_DHM[i] <- SCOTT_SL4_negative_anomaly
+}
+
+GCM_SCOTT_SL4 <- GCM_SCOTT_SL4 %>% 
+  add_column(SCOTT_SL4_DHM)
+
+write_csv(GCM_SCOTT_SL4, here::here("data_raw/DHM/GCM_SCOTT_SL4_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTT_SL4_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4)
+SCOTT_SL4_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4, GCM_SCOTT_SL4)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTT_SL4 <- CCI_SCOTT_SL4 %>% 
@@ -1958,11 +2343,29 @@ NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>%
 
 write_csv(NOAA_SCOTT_SS3, here::here("data_raw/DHM/NOAA_SCOTT_SS3_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTT_SS3_DHM <- rep(0,nrow(GCM_SCOTT_SS3))
+SCOTT_SS3_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTT_SS3)){
+  if(GCM_SCOTT_SS3$anomaly[i] > 0) {
+    SCOTT_SS3_negative_anomaly <- 
+      SCOTT_SS3_negative_anomaly + GCM_SCOTT_SS3$anomaly[i]
+  } else {
+    SCOTT_SS3_negative_anomaly <- 0
+  }
+  SCOTT_SS3_DHM[i] <- SCOTT_SS3_negative_anomaly
+}
+
+GCM_SCOTT_SS3 <- GCM_SCOTT_SS3 %>% 
+  add_column(SCOTT_SS3_DHM)
+
+write_csv(GCM_SCOTT_SS3, here::here("data_raw/DHM/GCM_SCOTT_SS3_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTT_SS3_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3)
+SCOTT_SS3_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3, GCM_SCOTT_SS3)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTT_SS3 <- CCI_SCOTT_SS3 %>% 
@@ -2042,11 +2445,29 @@ NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>%
 
 write_csv(NOAA_SCOTTNR1, here::here("data_raw/DHM/NOAA_SCOTTNR1_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTNR1_DHM <- rep(0,nrow(GCM_SCOTTNR1))
+SCOTTNR1_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTNR1)){
+  if(GCM_SCOTTNR1$anomaly[i] > 0) {
+    SCOTTNR1_negative_anomaly <- 
+      SCOTTNR1_negative_anomaly + GCM_SCOTTNR1$anomaly[i]
+  } else {
+    SCOTTNR1_negative_anomaly <- 0
+  }
+  SCOTTNR1_DHM[i] <- SCOTTNR1_negative_anomaly
+}
+
+GCM_SCOTTNR1 <- GCM_SCOTTNR1 %>% 
+  add_column(SCOTTNR1_DHM)
+
+write_csv(GCM_SCOTTNR1, here::here("data_raw/DHM/GCM_SCOTTNR1_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTNR1_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1)
+SCOTTNR1_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1, GCM_SCOTTNR1)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTNR1 <- CCI_SCOTTNR1 %>% 
@@ -2126,11 +2547,29 @@ NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>%
 
 write_csv(NOAA_SCOTTSL1, here::here("data_raw/DHM/NOAA_SCOTTSL1_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTSL1_DHM <- rep(0,nrow(GCM_SCOTTSL1))
+SCOTTSL1_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTSL1)){
+  if(GCM_SCOTTSL1$anomaly[i] > 0) {
+    SCOTTSL1_negative_anomaly <- 
+      SCOTTSL1_negative_anomaly + GCM_SCOTTSL1$anomaly[i]
+  } else {
+    SCOTTSL1_negative_anomaly <- 0
+  }
+  SCOTTSL1_DHM[i] <- SCOTTSL1_negative_anomaly
+}
+
+GCM_SCOTTSL1 <- GCM_SCOTTSL1 %>% 
+  add_column(SCOTTSL1_DHM)
+
+write_csv(GCM_SCOTTSL1, here::here("data_raw/DHM/GCM_SCOTTSL1_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTSL1_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1)
+SCOTTSL1_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1, GCM_SCOTTSL1)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTSL1 <- CCI_SCOTTSL1 %>% 
@@ -2210,11 +2649,29 @@ NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>%
 
 write_csv(NOAA_SCOTTSL2, here::here("data_raw/DHM/NOAA_SCOTTSL2_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTSL2_DHM <- rep(0,nrow(GCM_SCOTTSL2))
+SCOTTSL2_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTSL2)){
+  if(GCM_SCOTTSL2$anomaly[i] > 0) {
+    SCOTTSL2_negative_anomaly <- 
+      SCOTTSL2_negative_anomaly + GCM_SCOTTSL2$anomaly[i]
+  } else {
+    SCOTTSL2_negative_anomaly <- 0
+  }
+  SCOTTSL2_DHM[i] <- SCOTTSL2_negative_anomaly
+}
+
+GCM_SCOTTSL2 <- GCM_SCOTTSL2 %>% 
+  add_column(SCOTTSL2_DHM)
+
+write_csv(GCM_SCOTTSL2, here::here("data_raw/DHM/GCM_SCOTTSL2_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTSL2_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2)
+SCOTTSL2_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2, GCM_SCOTTSL2)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTSL2 <- CCI_SCOTTSL2 %>% 
@@ -2293,11 +2750,29 @@ NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>%
 
 write_csv(NOAA_SCOTTSL3, here::here("data_raw/DHM/NOAA_SCOTTSL3_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTSL3_DHM <- rep(0,nrow(GCM_SCOTTSL3))
+SCOTTSL3_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTSL3)){
+  if(GCM_SCOTTSL3$anomaly[i] > 0) {
+    SCOTTSL3_negative_anomaly <- 
+      SCOTTSL3_negative_anomaly + GCM_SCOTTSL3$anomaly[i]
+  } else {
+    SCOTTSL3_negative_anomaly <- 0
+  }
+  SCOTTSL3_DHM[i] <- SCOTTSL3_negative_anomaly
+}
+
+GCM_SCOTTSL3 <- GCM_SCOTTSL3 %>% 
+  add_column(SCOTTSL3_DHM)
+
+write_csv(GCM_SCOTTSL3, here::here("data_raw/DHM/GCM_SCOTTSL3_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTSL3_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3)
+SCOTTSL3_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3, GCM_SCOTTSL3)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTSL3 <- CCI_SCOTTSL3 %>% 
@@ -2376,11 +2851,29 @@ NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>%
 
 write_csv(NOAA_SCOTTSS1, here::here("data_raw/DHM/NOAA_SCOTTSS1_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTSS1_DHM <- rep(0,nrow(GCM_SCOTTSS1))
+SCOTTSS1_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTSS1)){
+  if(GCM_SCOTTSS1$anomaly[i] > 0) {
+    SCOTTSS1_negative_anomaly <- 
+      SCOTTSS1_negative_anomaly + GCM_SCOTTSS1$anomaly[i]
+  } else {
+    SCOTTSS1_negative_anomaly <- 0
+  }
+  SCOTTSS1_DHM[i] <- SCOTTSS1_negative_anomaly
+}
+
+GCM_SCOTTSS1 <- GCM_SCOTTSS1 %>% 
+  add_column(SCOTTSS1_DHM)
+
+write_csv(GCM_SCOTTSS1, here::here("data_raw/DHM/GCM_SCOTTSS1_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTSS1_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1)
+SCOTTSS1_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1, GCM_SCOTTSS1)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTSS1 <- CCI_SCOTTSS1 %>% 
@@ -2460,11 +2953,29 @@ NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>%
 
 write_csv(NOAA_SCOTTSS2, here::here("data_raw/DHM/NOAA_SCOTTSS2_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+SCOTTSS2_DHM <- rep(0,nrow(GCM_SCOTTSS2))
+SCOTTSS2_negative_anomaly <- 0
+for (i in 1:nrow(GCM_SCOTTSS2)){
+  if(GCM_SCOTTSS2$anomaly[i] > 0) {
+    SCOTTSS2_negative_anomaly <- 
+      SCOTTSS2_negative_anomaly + GCM_SCOTTSS2$anomaly[i]
+  } else {
+    SCOTTSS2_negative_anomaly <- 0
+  }
+  SCOTTSS2_DHM[i] <- SCOTTSS2_negative_anomaly
+}
+
+GCM_SCOTTSS2 <- GCM_SCOTTSS2 %>% 
+  add_column(SCOTTSS2_DHM)
+
+write_csv(GCM_SCOTTSS2, here::here("data_raw/DHM/GCM_SCOTTSS2_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #no coral core at this site
 
 #Combining datasets with DHM calculations
-SCOTTSS2_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2)
+SCOTTSS2_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2, GCM_SCOTTSS2)
 
 #DHM in descending order
 #Max_DHM_CCI_SCOTTSS2 <- CCI_SCOTTSS2 %>% 
@@ -2506,58 +3017,62 @@ SCOTTSS2_Combined %>%
 
 ```{r DHM_Bundegi, echo = FALSE, message = FALSE}
 
-#DHM calculations for CCI dataset 
-Bundegi_DHM <- rep(0,nrow(CCI_Bundegi))
+#DHM calculations for 13BND CCI dataset 
+Bundegi_DHM <- rep(0,nrow(CCI_Bundegi_13BND))
 Bundegi_negative_anomaly <- 0
-for (i in 1:nrow(CCI_Bundegi)){
-  if(CCI_Bundegi$anomaly[i] > 0) {
+for (i in 1:nrow(CCI_Bundegi_13BND)){
+  if(CCI_Bundegi_13BND$anomaly[i] > 0) {
     Bundegi_negative_anomaly <- 
-      Bundegi_negative_anomaly + CCI_Bundegi$anomaly[i]
+      Bundegi_negative_anomaly + CCI_Bundegi_13BND$anomaly[i]
   } else {
     Bundegi_negative_anomaly <- 0
   }
   Bundegi_DHM[i] <- Bundegi_negative_anomaly
 }
 
-CCI_Bundegi <- CCI_Bundegi %>% 
+CCI_Bundegi_13BND <- CCI_Bundegi_13BND %>% 
   add_column(Bundegi_DHM)
 
-write_csv(CCI_Bundegi, here::here("data_raw/DHM/CCI_Bundegi_DHM.csv"))
-
-CCI_Bundegi_13BND <- CCI_Bundegi %>% 
-  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "13BND")) %>% 
-  rename(`13BND_DHM` = Bundegi_DHM)
-
-CCI_Bundegi_08BND <- CCI_Bundegi %>% 
-  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi", "08BND")) %>% 
-  rename(`08BND_DHM` = Bundegi_DHM)
+write_csv(CCI_Bundegi_13BND, here::here("data_raw/DHM/CCI_Bundegi_13BND_DHM.csv"))
 
 
-#DHM calculations for NOAA dataset
-Bundegi_DHM <- rep(0,nrow(NOAA_Bundegi))
+#DHM calculations for 13BND NOAA dataset
+Bundegi_DHM <- rep(0,nrow(NOAA_Bundegi_13BND))
 Bundegi_negative_anomaly <- 0
-for (i in 1:nrow(NOAA_Bundegi)){
-  if(NOAA_Bundegi$anomaly[i] > 0) {
+for (i in 1:nrow(NOAA_Bundegi_13BND)){
+  if(NOAA_Bundegi_13BND$anomaly[i] > 0) {
     Bundegi_negative_anomaly <- 
-      Bundegi_negative_anomaly + NOAA_Bundegi$anomaly[i]
+      Bundegi_negative_anomaly + NOAA_Bundegi_13BND$anomaly[i]
   } else {
     Bundegi_negative_anomaly <- 0
   }
   Bundegi_DHM[i] <- Bundegi_negative_anomaly
 }
 
-NOAA_Bundegi <- NOAA_Bundegi %>% 
+NOAA_Bundegi_13BND <- NOAA_Bundegi_13BND %>% 
+  add_column(Bundegi_DHM) %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi (13BND)", "13BND"))
+
+write_csv(NOAA_Bundegi_13BND, here::here("data_raw/DHM/NOAA_Bundegi_13BND_DHM.csv"))
+
+#DHM calculations for 13BND GCM dataset 
+Bundegi_DHM <- rep(0,nrow(GCM_Bundegi_13BND))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(GCM_Bundegi_13BND)){
+  if(GCM_Bundegi_13BND$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + GCM_Bundegi_13BND$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+GCM_Bundegi_13BND <- GCM_Bundegi_13BND %>% 
   add_column(Bundegi_DHM)
 
-write_csv(NOAA_Bundegi, here::here("data_raw/DHM/NOAA_Bundegi_DHM.csv"))
+write_csv(GCM_Bundegi_13BND, here::here("data_raw/DHM/GCM_Bundegi_13BND_DHM.csv"))
 
-NOAA_Bundegi_13BND <- NOAA_Bundegi %>% 
-  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi (13BND)", "13BND")) %>% 
-  rename(`13BND_DHM` = Bundegi_DHM)
-
-NOAA_Bundegi_08BND <- NOAA_Bundegi %>% 
-  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi (13BND)", "08BND")) %>% 
-  rename(`08BND_DHM` = Bundegi_DHM)
 
 #DHM calculations for 13BND Coral Core (CCI) dataset
 `13BND_DHM` <- rep(0,nrow(CCore_13BND_CCI))
@@ -2574,7 +3089,8 @@ for (i in 1:nrow(CCore_13BND_CCI)){
 
 CCore_13BND_CCI <- CCore_13BND_CCI %>% 
   add_column(`13BND_DHM`) %>% 
-  mutate(`13BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13BND_DHM`))
+  mutate(`13BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13BND_DHM`)) %>% 
+  rename(Bundegi_DHM = `13BND_DHM`)
 
 write_csv(CCore_13BND_CCI, here::here("data_raw/DHM/CCore_13BND_CCI_DHM.csv"))
 
@@ -2593,12 +3109,68 @@ for (i in 1:nrow(CCore_13BND_NOAA)){
 
 CCore_13BND_NOAA <- CCore_13BND_NOAA %>% 
   add_column(`13BND_DHM`) %>% 
-  mutate(`13BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13BND_DHM`))
+  mutate(`13BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13BND_DHM`)) %>% 
+  rename(Bundegi_DHM = `13BND_DHM`)
 
 write_csv(CCore_13BND_NOAA, here::here("data_raw/DHM/CCore_13BND_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations for Bundegi 13BND
-Bundegi_13BND_Combined <- rbind(CCI_Bundegi_13BND, NOAA_Bundegi_13BND, CCore_13BND_CCI, CCore_13BND_NOAA)
+Bundegi_13BND_Combined <- rbind(CCI_Bundegi_13BND, NOAA_Bundegi_13BND, GCM_Bundegi_13BND, CCore_13BND_CCI, CCore_13BND_NOAA)
+
+#DHM calculations for 08BND CCI dataset 
+Bundegi_DHM <- rep(0,nrow(CCI_Bundegi_08BND))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(CCI_Bundegi_08BND)){
+  if(CCI_Bundegi_08BND$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + CCI_Bundegi_08BND$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+CCI_Bundegi_08BND <- CCI_Bundegi_08BND %>% 
+  add_column(Bundegi_DHM)
+
+write_csv(CCI_Bundegi_08BND, here::here("data_raw/DHM/CCI_Bundegi_08BND_DHM.csv"))
+
+#DHM calculations for 08BND NOAA dataset
+Bundegi_DHM <- rep(0,nrow(NOAA_Bundegi_08BND))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(NOAA_Bundegi_08BND)){
+  if(NOAA_Bundegi_08BND$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + NOAA_Bundegi_08BND$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+NOAA_Bundegi_08BND <- NOAA_Bundegi_08BND %>% 
+  add_column(Bundegi_DHM) %>% 
+  mutate(Reef_Site = replace(Reef_Site, Reef_Site == "Bundegi (13BND)", "08BND"))
+
+write_csv(NOAA_Bundegi_08BND, here::here("data_raw/DHM/NOAA_Bundegi_08BND_DHM.csv"))
+
+#DHM calculations for 08BND GCM dataset 
+Bundegi_DHM <- rep(0,nrow(GCM_Bundegi_08BND))
+Bundegi_negative_anomaly <- 0
+for (i in 1:nrow(GCM_Bundegi_08BND)){
+  if(GCM_Bundegi_08BND$anomaly[i] > 0) {
+    Bundegi_negative_anomaly <- 
+      Bundegi_negative_anomaly + GCM_Bundegi_08BND$anomaly[i]
+  } else {
+    Bundegi_negative_anomaly <- 0
+  }
+  Bundegi_DHM[i] <- Bundegi_negative_anomaly
+}
+
+GCM_Bundegi_08BND <- GCM_Bundegi_08BND %>% 
+  add_column(Bundegi_DHM)
+
+write_csv(GCM_Bundegi_08BND, here::here("data_raw/DHM/GCM_Bundegi_08BND_DHM.csv"))
 
 #DHM calculations for 08BND Coral Core (CCI) dataset
 `08BND_DHM` <- rep(0,nrow(CCore_08BND_CCI))
@@ -2615,7 +3187,8 @@ for (i in 1:nrow(CCore_08BND_CCI)){
 
 CCore_08BND_CCI <- CCore_08BND_CCI %>% 
   add_column(`08BND_DHM`) %>% 
-  mutate(`08BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08BND_DHM`))
+  mutate(`08BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08BND_DHM`)) %>% 
+  rename(Bundegi_DHM = `08BND_DHM`)
 
 write_csv(CCore_08BND_CCI, here::here("data_raw/DHM/CCore_08BND_CCI_DHM.csv"))
 
@@ -2635,12 +3208,13 @@ for (i in 1:nrow(CCore_08BND_NOAA)){
 
 CCore_08BND_NOAA <- CCore_08BND_NOAA %>% 
   add_column(`08BND_DHM`) %>% 
-  mutate(`08BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08BND_DHM`))
+  mutate(`08BND_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08BND_DHM`)) %>% 
+  rename(Bundegi_DHM = `08BND_DHM`)
 
 write_csv(CCore_08BND_NOAA, here::here("data_raw/DHM/CCore_08BND_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, CCore_08BND_CCI, CCore_08BND_NOAA)
+Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bundegi_08BND, CCore_08BND_CCI, CCore_08BND_NOAA)
 
 #DHM in descending order
 #Max_DHM_CCI_Bundegi <- CCI_Bundegi %>% 
@@ -2660,7 +3234,7 @@ Bundegi_08BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `08BND_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08BND Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2676,7 +3250,7 @@ Bundegi_08BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `08BND_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08BND Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2694,7 +3268,7 @@ Bundegi_13BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `13BND_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "13BND Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2710,7 +3284,7 @@ Bundegi_13BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `13BND_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "13BND Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2743,8 +3317,7 @@ for (i in 1:nrow(CCI_Tantabiddi_08TNT)){
 }
 
 CCI_Tantabiddi_08TNT <- CCI_Tantabiddi_08TNT %>%
-  add_column(Tantabiddi_DHM) %>% 
-  rename(`08TNT_DHM` = Tantabiddi_DHM)
+  add_column(Tantabiddi_DHM)
 
 write_csv(CCI_Tantabiddi_08TNT, here::here("data_raw/DHM/CCI_Tantabiddi_08TNT_DHM.csv"))
 
@@ -2762,10 +3335,27 @@ for (i in 1:nrow(NOAA_Tantabiddi_08TNT)){
 }
 
 NOAA_Tantabiddi_08TNT <- NOAA_Tantabiddi_08TNT %>% 
-  add_column(Tantabiddi_DHM) %>% 
-  rename(`08TNT_DHM` = Tantabiddi_DHM)
+  add_column(Tantabiddi_DHM)
 
 write_csv(NOAA_Tantabiddi_08TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_08TNT_DHM.csv"))
+
+#DHM calculations for GCM dataset 
+Tantabiddi_DHM <- rep(0,nrow(GCM_Tantabiddi_08TNT))
+Tantabiddi_negative_anomaly <- 0
+for (i in 1:nrow(GCM_Tantabiddi_08TNT)){
+  if(GCM_Tantabiddi_08TNT$anomaly[i] > 0) {
+    Tantabiddi_negative_anomaly <- 
+      Tantabiddi_negative_anomaly + GCM_Tantabiddi_08TNT$anomaly[i]
+  } else {
+    Tantabiddi_negative_anomaly <- 0
+  }
+  Tantabiddi_DHM[i] <- Tantabiddi_negative_anomaly
+}
+
+GCM_Tantabiddi_08TNT <- GCM_Tantabiddi_08TNT %>%
+  add_column(Tantabiddi_DHM)
+
+write_csv(GCM_Tantabiddi_08TNT, here::here("data_raw/DHM/GCM_Tantabiddi_08TNT_DHM.csv"))
 
 #DHM calculations for Coral Core (CCI) dataset
 `08TNT_DHM` <- rep(0,nrow(CCore_08TNT_CCI))
@@ -2782,7 +3372,8 @@ for (i in 1:nrow(CCore_08TNT_CCI)){
 
 CCore_08TNT_CCI <- CCore_08TNT_CCI %>% 
   add_column(`08TNT_DHM`) %>% 
-  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
+  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`)) %>% 
+  rename(Tantabiddi_DHM = `08TNT_DHM`)
 
 write_csv(CCore_08TNT_CCI, here::here("data_raw/DHM/CCore_08TNT_CCI_DHM.csv"))
 
@@ -2801,19 +3392,20 @@ for (i in 1:nrow(CCore_08TNT_NOAA)){
 
 CCore_08TNT_NOAA <- CCore_08TNT_NOAA %>% 
   add_column(`08TNT_DHM`) %>% 
-  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`))
+  mutate(`08TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `08TNT_DHM`)) %>% 
+  rename(Tantabiddi_DHM = `08TNT_DHM`)
 
 write_csv(CCore_08TNT_NOAA, here::here("data_raw/DHM/CCore_08TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
+Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, GCM_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
 
 #DHM >= 1
 High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>% 
-  filter(`08TNT_DHM` >= 1) %>% 
-  select(monthly_date, Reef_Site, Data_Type, `08TNT_DHM`) %>% 
+  filter(Tantabiddi_DHM >= 1) %>% 
+  select(monthly_date, Reef_Site, Data_Type, Tantabiddi_DHM) %>% 
   mutate(monthly_date = yearmonth(monthly_date)) %>% 
-  pivot_wider(names_from = Data_Type, values_from = `08TNT_DHM`) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
   arrange(-desc(monthly_date)) %>% 
   rename(Date = monthly_date, Site = Reef_Site)
 
@@ -2831,7 +3423,7 @@ Tantabiddi_08TNT_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `08TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08TNT Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2847,7 +3439,7 @@ Tantabiddi_08TNT_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_line(aes(x = monthly_date, y = `08TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
+  geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08TNT Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 2, 4)) +
@@ -2903,6 +3495,25 @@ NOAA_Tantabiddi_13TNT <- NOAA_Tantabiddi_13TNT %>%
 
 write_csv(NOAA_Tantabiddi_13TNT, here::here("data_raw/DHM/NOAA_Tantabiddi_13TNT_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+Tantabiddi_DHM <- rep(0,nrow(CCI_Tantabiddi_13TNT))
+Tantabiddi_negative_anomaly <- 0
+for (i in 1:nrow(GCM_Tantabiddi_13TNT)){
+  if(GCM_Tantabiddi_13TNT$anomaly[i] > 0) {
+    Tantabiddi_negative_anomaly <- 
+      Tantabiddi_negative_anomaly + GCM_Tantabiddi_13TNT$anomaly[i]
+  } else {
+    Tantabiddi_negative_anomaly <- 0
+  }
+  Tantabiddi_DHM[i] <- Tantabiddi_negative_anomaly
+}
+
+GCM_Tantabiddi_13TNT <- GCM_Tantabiddi_13TNT %>%
+  add_column(Tantabiddi_DHM) %>% 
+  rename(`13TNT_DHM` = Tantabiddi_DHM)
+
+write_csv(GCM_Tantabiddi_13TNT, here::here("data_raw/DHM/GCM_Tantabiddi_13TNT_DHM.csv"))
+
 #DHM calculations for Coral Core (CCI) dataset
 `13TNT_DHM` <- rep(0,nrow(CCore_13TNT_CCI))
 `13TNT_negative_anomaly` <- 0
@@ -2918,7 +3529,7 @@ for (i in 1:nrow(CCore_13TNT_CCI)){
 
 CCore_13TNT_CCI <- CCore_13TNT_CCI %>% 
   add_column(`13TNT_DHM`) %>% 
-  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
+  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`)) 
 
 write_csv(CCore_13TNT_CCI, here::here("data_raw/DHM/CCore_13TNT_CCI_DHM.csv"))
 
@@ -2937,12 +3548,12 @@ for (i in 1:nrow(CCore_13TNT_NOAA)){
 
 CCore_13TNT_NOAA <- CCore_13TNT_NOAA %>% 
   add_column(`13TNT_DHM`) %>% 
-  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`))
+  mutate(`13TNT_DHM` = if_else(is.na(sst_monthly), NA_real_ , `13TNT_DHM`)) 
 
 write_csv(CCore_13TNT_NOAA, here::here("data_raw/DHM/CCore_13TNT_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
-Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
+Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, GCM_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
 
 #DHM >= 1
 High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>% 
@@ -3036,11 +3647,29 @@ NOAA_HAB05B <- NOAA_HAB05B %>%
 
 write_csv(NOAA_HAB05B, here::here("data_raw/DHM/NOAA_HAB05B_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+HAB05B_DHM <- rep(0,nrow(GCM_HAB05B))
+HAB05B_negative_anomaly <- 0
+for (i in 1:nrow(GCM_HAB05B)){
+  if(GCM_HAB05B$anomaly[i] > 0) {
+    HAB05B_negative_anomaly <- 
+      HAB05B_negative_anomaly + GCM_HAB05B$anomaly[i]
+  } else {
+    HAB05B_negative_anomaly <- 0
+  }
+  HAB05B_DHM[i] <- HAB05B_negative_anomaly
+}
+
+GCM_HAB05B <- GCM_HAB05B %>% 
+  add_column(HAB05B_DHM)
+
+write_csv(GCM_HAB05B, here::here("data_raw/DHM/GCM_HAB05B_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #excluded due to annual data resolution
 
 #Combining datasets with DHM calculations
-HAB05B_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B)
+HAB05B_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B, GCM_HAB05B)
 
 #DHM in descending order
 #Max_DHM_CCI_HAB05B <- CCI_HAB05B %>% 
@@ -3114,11 +3743,29 @@ NOAA_HAB10A <- NOAA_HAB10A %>%
 
 write_csv(NOAA_HAB10A, here::here("data_raw/DHM/NOAA_HAB10A_DHM.csv"))
 
+#DHM calculations for GCM dataset 
+HAB10A_DHM <- rep(0,nrow(GCM_HAB10A))
+HAB10A_negative_anomaly <- 0
+for (i in 1:nrow(GCM_HAB10A)){
+  if(GCM_HAB10A$anomaly[i] > 0) {
+    HAB10A_negative_anomaly <- 
+      HAB10A_negative_anomaly + GCM_HAB10A$anomaly[i]
+  } else {
+    HAB10A_negative_anomaly <- 0
+  }
+  HAB10A_DHM[i] <- HAB10A_negative_anomaly
+}
+
+GCM_HAB10A <- GCM_HAB10A %>% 
+  add_column(HAB10A_DHM)
+
+write_csv(GCM_HAB10A, here::here("data_raw/DHM/GCM_HAB10A_DHM.csv"))
+
 #DHM calculations for Coral Core dataset
 #excluded due to annual data resolution
 
 #Combining datasets with DHM calculations
-HAB10A_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A)
+HAB10A_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A, GCM_HAB10A)
 
 #DHM in descending order
 #Max_DHM_CCI_HAB10A <- CCI_HAB10A %>% 
