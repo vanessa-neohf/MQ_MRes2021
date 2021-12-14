@@ -37,7 +37,7 @@ Browse_05_CCI <- Browse_05_CCI %>%
   select(data_type, date, sst) %>% #select only useful columns 
   as_tsibble(index = date) # convert them to tsibble
 
-Browse_05_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month.csv"), n_max = 740) %>% 
+Browse_05_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month.csv"), n_max = 349) %>% 
   mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
   mutate(date = str_c(year, month, sep = "-")) %>% #stringing year and month
   mutate(date = yearmonth(date)) %>% #converting date column fr chr to date format
@@ -57,17 +57,25 @@ Browse_05_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS05_SST.csv")) %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Browse_05_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BRS05.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 
 dat <- as_tibble(Browse_05_CCI) %>% 
   add_row(as_tibble(Browse_05_NOAA)) %>% 
   # only few data points when logger data is included: add_row(as_tibble(Browse_05_Logger)) %>% 
   add_row(as_tibble(Browse_05_CCore) %>% 
             rename(sst = `BRS05 Sr/Ca [mmol/mol]`)) %>% 
+  add_row(as_tibble(Browse_05_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "browse_CCI",
                       data_type == "Logger" ~ "browse_Logger", 
                       data_type == "NOAA" ~ "browse_NOAA",
                       data_type == "Coral Core" ~ "browse_coral_core",
+                      data_type == "GCM" ~ "browse_GCM",
                       TRUE ~ data_type))
 
 BRS05_joint <- dat %>% 
@@ -121,7 +129,7 @@ CCI_BRS05 <- lm(browse_CCI ~ 1 + browse_coral_core,
 # summary(lm2)
 
 
-modelsummary::modelsummary(list(NOAA_BRS05, CCI_BRS05))
+#modelsummary::modelsummary(list(NOAA_BRS05, CCI_BRS05))
 
 ##BRS07
 
@@ -154,16 +162,24 @@ Browse_07_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS07_SST.csv")) %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Browse_07_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BRS07.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(Browse_07_CCI) %>% 
   add_row(as_tibble(Browse_07_NOAA)) %>% 
   # only 9 points are available when including logger data: add_row(as_tibble(Browse_07_Logger)) %>% 
   add_row(as_tibble(Browse_07_CCore) %>% 
             rename(sst = `BRS07 Sr/Ca [mmol/mol]`)) %>% 
+  add_row(as_tibble(Browse_07_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "browse_CCI",
                       data_type == "Logger" ~ "browse_Logger", 
                       data_type == "NOAA" ~ "browse_NOAA",
                       data_type == "Coral Core" ~ "browse_coral_core",
+                      data_type == "GCM" ~ "browse_GCM",
                       TRUE ~ data_type))
 
 BRS07_joint <- dat %>% 
@@ -211,7 +227,7 @@ CCI_BRS07 <- lm(browse_CCI ~ 1 + browse_coral_core + I(browse_coral_core^2),
 
 # p-value for quadratic is significant, keep quadratic model
 
-modelsummary::modelsummary(list(NOAA_BRS07, CCI_BRS07))
+#modelsummary::modelsummary(list(NOAA_BRS07, CCI_BRS07))
 ```
 
 
@@ -250,16 +266,24 @@ DARL_NOAA <- DARL_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+DARL_GCM <- read_csv(here::here("data_raw/GCM", "GCM_DAR_Long.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(DARL_CCI) %>% 
   add_row(as_tibble(DARL_NOAA)) %>% 
   #less than 10 points if logger data is included : add_row(as_tibble(DARL_Logger)) %>% 
   add_row(as_tibble(DARL_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(DARL_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "Cocos_CCI",
                       data_type == "Logger" ~ "Cocos_Logger", 
                       data_type == "NOAA" ~ "Cocos_NOAA",
                       data_type == "Coral Core" ~ "Cocos_coral_core",
+                      data_type == "GCM" ~ "Cocos_GCM",
                       TRUE ~ data_type))
 
 DARL_joint <- dat %>% 
@@ -314,7 +338,7 @@ CCI_DARL <- lm(Cocos_CCI ~ 1 + Cocos_coral_core,
           data = DARL_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_DARL, CCI_DARL))
+#modelsummary::modelsummary(list(NOAA_DARL, CCI_DARL))
 
 ##DAR3
 DAR3_CCI <- read_csv(here::here("data_raw", "CCI_DAR3.csv"))
@@ -349,16 +373,24 @@ DAR3_NOAA <- DAR3_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+DAR3_GCM <- read_csv(here::here("data_raw/GCM", "GCM_DAR3.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(DAR3_CCI) %>% 
   add_row(as_tibble(DAR3_NOAA)) %>% 
   #less than 10 points if logger data is included : add_row(as_tibble(DAR3_Logger)) %>% 
   add_row(as_tibble(DAR3_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(DAR3_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "Cocos_CCI",
                       data_type == "Logger" ~ "Cocos_Logger", 
                       data_type == "NOAA" ~ "Cocos_NOAA",
                       data_type == "Coral Core" ~ "Cocos_coral_core",
+                      data_type == "GCM" ~ "Cocos_GCM",
                       TRUE ~ data_type))
 
 DAR3_joint <- dat %>% 
@@ -411,7 +443,7 @@ CCI_DAR3 <- lm(Cocos_CCI ~ 1 + Cocos_coral_core,
           data = DAR3_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_DAR3, CCI_DAR3))
+#modelsummary::modelsummary(list(NOAA_DAR3, CCI_DAR3))
 
 
 ```
@@ -451,16 +483,24 @@ Ningaloo_13TNT_NOAA <- Ningaloo_13TNT_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_13TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
   # only 13 data points available if logger data is included in analysis: add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% 
   add_row(as_tibble(Ningaloo_13TNT_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_13TNT_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       # only 13 data points if logger data is included: data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 Tantabiddi_13TNT_joint <- dat %>% 
@@ -499,7 +539,7 @@ CCI_Tantabiddi_13TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_c
           data = Tantabiddi_13TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_Tantabiddi_13TNT, CCI_Tantabiddi_13TNT))
+#modelsummary::modelsummary(list(NOAA_Tantabiddi_13TNT, CCI_Tantabiddi_13TNT))
 
 
 ##Tantabiddi 08TNT
@@ -534,17 +574,25 @@ Ningaloo_08TNT_NOAA <- Ningaloo_08TNT_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_08TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 
 dat <- as_tibble(Ningaloo_08TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_08TNT_NOAA)) %>% 
   # no values if logger data is added here: add_row(as_tibble(Ningaloo_08TNT_Logger)) %>% 
   add_row(as_tibble(Ningaloo_08TNT_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_08TNT_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 Tantabiddi_08TNT_joint <- dat %>% 
@@ -595,7 +643,7 @@ CCI_Tantabiddi_08TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
           data = Tantabiddi_08TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_Tantabiddi_08TNT, CCI_Tantabiddi_08TNT))
+#modelsummary::modelsummary(list(NOAA_Tantabiddi_08TNT, CCI_Tantabiddi_08TNT))
 
 
 ##Bundegi 13BND
@@ -630,17 +678,25 @@ Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_13BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 
 dat <- as_tibble(Ningaloo_13BND_CCI) %>% 
   add_row(as_tibble(Ningaloo_13BND_NOAA)) %>% 
   # only 10 observations when logger data is added : add_row(as_tibble(Ningaloo_13BND_Logger)) %>%
   add_row(as_tibble(Ningaloo_13BND_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_13BND_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 Bundegi_13BND_joint <- dat %>% 
@@ -693,7 +749,7 @@ CCI_Bundegi_13BND <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
           data = Bundegi_13BND_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_Bundegi_13BND, CCI_Bundegi_13BND))
+#modelsummary::modelsummary(list(NOAA_Bundegi_13BND, CCI_Bundegi_13BND))
 
 
 ##Bundegi 08BND
@@ -728,16 +784,24 @@ Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_08BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(Ningaloo_08BND_CCI) %>% 
   add_row(as_tibble(Ningaloo_08BND_NOAA)) %>% 
   #no values if logger data is included : add_row(as_tibble(Ningaloo_08BND_Logger)) %>% 
   add_row(as_tibble(Ningaloo_08BND_CCore) %>% 
             rename(sst = `Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_08BND_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 Bundegi_08BND_joint <- dat %>% 
@@ -780,7 +844,7 @@ CCI_Bundegi_08BND <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core + I(ningaloo_cora
 
 # significant p-value for quadratic
 
-modelsummary::modelsummary(list(NOAA_Bundegi_08BND, CCI_Bundegi_08BND))
+#modelsummary::modelsummary(list(NOAA_Bundegi_08BND, CCI_Bundegi_08BND))
 
 
 ##TNT
@@ -878,7 +942,7 @@ CCI_TNT <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
           data = TNT_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_TNT, CCI_TNT))
+#modelsummary::modelsummary(list(NOAA_TNT, CCI_TNT))
 
 ##TNT07C
 ##Only annual coral core data
@@ -917,17 +981,25 @@ Ningaloo_TNT07C_NOAA <- Ningaloo_TNT07C_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_TNT07C_GCM <- read_csv(here::here("data_raw/GCM", "GCM_TNT07C.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 
 dat <- as_tibble(Ningaloo_TNT07C_CCI) %>% 
   add_row(as_tibble(Ningaloo_TNT07C_NOAA)) %>% 
   # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT07C_Logger)) %>% 
   add_row(as_tibble(Ningaloo_TNT07C_CCore) %>% 
             rename(sst = `Tantabiddi Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_TNT07C_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 TNT07C_joint <- dat %>% 
@@ -980,7 +1052,7 @@ CCI_TNT07C <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
           data = TNT07C_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_TNT07C, CCI_TNT07C))
+#modelsummary::modelsummary(list(NOAA_TNT07C, CCI_TNT07C))
 
 ##BUN05A
 ##Only annual coral core data
@@ -1018,16 +1090,24 @@ Ningaloo_BUN05A_NOAA <- Ningaloo_BUN05A_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+Ningaloo_BUN05A_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BUN05A.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(Ningaloo_BUN05A_CCI) %>% 
   add_row(as_tibble(Ningaloo_BUN05A_NOAA)) %>% 
   # no data is available when logger data is added: add_row(as_tibble(Ningaloo_BUN05A_Logger)) %>% 
   add_row(as_tibble(Ningaloo_BUN05A_CCore) %>% 
             rename(sst = `Bundegi Sr/Ca`)) %>% 
+  add_row(as_tibble(Ningaloo_BUN05A_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "ningaloo_CCI",
                       data_type == "Logger" ~ "ningaloo_Logger", 
                       data_type == "NOAA" ~ "ningaloo_NOAA",
                       data_type == "Coral Core" ~ "ningaloo_coral_core",
+                      data_type == "GCM" ~ "ningaloo_GCM",
                       TRUE ~ data_type))
 
 BUN05A_joint <- dat %>% 
@@ -1080,7 +1160,7 @@ CCI_BUN05A <- lm(ningaloo_CCI ~ 1 + ningaloo_coral_core,
           data = BUN05A_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_BUN05A, CCI_BUN05A))
+#modelsummary::modelsummary(list(NOAA_BUN05A, CCI_BUN05A))
 
 ```
 
@@ -1172,7 +1252,7 @@ CCI_Wallabi_Island <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core + I(HAbrol_coral_cor
 
 # p-value for quadratic is significant
 
-modelsummary::modelsummary(list(NOAA_Wallabi_Island, CCI_Wallabi_Island))
+#modelsummary::modelsummary(list(NOAA_Wallabi_Island, CCI_Wallabi_Island))
 
 ##HAB10A d18O Proxy
 ##Only annual coral core data
@@ -1273,7 +1353,7 @@ CCI_HAB10A_d18O <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core,
           data = HAB10A_d18O_joint)
 # summary(lm2)
 
-modelsummary::modelsummary(list(NOAA_HAB10A_d18O, CCI_HAB10A_d18O))
+#modelsummary::modelsummary(list(NOAA_HAB10A_d18O, CCI_HAB10A_d18O))
 
 ##HAB05B d18O Proxy
 ##Only annual coral core data
@@ -1362,7 +1442,6 @@ HAB05B_SrCa_CCI <- HAB05B_SrCa_CCI %>%
   as_tsibble(index = date) # convert them to tsibble
 
 HAB05B_SrCa_CCore <- read_csv(here::here("data_raw", "CCore_H_Abrol_HAB_year.csv"))
-
 HAB05B_SrCa_CCore <- HAB05B_SrCa_CCore %>% 
   mutate(data_type = "Coral Core") %>% #prepare data for binding with other data types
   mutate(month = "01") %>% 
@@ -1386,16 +1465,24 @@ HAB05B_SrCa_NOAA <- HAB05B_SrCa_NOAA %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
+HAB05B_SrCa_GCM <- read_csv(here::here("data_raw/GCM", "GCM_HAB10AB.csv")) %>% 
+  mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
+  rename(sst = tos) %>% 
+  select(data_type, date, sst) %>% 
+  as_tsibble(index = date)
+
 dat <- as_tibble(HAB05B_SrCa_CCI) %>% 
   add_row(as_tibble(HAB05B_SrCa_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(HAB05B_SrCa_Logger)) %>% 
   add_row(as_tibble(HAB05B_SrCa_CCore) %>% 
             rename(sst = `HAB05B Sr/Ca`)) %>% 
+  add_row(as_tibble(HAB05B_SrCa_GCM)) %>% 
   mutate(data_type = 
            case_when( data_type == "CCI" ~ "HAbrol_CCI",
                       data_type == "Logger" ~ "HAbrol_Logger", 
                       data_type == "NOAA" ~ "HAbrol_NOAA",
                       data_type == "Coral Core" ~ "HAbrol_coral_core",
+                      data_type == "GCM" ~ "HAbrol_GCM",
                       TRUE ~ data_type))
 
 HAB05B_SrCa_joint <- dat %>% 
@@ -1451,7 +1538,7 @@ CCI_HAB05B_SrCa <- lm(HAbrol_CCI ~ 1 + HAbrol_coral_core,
 
 # p-value for linear model is significant
 
-modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
+#modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 ```
 
 
@@ -1462,8 +1549,8 @@ modelsummary::modelsummary(list(CCI_HAB05B_SrCa))
 
 Browse <- rbind(BRS05_joint, BRS07_joint)
 Cocos_Keeling <- rbind(DARL_joint, DAR3_joint)
-Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, Bundegi_13BND_joint, Bundegi_08BND_joint)
-HAbrol <- rbind(Wallabi_Island_joint, HAB10A_d18O_joint, HAB05B_SrCa_joint)
+Ningaloo <- rbind(Tantabiddi_13TNT_joint, Tantabiddi_08TNT_joint, Bundegi_13BND_joint, Bundegi_08BND_joint, TNT07C_joint, BUN05A_joint)
+HAbrol <- HAB05B_SrCa_joint
 
 
 ```
@@ -1660,7 +1747,11 @@ BRS05_joint_smooth <- BRS05_joint %>%
   browse_coral_core =
     analyze.wavelet(BRS05_joint, "browse_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$browse_coral_core)
+                            dj = 1/10)$series$browse_coral_core,
+  browse_GCM = 
+    analyze.wavelet(BRS05_joint, "browse_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$browse_GCM)
 # BRS05 CCI
 #wave_out <- analyze.wavelet(BRS05_joint, "browse_CCI",
 #                            dt = 1/12,
@@ -1763,11 +1854,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a slightly higher power around period 1 than NOAA and CCORE.
 # NOAA and CCORE has higher power around period 2 and 0.5. 
-par(mfrow=c(2,1))
+
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(BRS05_joint_smooth, 
+                    my.pair = c("browse_GCM", "browse_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 8.5, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 8.5, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 9, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -1785,7 +1898,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -1821,7 +1939,11 @@ BRS07_joint_smooth <- BRS07_joint %>%
   browse_coral_core =
     analyze.wavelet(BRS07_joint, "browse_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$browse_coral_core)
+                            dj = 1/10)$series$browse_coral_core,
+  browse_GCM = 
+    analyze.wavelet(BRS07_joint, "browse_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$browse_GCM)
 
 
 # BRS07 CCI
@@ -1924,11 +2046,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a slightly higher power around period 1 than NOAA and CCORE.
 # NOAA and CCORE has similar power to CCI and CCORE around period 0.5, 2 and 4
-par(mfrow=c(2,1))
+
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(BRS07_joint_smooth, 
+                    my.pair = c("browse_GCM", "browse_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 10, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -1946,7 +2090,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -1983,7 +2132,11 @@ DAR3_joint_smooth <- DAR3_joint %>%
   Cocos_coral_core =
     analyze.wavelet(DAR3_joint, "Cocos_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$Cocos_coral_core)
+                            dj = 1/10)$series$Cocos_coral_core,
+  Cocos_GCM = 
+    analyze.wavelet(DAR3_joint, "Cocos_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$Cocos_GCM)
 
 #DAR3 CCI
 #wave_out <- analyze.wavelet(DAR3_joint, "Cocos_CCI",
@@ -2086,11 +2239,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a slightly higher power around period 1 than NOAA and CCORE.
 # NOAA and CCORE has similar power to CCI and CCORE around period 2 to 4
-par(mfrow=c(2,1))
+
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(DAR3_joint_smooth, 
+                    my.pair = c("Cocos_GCM", "Cocos_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 10.5, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 10.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 10.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2108,7 +2283,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2145,7 +2325,11 @@ DARL_joint_smooth <- DARL_joint %>%
   Cocos_coral_core =
     analyze.wavelet(DARL_joint, "Cocos_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$Cocos_coral_core)
+                            dj = 1/10)$series$Cocos_coral_core,
+  Cocos_GCM = 
+    analyze.wavelet(DARL_joint, "Cocos_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$Cocos_GCM)
 
 #DARL CCI
 #wave_out <- analyze.wavelet(DARL_joint, "Cocos_CCI",
@@ -2247,11 +2431,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a slightly higher power than NOAA and CCORE around period 1.
 # NOAA and CCORE has slightly higher power than CCI and CCORE around period 0.5
-par(mfrow=c(2,1))
+
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(DARL_joint_smooth, 
+                    my.pair = c("Cocos_GCM", "Cocos_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 10, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 10, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 10.5, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 10.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 10.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2269,7 +2475,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2306,7 +2517,11 @@ Tantabiddi_13TNT_joint_smooth <- Tantabiddi_13TNT_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #13TNT CCI
 #wave_out <- analyze.wavelet(Tantabiddi_13TNT_joint, "ningaloo_CCI",
@@ -2408,11 +2623,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # NOAA and CCORE has a slightly higher power than CCI and CCORE around period 1.
 
-par(mfrow=c(2,1))
+
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(Tantabiddi_13TNT_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 13, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 13, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 14, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 14, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 14, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2430,7 +2667,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2468,7 +2710,11 @@ Tantabiddi_08TNT_joint_smooth <- Tantabiddi_08TNT_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #08TNT CCI
 #wave_out <- analyze.wavelet(Tantabiddi_08TNT_joint, "ningaloo_CCI",
@@ -2570,11 +2816,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # NOAA and CCORE has a slightly higher power than CCI and CCORE around period 1.
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(Tantabiddi_08TNT_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 9, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 9, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 9.5, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 9.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 9.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2592,7 +2860,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2630,7 +2903,11 @@ Bundegi_13BND_joint_smooth <- Bundegi_13BND_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(Bundegi_13BND_joint, "ningaloo_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(Bundegi_13BND_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #13BND CCI
 #wave_out <- analyze.wavelet(Bundegi_13BND_joint, "ningaloo_CCI",
@@ -2732,11 +3009,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a much higher power than NOAA and CCORE around the peak (not at period 1 somehow).
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(Bundegi_13BND_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
 wc.avg(wave_out_CCI_CCORE, maximum.level = 9.5, main = "CCI and CCORE")
 wc.avg(wave_out_NOAA_CCORE, maximum.level = 9.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 9.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2754,7 +3053,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2792,7 +3096,11 @@ Bundegi_08BND_joint_smooth <- Bundegi_08BND_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(Bundegi_08BND_joint, "ningaloo_coral_core",
                             dt = 1/12,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(Bundegi_08BND_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #08BND CCI
 #wave_out <- analyze.wavelet(Bundegi_08BND_joint, "ningaloo_CCI",
@@ -2894,11 +3202,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE has a much higher power than NOAA and CCORE around the peak (not at period 1 somehow).
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(Bundegi_08BND_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 12.5, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 12.5, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 13, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 13, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 13, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2917,7 +3247,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -2962,7 +3297,11 @@ TNT07C_joint_smooth <- TNT07C_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(TNT07C_joint, "ningaloo_coral_core",
                             dt = 1/10,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(TNT07C_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #TNT07C CCI
 #wave_out <- analyze.wavelet(TNT07C_joint, "ningaloo_CCI",
@@ -3064,11 +3403,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # NOAA and CCORE and CCI and CCORE shows very low power
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(TNT07C_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 3, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 3, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 4, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 4, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 4, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -3086,7 +3447,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -3123,7 +3489,11 @@ BUN05A_joint_smooth <- BUN05A_joint %>%
   ningaloo_coral_core =
     analyze.wavelet(BUN05A_joint, "ningaloo_coral_core",
                             dt = 1/10,
-                            dj = 1/10)$series$ningaloo_coral_core)
+                            dj = 1/10)$series$ningaloo_coral_core,
+  ningaloo_GCM = 
+    analyze.wavelet(BUN05A_joint, "ningaloo_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$ningaloo_GCM)
 
 #BUN05A CCI
 #wave_out <- analyze.wavelet(BUN05A_joint, "ningaloo_CCI",
@@ -3225,11 +3595,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # NOAA and CCORE and CCI and CCORE shows very low power
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(BUN05A_joint_smooth, 
+                    my.pair = c("ningaloo_GCM", "ningaloo_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 6, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 6, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 6.5, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 6.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 6.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -3247,7 +3639,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
@@ -3284,7 +3681,11 @@ HAB05B_SrCa_joint_smooth <- HAB05B_SrCa_joint %>%
   HAbrol_coral_core =
     analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_coral_core",
                             dt = 1/10,
-                            dj = 1/10)$series$HAbrol_coral_core)
+                            dj = 1/10)$series$HAbrol_coral_core,
+  HAbrol_GCM = 
+    analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_GCM",
+                    dt = 1/12,
+                    dj = 1/10)$series$HAbrol_GCM)
 
 #HAB05B CCI
 #wave_out <- analyze.wavelet(HAB05B_SrCa_joint, "HAbrol_CCI",
@@ -3387,11 +3788,33 @@ wc.image(wave_out_NOAA_CCORE, which.image = "wc",
 # cross-wavelet power (with certain limitations) to an assessment of the similarity of the two series’ wavelet power in the time-frequency (or time-scale) domain.
 # CCI and CCORE shows very low power whereas NOAA and CCORE shows power 5 at period 0.3.
 
-par(mfrow=c(2,1))
+#GCM and CCORE
+wave_out_GCM_CCORE <- 
+  analyze.coherency(HAB05B_SrCa_joint_smooth, 
+                    my.pair = c("HAbrol_GCM", "HAbrol_coral_core"),
+                    loess.span = 0, 
+                    dt = 1/12, dj = 1/10)
+wc.avg(wave_out_GCM_CCORE, main = "GCM and CCORE")
+
+#Covariance
+wc.image(wave_out_GCM_CCORE, show.date = TRUE, 
+         plot.arrow = FALSE, main = "GCM and CCORE")
+
+wc.avg(wave_out_GCM_CCORE, which.avg = "wc",
+       legend.coords = "topleft",
+       main = "GCM and Coral Core")
+wc.image(wave_out_GCM_CCORE, which.image = "wc", 
+         show.date = TRUE, plot.arrow = FALSE, main = "GCM and CCORE")
+
+#Compare CCI/NOAA/GCM vs CCORE
+
+
+par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 6, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 6, main = "NOAA and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 6.5, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 6.5, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 6.5, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -3409,7 +3832,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
          add_row(Period = wave_out_NOAA_CCORE$Period,
                   Power.avg = wave_out_NOAA_CCORE$Power.xy.avg,
                   Power.avg.pval = wave_out_NOAA_CCORE$Power.xy.avg.pval,
-                  type = "NOAA and CCore")
+                  type = "NOAA and CCore") %>% 
+         add_row(Period = wave_out_GCM_CCORE$Period,
+                  Power.avg = wave_out_GCM_CCORE$Power.xy.avg,
+                  Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
+                  type = "GCM and CCore")
+
 ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
