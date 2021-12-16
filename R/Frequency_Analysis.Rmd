@@ -34,6 +34,10 @@ Browse_05_CCI <- Browse_05_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>% #select only useful columns 
   as_tsibble(index = date) # convert them to tsibble
 
@@ -46,7 +50,11 @@ Browse_05_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month
 
 Browse_05_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv")) %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
-  mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(data_type = "Logger", year = year(time), month = month(time)) %>% #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst)  %>% #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -54,12 +62,22 @@ Browse_05_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS05_SST.csv")) %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Browse_05_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BRS05.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -139,6 +157,10 @@ Browse_07_CCI <- Browse_07_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>% #select only useful columns 
   as_tsibble(index = date) # convert them to tsibble
 
@@ -152,6 +174,11 @@ Browse_07_CCore <- read_csv(here::here("data_raw", "CCore_BRS05_BRS07_Year_Month
 Browse_07_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv")) %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst)  %>% #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -159,12 +186,22 @@ Browse_07_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS07_SST.csv")) %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Browse_07_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BRS07.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -240,6 +277,10 @@ DARL_CCI <- DARL_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -255,6 +296,11 @@ DARL_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.c
 DARL_Logger <- DARL_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -263,12 +309,22 @@ DARL_NOAA <- DARL_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 DARL_GCM <- read_csv(here::here("data_raw/GCM", "GCM_DAR_Long.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -347,6 +403,10 @@ DAR3_CCI <- DAR3_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -362,6 +422,11 @@ DAR3_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.c
 DAR3_Logger <- DAR3_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -370,12 +435,22 @@ DAR3_NOAA <- DAR3_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 DAR3_GCM <- read_csv(here::here("data_raw/GCM", "GCM_DAR3.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -458,6 +533,10 @@ Ningaloo_13TNT_CCI <- Ningaloo_13TNT_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -472,6 +551,11 @@ Ningaloo_13TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_T
 Ningaloo_13TNT_Logger <- Ningaloo_13TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -480,12 +564,22 @@ Ningaloo_13TNT_NOAA <- Ningaloo_13TNT_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_13TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -549,6 +643,10 @@ Ningaloo_08TNT_CCI <- Ningaloo_08TNT_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -563,6 +661,11 @@ Ningaloo_08TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_T
 Ningaloo_08TNT_Logger <- Ningaloo_08TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -571,12 +674,22 @@ Ningaloo_08TNT_NOAA <- Ningaloo_08TNT_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_08TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -653,6 +766,10 @@ Ningaloo_13BND_CCI <- Ningaloo_13BND_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -667,6 +784,11 @@ Ningaloo_13BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_B
 Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -675,12 +797,22 @@ Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_13BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -759,6 +891,10 @@ Ningaloo_08BND_CCI <- Ningaloo_08BND_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -773,6 +909,11 @@ Ningaloo_08BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_B
 Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -781,12 +922,22 @@ Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_08BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -855,6 +1006,10 @@ Ningaloo_TNT_CCI <- Ningaloo_TNT_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -869,6 +1024,11 @@ Ningaloo_TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TAN
 Ningaloo_TNT_Logger <- Ningaloo_TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -877,6 +1037,11 @@ Ningaloo_TNT_NOAA <- Ningaloo_TNT_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -953,6 +1118,10 @@ Ningaloo_TNT07C_CCI <- Ningaloo_TNT07C_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -970,6 +1139,11 @@ Ningaloo_TNT07C_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_
 Ningaloo_TNT07C_Logger <- Ningaloo_TNT07C_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -978,12 +1152,22 @@ Ningaloo_TNT07C_NOAA <- Ningaloo_TNT07C_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_TNT07C_GCM <- read_csv(here::here("data_raw/GCM", "GCM_TNT07C.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -1063,6 +1247,10 @@ Ningaloo_BUN05A_CCI <- Ningaloo_BUN05A_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1079,6 +1267,11 @@ Ningaloo_BUN05A_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_
 Ningaloo_BUN05A_Logger <- Ningaloo_BUN05A_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1087,12 +1280,22 @@ Ningaloo_BUN05A_NOAA <- Ningaloo_BUN05A_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 Ningaloo_BUN05A_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BUN05A.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -1174,6 +1377,10 @@ Wallabi_Island_CCI <- Wallabi_Island_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1189,6 +1396,11 @@ Wallabi_Island_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_N
 Wallabi_Island_Logger <- Wallabi_Island_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1197,6 +1409,11 @@ Wallabi_Island_NOAA <- Wallabi_Island_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1263,6 +1480,10 @@ HAB10A_d18O_CCI <- HAB10A_d18O_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1280,6 +1501,11 @@ HAB10A_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHF
 HAB10A_d18O_Logger <- HAB10A_d18O_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1288,6 +1514,11 @@ HAB10A_d18O_NOAA <- HAB10A_d18O_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1364,6 +1595,10 @@ HAB05B_d18O_CCI <- HAB05B_d18O_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1381,6 +1616,11 @@ HAB05B_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHF
 HAB05B_d18O_Logger <- HAB05B_d18O_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1389,6 +1629,11 @@ HAB05B_d18O_NOAA <- HAB05B_d18O_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1401,6 +1646,10 @@ HAB10A_SrCa_CCI <- HAB10A_SrCa_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1418,6 +1667,11 @@ HAB10A_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHF
 HAB10A_SrCa_Logger <- HAB10A_SrCa_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1426,6 +1680,11 @@ HAB10A_SrCa_NOAA <- HAB10A_SrCa_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1438,6 +1697,10 @@ HAB05B_SrCa_CCI <- HAB05B_SrCa_CCI %>%
   select(-`mean temperature deg C`) %>%  #remove column with [[ and ]]
   mutate(data_type = "CCI") %>%  #prepare data for binding with other data types
   rename(date = daily_date) %>%  #prepare data for binding with other data types
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>% 
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1454,6 +1717,11 @@ HAB05B_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHF
 HAB05B_SrCa_Logger <- HAB05B_SrCa_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
+  mutate(year = year(time), month = month(time)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%   #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
@@ -1462,12 +1730,22 @@ HAB05B_SrCa_NOAA <- HAB05B_SrCa_NOAA %>%
   mutate(data_type = "NOAA") %>%  #prepare data for binding with other data types
   select(-date) %>% #remove monthly date column
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>%  #select only useful columns
   as_tsibble(index = date) # convert them to tsibble
 
 HAB05B_SrCa_GCM <- read_csv(here::here("data_raw/GCM", "GCM_HAB10AB.csv")) %>% 
   mutate(data_type = "GCM", date = ymd(as.Date(Time))) %>% 
   rename(sst = tos) %>% 
+  mutate(year = year(date), month = month(date)) %>% 
+  na.omit(sst) %>% 
+  group_by(year, month) %>% 
+  mutate(sst = mean(sst)) %>% 
+  ungroup %>%
   select(data_type, date, sst) %>% 
   as_tsibble(index = date)
 
@@ -2263,9 +2541,9 @@ wc.image(wave_out_GCM_CCORE, which.image = "wc",
 par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 10.5, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 10.5, main = "NOAA and CCORE")
-wc.avg(wave_out_GCM_CCORE, maximum.level = 10.5, main = "GCM and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 11, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 11, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 11, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
@@ -2455,9 +2733,9 @@ wc.image(wave_out_GCM_CCORE, which.image = "wc",
 par(mfrow=c(3,1))
 par(mar = c(3, 4, 1, 2))
 par(cex = 0.6)
-wc.avg(wave_out_CCI_CCORE, maximum.level = 10.5, main = "CCI and CCORE")
-wc.avg(wave_out_NOAA_CCORE, maximum.level = 10.5, main = "NOAA and CCORE")
-wc.avg(wave_out_GCM_CCORE, maximum.level = 10.5, main = "GCM and CCORE")
+wc.avg(wave_out_CCI_CCORE, maximum.level = 11, main = "CCI and CCORE")
+wc.avg(wave_out_NOAA_CCORE, maximum.level = 11, main = "NOAA and CCORE")
+wc.avg(wave_out_GCM_CCORE, maximum.level = 11, main = "GCM and CCORE")
 
 #par(mfrow=c(1,1))
 #wc.image(wave_out_CCI_CCORE, which.image = "wc", show.date = TRUE, 
