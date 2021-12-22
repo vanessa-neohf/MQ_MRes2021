@@ -1,0 +1,44 @@
+---
+title: "Study Sites"
+author: "Vanessa Neo"
+date: "`r lubridate::today()`"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Map, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(maps)
+library(ggrepel)
+
+
+Study_Sites <- read_csv(here::here("data_raw", "Combined_Site_Coordinates.csv")) %>% 
+  rename(Reef = Site)
+
+Aus <- map_data("world") %>% 
+  filter(region == "Australia")
+
+cols <- c("Browse Island" = "#CC6666", "Scott Reef" = "#9999CC", "Cocos (Keeling) Islands" = "#66CC99", "Ningaloo Reef" = "#FFCC99", "Houtman Abrolhos" = "grey")
+
+ggplot() +
+  geom_polygon(data = Aus, aes(x = long, y = lat, group = group), fill = "brown") +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, fill = Reef)) +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Reef_Site, fill = Reef), size = 2, max.overlaps = 40, segment.color = "grey80") +
+  scale_fill_manual(values = cols) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  ylim(-45, -10) +
+  theme(legend.key = element_rect(fill = "transparent"), panel.grid = element_line(color = "transparent"), legend.position = "bottom", legend.title = element_blank(), axis.title = element_text(size = 10)) 
+  
+  
+  
+
+  
+
+```
+
