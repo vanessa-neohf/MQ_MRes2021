@@ -1603,15 +1603,15 @@ color.me <- which(High_BRS05_DHM$`Coral Core (CCI)`> 0 | High_BRS05_DHM$`Coral C
 #  row_spec(color.me, color = "red")
 
 
-#Visualising DHM values in CCI, NOAA and CCore 
-BRS05_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+BRS05 <- BRS05_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "BRS05 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "BRS05 (-14.11, 123.54)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -1625,7 +1625,7 @@ BRS05_Combined %>%
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "BRS05 Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -1751,15 +1751,15 @@ color.me <- which(High_BRS07_DHM$`Coral Core (CCI)`> 0 | High_BRS07_DHM$`Coral C
 #  add_header_above(c(" " = 2, "Degree Heating Month Values in BRS07" = 4), bold = TRUE) %>% 
 #  row_spec(color.me, color = "red")
 
-#Visualising DHM values in CCI, NOAA and CCore 
-BRS07_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+BRS07 <- BRS07_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "BRS07 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "BRS07 (-14.12, 123.55)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -1773,7 +1773,7 @@ BRS07_Combined %>%
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "BRS07 Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -1894,8 +1894,8 @@ DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, GCM_DAR3, CCore_DAR3_CCI, CCore_DAR3
 
 #knitr::kable(list(Max_DHM_CCI_DAR3, Max_DHM_NOAA_DAR3), caption = "Degree Heating Month values in DAR3 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-DAR3_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+DAR3 <- DAR3_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
@@ -1906,9 +1906,9 @@ DAR3_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "DAR3 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "DAR3 (-12.10, 96.88)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -1928,7 +1928,7 @@ DAR3_Combined %>%
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DAR3 Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2054,8 +2054,8 @@ color.me <- which(High_DARL_DHM$`Coral Core (CCI)`> 0 | High_DARL_DHM$`Coral Cor
 #  add_header_above(c(" " = 2, "Degree Heating Month Values in DAR Long" = 4), bold = TRUE) %>% 
 #  row_spec(color.me, color = "red")
 
-#Visualising DHM values in CCI, NOAA and CCore 
-DARL_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+DARL <- DARL_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
@@ -2066,9 +2066,9 @@ DARL_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "DARL Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "DAR Long (-12.09, 96.88)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2088,7 +2088,7 @@ DARL_Combined %>%
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DARL Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2176,8 +2176,8 @@ SCOTT_RPO_1_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1, GCM_SCOTT_RPO_1
 
 #knitr::kable(list(Max_DHM_CCI_SCOTT_RPO_1, Max_DHM_NOAA_SCOTT_RPO_1), caption = "Degree Heating Month values in SCOTT\\_RPO\\_1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTT_RPO_1_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2188,9 +2188,9 @@ SCOTT_RPO_1_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_RPO_1 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_RPO_1 (-14.06, 121.78)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2277,8 +2277,8 @@ SCOTT_SL4_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4, GCM_SCOTT_SL4)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTT_SL4, Max_DHM_NOAA_SCOTT_SL4), caption = "Degree Heating Month values in SCOTT\\_SL4 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTT_SL4_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTT_SL4 <- SCOTT_SL4_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2289,9 +2289,9 @@ SCOTT_SL4_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_SL4_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SL4 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SL4 (-14.02, 121.86)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2378,8 +2378,8 @@ SCOTT_SS3_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3, GCM_SCOTT_SS3)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTT_SS3, Max_DHM_NOAA_SCOTT_SS3), caption = "Degree Heating Month values in SCOTT\\_SS3 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTT_SS3_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTT_SS3 <- SCOTT_SS3_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2390,9 +2390,9 @@ SCOTT_SS3_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_SS3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SS3 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source")  +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SS3 (-13.64, 122.03)")+
+  scale_fill_discrete_diverging(name = "Data Source")  +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2480,8 +2480,8 @@ SCOTTNR1_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1, GCM_SCOTTNR1)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTNR1, Max_DHM_NOAA_SCOTTNR1), caption = "Degree Heating Month values in SCOTTNR1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTNR1_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTNR1 <- SCOTTNR1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2492,9 +2492,9 @@ SCOTTNR1_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTNR1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTNR1 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTNR1 (-13.99, 121.88)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2582,8 +2582,8 @@ SCOTTSL1_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1, GCM_SCOTTSL1)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTSL1, Max_DHM_NOAA_SCOTTSL1), caption = "Degree Heating Month values in SCOTTSL1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTSL1_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTSL1 <- SCOTTSL1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2594,9 +2594,9 @@ SCOTTSL1_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL1 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL1 (-14.08, 121.95)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2684,8 +2684,8 @@ SCOTTSL2_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2, GCM_SCOTTSL2)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTSL2, Max_DHM_NOAA_SCOTTSL2), caption = "Degree Heating Month values in SCOTTSL2 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTSL2_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTSL2 <- SCOTTSL2_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2696,9 +2696,9 @@ SCOTTSL2_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL2_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL2 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL2 (-14.19, 121.80)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2785,8 +2785,8 @@ SCOTTSL3_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3, GCM_SCOTTSL3)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTSL3, Max_DHM_NOAA_SCOTTSL3), caption = "Degree Heating Month values in SCOTTSL3 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTSL3_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTSL3 <- SCOTTSL3_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2797,9 +2797,9 @@ SCOTTSL3_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL3 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source")  +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL3 (-14.07, 121.78)")+
+  scale_fill_discrete_diverging(name = "Data Source")  +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2886,8 +2886,8 @@ SCOTTSS1_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1, GCM_SCOTTSS1)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTSS1, Max_DHM_NOAA_SCOTTSS1), caption = "Degree Heating Month values in SCOTTSS1 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTSS1_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTSS1 <- SCOTTSS1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -2898,9 +2898,9 @@ SCOTTSS1_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSS1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS1 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS1 (-14.08, 121.98)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -2988,8 +2988,8 @@ SCOTTSS2_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2, GCM_SCOTTSS2)
 
 #knitr::kable(list(Max_DHM_CCI_SCOTTSS2, Max_DHM_NOAA_SCOTTSS2), caption = "Degree Heating Month values in SCOTTSS2 from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-SCOTTSS2_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+SCOTTSS2 <- SCOTTSS2_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
@@ -3000,9 +3000,9 @@ SCOTTSS2_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSS2_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS2 Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS2 (-13.92, 121.92)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3227,17 +3227,17 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
 
 #knitr::kable(list(Max_DHM_CCI_Bundegi, Max_DHM_NOAA_Bundegi), caption = "Degree Heating Month values in 08BND and 13BND from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore - 08BND
-Bundegi_08BND_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore - 08BND
+`08BND` <- Bundegi_08BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "08BND Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "08BND (-21.87, 114.16)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3253,7 +3253,7 @@ Bundegi_08BND_Combined %>%
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08BND Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3261,17 +3261,17 @@ Bundegi_08BND_Combined %>%
   facet_wrap(~Bundegi_08BND_Combined$Data_Type)
 
 
-#Visualising DHM values in CCI, NOAA and CCore - 13BND
-Bundegi_13BND_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore - 13BND
+`13BND` <- Bundegi_13BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "13BND Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "13BND (-21.87, 114.16)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3285,9 +3285,9 @@ Bundegi_13BND_Combined %>%
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "13BND Degree Heating Month values time plot")+
+  labs(x = "Date", y = "Degree Heating Month", title = "13BND (-21.87, 114.16)")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3416,17 +3416,17 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
 #  add_header_above(c(" " = 2, "Degree Heating Month Values in 08TNT" = 2), bold = TRUE) #%>% 
 #  row_spec(color.me, color = "red")
 
-#Visualising DHM values in CCI, NOAA and CCore 
-Tantabiddi_08TNT_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+`08TNT` <- Tantabiddi_08TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "08TNT Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "08TNT (-21.91, 113.97)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3442,7 +3442,7 @@ Tantabiddi_08TNT_Combined %>%
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08TNT Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3571,17 +3571,17 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
 #  add_header_above(c(" " = 2, "Degree Heating Month Values in 13TNT" = 2), bold = TRUE) #%>% 
 #  row_spec(color.me, color = "red")
 
-#Visualising DHM values in CCI, NOAA and CCore 
-Tantabiddi_13TNT_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+`13TNT` <- Tantabiddi_13TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "13TNT Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "13TNT (-21.91, 113.97)")+
+  scale_fill_discrete_diverging(name = "Data Source") +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3597,7 +3597,7 @@ Tantabiddi_13TNT_Combined %>%
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "13TNT Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3682,17 +3682,17 @@ HAB05B_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B, GCM_HAB05B)
 
 #knitr::kable(list(Max_DHM_CCI_HAB05B, Max_DHM_NOAA_HAB05B), caption = "Degree Heating Month values in HAB05B from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-HAB05B_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+HAB05B <- HAB05B_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "HAB05B Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source")  +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "HAB05B (-28.46, 113.77)")+
+  scale_fill_discrete_diverging(name = "Data Source")  +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3778,17 +3778,17 @@ HAB10A_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A, GCM_HAB10A)
 
 #knitr::kable(list(Max_DHM_CCI_HAB10A, Max_DHM_NOAA_HAB10A), caption = "Degree Heating Month values in HAB10A from CCI (left) and NOAA (right)", col.names = c("Date", "DHM value"))
 
-#Visualising DHM values in CCI, NOAA and CCore 
-HAB10A_Combined %>% 
+#Visualising DHM values in CCI, NOAA, GCM and CCore 
+HAB10A <- HAB10A_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "HAB10A Degree Heating Month values time plot")+
-  scale_color_discrete_diverging(name = "Data Source")  +
-  scale_y_continuous(breaks = c(0, 2, 4)) +
+  labs(x = "Date", y = "Degree Heating Month", title = "HAB10A (-28.46, 113.75)")+
+  scale_fill_discrete_diverging(name = "Data Source")  +
+  scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold")
@@ -3798,4 +3798,23 @@ HAB10A_Combined %>%
  
 ```
 
-\end
+\newpage
+# **Combined Plots with Coral Core Data**
+```{r Combined_Sites_with_Coral, echo = FALSE, fig.width = 15, fig.height = 8}
+
+(DARL + BRS07) 
+(`08BND` + `13BND`)
+(`08TNT` + `13TNT`)
+
+
+```
+
+\newpage
+# **Combined Plots without Coral Core Data**
+```{r Combined_Sites_without_Coral, echo = FALSE, fig.width= 15, fig.height = 8}
+
+(SCOTT_RPO_1 + SCOTTSL1)
+(HAB10A + HAB05B)
+
+```
+

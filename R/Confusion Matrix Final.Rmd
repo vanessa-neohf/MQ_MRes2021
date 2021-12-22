@@ -1,0 +1,2721 @@
+---
+title: "Confusion Matrix for NOAA, CCI, GCM and Coral Core predictability of Coral Bleaching"
+author: "Vanessa Hui Fen Neo"
+date: "`r lubridate::today()`"
+output: pdf_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+```
+
+```{r load_library, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(cvms)
+library(knitr)
+library(kableExtra)
+library(xtable)
+
+```
+
+```{r Reading_DHW_Data, include = FALSE, message = FALSE}
+#CCI data
+CCI_BRS05 <- read_csv(here::here("data_raw", "CCI_BRS05_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Browse Island")
+CCI_BRS07 <- read_csv(here::here("data_raw", "CCI_BRS07_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Browse Island")
+CCI_BUN05A <- read_csv(here::here("data_raw", "CCI_BUN05A_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+CCI_Bundegi <- read_csv(here::here("data_raw", "CCI_Bundegi_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+CCI_DAR3 <- read_csv(here::here("data_raw", "CCI_DAR3_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+CCI_DARL <- read_csv(here::here("data_raw", "CCI_DARL_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+CCI_HAB05B <- read_csv(here::here("data_raw", "CCI_HAB05B_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Houtman Abrolhos")
+CCI_HAB10A <- read_csv(here::here("data_raw", "CCI_HAB10A_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Houtman Abrolhos")
+CCI_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTT_SL4 <- read_csv(here::here("data_raw", "CCI_SCOTT_SL4_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTT_SS3 <- read_csv(here::here("data_raw", "CCI_SCOTT_SS3_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTNR1 <- read_csv(here::here("data_raw", "CCI_SCOTTNR1_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTSL1 <- read_csv(here::here("data_raw", "CCI_SCOTTSL1_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTSL2 <- read_csv(here::here("data_raw", "CCI_SCOTTSL2_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTSL3 <- read_csv(here::here("data_raw", "CCI_SCOTTSL3_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTSS1 <- read_csv(here::here("data_raw", "CCI_SCOTTSS1_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_SCOTTSS2 <- read_csv(here::here("data_raw", "CCI_SCOTTSS2_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Scott Reef")
+CCI_Tantabiddi <- read_csv(here::here("data_raw", "CCI_Tantabiddi_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+CCI_TNT <- read_csv(here::here("data_raw", "CCI_TNT_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+CCI_TNT07C <- read_csv(here::here("data_raw", "CCI_TNT07C_with_mmm_and_dhw.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+CCI_Wallabi_Island <- read_csv(here::here("data_raw", "CCI_Wallabi_Island_with_mmm_and_dhw.csv")) %>%
+  mutate(Reef = "Houtman Abrolhos")
+
+#NOAA data
+NOAA_BRS05 <- read_csv(here::here("data_raw", "NOAA_BRS05_with_mmm_and_dhw.csv"))
+NOAA_BRS07 <- read_csv(here::here("data_raw", "NOAA_BRS07_with_mmm_and_dhw.csv"))
+NOAA_BUN05A <- read_csv(here::here("data_raw", "NOAA_BUN05A_with_mmm_and_dhw.csv"))
+NOAA_Bundegi <- read_csv(here::here("data_raw", "NOAA_Bundegi_with_mmm_and_dhw.csv"))
+NOAA_DAR3 <- read_csv(here::here("data_raw", "NOAA_DAR3_with_mmm_and_dhw.csv"))
+NOAA_DARL <- read_csv(here::here("data_raw", "NOAA_DAR_Long_with_mmm_and_dhw.csv"))
+NOAA_SCOTT_RPO_1 <- read_csv(here::here("data_raw", "NOAA_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTT_SL4 <- read_csv(here::here("data_raw", "NOAA_SCOTT_SL4_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTT_SS3 <- read_csv(here::here("data_raw", "NOAA_SCOTT_SS3_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTNR1 <- read_csv(here::here("data_raw", "NOAA_SCOTTNR1_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTSL1 <- read_csv(here::here("data_raw", "NOAA_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTSL2 <- read_csv(here::here("data_raw", "NOAA_SCOTTSL2_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTSL3 <- read_csv(here::here("data_raw", "NOAA_SCOTTSL3_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTSS1 <- read_csv(here::here("data_raw", "NOAA_SCOTTSS1_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_SCOTTSS2 <- read_csv(here::here("data_raw", "NOAA_SCOTTSS2_with_mmm_and_dhw.csv")) %>% 
+  rename(Site = site, Reef_Site = subsite) %>% 
+  mutate(Data_Type = "no coral core")
+NOAA_Tantabiddi <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_with_mmm_and_dhw.csv"))
+NOAA_TNT <- read_csv(here::here("data_raw", "NOAA_TNT_with_mmm_and_dhw.csv"))
+NOAA_TNT07C <- read_csv(here::here("data_raw", "NOAA_TNT07C_with_mmm_and_dhw.csv"))
+NOAA_Wallabi_Island <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_with_mmm_and_dhw.csv"))
+NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_HAB10A_with_mmm_and_dhw.csv"))
+NOAA_HAB05B <- read_csv(here::here("data_raw", "NOAA_HAB05B_with_mmm_and_dhw.csv"))
+
+#GCM data
+GCM_BRS05 <- read_csv(here::here("data_raw/GCM", "GCM_BRS05_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Browse Island")
+GCM_BRS07 <- read_csv(here::here("data_raw/GCM", "GCM_BRS07_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Browse Island")
+GCM_BUN05A <- read_csv(here::here("data_raw/GCM", "GCM_BUN05A_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Ningaloo Reef")
+GCM_Bundegi <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Ningaloo Reef")
+GCM_Tantabiddi <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Ningaloo Reef")
+GCM_TNT07C <- read_csv(here::here("data_raw/GCM", "GCM_TNT07C_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Ningaloo Reef")
+GCM_DAR3 <- read_csv(here::here("data_raw/GCM", "GCM_DAR3_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Cocos (Keeling) Islands")
+GCM_DARL <- read_csv(here::here("data_raw/GCM", "GCM_DAR_Long_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Cocos (Keeling) Islands")
+GCM_HAB05B <- read_csv(here::here("data_raw/GCM", "GCM_HAB05B_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Houtman Abrolhos")
+GCM_HAB10A <- read_csv(here::here("data_raw/GCM", "GCM_HAB10A_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Houtman Abrolhos")
+GCM_SCOTT_RPO_1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTT_SL4 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_SL4_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTT_SS3 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_SS3_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTNR1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTNR1_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTSL1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTSL2 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL2_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTSL3 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL3_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTSS1 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSS1_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+GCM_SCOTTSS2 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSS2_with_mmm_and_dhw.csv")) %>% 
+  mutate(Site = "Scott Reef")
+```
+
+```{r preparing_DHW_data_for_confusion_matrix, include = FALSE}
+
+##CCI
+#take the maximum DHW value for comparison with bleaching data
+#filter date to <2016 (Terry Hughes table is until 2016)
+#create new columns bleaching (actual) and prediction (predicted)
+
+CCI_BRS05 <- CCI_BRS05 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_BRS07 <- CCI_BRS07 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_BUN05A <- CCI_BUN05A %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_Bundegi <- CCI_Bundegi %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_DAR3 <- CCI_DAR3 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_DARL <- CCI_DARL %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_HAB05B <- CCI_HAB05B %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_HAB10A <- CCI_HAB10A %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTT_RPO_1 <- CCI_SCOTT_RPO_1 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTT_SL4 <- CCI_SCOTT_SL4 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTT_SS3 <- CCI_SCOTT_SS3 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTNR1 <- CCI_SCOTTNR1 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTSL1 <- CCI_SCOTTSL1 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTSL2 <- CCI_SCOTTSL2 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTSL3 <- CCI_SCOTTSL3 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTSS1 <- CCI_SCOTTSS1 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_SCOTTSS2 <- CCI_SCOTTSS2 %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+CCI_Tantabiddi <- CCI_Tantabiddi %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+#CCI_TNT <- CCI_TNT %>% 
+#  group_by(year) %>% 
+#  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+#  ungroup() %>% 
+#  select(Reef, year, accum_DHW_12weeks) %>% 
+#  distinct() %>%  
+#  filter(year <= 2016) %>% 
+#  mutate(bleaching = case_when(year == "2011" ~ "1",
+#                               year == "2016" ~ "1",
+#                               year != "2011" & year != "2016" ~ "0")) %>% 
+#  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+#            accum_DHW_12weeks >= 4 ~ 1)
+#  )
+
+CCI_TNT07C <- CCI_TNT07C %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Reef, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+#CCI_Wallabi_Island <- CCI_Wallabi_Island %>% 
+#  group_by(year) %>% 
+#  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+#  ungroup() %>% 
+#  select(Reef, year, accum_DHW_12weeks) %>% 
+#  distinct() %>%  
+#  filter(year <= 2016) %>% 
+#  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+#  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+#            accum_DHW_12weeks >= 4 ~ 1)
+#  )
+
+#combine CCI data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+CCI_Combined_DHW <- rbind(CCI_BRS05, CCI_BRS07, CCI_BUN05A, CCI_Bundegi, CCI_DAR3, CCI_DARL, CCI_HAB05B, CCI_HAB10A, CCI_SCOTT_RPO_1, CCI_SCOTT_SL4, CCI_SCOTT_SS3, CCI_SCOTTNR1, CCI_SCOTTSL1, CCI_SCOTTSL2, CCI_SCOTTSL3, CCI_SCOTTSS1, CCI_SCOTTSS2, CCI_Tantabiddi, CCI_TNT07C) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+##NOAA
+#take the maximum DHW value for comparison with bleaching data
+#filter date to <2016 (Terry Hughes table is until 2016)
+#create new columns bleaching (actual) and prediction (predicted)
+
+NOAA_BRS05 <- NOAA_BRS05 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_BRS07 <- NOAA_BRS07 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_BUN05A <- NOAA_BUN05A %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_Bundegi <- NOAA_Bundegi %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_DAR3 <- NOAA_DAR3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_DARL <- NOAA_DARL %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_HAB05B <- NOAA_HAB05B %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_HAB10A <- NOAA_HAB10A %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTT_RPO_1 <- NOAA_SCOTT_RPO_1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTT_SL4 <- NOAA_SCOTT_SL4 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTT_SS3 <- NOAA_SCOTT_SS3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTNR1 <- NOAA_SCOTTNR1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTSL1 <- NOAA_SCOTTSL1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTSL2 <- NOAA_SCOTTSL2 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTSL3 <- NOAA_SCOTTSL3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTSS1 <- NOAA_SCOTTSS1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_SCOTTSS2 <- NOAA_SCOTTSS2 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+NOAA_Tantabiddi <- NOAA_Tantabiddi %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+#NOAA_TNT <- NOAA_TNT %>% 
+#  mutate(year = year(Date)) %>% 
+#  group_by(year) %>% 
+#  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+#  ungroup() %>% 
+#  select(Site, year, accum_DHW_12weeks) %>% 
+#  distinct() %>%  
+#  filter(year <= 2016) %>% 
+#  mutate(bleaching = case_when(year == "2011" ~ "1",
+#                               year == "2016" ~ "1",
+#                               year != "2011" & year != "2016" ~ "0")) %>% 
+#  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+#            accum_DHW_12weeks >= 4 ~ 1)
+#  )
+
+NOAA_TNT07C <- NOAA_TNT07C %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+#NOAA_Wallabi_Island <- NOAA_Wallabi_Island %>% 
+#  mutate(year = year(Date)) %>% 
+#  group_by(year) %>% 
+#  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+#  ungroup() %>% 
+#  select(Site, year, accum_DHW_12weeks) %>% 
+#  distinct() %>%  
+#  filter(year <= 2016) %>% 
+#  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+#  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+#            accum_DHW_12weeks >= 4 ~ 1)
+#  )
+
+#combine NOAA data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+NOAA_Combined_DHW <- rbind(NOAA_BRS05, NOAA_BRS07, NOAA_BUN05A, NOAA_Bundegi, NOAA_DAR3, NOAA_DARL, NOAA_HAB05B, NOAA_HAB10A, NOAA_SCOTT_RPO_1, NOAA_SCOTT_SL4, NOAA_SCOTT_SS3, NOAA_SCOTTNR1, NOAA_SCOTTSL1, NOAA_SCOTTSL2, NOAA_SCOTTSL3, NOAA_SCOTTSS1, NOAA_SCOTTSS2, NOAA_Tantabiddi, NOAA_TNT07C) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+
+##GCM
+#take the maximum DHW value for comparison with bleaching data
+#filter date to <2016 (Terry Hughes table is until 2016)
+#create new columns bleaching (actual) and prediction (predicted)
+
+GCM_BRS05 <- GCM_BRS05 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_BRS07 <- GCM_BRS07 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_BUN05A <- GCM_BUN05A %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_Bundegi <- GCM_Bundegi %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_DAR3 <- GCM_DAR3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_DARL <- GCM_DARL %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_HAB05B <- GCM_HAB05B %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_HAB10A <- GCM_HAB10A %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTT_RPO_1 <- GCM_SCOTT_RPO_1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTT_SL4 <- GCM_SCOTT_SL4 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTT_SS3 <- GCM_SCOTT_SS3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTNR1 <- GCM_SCOTTNR1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>%  
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTSL1 <- GCM_SCOTTSL1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTSL2 <- GCM_SCOTTSL2 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTSL3 <- GCM_SCOTTSL3 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTSS1 <- GCM_SCOTTSS1 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_SCOTTSS2 <- GCM_SCOTTSS2 %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+GCM_Tantabiddi <- GCM_Tantabiddi %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+
+GCM_TNT07C <- GCM_TNT07C %>% 
+  mutate(year = year(Date)) %>% 
+  group_by(year) %>% 
+  mutate(accum_DHW_12weeks = max(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(Site, year, accum_DHW_12weeks) %>% 
+  distinct() %>%  
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>% 
+  mutate(prediction = case_when(accum_DHW_12weeks < 4 ~ 0,
+            accum_DHW_12weeks >= 4 ~ 1)
+  )
+
+
+#combine NOAA data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+GCM_Combined_DHW <- rbind(GCM_BRS05, GCM_BRS07, GCM_BUN05A, GCM_Bundegi, GCM_DAR3, GCM_DARL, GCM_HAB05B, GCM_HAB10A, GCM_SCOTT_RPO_1, GCM_SCOTT_SL4, GCM_SCOTT_SS3, GCM_SCOTTNR1, GCM_SCOTTSL1, GCM_SCOTTSL2, GCM_SCOTTSL3, GCM_SCOTTSS1, GCM_SCOTTSS2, GCM_Tantabiddi, GCM_TNT07C) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+```
+
+
+\newpage
+
+```{r Confusion_Matrix_DHW, echo = FALSE, warning = FALSE, message = FALSE}
+
+CCI_CM_DHW <- as_tibble(CCI_Combined_DHW %>% 
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+NOAA_CM_DHW <- as_tibble(NOAA_Combined_DHW %>%
+  rename(Reef = Site) %>% 
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+GCM_CM_DHW <- as_tibble(GCM_Combined_DHW %>%
+  rename(Reef = Site) %>% 
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+CCI_CM_DHW %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Week values from CCI data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+NOAA_CM_DHW %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Week values from NOAA data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+GCM_CM_DHW %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Week values from GCM data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+```
+
+```{r Reading_DHM_data, include = FALSE}
+
+#CCI
+CCI_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "CCI_BRS05_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+CCI_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "CCI_BRS07_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+CCI_BUN05A_DHM <- read_csv(here::here("data_raw/DHM", "CCI_BUN05A_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+CCI_Bundegi_DHM <- read_csv(here::here("data_raw/DHM", "CCI_Bundegi_08BND_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+CCI_DAR3_DHM <- read_csv(here::here("data_raw/DHM", "CCI_DAR3_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+CCI_DARL_DHM <- read_csv(here::here("data_raw/DHM", "CCI_DARL_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+CCI_HAB05B_DHM <- read_csv(here::here("data_raw/DHM", "CCI_HAB05B_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+CCI_HAB10A_DHM <- read_csv(here::here("data_raw/DHM", "CCI_HAB10A_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+CCI_SCOTT_RPO_1_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTT_RPO_1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTT_SL4_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTT_SL4_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTT_SS3_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTT_SS3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTNR1_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTNR1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTSL1_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTSL1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTSL2_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTSL2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTSL3_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTSL3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTSS1_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTSS1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_SCOTTSS2_DHM <- read_csv(here::here("data_raw/DHM", "CCI_SCOTTSS2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+CCI_Tantabiddi_DHM <- read_csv(here::here("data_raw/DHM", "CCI_Tantabiddi_08TNT_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+CCI_TNT_DHM <- read_csv(here::here("data_raw/DHM", "CCI_TNT_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+CCI_TNT07C_DHM <- read_csv(here::here("data_raw/DHM", "CCI_TNT07C_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+CCI_Wallabi_Island_DHM <- read_csv(here::here("data_raw/DHM", "CCI_Wallabi_Island_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+
+#NOAA
+NOAA_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_BRS05_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+NOAA_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_BRS07_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+NOAA_BUN05A_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_BUN05A_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+NOAA_Bundegi_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_Bundegi_08BND_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+NOAA_DAR3_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_DAR3_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+NOAA_DARL_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_DARL_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+NOAA_HAB05B_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_HAB05B_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+NOAA_HAB10A_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_HAB10A_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+NOAA_SCOTT_RPO_1_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTT_RPO_1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTT_SL4_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTT_SL4_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTT_SS3_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTT_SS3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTNR1_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTNR1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTSL1_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTSL1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTSL2_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTSL2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTSL3_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTSL3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTSS1_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTSS1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_SCOTTSS2_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_SCOTTSS2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+NOAA_Tantabiddi_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_Tantabiddi_08TNT_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+NOAA_TNT_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_TNT_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+NOAA_TNT07C_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_TNT07C_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+NOAA_Wallabi_Island_DHM <- read_csv(here::here("data_raw/DHM", "NOAA_Wallabi_Island_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+#GCM
+GCM_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "GCM_BRS05_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+GCM_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "GCM_BRS07_DHM.csv")) %>% 
+  mutate(Reef = "Browse Island")
+
+GCM_Bundegi_DHM <- read_csv(here::here("data_raw/DHM", "GCM_Bundegi_08BND_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+GCM_DAR3_DHM <- read_csv(here::here("data_raw/DHM", "GCM_DAR3_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+GCM_DARL_DHM <- read_csv(here::here("data_raw/DHM", "GCM_DARL_DHM.csv")) %>% 
+  mutate(Reef = "Cocos (Keeling) Islands")
+
+GCM_HAB05B_DHM <- read_csv(here::here("data_raw/DHM", "GCM_HAB05B_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+GCM_HAB10A_DHM <- read_csv(here::here("data_raw/DHM", "GCM_HAB10A_DHM.csv")) %>% 
+  mutate(Reef = "Houtman Abrolhos")
+
+GCM_SCOTT_RPO_1_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTT_RPO_1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTT_SL4_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTT_SL4_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTT_SS3_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTT_SS3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTNR1_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTNR1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTSL1_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTSL1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTSL2_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTSL2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTSL3_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTSL3_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTSS1_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTSS1_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_SCOTTSS2_DHM <- read_csv(here::here("data_raw/DHM", "GCM_SCOTTSS2_DHM.csv")) %>% 
+  mutate(Reef = "Scott Reef")
+
+GCM_Tantabiddi_DHM <- read_csv(here::here("data_raw/DHM", "GCM_Tantabiddi_08TNT_DHM.csv")) %>% 
+  mutate(Reef = "Ningaloo Reef")
+
+
+#Coral Core Data from CCI
+CCore_CCI_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS05_CCI_DHM.csv"))
+CCore_CCI_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS07_CCI_DHM.csv"))
+CCore_CCI_DARL_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DARL_CCI_DHM.csv"))
+CCore_CCI_DAR3_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DAR3_CCI_DHM.csv"))
+CCore_CCI_08BND_DHM <- read_csv(here::here("data_raw/DHM", "CCore_08BND_CCI_DHM.csv"))
+CCore_CCI_13BND_DHM <- read_csv(here::here("data_raw/DHM", "CCore_13BND_CCI_DHM.csv"))
+CCore_CCI_08TNT_DHM <- read_csv(here::here("data_raw/DHM", "CCore_08TNT_CCI_DHM.csv"))
+CCore_CCI_13TNT_DHM <- read_csv(here::here("data_raw/DHM", "CCore_13TNT_CCI_DHM.csv"))
+
+#Coral Core Data from NOAA
+CCore_NOAA_BRS05_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS05_NOAA_DHM.csv"))
+CCore_NOAA_BRS07_DHM <- read_csv(here::here("data_raw/DHM", "CCore_BRS07_NOAA_DHM.csv"))
+CCore_NOAA_DARL_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DARL_NOAA_DHM.csv"))
+CCore_NOAA_DAR3_DHM <- read_csv(here::here("data_raw/DHM", "CCore_DAR3_NOAA_DHM.csv"))
+CCore_NOAA_08BND_DHM <- read_csv(here::here("data_raw/DHM", "CCore_08BND_NOAA_DHM.csv"))
+CCore_NOAA_13BND_DHM <- read_csv(here::here("data_raw/DHM", "CCore_13BND_NOAA_DHM.csv"))
+CCore_NOAA_08TNT_DHM <- read_csv(here::here("data_raw/DHM", "CCore_08TNT_NOAA_DHM.csv"))
+CCore_NOAA_13TNT_DHM <- read_csv(here::here("data_raw/DHM", "CCore_13TNT_NOAA_DHM.csv"))
+
+```
+
+
+```{r preparing_DHM_data_for_confusion_matrix, include = FALSE}
+
+##CCI
+#take the maximum DHM value for comparison with bleaching data
+#filter date to <2016 (Terry Hughes table is until 2016)
+#create new columns bleaching (actual) and prediction (predicted)
+
+CCI_BRS05_DHM <- CCI_BRS05_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_BRS07_DHM <- CCI_BRS07_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+            DHM >= 1 ~ 1)
+  )
+
+CCI_BUN05A_DHM <- CCI_BUN05A_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BUN05A_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_Bundegi_DHM <- CCI_Bundegi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_DAR3_DHM <- CCI_DAR3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DAR3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_DARL_DHM <- CCI_DARL_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_HAB05B_DHM <- CCI_HAB05B_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB05B_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_HAB10A_DHM <- CCI_HAB10A_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB10A_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_SCOTT_RPO_1_DHM <- CCI_SCOTT_RPO_1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_RPO_1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_SCOTT_SL4_DHM <- CCI_SCOTT_SL4_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SL4_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTT_SS3_DHM <- CCI_SCOTT_SS3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SS3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTNR1_DHM <- CCI_SCOTTNR1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTNR1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTSL1_DHM <- CCI_SCOTTSL1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTSL2_DHM <- CCI_SCOTTSL2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTSL3_DHM <- CCI_SCOTTSL3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTSS1_DHM <- CCI_SCOTTSS1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_SCOTTSS2_DHM <- CCI_SCOTTSS2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_Tantabiddi_DHM <- CCI_Tantabiddi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Tantabiddi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+CCI_TNT_DHM <- CCI_TNT_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = TNT_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_TNT07C_DHM <- CCI_TNT07C_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = TNT07C_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCI_Wallabi_Island_DHM <- CCI_Wallabi_Island_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Wallabi_Island_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+#combine CCI data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+#removed sites with annual coral core proxies
+#included Scott Reef and Houtman Abrolhos sites
+CCI_Combined_DHM <- rbind(CCI_BRS05_DHM, CCI_BRS07_DHM, CCI_Bundegi_DHM, CCI_DAR3_DHM, CCI_DARL_DHM, CCI_SCOTT_RPO_1_DHM, CCI_SCOTT_SL4_DHM, CCI_SCOTT_SS3_DHM, CCI_SCOTTNR1_DHM, CCI_SCOTTSL1_DHM, CCI_SCOTTSL2_DHM, CCI_SCOTTSL3_DHM, CCI_SCOTTSS1_DHM, CCI_SCOTTSS2_DHM, CCI_Tantabiddi_DHM, CCI_HAB05B_DHM, CCI_HAB10A_DHM) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+
+#NOAA
+NOAA_BRS05_DHM <- NOAA_BRS05_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_BRS07_DHM <- NOAA_BRS07_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+            DHM >= 1 ~ 1)
+  )
+
+NOAA_BUN05A_DHM <- NOAA_BUN05A_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BUN05A_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_Bundegi_DHM <- NOAA_Bundegi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_DAR3_DHM <- NOAA_DAR3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DAR3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_DARL_DHM <- NOAA_DARL_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_HAB05B_DHM <- NOAA_HAB05B_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB05B_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_HAB10A_DHM <- NOAA_HAB10A_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB10A_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_SCOTT_RPO_1_DHM <- NOAA_SCOTT_RPO_1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_RPO_1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_SCOTT_SL4_DHM <- NOAA_SCOTT_SL4_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SL4_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTT_SS3_DHM <- NOAA_SCOTT_SS3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SS3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTNR1_DHM <- NOAA_SCOTTNR1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTNR1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTSL1_DHM <- NOAA_SCOTTSL1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTSL2_DHM <- NOAA_SCOTTSL2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTSL3_DHM <- NOAA_SCOTTSL3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTSS1_DHM <- NOAA_SCOTTSS1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_SCOTTSS2_DHM <- NOAA_SCOTTSS2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_Tantabiddi_DHM <- NOAA_Tantabiddi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Tantabiddi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+NOAA_TNT_DHM <- NOAA_TNT_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = TNT_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_TNT07C_DHM <- NOAA_TNT07C_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = TNT07C_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+NOAA_Wallabi_Island_DHM <- NOAA_Wallabi_Island_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Wallabi_Island_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+#combine NOAA data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+#removed sites with annual core core proxies
+#included Scott Reef and Houtman Abrolhos
+NOAA_Combined_DHM <- rbind(NOAA_BRS05_DHM, NOAA_BRS07_DHM, NOAA_Bundegi_DHM, NOAA_DAR3_DHM, NOAA_DARL_DHM, NOAA_SCOTT_RPO_1_DHM, NOAA_SCOTT_SL4_DHM, NOAA_SCOTT_SS3_DHM, NOAA_SCOTTNR1_DHM, NOAA_SCOTTSL1_DHM, NOAA_SCOTTSL2_DHM, NOAA_SCOTTSL3_DHM, NOAA_SCOTTSS1_DHM, NOAA_SCOTTSS2_DHM, NOAA_Tantabiddi_DHM, NOAA_HAB10A_DHM, NOAA_HAB05B_DHM) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+
+#GCM
+GCM_BRS05_DHM <- GCM_BRS05_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_BRS07_DHM <- GCM_BRS07_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2016", "1", "0")) %>% 
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+            DHM >= 1 ~ 1)
+  )
+
+
+GCM_Bundegi_DHM <- GCM_Bundegi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_DAR3_DHM <- GCM_DAR3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DAR3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_DARL_DHM <- GCM_DARL_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+GCM_HAB05B_DHM <- GCM_HAB05B_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB05B_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+GCM_HAB10A_DHM <- GCM_HAB10A_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = HAB10A_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "2011", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+GCM_SCOTT_RPO_1_DHM <- GCM_SCOTT_RPO_1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_RPO_1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+GCM_SCOTT_SL4_DHM <- GCM_SCOTT_SL4_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SL4_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTT_SS3_DHM <- GCM_SCOTT_SS3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTT_SS3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTNR1_DHM <- GCM_SCOTTNR1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTNR1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTSL1_DHM <- GCM_SCOTTSL1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTSL2_DHM <- GCM_SCOTTSL2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTSL3_DHM <- GCM_SCOTTSL3_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSL3_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTSS1_DHM <- GCM_SCOTTSS1_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS1_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_SCOTTSS2_DHM <- GCM_SCOTTSS2_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = SCOTTSS2_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1998" | year == "2016" ~ 1,
+                               year == "2011" | year == "2013" ~ 1,
+                               year != "1998" | year != "2011" | year != "2013" | year != "2016" ~ 0
+  )) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+GCM_Tantabiddi_DHM <- GCM_Tantabiddi_DHM %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Tantabiddi_DHM) %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+
+#combine GCM data
+#only at sites with SrCa coral proxy
+#removed sites with d18O coral proxy
+#removed sites with annual core core proxies
+#included Scott Reef and Houtman Abrolhos
+GCM_Combined_DHM <- rbind(GCM_BRS05_DHM, GCM_BRS07_DHM, GCM_Bundegi_DHM, GCM_DAR3_DHM, GCM_DARL_DHM, GCM_SCOTT_RPO_1_DHM, GCM_SCOTT_SL4_DHM, GCM_SCOTT_SS3_DHM, GCM_SCOTTNR1_DHM, GCM_SCOTTSL1_DHM, GCM_SCOTTSL2_DHM, GCM_SCOTTSL3_DHM, GCM_SCOTTSS1_DHM, GCM_SCOTTSS2_DHM, GCM_Tantabiddi_DHM, GCM_HAB10A_DHM, GCM_HAB05B_DHM) %>% 
+  mutate(bleaching = as.character(bleaching)) %>% 
+  mutate(prediction = as.character(prediction))
+
+
+#Coral Core
+CCore_CCI_BRS05_DHM <- CCore_CCI_BRS05_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+  
+  
+CCore_CCI_BRS07_DHM <- CCore_CCI_BRS07_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_DARL_DHM <- CCore_CCI_DARL_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1996" | year == "1998" | year == "2014" | year == "2016" ~ "1",
+                               year != "1996" | year != "1998" | year != "2014" | year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+CCore_CCI_DAR3_DHM <- CCore_CCI_DAR3_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DAR3_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_08TNT_DHM <- CCore_CCI_08TNT_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Tantabiddi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_13TNT_DHM <- CCore_CCI_13TNT_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = `13TNT_DHM`) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_08BND_DHM <- CCore_CCI_08BND_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_CCI_13BND_DHM <- CCore_CCI_13BND_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+#combine Coral Core (CCI) data
+CCore_CCI_Combined_DHM <- rbind(CCore_CCI_BRS05_DHM, CCore_CCI_BRS07_DHM, CCore_CCI_DARL_DHM, CCore_CCI_DAR3_DHM, CCore_CCI_08BND_DHM, CCore_CCI_08TNT_DHM, CCore_CCI_13BND_DHM, CCore_CCI_13TNT_DHM)
+
+#Coral Core (NOAA)
+CCore_NOAA_BRS05_DHM <- CCore_NOAA_BRS05_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS05_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+  
+  
+CCore_NOAA_BRS07_DHM <- CCore_NOAA_BRS07_DHM %>% 
+  mutate(Reef = "Browse Island") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = BRS07_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2016" ~ "1",
+                               year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+CCore_NOAA_DARL_DHM <- CCore_NOAA_DARL_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>% 
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DARL_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "1996" | year == "1998" | year == "2014" | year == "2016" ~ "1",
+                               year != "1996" | year != "1998" | year != "2014" | year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  ) 
+
+CCore_NOAA_DAR3_DHM <- CCore_NOAA_DAR3_DHM %>% 
+  mutate(Reef = "Cocos (Keeling) Islands") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = DAR3_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = if_else(year == "1996" | year == "1998" | year == "2014" | year == "2016", "1", "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_NOAA_08TNT_DHM <- CCore_NOAA_08TNT_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Tantabiddi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_NOAA_13TNT_DHM <- CCore_NOAA_13TNT_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = `13TNT_DHM`) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_NOAA_08BND_DHM <- CCore_NOAA_08BND_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+CCore_NOAA_13BND_DHM <- CCore_NOAA_13BND_DHM %>% 
+  mutate(Reef = "Ningaloo Reef") %>%
+  mutate(year = year(monthly_date)) %>% 
+  rename(DHM = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  group_by(year) %>% 
+  mutate(DHM = max(DHM)) %>% 
+  ungroup() %>% 
+  select(Reef, year, DHM) %>% 
+  distinct() %>% 
+  filter(year <= 2016) %>% 
+  mutate(bleaching = case_when(year == "2011" ~ "1",
+                               year == "2016" ~ "1",
+                               year != "2011" & year != "2016" ~ "0")) %>%
+  mutate(prediction = case_when(DHM < 1 ~ 0,
+                                DHM >= 1 ~ 1)
+  )
+
+#combine Coral Core (NOAA) data
+CCore_NOAA_Combined_DHM <- rbind(CCore_NOAA_BRS05_DHM, CCore_NOAA_BRS07_DHM, CCore_NOAA_DARL_DHM, CCore_NOAA_DAR3_DHM, CCore_NOAA_08BND_DHM, CCore_NOAA_08TNT_DHM, CCore_NOAA_13BND_DHM, CCore_NOAA_13TNT_DHM)
+
+```
+
+```{r Confusion_Matrix_DHM, echo = FALSE, warning = FALSE, message = FALSE}
+
+CCI_CM_DHM <- as_tibble(CCI_Combined_DHM %>%
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+NOAA_CM_DHM <- as_tibble(NOAA_Combined_DHM %>%
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+GCM_CM_DHM <- as_tibble(GCM_Combined_DHM %>%
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup() 
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+CCore_CCI_CM_DHM <- as_tibble(CCore_CCI_Combined_DHM %>%
+  filter(Reef != "Browse Island") %>% 
+  group_by(Reef) %>% 
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup()
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+CCore_NOAA_CM_DHM <- as_tibble(CCore_NOAA_Combined_DHM %>%
+  filter(Reef != "Browse Island") %>% 
+  group_by(Reef) %>%
+  cvms::evaluate(target_col = "bleaching", prediction_cols = "prediction", type = "binomial") %>% 
+  ungroup()
+) %>% 
+  select(-c(Predictions, `Confusion Matrix`, Process, ROC))
+
+CCI_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from CCI data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+NOAA_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from NOAA data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+GCM_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from GCM data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+CCore_CCI_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from Coral Core CCI data", digits = 2) %>% 
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+CCore_NOAA_CM_DHM %>% 
+  kbl(caption = "Confusion Matrix for predictability of bleaching using Degree Heating Months values from Coral Core NOAA data", digits = 2) %>%
+  kable_styling(full_width = TRUE) %>% 
+  landscape()
+
+```
+
+```{r Combined_Confusion_Matrix, echo = FALSE, warning = FALSE, message = FALSE}
+
+CCI_CM_DHW <- xtable(CCI_CM_DHW %>% 
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+NOAA_CM_DHW <- xtable(NOAA_CM_DHW %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+GCM_CM_DHW <- xtable(GCM_CM_DHW %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+CCI_CM_DHM <- xtable(CCI_CM_DHM %>% 
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+NOAA_CM_DHM <- xtable(NOAA_CM_DHM %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+GCM_CM_DHM <- xtable(GCM_CM_DHM %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+CCore_CCI_CM_DHM <- xtable(CCore_CCI_CM_DHM %>% 
+  select(Reef, `Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+CCore_NOAA_CM_DHM <- xtable(CCore_NOAA_CM_DHM %>% 
+  select(`Balanced Accuracy`, Sensitivity, Specificity, AUC))
+
+CM_Combined_DHW <- cbind(CCI_CM_DHW, NOAA_CM_DHW, GCM_CM_DHW) 
+CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM, GCM_CM_DHM)
+CM_CCore_DHM <- cbind(CCore_CCI_CM_DHM, CCore_NOAA_CM_DHM)
+
+xtable2kable(CM_Combined_DHW) %>% 
+  kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix") %>% 
+  add_header_above(c(" " = 1, "CCI DHW" = 4, "NOAA DHW" = 4, "GCM_DHW" = 4)) %>% 
+  kable_styling(full_width = T) %>% 
+  landscape()
+
+xtable2kable(CM_Combined_DHM) %>% 
+  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix", ) %>% 
+  add_header_above(c(" " = 1, "CCI DHM" = 4, "NOAA DHM" = 4, "GCM_DHM" = 4)) %>%
+  kable_styling(full_width = T) %>% 
+  landscape()
+
+xtable2kable(CM_CCore_DHM) %>% 
+  kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix for Coral Core", ) %>% 
+  add_header_above(c(" " = 1, "CCore CCI DHM" = 4, "CCore NOAA DHM" = 4)) %>% 
+  kable_styling(full_width = T) %>% 
+  landscape()
+  
+
+```
+

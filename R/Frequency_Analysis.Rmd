@@ -2182,7 +2182,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+BRS05 <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -2191,7 +2191,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 3) +
-  ggtitle("BRS05")
+  ggtitle("BRS05 (-14.11, 123.54)")
 ```
 
 \newpage
@@ -2374,7 +2374,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+BRS07 <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -2383,7 +2383,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("BRS07")
+  ggtitle("BRS07 (-14.12, 123.55)")
 
 ```
 
@@ -2567,7 +2567,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+DAR3 <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -2576,7 +2576,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("DAR3")
+  ggtitle("DAR3 (-12.10, 96.88)")
 
 ```
 
@@ -2759,7 +2759,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+DARL <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -2768,7 +2768,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("DAR Long")
+  ggtitle("DAR Long (-12.09, 96.88)")
 
 ```
 
@@ -2951,7 +2951,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+`13TNT` <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -2960,7 +2960,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 3) +
-  ggtitle("13TNT")
+  ggtitle("13TNT (-21.91, 113.97)")
 
 ```
 
@@ -3144,7 +3144,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+`08TNT` <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -3153,7 +3153,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 2.5) +
-  ggtitle("08TNT")
+  ggtitle("08TNT (-21.91, 113.97)")
 
 ```
 
@@ -3337,7 +3337,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+`13BND` <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -3346,7 +3346,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 2) +
-  ggtitle("13BND")
+  ggtitle("13BND (-21.87, 114.16)")
 
 ```
 
@@ -3531,7 +3531,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+`08BND` <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -3540,7 +3540,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 4) +
-  ggtitle("08BND")
+  ggtitle("08BND (-21.87, 114.16)")
 
 ```
 \newpage
@@ -3731,7 +3731,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+TNT07C <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -3740,7 +3740,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("TNT07C")
+  ggtitle("TNT07C (-21.89, 113.96)")
 
 ```
 
@@ -3923,7 +3923,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+BUN05A <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -3932,7 +3932,7 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("BUN05A")
+  ggtitle("BUN05A (-21.84, 114.18)")
 
 ```
 
@@ -4116,7 +4116,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
                   Power.avg.pval = wave_out_GCM_CCORE$Power.xy.avg.pval,
                   type = "GCM and CCore")
 
-ggplot(temp) + 
+HAB05B <- ggplot(temp) + 
   geom_line(aes(x = Period, y = Power.avg, colour = type)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.1"), 
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
@@ -4125,7 +4125,25 @@ ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("HAB05B")
+  ggtitle("HAB05B (-28.46, 113.77)")
+
+```
+
+\newpage
+```{r Combined_Plots_Monthly, fig.width= 15, fig.height = 10}
+
+(DARL + DAR3) /
+(BRS05 + BRS07) /
+(`08BND` + `13BND`) /
+(`08TNT` + `13TNT`)
+
+```
+\newpage
+```{r Combined_Plots_Annual}
+
+BUN05A
+TNT07C
+HAB05B
 
 ```
 
