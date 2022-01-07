@@ -73,8 +73,8 @@ NOAA_SCOTTSS1 <- read_csv(here::here("data_raw", "NOAA_SCOTTSS1_with_mmm_and_dhw
 NOAA_SCOTTSS2 <- read_csv(here::here("data_raw", "NOAA_SCOTTSS2_with_mmm_and_dhw.csv"))
 
 
-NOAA_HAB05B <- read_csv(here::here("data_raw", "NOAA_SST_HAB05B_SrCa_with_mmm_and_dhw.csv"))
-NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_SST_HAB10A_SrCa_with_mmm_and_dhw.csv"))
+NOAA_HAB05B <- read_csv(here::here("data_raw", "NOAA_HAB05B_with_mmm_and_dhw.csv"))
+NOAA_HAB10A <- read_csv(here::here("data_raw", "NOAA_HAB10A_with_mmm_and_dhw.csv"))
 
 ```
 
@@ -1757,12 +1757,13 @@ BRS07 <- BRS07_Combined %>%
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "BRS07 (-14.12, 123.55)")+
+  labs(x = "", y = "", title = "(B) BRS07 (-14.12, 123.55)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #visualising in separate plots
@@ -2066,12 +2067,13 @@ DARL <- DARL_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "DAR Long (-12.09, 96.88)")+
+  labs(x = "", y = "Degree Heating Month", title = "DAR Long (-12.09, 96.88)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #visualising in separate plots
@@ -2086,7 +2088,7 @@ DARL_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "DARL Degree Heating Month values time plot")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(A) DARL Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3235,12 +3237,13 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "08BND (-21.87, 114.16)")+
+  labs(x = "", y = "Degree Heating Month", title = "(C) 08BND (-21.87, 114.16)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #visualising in separate plots
@@ -3269,12 +3272,13 @@ Bundegi_08BND_Combined %>%
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "13BND (-21.87, 114.16)")+
+  labs(x = "", y = "", title = "(D) 13BND (-21.87, 114.16)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #visualising in separate plots
@@ -3424,12 +3428,13 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "08TNT (-21.91, 113.97)")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(E) 08TNT (-21.91, 113.97)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #visualising in separate plots
@@ -3579,12 +3584,13 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "13TNT (-21.91, 113.97)")+
+  labs(x = "Date", y = "", title = "(F) 13TNT (-21.91, 113.97)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none"
   )
 
 #Visualising in separate plots
