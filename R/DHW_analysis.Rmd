@@ -115,16 +115,19 @@ GCM_BRS05 <- GCM_BRS05 %>%
 
 BRS05_Sat_Combined <- rbind(CCI_BRS05, NOAA_BRS05, GCM_BRS05)
 
-BRS05 <- ggplot(BRS05_Sat_Combined)+
+ggplot(BRS05_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "BRS05 (-14.11, 123.54)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -146,6 +149,7 @@ BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07)
 BRS07 <- ggplot(BRS07_Sat_Combined)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "", title = "(D) BRS07 (-14.12, 123.55)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -153,7 +157,9 @@ BRS07 <- ggplot(BRS07_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -172,7 +178,7 @@ GCM_DAR3 <- GCM_DAR3 %>%
 
 DAR3_Sat_Combined <- rbind(CCI_DAR3, NOAA_DAR3, GCM_DAR3)
 
-DAR3 <- ggplot(DAR3_Sat_Combined)+
+ggplot(DAR3_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
@@ -181,13 +187,19 @@ DAR3 <- ggplot(DAR3_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "DAR3 (-12.10, 96.88)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -215,6 +227,10 @@ DARL <- ggplot(DARL_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "DHW", title = "(A) DAR Long (-12.09, 96.88)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -222,8 +238,11 @@ DARL <- ggplot(DARL_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
+   
 
 
 #Scott_RPO_1
@@ -250,14 +269,20 @@ SCOTT_RPO_1 <- ggplot(SCOTT_RPO_1_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "", title = "(B) SCOTT_RPO_1 (-14.06, 121.78)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -276,7 +301,7 @@ GCM_SCOTT_SL4 <- GCM_SCOTT_SL4 %>%
 
 SCOTT_SL4_Sat_Combined <- rbind(CCI_SCOTT_SL4, NOAA_SCOTT_SL4, GCM_SCOTT_SL4)
 
-SCOTT_SL4 <- ggplot(SCOTT_SL4_Sat_Combined)+
+ggplot(SCOTT_SL4_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -285,13 +310,19 @@ SCOTT_SL4 <- ggplot(SCOTT_SL4_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTT_SL4 (-14.02, 121.86)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
   
 
@@ -310,7 +341,7 @@ GCM_SCOTT_SS3 <- GCM_SCOTT_SS3 %>%
 
 SCOTT_SS3_Sat_Combined <- rbind(CCI_SCOTT_SS3, NOAA_SCOTT_SS3, GCM_SCOTT_SS3)
 
-SCOTT_SS3 <- ggplot(SCOTT_SS3_Sat_Combined)+
+ggplot(SCOTT_SS3_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -319,13 +350,19 @@ SCOTT_SS3 <- ggplot(SCOTT_SS3_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTT_SS3 (-13.64, 122.03)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -344,7 +381,7 @@ GCM_SCOTTNR1 <- GCM_SCOTTNR1 %>%
 
 SCOTTNR1_Sat_Combined <- rbind(CCI_SCOTTNR1, NOAA_SCOTTNR1, GCM_SCOTTNR1)
 
-SCOTTNR1 <- ggplot(SCOTTNR1_Sat_Combined)+
+ggplot(SCOTTNR1_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -353,13 +390,19 @@ SCOTTNR1 <- ggplot(SCOTTNR1_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTTNR1 (-13.99, 121.88)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -387,6 +430,10 @@ SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "DHW", title = "(C) SCOTTSL1 (-14.08, 121.95)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -394,7 +441,9 @@ SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -413,7 +462,7 @@ GCM_SCOTTSL2 <- GCM_SCOTTSL2 %>%
 
 SCOTTSL2_Sat_Combined <- rbind(CCI_SCOTTSL2, NOAA_SCOTTSL2, GCM_SCOTTSL2)
 
-SCOTTSL2 <- ggplot(SCOTTSL2_Sat_Combined)+
+ggplot(SCOTTSL2_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -422,13 +471,19 @@ SCOTTSL2 <- ggplot(SCOTTSL2_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTTSL2 (-14.19, 121.80)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -447,7 +502,7 @@ GCM_SCOTTSL3 <- GCM_SCOTTSL3 %>%
 
 SCOTTSL3_Sat_Combined <- rbind(CCI_SCOTTSL3, NOAA_SCOTTSL3, GCM_SCOTTSL3)
 
-SCOTTSL3 <- ggplot(SCOTTSL3_Sat_Combined)+
+ggplot(SCOTTSL3_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -456,13 +511,19 @@ SCOTTSL3 <- ggplot(SCOTTSL3_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTTSL3 (-14.07, 121.78)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -481,7 +542,7 @@ GCM_SCOTTSS1 <- GCM_SCOTTSS1 %>%
 
 SCOTTSS1_Sat_Combined <- rbind(CCI_SCOTTSS1, NOAA_SCOTTSS1, GCM_SCOTTSS1)
 
-SCOTTSS1 <- ggplot(SCOTTSS1_Sat_Combined)+
+ggplot(SCOTTSS1_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -490,13 +551,19 @@ SCOTTSS1 <- ggplot(SCOTTSS1_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTTSS1 (-14.08, 121.98)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -515,7 +582,7 @@ GCM_SCOTTSS2 <- GCM_SCOTTSS2 %>%
 
 SCOTTSS2_Sat_Combined <- rbind(CCI_SCOTTSS2, NOAA_SCOTTSS2, GCM_SCOTTSS2)
 
-SCOTTSS2 <- ggplot(SCOTTSS2_Sat_Combined)+
+ggplot(SCOTTSS2_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
@@ -524,13 +591,19 @@ SCOTTSS2 <- ggplot(SCOTTSS2_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "SCOTTSS2 (-13.92, 121.92)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -549,18 +622,22 @@ GCM_BUN05A <- GCM_BUN05A %>%
 
 BUN05A_Sat_Combined <- rbind(CCI_BUN05A, NOAA_BUN05A, GCM_BUN05A)
 
-BUN05A <- ggplot(BUN05A_Sat_Combined)+
+ggplot(BUN05A_Sat_Combined)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "BUN05A (-21.84, 114.18)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -584,6 +661,8 @@ Bundegi <- ggplot(Bundegi_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "DHW", title = "(E) 08BND, 13BND (-21.87, 114.16)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -591,7 +670,9 @@ Bundegi <- ggplot(Bundegi_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -615,6 +696,8 @@ Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "", y = "", title = "(F) 08TNT, 13TNT (-21.91, 113.97)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -622,7 +705,9 @@ Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -667,18 +752,22 @@ GCM_TNT07C <- GCM_TNT07C %>%
 
 TNT07C_Sat_Combined <- rbind(CCI_TNT07C, NOAA_TNT07C, GCM_TNT07C)
 
-TNT07C <- ggplot(TNT07C_Sat_Combined)+
+ggplot(TNT07C_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW value", title = "TNT07C (-21.89, 113.96)") +
   scale_color_discrete_qualitative(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -724,6 +813,7 @@ HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B, GCM_HAB05B)
 HAB05B <- ggplot(HAB05B_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "", title = "(H) HAB05B (-28.46, 113.77)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -731,7 +821,9 @@ HAB05B <- ggplot(HAB05B_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -753,6 +845,7 @@ HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A, GCM_HAB10A)
 HAB10A <- ggplot(HAB10A_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
   labs(x = "Time", y = "DHW", title = "(G) HAB10A (-28.46, 113.75)") +
   scale_color_discrete_qualitative(name = "Data Source") +
@@ -760,7 +853,9 @@ HAB10A <- ggplot(HAB10A_Sat_Combined)+
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
