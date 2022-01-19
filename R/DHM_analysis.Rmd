@@ -1609,12 +1609,15 @@ BRS05 <- BRS05_Combined %>%
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   labs(x = "Date", y = "Degree Heating Month", title = "BRS05 (-14.11, 123.54)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -1757,13 +1760,16 @@ BRS07 <- BRS07_Combined %>%
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   labs(x = "", y = "", title = "(B) BRS07 (-14.12, 123.55)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -1906,13 +1912,19 @@ DAR3 <- DAR3_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 2)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 2)+
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DAR3 (-12.10, 96.88)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -2066,14 +2078,20 @@ DARL <- DARL_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "", y = "Degree Heating Month", title = "DAR Long (-12.09, 96.88)")+
+  labs(x = "", y = "Degree Heating Month", title = "(A) DAR Long (-12.09, 96.88)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -2088,7 +2106,7 @@ DARL_Combined %>%
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
-  labs(x = "Date", y = "Degree Heating Month", title = "(A) DARL Degree Heating Month values time plot")+
+  labs(x = "Date", y = "Degree Heating Month", title = "DARL Degree Heating Month values time plot")+
   scale_color_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2189,13 +2207,20 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_RPO_1 (-14.06, 121.78)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2290,13 +2315,19 @@ SCOTT_SL4 <- SCOTT_SL4_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTT_SL4_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SL4 (-14.02, 121.86)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2391,13 +2422,19 @@ SCOTT_SS3 <- SCOTT_SS3_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTT_SS3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_SS3 (-13.64, 122.03)")+
   scale_fill_discrete_diverging(name = "Data Source")  +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2493,13 +2530,19 @@ SCOTTNR1 <- SCOTTNR1_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTNR1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTNR1 (-13.99, 121.88)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2595,13 +2638,20 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL1 (-14.08, 121.95)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2697,13 +2747,19 @@ SCOTTSL2 <- SCOTTSL2_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTSL2_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL2 (-14.19, 121.80)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2798,13 +2854,19 @@ SCOTTSL3 <- SCOTTSL3_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTSL3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL3 (-14.07, 121.78)")+
   scale_fill_discrete_diverging(name = "Data Source")  +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -2899,13 +2961,19 @@ SCOTTSS1 <- SCOTTSS1_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTSS1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS1 (-14.08, 121.98)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -3001,13 +3069,19 @@ SCOTTSS2 <- SCOTTSS2_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = SCOTTSS2_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSS2 (-13.92, 121.92)")+
   scale_fill_discrete_diverging(name = "Data Source") +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 
@@ -3236,6 +3310,8 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "", y = "Degree Heating Month", title = "(C) 08BND (-21.87, 114.16)")+
   scale_fill_discrete_diverging(name = "Data Source") +
@@ -3243,7 +3319,9 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -3271,6 +3349,8 @@ Bundegi_08BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "", y = "", title = "(D) 13BND (-21.87, 114.16)")+
   scale_fill_discrete_diverging(name = "Data Source") +
@@ -3278,7 +3358,9 @@ Bundegi_08BND_Combined %>%
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -3427,6 +3509,8 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "(E) 08TNT (-21.91, 113.97)")+
   scale_fill_discrete_diverging(name = "Data Source") +
@@ -3434,7 +3518,9 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #visualising in separate plots
@@ -3583,6 +3669,8 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
+  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "", title = "(F) 13TNT (-21.91, 113.97)")+
   scale_fill_discrete_diverging(name = "Data Source") +
@@ -3590,7 +3678,9 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
-        legend.position = "none"
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )
 
 #Visualising in separate plots
@@ -3693,15 +3783,17 @@ HAB05B <- HAB05B_Combined %>%
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "HAB05B (-28.46, 113.77)")+
   scale_fill_discrete_diverging(name = "Data Source")  +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   ) 
 
 
@@ -3789,15 +3881,17 @@ HAB10A <- HAB10A_Combined %>%
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 3)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "HAB10A (-28.46, 113.75)")+
   scale_fill_discrete_diverging(name = "Data Source")  +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey")
   )  
 
 
