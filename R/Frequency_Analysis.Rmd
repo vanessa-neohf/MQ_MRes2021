@@ -2189,9 +2189,12 @@ BRS05 <- ggplot(temp) +
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 3) +
-  ggtitle("BRS05 (-14.11, 123.54)")
+  xlim(0, 5) +
+  ylim(0, 15) +
+  ggtitle("BRS05 (-14.11, 123.54)") +
+  theme(legend.position = "none")
 ```
 
 \newpage
@@ -2380,10 +2383,13 @@ BRS07 <- ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
+  ylab("") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("BRS07 (-14.12, 123.55)")
+  ylim(0, 15) +
+  ggtitle("BRS07 (-14.12, 123.55)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -2573,10 +2579,13 @@ DAR3 <- ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
+  ylab("") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("DAR3 (-12.10, 96.88)")
+  ylim(0, 15) +
+  ggtitle("DAR3 (-12.10, 96.88)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -2766,9 +2775,12 @@ DARL <- ggplot(temp) +
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
-  ggtitle("DAR Long (-12.09, 96.88)")
+  ylim(0, 15) +
+  ggtitle("DAR Long (-12.09, 96.88)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -2957,10 +2969,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
+  ylab("") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 3) +
-  ggtitle("13TNT (-21.91, 113.97)")
+  xlim(0, 5) +
+  ylim(0, 15) +
+  ggtitle("13TNT (-21.91, 113.97)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -3152,8 +3166,10 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 2.5) +
-  ggtitle("08TNT (-21.91, 113.97)")
+  xlim(0, 5) +
+  ylim(0, 15) +
+  ggtitle("08TNT (-21.91, 113.97)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -3343,10 +3359,13 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
              data = ~ filter(.x, Power.avg.pval < 0.1)) + 
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
-  ylab("Average Wavelet Power") + 
+  ylab("") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 2) +
-  ggtitle("13BND (-21.87, 114.16)")
+  xlim(0, 5) +
+  ylim(0, 15) +
+  ggtitle("13BND (-21.87, 114.16)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -3538,9 +3557,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   geom_point(aes(x = Period, y = Power.avg, colour = "0.05"), 
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
+  xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 4) +
-  ggtitle("08BND (-21.87, 114.16)")
+  xlim(0, 5) +
+  ylim(0, 15) +
+  ggtitle("08BND (-21.87, 114.16)") +
+  theme(legend.position = "none")
 
 ```
 \newpage
@@ -3740,7 +3762,9 @@ TNT07C <- ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("TNT07C (-21.89, 113.96)")
+  ylim(0, 6.5) +
+  ggtitle("TNT07C (-21.89, 113.96)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -3932,7 +3956,9 @@ BUN05A <- ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("BUN05A (-21.84, 114.18)")
+  ylim(0, 6.5) +
+  ggtitle("BUN05A (-21.84, 114.18)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -4125,7 +4151,9 @@ HAB05B <- ggplot(temp) +
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
-  ggtitle("HAB05B (-28.46, 113.77)")
+  ylim(0, 6.5) +
+  ggtitle("HAB05B (-28.46, 113.77)") +
+  theme(legend.position = "none")
 
 ```
 
@@ -4141,8 +4169,8 @@ HAB05B <- ggplot(temp) +
 \newpage
 ```{r Combined_Plots_Annual}
 
-BUN05A
-TNT07C
+BUN05A/
+TNT07C/
 HAB05B
 
 ```
