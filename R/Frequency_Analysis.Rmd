@@ -2193,7 +2193,7 @@ BRS05 <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("BRS05 (-14.11, 123.54)") +
+  ggtitle("(C) BRS05 (-14.11, 123.54)", subtitle = "Browse Island") +
   theme(legend.position = "none")
 ```
 
@@ -2388,7 +2388,7 @@ BRS07 <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("BRS07 (-14.12, 123.55)") +
+  ggtitle("(D) BRS07 (-14.12, 123.55)", subtitle = "Browse Island") +
   theme(legend.position = "none")
 
 ```
@@ -2584,7 +2584,7 @@ DAR3 <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("DAR3 (-12.10, 96.88)") +
+  ggtitle("(B) DAR3 (-12.10, 96.88)", subtitle = "Cocos Keeling Island") +
   theme(legend.position = "none")
 
 ```
@@ -2779,7 +2779,7 @@ DARL <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("DAR Long (-12.09, 96.88)") +
+  ggtitle("(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island") +
   theme(legend.position = "none")
 
 ```
@@ -2973,7 +2973,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("13TNT (-21.91, 113.97)") +
+  ggtitle("(H) 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -3168,7 +3168,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("08TNT (-21.91, 113.97)") +
+  ggtitle("(G) 08TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -3364,7 +3364,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("13BND (-21.87, 114.16)") +
+  ggtitle("(F) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -3561,7 +3561,7 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 5) +
   ylim(0, 15) +
-  ggtitle("08BND (-21.87, 114.16)") +
+  ggtitle("(E) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -3763,7 +3763,7 @@ TNT07C <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
   ylim(0, 6.5) +
-  ggtitle("TNT07C (-21.89, 113.96)") +
+  ggtitle("(B) TNT07C (-21.89, 113.96)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -3957,7 +3957,7 @@ BUN05A <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
   ylim(0, 6.5) +
-  ggtitle("BUN05A (-21.84, 114.18)") +
+  ggtitle("(A) BUN05A (-21.84, 114.18)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
@@ -4152,7 +4152,7 @@ HAB05B <- ggplot(temp) +
   scale_colour_discrete(name = "Sig. Level and Series") +
   xlim(0, 1) +
   ylim(0, 6.5) +
-  ggtitle("HAB05B (-28.46, 113.77)") +
+  ggtitle("(C) HAB05B (-28.46, 113.77)", subtitle = "Ningaloo Reef") +
   theme(legend.position = "none")
 
 ```
