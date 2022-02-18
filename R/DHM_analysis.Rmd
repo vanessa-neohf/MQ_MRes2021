@@ -171,6 +171,16 @@ CCore_08BND_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08BND_NO
   mutate(Date = round_date(Date, unit = "month")) %>% 
   mutate(Latitude = "-21.87", Longitude = "114.156", yearmonth = yearmonth(Date), end_date = max(Date), Site = "08BND")
 
+#annual Coral cores HAB10A, HAB05B, BUN05A, TNT07C
+#for date range only
+CCore_H_Abrol <- read_csv(here::here("data_raw", "CCore_H_Abrol_SrCa_year.csv"))
+
+CCore_BUN05A <- read_csv(here::here("data_raw", "CCore_Ningaloo_BUN05A_year.csv"))
+
+CCore_TNT07C <- read_csv(here::here("data_raw", "CCore_Ningaloo_TNT07C_year.csv"))
+
+
+
 ```
 
 ```{r GCM_with_mmm_from_sst, include = FALSE}
@@ -352,12 +362,47 @@ Date_08BND_NOAA <- CCore_08BND_NOAA %>%
   select(Site, start_date, end_date) %>% 
   distinct()
 
+#annual coral core
+CCore_HAB05B <- CCore_H_Abrol %>% 
+  select(year, HAB05B) %>% 
+  na.omit()
+
+CCore_HAB10A <- CCore_H_Abrol %>% 
+  select(year, HAB10A) %>% 
+  na.omit()
+
+Date_HAB10A <- CCore_HAB10A %>% 
+  mutate(start_date = min(year), end_date = max(year), Site = "HAB10A") %>%
+  select(Site, start_date, end_date) %>% 
+  distinct()
+
+Date_HAB05B <- CCore_HAB05B %>% 
+  mutate(start_date = min(year), end_date = max(year), Site = "HAB05B") %>%
+  select(Site, start_date, end_date) %>% 
+  distinct()
+
+Date_BUN05A <- CCore_BUN05A %>% 
+  mutate(start_date = min(year), end_date = max(year), Site = "BUN05A") %>%
+  select(Site, start_date, end_date) %>% 
+  distinct()
+
+Date_TNT07C <- CCore_TNT07C %>% 
+  mutate(start_date = min(year), end_date = max(year), Site = "TNT07C") %>%
+  select(Site, start_date, end_date) %>% 
+  distinct()
+
 
 Date_Coral_Core <- rbind(Date_BRS05_CCI, Date_BRS05_NOAA, Date_BRS07_CCI, Date_BRS07_NOAA, Date_DAR3_CCI, Date_DAR3_NOAA, Date_DARL_CCI, Date_DARL_NOAA, Date_13TNT_CCI, Date_13TNT_NOAA, Date_08TNT_CCI, Date_08TNT_NOAA, Date_13BND_CCI, Date_13BND_NOAA, Date_08BND_CCI, Date_08BND_NOAA) %>% 
   distinct()
 
+Date_Coral_Core_Annual <- rbind(Date_HAB05B, Date_HAB10A, Date_BUN05A, Date_TNT07C)
+
 kbl(Date_Coral_Core, col.names = c("Site", "Start Year", "End Year")) %>% 
   kable_styling(position = "center") 
+
+kbl(Date_Coral_Core_Annual, col.names = c("Site", "Start Year", "End Year")) %>% 
+  kable_styling(position = "center") 
+
   
 
 ```
@@ -1627,7 +1672,10 @@ BRS05 <- BRS05_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -1643,7 +1691,10 @@ BRS05_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~BRS05_Combined$Data_Type)
 ```
@@ -1782,7 +1833,9 @@ BRS07 <- BRS07_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -1798,7 +1851,10 @@ BRS07_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~BRS07_Combined$Data_Type)
 
@@ -1939,7 +1995,10 @@ DAR3 <- DAR3_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -1961,7 +2020,10 @@ DAR3_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~DAR3_Combined$Data_Type)
 
@@ -2109,7 +2171,9 @@ DARL <- DARL_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -2131,7 +2195,10 @@ DARL_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~DARL_Combined$Data_Type)
 
@@ -2241,7 +2308,9 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -2348,7 +2417,10 @@ SCOTT_SL4 <- SCOTT_SL4_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -2455,7 +2527,10 @@ SCOTT_SS3 <- SCOTT_SS3_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -2563,7 +2638,10 @@ SCOTTNR1 <- SCOTTNR1_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -2673,7 +2751,9 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -2781,7 +2861,10 @@ SCOTTSL2 <- SCOTTSL2_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -2888,7 +2971,10 @@ SCOTTSL3 <- SCOTTSL3_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -2995,7 +3081,10 @@ SCOTTSS1 <- SCOTTSS1_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -3103,7 +3192,10 @@ SCOTTSS2 <- SCOTTSS2_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -3113,7 +3205,7 @@ SCOTTSS2 <- SCOTTSS2_Combined %>%
 \newpage
 # **Bundegi** Degree Heating Months Time Series
 
-```{r DHM_Bundegi_13BND, echo = FALSE, message = FALSE}
+```{r DHM_Bundegi_13BND_08BND, echo = FALSE, message = FALSE}
 
 #DHM calculations for 13BND CCI dataset 
 Bundegi_DHM <- rep(0,nrow(CCI_Bundegi_13BND))
@@ -3344,7 +3436,9 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -3360,7 +3454,10 @@ Bundegi_08BND_Combined %>%
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold")
+        plot.title = element_text( face = "bold"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~Bundegi_08BND_Combined$Data_Type)
 
@@ -3384,7 +3481,9 @@ Bundegi_08BND_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -3402,7 +3501,10 @@ Bundegi_13BND_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~Bundegi_13BND_Combined$Data_Type)
 ```
@@ -3547,7 +3649,9 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -3565,7 +3669,10 @@ Tantabiddi_08TNT_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~Tantabiddi_08TNT_Combined$Data_Type)
 
@@ -3710,7 +3817,9 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
         plot.title = element_text(face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 #Visualising in separate plots
@@ -3728,7 +3837,10 @@ Tantabiddi_13TNT_Combined %>%
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   ) +
   facet_wrap(~Tantabiddi_13TNT_Combined$Data_Type)
 
@@ -3826,7 +3938,9 @@ HAB05B <- HAB05B_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   ) 
 
 
@@ -3925,7 +4039,9 @@ HAB10A <- HAB10A_Combined %>%
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )  
 
 

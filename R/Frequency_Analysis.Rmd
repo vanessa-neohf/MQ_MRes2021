@@ -2191,10 +2191,12 @@ BRS05 <- ggplot(temp) +
   ylab("Average Wavelet Power") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(C) BRS05 (-14.11, 123.54)", subtitle = "Browse Island") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 ```
 
 \newpage
@@ -2386,10 +2388,12 @@ BRS07 <- ggplot(temp) +
   ylab("") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(D) BRS07 (-14.12, 123.55)", subtitle = "Browse Island") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -2582,10 +2586,12 @@ DAR3 <- ggplot(temp) +
   ylab("") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(B) DAR3 (-12.10, 96.88)", subtitle = "Cocos Keeling Island") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -2777,10 +2783,12 @@ DARL <- ggplot(temp) +
   ylab("Average Wavelet Power") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -2971,10 +2979,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(H) 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -3166,10 +3176,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(G) 08TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -3362,10 +3374,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   ylab("") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(F) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -3559,10 +3573,12 @@ temp <- tibble(Period = wave_out_CCI_CCORE$Period,
   ylab("Average Wavelet Power") + 
   xlab("") +
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 5) +
+  xlim(0, 3.5) +
   ylim(0, 15) +
   ggtitle("(E) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 \newpage
@@ -3761,10 +3777,12 @@ TNT07C <- ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 1) +
+  xlim(0, 0.75) +
   ylim(0, 6.5) +
   ggtitle("(B) TNT07C (-21.89, 113.96)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -3955,10 +3973,12 @@ BUN05A <- ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 1) +
+  xlim(0, 0.75) +
   ylim(0, 6.5) +
   ggtitle("(A) BUN05A (-21.84, 114.18)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 
@@ -4150,10 +4170,12 @@ HAB05B <- ggplot(temp) +
              data = ~ filter(.x, Power.avg.pval < 0.05)) + 
   ylab("Average Wavelet Power") + 
   scale_colour_discrete(name = "Sig. Level and Series") +
-  xlim(0, 1) +
+  xlim(0, 0.75) +
   ylim(0, 6.5) +
   ggtitle("(C) HAB05B (-28.46, 113.77)", subtitle = "Ningaloo Reef") +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        legend.direction = "horizontal",
+        legend.title = element_blank())
 
 ```
 

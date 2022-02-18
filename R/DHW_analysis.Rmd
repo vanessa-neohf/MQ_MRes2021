@@ -130,7 +130,10 @@ ggplot(BRS05_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -163,7 +166,9 @@ BRS07 <- ggplot(BRS07_Sat_Combined)+
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -203,7 +208,10 @@ ggplot(DAR3_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -245,7 +253,9 @@ DARL <- ggplot(DARL_Sat_Combined)+
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
    
 
@@ -288,7 +298,9 @@ SCOTT_RPO_1 <- ggplot(SCOTT_RPO_1_Sat_Combined)+
         plot.title = element_text( face = "bold", size = 12),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -328,7 +340,10 @@ ggplot(SCOTT_SL4_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
   
 
@@ -368,7 +383,10 @@ ggplot(SCOTT_SS3_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -408,7 +426,10 @@ ggplot(SCOTTNR1_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -450,7 +471,9 @@ SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -490,7 +513,10 @@ ggplot(SCOTTSL2_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -530,7 +556,10 @@ ggplot(SCOTTSL3_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -570,7 +599,10 @@ ggplot(SCOTTSS1_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -610,7 +642,10 @@ ggplot(SCOTTSS2_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -644,7 +679,10 @@ ggplot(BUN05A_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -680,7 +718,9 @@ Bundegi <- ggplot(Bundegi_Sat_Combined)+
         plot.title = element_text( face = "bold", size = 12),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -716,7 +756,9 @@ Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
         plot.title = element_text( face = "bold", size = 12),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -776,7 +818,10 @@ ggplot(TNT07C_Sat_Combined)+
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold"),
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.position = "bottom",
+        legend.title = element_blank()
   )
 
 
@@ -833,7 +878,9 @@ HAB05B <- ggplot(HAB05B_Sat_Combined)+
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
@@ -866,7 +913,9 @@ HAB10A <- ggplot(HAB10A_Sat_Combined)+
         plot.title = element_text( face = "bold"),
         legend.position = "none",
         panel.background = element_blank(),
-        axis.line = element_line(color = "grey")
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
   )
 
 
