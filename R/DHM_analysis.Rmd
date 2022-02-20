@@ -4068,3 +4068,381 @@ HAB10A <- HAB10A_Combined %>%
 
 ```
 
+
+```{r Frequency_Tables, echo = FALSE, message = FALSE, include = FALSE}
+#DAR Long
+freq_mod_DHM_DARL <- DARL_Combined %>% 
+  select(monthly_date, DARL_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
+
+freq_sev_DHM_DARL <- DARL_Combined %>% 
+  select(monthly_date, DARL_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
+
+#BRS07
+freq_mod_DHM_BRS07 <- BRS07_Combined %>% 
+  select(monthly_date, BRS07_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "BRS07", Reef = "Browse Island")
+
+freq_sev_DHM_BRS07 <- BRS07_Combined %>% 
+  select(monthly_date, BRS07_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "BRS07", Reef = "Browse Island")
+
+#08BND
+freq_mod_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "08BND", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "08BND", Reef = "Ningaloo Reef")
+
+#13BND
+freq_mod_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "13BND", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "13BND", Reef = "Ningaloo Reef")
+
+#08TNT
+freq_mod_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>% 
+  select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "08TNT", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>% 
+  select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "08TNT", Reef = "Ningaloo Reef")
+
+#13TNT
+freq_mod_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>% 
+  select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "13TNT", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>% 
+  select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "13TNT", Reef = "Ningaloo Reef")
+
+#SCOTT_RPO_1
+freq_mod_DHM_SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>% 
+  select(monthly_date, SCOTT_RPO_1_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = SCOTT_RPO_1_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "SCOTT_RPO_1", Reef = "Scott Reef")
+
+freq_sev_DHM_SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>% 
+  select(monthly_date, SCOTT_RPO_1_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = SCOTT_RPO_1_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "SCOTT_RPO_1", Reef = "Scott Reef")
+
+#SCOTTSL1
+freq_mod_DHM_SCOTTSL1 <- SCOTTSL1_Combined %>% 
+  select(monthly_date, SCOTTSL1_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = SCOTTSL1_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "SCOTTSL1", Reef = "Scott Reef")
+
+freq_sev_DHM_SCOTTSL1 <- SCOTTSL1_Combined %>% 
+  select(monthly_date, SCOTTSL1_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = SCOTTSL1_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "SCOTTSL1", Reef = "Scott Reef")
+
+#HAB10A
+freq_mod_DHM_HAB10A <- HAB10A_Combined %>% 
+  select(monthly_date, HAB10A_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = HAB10A_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "HAB10A", Reef = "Houtman Abrolhos")
+
+freq_sev_DHM_HAB10A <- HAB10A_Combined %>% 
+  select(monthly_date, HAB10A_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = HAB10A_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "HAB10A", Reef = "Houtman Abrolhos")
+
+#HAB05B
+freq_mod_DHM_HAB05B <- HAB05B_Combined %>% 
+  select(monthly_date, HAB05B_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = HAB05B_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "HAB05B", Reef = "Houtman Abrolhos")
+
+freq_sev_DHM_HAB05B <- HAB05B_Combined %>% 
+  select(monthly_date, HAB05B_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = HAB05B_DHM) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "HAB05B", Reef = "Houtman Abrolhos")
+
+#summary
+freq_mod_DHM_withCC_combined <- rbind(freq_mod_DHM_DARL, freq_mod_DHM_BRS07, freq_mod_DHM_Bundegi_08BND, freq_mod_DHM_Bundegi_13BND, freq_mod_DHM_Tantabiddi_08TNT, freq_mod_DHM_Tantabiddi_13TNT) %>% 
+  relocate(c(4, 3))
+
+freq_mod_DHM_noCC_combined <- rbind(freq_mod_DHM_SCOTT_RPO_1, freq_mod_DHM_SCOTTSL1, freq_mod_DHM_HAB10A, freq_mod_DHM_HAB05B) %>% 
+  relocate(c(4, 3))
+
+freq_sev_DHM_withCC_combined <- rbind(freq_sev_DHM_DARL, freq_sev_DHM_BRS07, freq_sev_DHM_Bundegi_08BND, freq_sev_DHM_Bundegi_13BND, freq_sev_DHM_Tantabiddi_08TNT, freq_sev_DHM_Tantabiddi_13TNT) %>% 
+  relocate(c(4, 3))
+
+freq_sev_DHM_noCC_combined <- rbind(freq_sev_DHM_SCOTT_RPO_1, freq_sev_DHM_SCOTTSL1, freq_sev_DHM_HAB10A, freq_sev_DHM_HAB05B) %>% 
+  relocate(c(4, 3))
+
+#data is truncated when Coral core date range is incorporated
+#analysis of CCI, NOAA and GCM only (1985-2020)
+#without Coral Core date range
+#DAR Long
+freq_mod_DHM_DARL <- DARL_Combined %>% 
+  select(monthly_date, DARL_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
+
+freq_sev_DHM_DARL <- DARL_Combined %>% 
+  select(monthly_date, DARL_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
+
+#BRS07
+freq_mod_DHM_BRS07 <- BRS07_Combined %>% 
+  select(monthly_date, BRS07_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "BRS07", Reef = "Browse Island")
+
+freq_sev_DHM_BRS07 <- BRS07_Combined %>% 
+  select(monthly_date, BRS07_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "BRS07", Reef = "Browse Island")
+
+#08BND
+freq_mod_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "08BND", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "08BND", Reef = "Ningaloo Reef")
+
+#13BND
+freq_mod_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "13BND", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>% 
+  select(monthly_date, Bundegi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "13BND", Reef = "Ningaloo Reef")
+
+#08TNT
+freq_mod_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>% 
+  select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "08TNT", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>% 
+  select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "08TNT", Reef = "Ningaloo Reef")
+
+#13TNT
+freq_mod_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>% 
+  select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 1 & DHM < 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`moderate bleaching days` = n()) %>% 
+  mutate(Site = "13TNT", Reef = "Ningaloo Reef")
+
+freq_sev_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>% 
+  select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
+  pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
+  select(-c(`Coral Core (CCI)`, `Coral Core (NOAA)`)) %>% 
+  na.omit() %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  filter(DHM >= 2) %>% 
+  group_by(`Data Type`) %>% 
+  summarize(`severe bleaching days` = n()) %>% 
+  mutate(Site = "13TNT", Reef = "Ningaloo Reef")
+
+#summary without CCore
+freq_mod_DHM_combined_CCore_rm <- rbind(freq_mod_DHM_DARL, freq_mod_DHM_BRS07, freq_mod_DHM_Bundegi_08BND, freq_mod_DHM_Bundegi_13BND, freq_mod_DHM_Tantabiddi_08TNT, freq_mod_DHM_Tantabiddi_13TNT) %>% 
+  relocate(c(4, 3))
+
+freq_sev_DHM_combined_CCore_rm <- rbind(freq_sev_DHM_DARL, freq_sev_DHM_BRS07, freq_sev_DHM_Bundegi_08BND, freq_sev_DHM_Bundegi_13BND, freq_sev_DHM_Tantabiddi_08TNT, freq_sev_DHM_Tantabiddi_13TNT) %>% 
+  relocate(c(4, 3))
+
+
+
+```
+
+
