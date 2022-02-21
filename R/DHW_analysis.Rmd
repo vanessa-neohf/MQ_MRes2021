@@ -1110,18 +1110,46 @@ freq_mod_DHW_combined <- rbind(freq_mod_DHW_DARL, freq_mod_DHW_SCOTT_RPO_1, freq
            fill = list(`moderate bleaching days` = 0))
 
 freq_sev_DHW_combined <- rbind(freq_sev_DHW_DARL, freq_sev_DHW_SCOTT_RPO_1, freq_sev_DHW_SCOTTSL1, freq_sev_DHW_BRS07, freq_sev_DHW_Bundegi, freq_sev_DHW_Tantabiddi, freq_sev_DHW_HAB10A, freq_sev_DHW_HAB05B) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`severe bleaching days` = 0))
 
 ```
 
-```{r}
-map_df(unique(freq_mod_DHW_combined$Site),   
+```{r Chi_Sq_test, echo = FALSE, include = FALSE}
+DHW_Mod_Chi_Sq <- map_df(unique(freq_mod_DHW_combined$Site),   
     ~ chisq.test(freq_mod_DHW_combined %>% 
       filter(Site == .x) %>% 
       pull(`moderate bleaching days`)) %>% 
       broom::tidy()
     ) %>% 
   mutate(Site = unique(freq_mod_DHW_combined$Site)) %>% 
-  relocate(Site)
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+DHW_Sev_Chi_Sq <- map_df(unique(freq_sev_DHW_combined$Site),   
+    ~ chisq.test(freq_sev_DHW_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`severe bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_sev_DHW_combined$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+#Plotting tables with Chi-Sq p-value
+freq_mod_DHW_ChiSq <- freq_mod_DHW_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "moderate bleaching days") %>% 
+  left_join(DHW_Mod_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+freq_sev_DHW_ChiSq <- freq_sev_DHW_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "severe bleaching days") %>% 
+  left_join(DHW_Sev_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+write_csv(freq_mod_DHW_ChiSq, here::here("R/DHW_mod_ChiSq.csv"))
+write_csv(freq_sev_DHW_ChiSq, here::here("R/DHW_sev_ChiSq.csv"))
+
 ```
 

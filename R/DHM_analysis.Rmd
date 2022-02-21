@@ -4075,7 +4075,7 @@ freq_mod_DHM_DARL <- DARL_Combined %>%
   select(monthly_date, DARL_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4085,7 +4085,7 @@ freq_sev_DHM_DARL <- DARL_Combined %>%
   select(monthly_date, DARL_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = DARL_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4096,7 +4096,7 @@ freq_mod_DHM_BRS07 <- BRS07_Combined %>%
   select(monthly_date, BRS07_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4106,7 +4106,7 @@ freq_sev_DHM_BRS07 <- BRS07_Combined %>%
   select(monthly_date, BRS07_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = BRS07_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4117,7 +4117,7 @@ freq_mod_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>%
   select(monthly_date, Bundegi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4127,7 +4127,7 @@ freq_sev_DHM_Bundegi_08BND <- Bundegi_08BND_Combined %>%
   select(monthly_date, Bundegi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4138,7 +4138,7 @@ freq_mod_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>%
   select(monthly_date, Bundegi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4148,7 +4148,7 @@ freq_sev_DHM_Bundegi_13BND <- Bundegi_13BND_Combined %>%
   select(monthly_date, Bundegi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Bundegi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4159,7 +4159,7 @@ freq_mod_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>%
   select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4169,7 +4169,7 @@ freq_sev_DHM_Tantabiddi_08TNT <- Tantabiddi_08TNT_Combined %>%
   select(monthly_date, Tantabiddi_DHM, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = Tantabiddi_DHM) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4180,7 +4180,7 @@ freq_mod_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>%
   select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 1 & DHM < 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
@@ -4190,7 +4190,7 @@ freq_sev_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>%
   select(monthly_date, `13TNT_DHM`, Data_Type) %>% 
   pivot_wider(names_from = Data_Type, values_from = `13TNT_DHM`) %>% 
   na.omit() %>% 
-  pivot_longer(cols = c(CCI, NOAA, GCM), names_to = "Data Type", values_to = "DHM") %>% 
+  pivot_longer(cols = c(CCI, NOAA, GCM, `Coral Core (CCI)`, `Coral Core (NOAA)`), names_to = "Data Type", values_to = "DHM") %>% 
   filter(DHM >= 2) %>% 
   group_by(`Data Type`) %>% 
   summarize(`severe bleaching days` = n()) %>% 
@@ -4282,16 +4282,24 @@ freq_sev_DHM_HAB05B <- HAB05B_Combined %>%
 
 #summary
 freq_mod_DHM_withCC_combined <- rbind(freq_mod_DHM_DARL, freq_mod_DHM_BRS07, freq_mod_DHM_Bundegi_08BND, freq_mod_DHM_Bundegi_13BND, freq_mod_DHM_Tantabiddi_08TNT, freq_mod_DHM_Tantabiddi_13TNT) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`moderate bleaching days` = 0))
 
 freq_mod_DHM_noCC_combined <- rbind(freq_mod_DHM_SCOTT_RPO_1, freq_mod_DHM_SCOTTSL1, freq_mod_DHM_HAB10A, freq_mod_DHM_HAB05B) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`moderate bleaching days` = 0))
 
 freq_sev_DHM_withCC_combined <- rbind(freq_sev_DHM_DARL, freq_sev_DHM_BRS07, freq_sev_DHM_Bundegi_08BND, freq_sev_DHM_Bundegi_13BND, freq_sev_DHM_Tantabiddi_08TNT, freq_sev_DHM_Tantabiddi_13TNT) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`severe bleaching days` = 0))
 
 freq_sev_DHM_noCC_combined <- rbind(freq_sev_DHM_SCOTT_RPO_1, freq_sev_DHM_SCOTTSL1, freq_sev_DHM_HAB10A, freq_sev_DHM_HAB05B) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`severe bleaching days` = 0))
 
 #data is truncated when Coral core date range is incorporated
 #analysis of CCI, NOAA and GCM only (1985-2020)
@@ -4436,13 +4444,128 @@ freq_sev_DHM_Tantabiddi_13TNT <- Tantabiddi_13TNT_Combined %>%
 
 #summary without CCore
 freq_mod_DHM_combined_CCore_rm <- rbind(freq_mod_DHM_DARL, freq_mod_DHM_BRS07, freq_mod_DHM_Bundegi_08BND, freq_mod_DHM_Bundegi_13BND, freq_mod_DHM_Tantabiddi_08TNT, freq_mod_DHM_Tantabiddi_13TNT) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`moderate bleaching days` = 0))
 
 freq_sev_DHM_combined_CCore_rm <- rbind(freq_sev_DHM_DARL, freq_sev_DHM_BRS07, freq_sev_DHM_Bundegi_08BND, freq_sev_DHM_Bundegi_13BND, freq_sev_DHM_Tantabiddi_08TNT, freq_sev_DHM_Tantabiddi_13TNT) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`severe bleaching days` = 0))
 
 
 
 ```
 
+```{r Chi_Sq_test_noCC, echo = FALSE, include = FALSE}
+DHM_Mod_noCC_Chi_Sq <- map_df(unique(freq_mod_DHM_noCC_combined$Site),   
+    ~ chisq.test(freq_mod_DHM_noCC_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`moderate bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_mod_DHM_noCC_combined$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
 
+DHM_Sev_noCC_Chi_Sq <- map_df(unique(freq_sev_DHM_noCC_combined$Site),   
+    ~ chisq.test(freq_sev_DHM_noCC_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`severe bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_sev_DHM_noCC_combined$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+#Plotting tables with Chi-Sq p-value
+freq_mod_DHM_noCC_ChiSq <- freq_mod_DHM_noCC_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "moderate bleaching days") %>% 
+  left_join(DHM_Mod_noCC_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+freq_sev_DHM_noCC_ChiSq <- freq_sev_DHM_noCC_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "severe bleaching days") %>% 
+  left_join(DHM_Sev_noCC_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+write_csv(freq_mod_DHM_noCC_ChiSq, here::here("R/DHM_mod_noCC_ChiSq.csv"))
+write_csv(freq_sev_DHM_noCC_ChiSq, here::here("R/DHM_sev_noCC_ChiSq.csv"))
+
+```
+
+
+```{r Chi_Sq_test_withCC_all, echo = FALSE, include = FALSE}
+DHM_Mod_withCC_Chi_Sq <- map_df(unique(freq_mod_DHM_withCC_combined$Site),   
+    ~ chisq.test(freq_mod_DHM_withCC_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`moderate bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_mod_DHM_withCC_combined$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+DHM_Sev_withCC_Chi_Sq <- map_df(unique(freq_sev_DHM_withCC_combined$Site),   
+    ~ chisq.test(freq_sev_DHM_withCC_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`severe bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_sev_DHM_withCC_combined$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+#Plotting tables with Chi-Sq p-value
+freq_mod_DHM_withCC_ChiSq <- freq_mod_DHM_withCC_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "moderate bleaching days") %>% 
+  left_join(DHM_Mod_withCC_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+freq_sev_DHM_withCC_ChiSq <- freq_sev_DHM_withCC_combined %>% 
+  pivot_wider(names_from = "Data Type", values_from = "severe bleaching days") %>% 
+  left_join(DHM_Sev_withCC_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+write_csv(freq_mod_DHM_withCC_ChiSq, here::here("R/DHM_mod_withCC_ChiSq.csv"))
+write_csv(freq_sev_DHM_withCC_ChiSq, here::here("R/DHM_sev_withCC_ChiSq.csv"))
+
+```
+
+
+```{r Chi_Sq_test_withCC_CCore_rm, echo = FALSE, include = FALSE}
+DHM_Mod_withCC_CCore_rm_Chi_Sq <- map_df(unique(freq_mod_DHM_combined_CCore_rm$Site),   
+    ~ chisq.test(freq_mod_DHM_combined_CCore_rm %>% 
+      filter(Site == .x) %>% 
+      pull(`moderate bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_mod_DHM_combined_CCore_rm$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+DHM_Sev_withCC_CCore_rm_Chi_Sq <- map_df(unique(freq_sev_DHM_combined_CCore_rm$Site),   
+    ~ chisq.test(freq_sev_DHM_combined_CCore_rm %>% 
+      filter(Site == .x) %>% 
+      pull(`severe bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_sev_DHM_combined_CCore_rm$Site)) %>% 
+  relocate(Site) %>% 
+  select(Site, p.value)
+
+#Plotting tables with Chi-Sq p-value
+freq_mod_DHM_withCC_CCore_rm_ChiSq <- freq_mod_DHM_combined_CCore_rm %>% 
+  pivot_wider(names_from = "Data Type", values_from = "moderate bleaching days") %>% 
+  left_join(DHM_Mod_withCC_CCore_rm_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+freq_sev_DHM_withCC_CCore_rm_ChiSq <- freq_sev_DHM_combined_CCore_rm %>% 
+  pivot_wider(names_from = "Data Type", values_from = "severe bleaching days") %>% 
+  left_join(DHM_Sev_withCC_CCore_rm_Chi_Sq, by = "Site") %>% 
+  rename(`Chi-Square p-value` = p.value)
+
+write_csv(freq_mod_DHM_withCC_CCore_rm_ChiSq, here::here("R/DHM_mod_withCC_CCore_rm_ChiSq.csv"))
+write_csv(freq_sev_DHM_withCC_CCore_rm_ChiSq, here::here("R/DHM_sev_withCC_CCore_rm_ChiSq.csv"))
+
+```
