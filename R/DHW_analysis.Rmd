@@ -943,7 +943,7 @@ freq_mod_DHW_DARL <- DARL_Sat_Combined %>%
   filter(DHW >= 4 & DHW < 8) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
-  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island") 
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
   
 
 freq_sev_DHW_DARL <- DARL_Sat_Combined %>% 
@@ -1105,7 +1105,9 @@ freq_sev_DHW_HAB05B <- HAB05B_Sat_Combined %>%
 
 #summary
 freq_mod_DHW_combined <- rbind(freq_mod_DHW_DARL, freq_mod_DHW_SCOTT_RPO_1, freq_mod_DHW_SCOTTSL1, freq_mod_DHW_BRS07, freq_mod_DHW_Bundegi, freq_mod_DHW_Tantabiddi, freq_mod_DHW_HAB10A, freq_mod_DHW_HAB05B) %>% 
-  relocate(c(4, 3))
+  relocate(c(4, 3)) %>% 
+  complete(nesting(`Reef`, `Site`), `Data Type`, 
+           fill = list(`moderate bleaching days` = 0))
 
 freq_sev_DHW_combined <- rbind(freq_sev_DHW_DARL, freq_sev_DHW_SCOTT_RPO_1, freq_sev_DHW_SCOTTSL1, freq_sev_DHW_BRS07, freq_sev_DHW_Bundegi, freq_sev_DHW_Tantabiddi, freq_sev_DHW_HAB10A, freq_sev_DHW_HAB05B) %>% 
   relocate(c(4, 3))
