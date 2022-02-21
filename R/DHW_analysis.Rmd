@@ -943,7 +943,8 @@ freq_mod_DHW_DARL <- DARL_Sat_Combined %>%
   filter(DHW >= 4 & DHW < 8) %>% 
   group_by(`Data Type`) %>% 
   summarize(`moderate bleaching days` = n()) %>% 
-  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island")
+  mutate(Site = "DAR Long", Reef = "Cocos Keeling Island") 
+  
 
 freq_sev_DHW_DARL <- DARL_Sat_Combined %>% 
   select(Date, accum_DHW_12weeks, Data_Type) %>% 
@@ -1111,4 +1112,14 @@ freq_sev_DHW_combined <- rbind(freq_sev_DHW_DARL, freq_sev_DHW_SCOTT_RPO_1, freq
 
 ```
 
+```{r}
+map_df(unique(freq_mod_DHW_combined$Site),   
+    ~ chisq.test(freq_mod_DHW_combined %>% 
+      filter(Site == .x) %>% 
+      pull(`moderate bleaching days`)) %>% 
+      broom::tidy()
+    ) %>% 
+  mutate(Site = unique(freq_mod_DHW_combined$Site)) %>% 
+  relocate(Site)
+```
 
