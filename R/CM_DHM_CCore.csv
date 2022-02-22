@@ -1,0 +1,4 @@
+,Ccore CCI DHM,,,,Ccore NOAA DHM,,,
+Reef,Balanced Accuracy,Sensitivity,Specificity,AUC,Balanced Accuracy,Sensitivity,Specificity,AUC
+Cocos (Keeling) Islands,0.5,0,1,0.5,0.5,0,1,0.5
+Ningaloo Reef,0.68902439,0.5,0.87804878,0.68902439,0.487804878,0,0.975609756,0.487804878

@@ -2698,17 +2698,23 @@ CM_Combined_DHW <- cbind(CCI_CM_DHW, NOAA_CM_DHW, GCM_CM_DHW)
 CM_Combined_DHM <- cbind(CCI_CM_DHM, NOAA_CM_DHM, GCM_CM_DHM)
 CM_CCore_DHM <- cbind(CCore_CCI_CM_DHM, CCore_NOAA_CM_DHM)
 
+write_csv(CM_Combined_DHW, "R/CM_DHW.csv")
+
 xtable2kable(CM_Combined_DHW) %>% 
   kbl(digits = 2, caption = "Degree Heating Week Confusion Matrix") %>% 
   add_header_above(c(" " = 1, "CCI DHW" = 4, "NOAA DHW" = 4, "GCM_DHW" = 4)) %>% 
   kable_styling(full_width = T) %>% 
   landscape()
 
+write_csv(CM_Combined_DHM, "R/CM_DHM.csv")
+
 xtable2kable(CM_Combined_DHM) %>% 
   kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix", ) %>% 
   add_header_above(c(" " = 1, "CCI DHM" = 4, "NOAA DHM" = 4, "GCM_DHM" = 4)) %>%
   kable_styling(full_width = T) %>% 
   landscape()
+
+write_csv(CM_CCore_DHM, "R/CM_DHM_CCore.csv")
 
 xtable2kable(CM_CCore_DHM) %>% 
   kbl(digits = 2, caption = "Degree Heating Month Confusion Matrix for Coral Core", ) %>% 
