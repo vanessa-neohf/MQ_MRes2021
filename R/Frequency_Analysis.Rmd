@@ -1933,7 +1933,7 @@ C_Ningaloo_Plot_NOAA / C_Ningaloo_Plot_CCI
 
 ```
 \newpage
-```{r Houtman_Abrolhos_Plots_Table, include = FALSE}
+```{r Houtman_Abrolhos_Plots_Table}
 HAbrol_Plot_NOAA <- HAbrol %>% 
   ggplot(aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   geom_point() +
