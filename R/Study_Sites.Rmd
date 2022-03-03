@@ -35,8 +35,9 @@ ggplot() +
   ylim(-40, -10) +
   xlim(95, 125) +
   labs(caption = "Number of Sites = 19")+
-  theme(legend.key = element_rect(fill = "transparent"), panel.grid = element_line(color = "transparent"), legend.position = "bottom", legend.title = element_blank(), axis.title = element_text(size = 10), panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black"), plot.caption = element_text(hjust = 0.5))
+  theme(legend.key = element_rect(fill = "transparent"), panel.grid = element_line(color = "transparent"), legend.position = "bottom", legend.title = element_blank(), axis.title = element_text(size = 12), panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black"), plot.caption = element_text(hjust = 0.5, size = 12))
 
+ggsave("study sites.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3, limitsize = FALSE)
   
   
   
