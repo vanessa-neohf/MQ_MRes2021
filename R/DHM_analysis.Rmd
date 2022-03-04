@@ -1826,7 +1826,8 @@ BRS07 <- BRS07_Combined %>%
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
-  labs(x = "", y = "", title = "(B) BRS07 (-14.12, 123.55)", subtitle = "Browse Island", tag = "(S)NOAA>CCI>GCM")+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
+  labs(x = "", y = "", title = "(B) BRS07 (-14.12, 123.55)", subtitle = "Browse Island")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -1837,9 +1838,7 @@ BRS07 <- BRS07_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -2168,9 +2167,10 @@ DARL <- DARL_Combined %>%
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)GCM>CCI>NOAA", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island", tag = "(M)GCM>CCI>NOAA")+
+  labs(x = "", y = "Degree Heating Month", title = "(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2181,9 +2181,7 @@ DARL <- DARL_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -2309,9 +2307,10 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Date", y = "Degree Heating Month", title = "(A) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef", tag = "(S)NOAA>CCI>GCM")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(A) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2322,9 +2321,7 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 
@@ -2758,9 +2755,10 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Date", y = "Degree Heating Month", title = "(B) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef", tag = "(S)NOAA>CCI>GCM")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(B) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2771,9 +2769,7 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 
@@ -3450,9 +3446,10 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(C) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef", tag = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM")+
+  labs(x = "", y = "Degree Heating Month", title = "(C) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3463,9 +3460,7 @@ Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bunde
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -3499,9 +3494,10 @@ Bundegi_08BND_Combined %>%
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "", title = "(D) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef", tag = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM")+
+  labs(x = "", y = "", title = "(D) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3512,9 +3508,7 @@ Bundegi_08BND_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )
 
 #visualising in separate plots
@@ -3964,9 +3958,10 @@ HAB05B <- HAB05B_Combined %>%
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Date", y = "Degree Heating Month", title = "(D) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos", tag = "(S)CCI>NOAA>GCM")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(D) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3977,9 +3972,7 @@ HAB05B <- HAB05B_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   ) 
 
 
@@ -4068,9 +4061,10 @@ HAB10A <- HAB10A_Combined %>%
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
+  annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Date", y = "Degree Heating Month", title = "(C) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos", tag = "(S)CCI>NOAA>GCM")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(C) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -4081,9 +4075,7 @@ HAB10A <- HAB10A_Combined %>%
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         legend.direction = "horizontal",
-        legend.title = element_blank(),
-        plot.tag.position = "bottom",
-        plot.tag = element_text(size = 10)
+        legend.title = element_blank()
   )  
 
 
