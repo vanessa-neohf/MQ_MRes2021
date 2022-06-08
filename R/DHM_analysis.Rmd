@@ -2324,7 +2324,35 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
         legend.title = element_blank()
   )
 
+#visualising in separate plots
+SCOTT_RPO_1_Combined %>% 
+  ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTT_RPO_1 Degree Heating Month values time plot")+
+  scale_color_manual(values = cols_no_cc) +
+  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text(face = "bold", size = 12),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
+  ) +
+  facet_wrap(~SCOTT_RPO_1_Combined$Data_Type)
 
+ggsave("Supp_SCOTT_RPO_1_DHM.png", path = here::here("graphics/Figures"), dpi = 300, scale = 1, limitsize = FALSE)
 
 ```
 
@@ -2773,6 +2801,35 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
   )
 
 
+#visualising in separate plots
+SCOTTSL1_Combined %>% 
+  ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
+  labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL1 Degree Heating Month values time plot")+
+  scale_color_manual(values = cols_no_cc) +
+  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text(face = "bold", size = 12),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
+  ) +
+  facet_wrap(~SCOTTSL1_Combined$Data_Type)
+
+ggsave("Supp_SCOTT_SL1_DHM.png", path = here::here("graphics/Figures"), dpi = 300, scale = 1, limitsize = FALSE)
  
 ```
 
@@ -3975,7 +4032,29 @@ HAB05B <- HAB05B_Combined %>%
         legend.title = element_blank()
   ) 
 
+#Visualising in Separate Plots
+HAB05B_Combined %>% 
+  ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
+  labs(x = "Date", y = "Degree Heating Month", title = "HAB05B Degree Heating Month values time plot")+
+  scale_color_manual(values = cols_no_cc) +
+  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text(face = "bold", size = 12),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
+  ) +
+  facet_wrap(~HAB05B_Combined$Data_Type)
 
+ggsave("Supp_HAB05B_DHM.png", path = here::here("graphics/Figures"), dpi = 300, scale = 1, limitsize = FALSE)
  
 ```
 
@@ -4078,6 +4157,29 @@ HAB10A <- HAB10A_Combined %>%
         legend.title = element_blank()
   )  
 
+#Visualising in separate plots
+HAB10A_Combined %>% 
+  ggplot()+
+  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+  geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
+  scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
+  labs(x = "Date", y = "Degree Heating Month", title = "HAB10A Degree Heating Month values time plot")+
+  scale_color_manual(values = cols_no_cc) +
+  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text(face = "bold", size = 12),
+        axis.title = element_text(size = 12),
+        legend.position = "bottom",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        legend.direction = "horizontal",
+        legend.title = element_blank()
+  )  +
+  facet_wrap(~HAB10A_Combined$Data_Type)
+
+ggsave("Supp_HAB10A_DHM.png", path = here::here("graphics/Figures"), dpi = 300, scale = 1, limitsize = FALSE)
 
  
 ```
