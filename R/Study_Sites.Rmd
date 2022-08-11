@@ -17,25 +17,25 @@ library(maps)
 library(ggrepel)
 
 
-Study_Sites <- read_csv(here::here("data_raw", "Combined_Site_Coordinates.csv")) %>% 
-  rename(Reef = Site)
+Study_Sites <- read_csv(here::here("data_raw", "Combined_Site_Coordinates_Full.csv")) 
 
 Aus <- map_data("world") %>% 
   filter(region == "Australia")
 
-cols <- c("Browse Island" = "#CC6666", "Scott Reef" = "#9999CC", "Cocos (Keeling) Islands" = "#66CC99", "Ningaloo Reef" = "#FFCC99", "Houtman Abrolhos" = "grey")
+cols <- c("Browse Island" = "#CC6666", "Scott Reef" = "#9999CC", "Cocos (Keeling) Islands" = "#66CC99", "Ningaloo Reef" = "#FFCC99", "Houtman Abrolhos" = "dark blue")
 
 ggplot() +
   geom_polygon(data = Aus, aes(x = long, y = lat, group = group), fill = "grey") +
-  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, fill = Reef), ) +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Reef_Site, fill = Reef), size = 4, max.overlaps = 40, segment.color = "grey80") +
-  scale_fill_manual(values = cols) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, color = Reef), size = 3 ) +
+  #geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, fill = Reef), size = 4, max.overlaps = 40, segment.color = "grey80") +
+  scale_color_manual(values = cols) +
   xlab("Longitude") +
   ylab("Latitude") +
-  ylim(-40, -10) +
-  xlim(95, 125) +
+  #ylim(-40, -10) +
+  #xlim(95, 125) +
   labs(caption = "Number of Sites = 19")+
-  theme(legend.key = element_rect(fill = "transparent"), panel.grid = element_line(color = "transparent"), legend.position = "bottom", legend.title = element_blank(), axis.title = element_text(size = 12), panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black"), plot.caption = element_text(hjust = 0.5, size = 12))
+  coord_fixed(ratio = 1) +
+  theme(legend.key = element_rect(fill = "transparent"), panel.grid = element_line(color = "transparent"), legend.position = "bottom", axis.title = element_text(size = 12), panel.background = element_rect(fill = "transparent"), axis.line = element_line(color = "black"), plot.caption = element_text(hjust = 0.5, size = 12), legend.title = element_blank() )
 
 ggsave("study sites.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3, limitsize = FALSE)
   
