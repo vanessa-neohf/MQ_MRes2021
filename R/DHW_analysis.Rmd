@@ -17,6 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
 library(dplyr)
+library(zoo)
 library(patchwork)
 library(colorspace)
 library(rmarkdown)
@@ -963,6 +964,121 @@ ggsave("DHW02.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3,
 
 ```
 
+```{r Cumulative_DHW_ts, echo=FALSE, message=FALSE, include=FALSE}
+
+#DARL
+DARL_cumu_HSdays <- DARL_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(DARL_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "DAR Long", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+#SCOTT_RPO_1
+SCOTT_RPO_1_cumu_HSdays <- SCOTT_RPO_1_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(SCOTT_RPO_1_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "SCOTT_RPO_1", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+#SCOTTSL1
+SCOTTSL1_cumu_HSdays <- SCOTTSL1_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(SCOTTSL1_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "SCOTTSL1", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+#BRS07
+BRS07_cumu_HSdays <- BRS07_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(BRS07_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "BRS07", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+#Bundegi
+Bundegi_cumu_HSdays <- Bundegi_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(Bundegi_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "Bundegi", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+#Tantabiddi
+Tantabiddi_cumu_HSdays <- Tantabiddi_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(Tantabiddi_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "Tantabiddi", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+#HAB05B
+HAB05B_cumu_HSdays <- HAB05B_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(HAB05B_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "HAB05B", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+#HAB10A
+HAB10A_cumu_HSdays <- HAB10A_Sat_Combined %>% 
+  select(Date, accum_DHW_12weeks, Data_Type, Reef_Site) %>% 
+  mutate(accum_DHW_12weeks = if_else(accum_DHW_12weeks > 0, 1, 0)) %>% 
+  group_by(Data_Type) %>% 
+  mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
+  ungroup() %>% 
+  select(-accum_DHW_12weeks)
+
+ggplot(HAB10A_cumu_HSdays) + 
+  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative DHW days", title = "HAB10A", color = "Data Type") +
+  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+```
 
 ```{r Frequency_Tables, echo = FALSE, message = FALSE, include = FALSE}
 #DAR Long
