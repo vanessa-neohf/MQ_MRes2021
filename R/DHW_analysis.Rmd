@@ -964,7 +964,7 @@ ggsave("DHW02.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3,
 
 ```
 
-```{r Cumulative_DHW_ts, echo=FALSE, message=FALSE, include=FALSE}
+```{r Cumulative_DHW_ts, echo=FALSE, message=FALSE}
 
 #DARL
 DARL_cumu_HSdays <- DARL_Sat_Combined %>% 
@@ -975,10 +975,12 @@ DARL_cumu_HSdays <- DARL_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(DARL_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "DAR Long", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+DARL_cum <- ggplot(DARL_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "DAR Long", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+DARL_cum
 
 #SCOTT_RPO_1
 SCOTT_RPO_1_cumu_HSdays <- SCOTT_RPO_1_Sat_Combined %>% 
@@ -989,10 +991,12 @@ SCOTT_RPO_1_cumu_HSdays <- SCOTT_RPO_1_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(SCOTT_RPO_1_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "SCOTT_RPO_1", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+SCOTT_RPO_1_cum <- ggplot(SCOTT_RPO_1_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "SCOTT_RPO_1", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+SCOTT_RPO_1_cum
 
 #SCOTTSL1
 SCOTTSL1_cumu_HSdays <- SCOTTSL1_Sat_Combined %>% 
@@ -1003,10 +1007,12 @@ SCOTTSL1_cumu_HSdays <- SCOTTSL1_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(SCOTTSL1_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "SCOTTSL1", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+SCOTTSL1_cum <- ggplot(SCOTTSL1_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "SCOTTSL1", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+SCOTTSL1_cum 
 
 #BRS07
 BRS07_cumu_HSdays <- BRS07_Sat_Combined %>% 
@@ -1017,10 +1023,12 @@ BRS07_cumu_HSdays <- BRS07_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(BRS07_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "BRS07", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+BRS07_cum <- ggplot(BRS07_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "BRS07", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
+
+BRS07_cum
 
 #Bundegi
 Bundegi_cumu_HSdays <- Bundegi_Sat_Combined %>% 
@@ -1031,10 +1039,12 @@ Bundegi_cumu_HSdays <- Bundegi_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(Bundegi_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "Bundegi", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+Bundegi_cum <- ggplot(Bundegi_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "Bundegi", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+Bundegi_cum
 
 #Tantabiddi
 Tantabiddi_cumu_HSdays <- Tantabiddi_Sat_Combined %>% 
@@ -1045,10 +1055,12 @@ Tantabiddi_cumu_HSdays <- Tantabiddi_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(Tantabiddi_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "Tantabiddi", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+Tantabiddi_cum <- ggplot(Tantabiddi_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "Tantabiddi", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+Tantabiddi_cum
 
 #HAB05B
 HAB05B_cumu_HSdays <- HAB05B_Sat_Combined %>% 
@@ -1059,10 +1071,12 @@ HAB05B_cumu_HSdays <- HAB05B_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(HAB05B_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "HAB05B", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+HAB05B_cum <- ggplot(HAB05B_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "HAB05B", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+HAB05B_cum
 
 #HAB10A
 HAB10A_cumu_HSdays <- HAB10A_Sat_Combined %>% 
@@ -1073,10 +1087,12 @@ HAB10A_cumu_HSdays <- HAB10A_Sat_Combined %>%
   ungroup() %>% 
   select(-accum_DHW_12weeks)
 
-ggplot(HAB10A_cumu_HSdays) + 
-  geom_line(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHW days", title = "HAB10A", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+HAB10A_cum <- ggplot(HAB10A_cumu_HSdays) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  labs(x = "Time", y = "Cumulative high DHW days", title = "HAB10A", color = "Data Type") 
+  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+
+HAB10A_cum
 
 ```
 
