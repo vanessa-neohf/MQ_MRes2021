@@ -1815,20 +1815,21 @@ write_csv(CCore_BRS07_NOAA, here::here("data_raw/DHM/CCore_BRS07_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 BRS07_Combined <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07, CCore_BRS07_CCI, CCore_BRS07_NOAA)
+BRS07_Combined_noCC <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07)
 
 #Cumulative Plot
-BRS07_cum_HSdays <- BRS07_Combined %>% 
+BRS07_cum_HSdays <- BRS07_Combined_noCC %>% 
   select(monthly_date, Reef_Site, Data_Type, BRS07_DHM) %>% 
   mutate(BRS07_DHM = if_else(BRS07_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(BRS07_DHM)) %>% 
   ungroup() %>% 
-  select(-BRS07_DHM)
+  select(-BRS07_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 BRS07_cum <- ggplot(BRS07_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "BRS07", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
+  labs(x = "Time", y = "Cumulative high DHM days", title = "BRS07", color = "Data Type") 
 
 BRS07_cum
 
@@ -2166,20 +2167,21 @@ write_csv(CCore_DARL_NOAA, here::here("data_raw/DHM/CCore_DARL_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 DARL_Combined <- rbind(CCI_DARL, NOAA_DARL, GCM_DARL, CCore_DARL_CCI, CCore_DARL_NOAA)
+DARL_Combined_noCC <- rbind(CCI_DARL, NOAA_DARL, GCM_DARL)
 
 #Cumulative Plot
-DARL_cum_HSdays <- DARL_Combined %>% 
+DARL_cum_HSdays <- DARL_Combined_noCC %>% 
   select(monthly_date, Reef_Site, Data_Type, DARL_DHM) %>% 
   mutate(DARL_DHM = if_else(DARL_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(DARL_DHM)) %>% 
   ungroup() %>% 
-  select(-DARL_DHM)
+  select(-DARL_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 DARL_cum <- ggplot(DARL_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "DARL", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 DARL_cum
 
@@ -2335,12 +2337,12 @@ SCOTT_RPO_1_cum_HSdays <- SCOTT_RPO_1_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(SCOTT_RPO_1_DHM)) %>% 
   ungroup() %>% 
-  select(-SCOTT_RPO_1_DHM)
+  select(-SCOTT_RPO_1_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 SCOTT_RPO_1_cum <- ggplot(SCOTT_RPO_1_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "SCOTT_RPO_1", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 SCOTT_RPO_1_cum
 
@@ -2827,12 +2829,12 @@ SCOTTSL1_cum_HSdays <- SCOTTSL1_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(SCOTTSL1_DHM)) %>% 
   ungroup() %>% 
-  select(-SCOTTSL1_DHM)
+  select(-SCOTTSL1_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 SCOTTSL1_cum <- ggplot(SCOTTSL1_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "SCOTTSL1", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 SCOTTSL1_cum
 
@@ -3462,22 +3464,8 @@ write_csv(CCore_13BND_NOAA, here::here("data_raw/DHM/CCore_13BND_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations for Bundegi 13BND
 Bundegi_13BND_Combined <- rbind(CCI_Bundegi_13BND, NOAA_Bundegi_13BND, GCM_Bundegi_13BND, CCore_13BND_CCI, CCore_13BND_NOAA)
+Bundegi_13BND_Combined_noCC <- rbind(CCI_Bundegi_13BND, NOAA_Bundegi_13BND, GCM_Bundegi_13BND)
 
-#Cumulative Plot
-Bundegi_13BND_cum_HSdays <- Bundegi_13BND_Combined %>% 
-  select(monthly_date, Reef_Site, Data_Type, Bundegi_DHM) %>% 
-  mutate(Bundegi_DHM = if_else(Bundegi_DHM > 1, 1, 0)) %>% 
-  group_by(Data_Type) %>% 
-  mutate(DHM_months_count = cumsum(Bundegi_DHM)) %>% 
-  ungroup() %>% 
-  select(-Bundegi_DHM)
-
-Bundegi_13BND_cum <- ggplot(Bundegi_13BND_cum_HSdays) +
-  geom_line(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "Bundegi 13BND", color = "Data Type") +
-  scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
-
-Bundegi_13BND_cum
 
 #DHM calculations for 08BND CCI dataset 
 Bundegi_DHM <- rep(0,nrow(CCI_Bundegi_08BND))
@@ -3577,36 +3565,37 @@ write_csv(CCore_08BND_NOAA, here::here("data_raw/DHM/CCore_08BND_NOAA_DHM.csv"))
 
 #Combining datasets with DHM calculations
 Bundegi_08BND_Combined <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bundegi_08BND, CCore_08BND_CCI, CCore_08BND_NOAA)
+Bundegi_08BND_Combined_noCC <- rbind(CCI_Bundegi_08BND, NOAA_Bundegi_08BND, GCM_Bundegi_08BND)
 
 #Cumulative Plot (08BND)
-Bundegi_08BND_cum_HSdays <- Bundegi_08BND_Combined %>% 
+Bundegi_08BND_cum_HSdays <- Bundegi_08BND_Combined_noCC %>% 
   select(monthly_date, Reef_Site, Data_Type, Bundegi_DHM) %>% 
   mutate(Bundegi_DHM = if_else(Bundegi_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(Bundegi_DHM)) %>% 
   ungroup() %>% 
-  select(-Bundegi_DHM)
+  select(-Bundegi_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 Bundegi_08BND_cum <- ggplot(Bundegi_08BND_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "Bundegi 08BND", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 Bundegi_08BND_cum
 
 #Cumulative Plot (13BND)
-Bundegi_13BND_cum_HSdays <- Bundegi_13BND_Combined %>% 
+Bundegi_13BND_cum_HSdays <- Bundegi_13BND_Combined_noCC %>% 
   select(monthly_date, Reef_Site, Data_Type, Bundegi_DHM) %>% 
   mutate(Bundegi_DHM = if_else(Bundegi_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(Bundegi_DHM)) %>% 
   ungroup() %>% 
-  select(-Bundegi_DHM)
+  select(-Bundegi_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 Bundegi_13BND_cum <- ggplot(Bundegi_13BND_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "Bundegi 13BND", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 Bundegi_13BND_cum
 
@@ -3824,19 +3813,21 @@ write_csv(CCore_08TNT_NOAA, here::here("data_raw/DHM/CCore_08TNT_NOAA_DHM.csv"))
 #Combining datasets with DHM calculations
 Tantabiddi_08TNT_Combined <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, GCM_Tantabiddi_08TNT, CCore_08TNT_CCI, CCore_08TNT_NOAA)
 
+Tantabiddi_08TNT_Combined_noCC <- rbind(CCI_Tantabiddi_08TNT, NOAA_Tantabiddi_08TNT, GCM_Tantabiddi_08TNT)
+
 #Cumulative Plot
-Tantabiddi_08TNT_cum_HSdays <- Tantabiddi_08TNT_Combined %>% 
+Tantabiddi_08TNT_cum_HSdays <- Tantabiddi_08TNT_Combined_noCC %>% 
   select(monthly_date, Reef_Site, Data_Type, Tantabiddi_DHM) %>% 
   mutate(Tantabiddi_DHM = if_else(Tantabiddi_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(Tantabiddi_DHM)) %>% 
   ungroup() %>% 
-  select(-Tantabiddi_DHM)
+  select(-Tantabiddi_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 Tantabiddi_08TNT_cum <- ggplot(Tantabiddi_08TNT_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "Tantabiddi 08TNT", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
 
 Tantabiddi_08TNT_cum
 
@@ -4010,20 +4001,22 @@ write_csv(CCore_13TNT_NOAA, here::here("data_raw/DHM/CCore_13TNT_NOAA_DHM.csv"))
 #Combining datasets with DHM calculations
 Tantabiddi_13TNT_Combined <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, GCM_Tantabiddi_13TNT, CCore_13TNT_CCI, CCore_13TNT_NOAA)
 
+Tantabiddi_13TNT_Combined_noCC <- rbind(CCI_Tantabiddi_13TNT, NOAA_Tantabiddi_13TNT, GCM_Tantabiddi_13TNT)
+
 #Cumulative Plot
-Tantabiddi_13TNT_cum_HSdays <- Tantabiddi_13TNT_Combined %>% 
+Tantabiddi_13TNT_cum_HSdays <- Tantabiddi_13TNT_Combined_noCC %>% 
   rename(Tantabiddi_DHM = `13TNT_DHM`) %>% 
   select(monthly_date, Reef_Site, Data_Type, Tantabiddi_DHM) %>% 
   mutate(Tantabiddi_DHM = if_else(Tantabiddi_DHM > 1, 1, 0)) %>% 
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(Tantabiddi_DHM)) %>% 
   ungroup() %>% 
-  select(-Tantabiddi_DHM)
+  select(-Tantabiddi_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 Tantabiddi_13TNT_cum <- ggplot(Tantabiddi_13TNT_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "Tantabiddi 13TNT", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
 
 Tantabiddi_13TNT_cum
 
@@ -4165,12 +4158,12 @@ HAB05B_cum_HSdays <- HAB05B_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(HAB05B_DHM)) %>% 
   ungroup() %>% 
-  select(-HAB05B_DHM)
+  select(-HAB05B_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 HAB05B_cum <- ggplot(HAB05B_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "HAB05B", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 HAB05B_cum
 
@@ -4306,12 +4299,12 @@ HAB10A_cum_HSdays <- HAB10A_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHM_months_count = cumsum(HAB10A_DHM)) %>% 
   ungroup() %>% 
-  select(-HAB10A_DHM)
+  select(-HAB10A_DHM) %>% 
+  filter(monthly_date < "2021-01-01")
 
 HAB10A_cum <- ggplot(HAB10A_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
   labs(x = "Time", y = "Cumulative high DHM days", title = "HAB10A", color = "Data Type") 
-  #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 HAB10A_cum
 
@@ -4375,6 +4368,20 @@ ggsave("Supp_HAB10A_DHM.png", path = here::here("graphics/Figures"), dpi = 300, 
 
  
 ```
+
+#**Cumulative Plots**
+```{r Cumulative_Plots, echo = FALSE, warning = FALSE, message = FALSE}
+
+Cumulative_DHM <- (BRS07_cum + DARL_cum + SCOTT_RPO_1_cum + SCOTTSL1_cum) /
+  (Tantabiddi_08TNT_cum + Tantabiddi_13TNT_cum + Bundegi_08BND_cum + Bundegi_13BND_cum) /
+  (HAB05B_cum + HAB10A_cum)
+
+Cumulative_DHM
+
+ggsave("Cumulative_DHM.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3, limitsize = FALSE)
+
+```
+
 
 \newpage
 # **Combined Plots with Coral Core Data**

@@ -973,10 +973,11 @@ DARL_cumu_HSdays <- DARL_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 DARL_cum <- ggplot(DARL_cumu_HSdays) + 
-  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
+  geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type), method = "loess") + 
   labs(x = "Time", y = "Cumulative high DHW days", title = "DAR Long", color = "Data Type") 
   #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
 
@@ -989,7 +990,8 @@ SCOTT_RPO_1_cumu_HSdays <- SCOTT_RPO_1_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 SCOTT_RPO_1_cum <- ggplot(SCOTT_RPO_1_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1005,7 +1007,8 @@ SCOTTSL1_cumu_HSdays <- SCOTTSL1_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 SCOTTSL1_cum <- ggplot(SCOTTSL1_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1021,7 +1024,8 @@ BRS07_cumu_HSdays <- BRS07_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 BRS07_cum <- ggplot(BRS07_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1037,7 +1041,8 @@ Bundegi_cumu_HSdays <- Bundegi_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 Bundegi_cum <- ggplot(Bundegi_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1053,7 +1058,8 @@ Tantabiddi_cumu_HSdays <- Tantabiddi_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 Tantabiddi_cum <- ggplot(Tantabiddi_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1069,7 +1075,8 @@ HAB05B_cumu_HSdays <- HAB05B_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 HAB05B_cum <- ggplot(HAB05B_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1085,7 +1092,8 @@ HAB10A_cumu_HSdays <- HAB10A_Sat_Combined %>%
   group_by(Data_Type) %>% 
   mutate(DHW_days_count = cumsum(accum_DHW_12weeks)) %>% 
   ungroup() %>% 
-  select(-accum_DHW_12weeks)
+  select(-accum_DHW_12weeks) %>% 
+  filter(Date < "2021-01-01")
 
 HAB10A_cum <- ggplot(HAB10A_cumu_HSdays) + 
   geom_smooth(aes(x = Date, y = DHW_days_count, color = Data_Type)) + 
@@ -1093,6 +1101,13 @@ HAB10A_cum <- ggplot(HAB10A_cumu_HSdays) +
   #scale_x_date(limits = as_date(c("1985-01-01","2021-01-01")))
 
 HAB10A_cum
+
+Cumulative_DHW <- (BRS07_cum + DARL_cum + SCOTT_RPO_1_cum + SCOTTSL1_cum) /
+  (Tantabiddi_cum  + Bundegi_cum + HAB05B_cum + HAB10A_cum)
+
+Cumulative_DHW
+
+ggsave("Cumulative_DHW.png", path = here::here("graphics/Figures"), dpi = 300, scale = 3, limitsize = FALSE)
 
 ```
 
