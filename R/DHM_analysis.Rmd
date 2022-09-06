@@ -1543,7 +1543,7 @@ cols_no_cc <- c("GCM" = "dark green", "CCI" = "dark red", "NOAA" = "navy blue")
 # **BRS05** Degree Heating Months Time Series
 
 
-```{r DHM_BRS05, echo = FALSE, message = FALSE}
+```{r DHM_BRS05, echo = FALSE, message = FALSE, warning = FALSE}
 
 #DHM calculations for CCI dataset 
 BRS05_DHM <- rep(0,nrow(CCI_BRS05))
@@ -1718,7 +1718,7 @@ BRS05_Combined %>%
 # **BRS07** Degree Heating Months Time Series
 
 
-```{r DHM_BRS07, echo = FALSE, message = FALSE}
+```{r DHM_BRS07, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -1899,7 +1899,7 @@ BRS07_Combined %>%
 \newpage
 # **DAR3** Degree Heating Months Time Series
 
-```{r DHM_DAR3, echo = FALSE, message = FALSE}
+```{r DHM_DAR3, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2070,7 +2070,7 @@ DAR3_Combined %>%
 \newpage
 # **DAR Long** Degree Heating Months Time Series
 
-```{r DHM_DARL, echo = FALSE, message = FALSE}
+```{r DHM_DARL, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2267,7 +2267,7 @@ DARL_Combined %>%
 \newpage
 # **SCOTT_RPO_1** Degree Heating Months Time Series
 
-```{r DHM_SCOTT_RPO_1, echo = FALSE, message = FALSE}
+```{r DHM_SCOTT_RPO_1, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2424,7 +2424,7 @@ ggsave("Supp_SCOTT_RPO_1_DHM.png", path = here::here("graphics/Figures"), dpi = 
 \newpage
 # **SCOTT_SL4** Degree Heating Months Time Series
 
-```{r DHM_SCOTT_SL4, echo = FALSE, message = FALSE}
+```{r DHM_SCOTT_SL4, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2535,7 +2535,7 @@ SCOTT_SL4 <- SCOTT_SL4_Combined %>%
 \newpage
 # **SCOTT_SS3** Degree Heating Months Time Series
 
-```{r DHM_SCOTT_SS3, echo = FALSE, message = FALSE}
+```{r DHM_SCOTT_SS3, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2647,7 +2647,7 @@ SCOTT_SS3 <- SCOTT_SS3_Combined %>%
 \newpage
 # **SCOTTNR1** Degree Heating Months Time Series
 
-```{r DHM_SCOTTNR1, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTNR1, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2759,7 +2759,7 @@ SCOTTNR1 <- SCOTTNR1_Combined %>%
 \newpage
 # **SCOTTSL1** Degree Heating Months Time Series
 
-```{r DHM_SCOTTSL1, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTSL1, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -2918,7 +2918,7 @@ ggsave("Supp_SCOTT_SL1_DHM.png", path = here::here("graphics/Figures"), dpi = 30
 \newpage
 # **SCOTTSL2** Degree Heating Months Time Series
 
-```{r DHM_SCOTTSL2, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTSL2, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3029,7 +3029,7 @@ SCOTTSL2 <- SCOTTSL2_Combined %>%
 \newpage
 # **SCOTTSL3** Degree Heating Months Time Series
 
-```{r DHM_SCOTTSL3, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTSL3, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3140,7 +3140,7 @@ SCOTTSL3 <- SCOTTSL3_Combined %>%
 \newpage
 # **SCOTTSS1** Degree Heating Months Time Series
 
-```{r DHM_SCOTTSS1, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTSS1, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3251,7 +3251,7 @@ SCOTTSS1 <- SCOTTSS1_Combined %>%
 \newpage
 # **SCOTTSS2** Degree Heating Months Time Series
 
-```{r DHM_SCOTTSS2, echo = FALSE, message = FALSE}
+```{r DHM_SCOTTSS2, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 
@@ -3363,7 +3363,7 @@ SCOTTSS2 <- SCOTTSS2_Combined %>%
 \newpage
 # **Bundegi** Degree Heating Months Time Series
 
-```{r DHM_Bundegi_13BND_08BND, echo = FALSE, message = FALSE}
+```{r DHM_Bundegi_13BND_08BND, echo = FALSE, message = FALSE, warning = FALSE}
 
 #DHM calculations for 13BND CCI dataset 
 Bundegi_DHM <- rep(0,nrow(CCI_Bundegi_13BND))
@@ -3713,7 +3713,7 @@ Bundegi_13BND_Combined %>%
 \newpage
 # **Tantabiddi 08TNT** Degree Heating Months Time Series
 
-```{r DHM_Tantabiddi_08TNT, echo = FALSE, message = FALSE}
+```{r DHM_Tantabiddi_08TNT, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -3901,7 +3901,7 @@ Tantabiddi_08TNT_Combined %>%
 
 \newpage
 # **Tantabiddi 13TNT** Degree Heating Months Time Series
-```{r DHM_Tantabiddi_13TNT, echo = FALSE, message = FALSE}
+```{r DHM_Tantabiddi_13TNT, echo = FALSE, message = FALSE, warning = FALSE}
 
 #DHM calculations for CCI dataset 
 Tantabiddi_DHM <- rep(0,nrow(CCI_Tantabiddi_13TNT))
@@ -4088,7 +4088,7 @@ Tantabiddi_13TNT_Combined %>%
 
 \newpage
 # **Houtman Abrolhos HAB05B** Degree Heating Months Time Series
-```{r DHM_HAB05B, echo = FALSE, message = FALSE}
+```{r DHM_HAB05B, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
@@ -4229,7 +4229,7 @@ ggsave("Supp_HAB05B_DHM.png", path = here::here("graphics/Figures"), dpi = 300, 
 
 \newpage
 # **Houtman Abrolhos HAB10A** Degree Heating Months Time Series
-```{r DHM_HAB10A, echo = FALSE, message = FALSE}
+```{r DHM_HAB10A, echo = FALSE, message = FALSE, warning = FALSE}
 
 
 #DHM calculations for CCI dataset 
