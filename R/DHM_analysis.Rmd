@@ -1651,7 +1651,7 @@ BRS05_cum_HSdays <- BRS05_Combined %>%
 
 ggplot(BRS05_cum_HSdays) +
   geom_line(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "BRS05", color = "Data Type") +
+  labs(x = "Time", y = "Cumulative high DHM months", title = "BRS05", color = "Data Type") +
   scale_x_date(limits = as_date(c("1985-01-01","2021-01-01"))) 
 
 #DHM >= 1
@@ -1829,7 +1829,7 @@ BRS07_cum_HSdays <- BRS07_Combined_noCC %>%
 
 BRS07_cum <- ggplot(BRS07_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "BRS07", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "BRS07", color = "Data Type") 
 
 BRS07_cum
 
@@ -2181,7 +2181,7 @@ DARL_cum_HSdays <- DARL_Combined_noCC %>%
 
 DARL_cum <- ggplot(DARL_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "DARL", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "DARL", color = "Data Type") 
 
 DARL_cum
 
@@ -2342,7 +2342,7 @@ SCOTT_RPO_1_cum_HSdays <- SCOTT_RPO_1_Combined %>%
 
 SCOTT_RPO_1_cum <- ggplot(SCOTT_RPO_1_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "SCOTT_RPO_1", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "SCOTT_RPO_1", color = "Data Type") 
 
 SCOTT_RPO_1_cum
 
@@ -2834,7 +2834,7 @@ SCOTTSL1_cum_HSdays <- SCOTTSL1_Combined %>%
 
 SCOTTSL1_cum <- ggplot(SCOTTSL1_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "SCOTTSL1", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "SCOTTSL1", color = "Data Type") 
 
 SCOTTSL1_cum
 
@@ -3579,7 +3579,7 @@ Bundegi_08BND_cum_HSdays <- Bundegi_08BND_Combined_noCC %>%
 
 Bundegi_08BND_cum <- ggplot(Bundegi_08BND_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "Bundegi 08BND", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "Bundegi 08BND", color = "Data Type") 
 
 Bundegi_08BND_cum
 
@@ -3595,7 +3595,7 @@ Bundegi_13BND_cum_HSdays <- Bundegi_13BND_Combined_noCC %>%
 
 Bundegi_13BND_cum <- ggplot(Bundegi_13BND_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "Bundegi 13BND", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "Bundegi 13BND", color = "Data Type") 
 
 Bundegi_13BND_cum
 
@@ -3827,7 +3827,7 @@ Tantabiddi_08TNT_cum_HSdays <- Tantabiddi_08TNT_Combined_noCC %>%
 
 Tantabiddi_08TNT_cum <- ggplot(Tantabiddi_08TNT_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "Tantabiddi 08TNT", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "Tantabiddi 08TNT", color = "Data Type") 
 
 Tantabiddi_08TNT_cum
 
@@ -4016,7 +4016,7 @@ Tantabiddi_13TNT_cum_HSdays <- Tantabiddi_13TNT_Combined_noCC %>%
 
 Tantabiddi_13TNT_cum <- ggplot(Tantabiddi_13TNT_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "Tantabiddi 13TNT", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "Tantabiddi 13TNT", color = "Data Type") 
 
 Tantabiddi_13TNT_cum
 
@@ -4163,7 +4163,7 @@ HAB05B_cum_HSdays <- HAB05B_Combined %>%
 
 HAB05B_cum <- ggplot(HAB05B_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "HAB05B", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "HAB05B", color = "Data Type") 
 
 HAB05B_cum
 
@@ -4304,7 +4304,7 @@ HAB10A_cum_HSdays <- HAB10A_Combined %>%
 
 HAB10A_cum <- ggplot(HAB10A_cum_HSdays) +
   geom_smooth(aes(x = monthly_date, y = DHM_months_count, color = Data_Type)) + 
-  labs(x = "Time", y = "Cumulative high DHM days", title = "HAB10A", color = "Data Type") 
+  labs(x = "Time", y = "Cumulative high DHM months", title = "HAB10A", color = "Data Type") 
 
 HAB10A_cum
 
