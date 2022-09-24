@@ -94,7 +94,7 @@ GCM_SCOTTSS2 <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSS2_with_mmm_and_d
 ```
 
 ```{r setting_colors_data_type, include = FALSE}
-cols <- c("GCM" = "dark green", "CCI" = "dark red", "NOAA" = "navy blue")
+cols <- c("GCM" = "forest green", "CCI" = "red", "NOAA" = "dark blue")
 ```
 
 # Degree Heating Week Time Series Plots for CCI, NOAA, and GCM data:      
@@ -155,11 +155,11 @@ GCM_BRS07 <- GCM_BRS07 %>%
 BRS07_Sat_Combined <- rbind(CCI_BRS07, NOAA_BRS07, GCM_BRS07)
 
 BRS07 <- ggplot(BRS07_Sat_Combined)+
-   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-  annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
+  annotate("text", x = as.Date("2017-01-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "DHW", title = "(D) BRS07 (-14.12, 123.55)", subtitle = "Browse Island") +
   scale_color_manual(values = cols) +
@@ -236,20 +236,20 @@ GCM_DARL <- GCM_DARL %>%
 DARL_Sat_Combined <- rbind(CCI_DARL, NOAA_DARL, GCM_DARL)
 
 DARL <- ggplot(DARL_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("1996-01-01")), xmax = as.Date(c("1997-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2014-01-01")), xmax = as.Date(c("2015-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>(NOAA=GCM)", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   labs(x = "", y = "DHW", title = "(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
@@ -283,20 +283,20 @@ GCM_SCOTT_RPO_1 <- GCM_SCOTT_RPO_1 %>%
 SCOTT_RPO_1_Sat_Combined <- rbind(CCI_SCOTT_RPO_1, NOAA_SCOTT_RPO_1, GCM_SCOTT_RPO_1)
 
 SCOTT_RPO_1 <- ggplot(SCOTT_RPO_1_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>GCM>CCI", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "DHW", title = "(B) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef") +
   scale_color_manual(values = cols) +
@@ -461,20 +461,20 @@ GCM_SCOTTSL1 <- GCM_SCOTTSL1 %>%
 SCOTTSL1_Sat_Combined <- rbind(CCI_SCOTTSL1, NOAA_SCOTTSL1, GCM_SCOTTSL1)
 
 SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-  geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
-   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+   geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "DHW", title = "(C) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef") +
   scale_color_manual(values = cols) +
@@ -721,14 +721,14 @@ GCM_Bundegi <- GCM_Bundegi %>%
 Bundegi_Sat_Combined <- rbind(CCI_Bundegi, NOAA_Bundegi, GCM_Bundegi)
 
 Bundegi <- ggplot(Bundegi_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "DHW", title = "(E) 08BND, 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
   scale_color_manual(values = cols) +
@@ -761,14 +761,14 @@ GCM_Tantabiddi <- GCM_Tantabiddi %>%
 Tantabiddi_Sat_Combined <- rbind(CCI_Tantabiddi, NOAA_Tantabiddi, GCM_Tantabiddi)
 
 Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
-    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
+    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
                 ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   labs(x = "", y = "DHW", title = "(F) 08TNT, 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
@@ -889,11 +889,11 @@ GCM_HAB05B <- GCM_HAB05B %>%
 HAB05B_Sat_Combined <- rbind(CCI_HAB05B, NOAA_HAB05B, GCM_HAB05B)
 
 HAB05B <- ggplot(HAB05B_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Time", y = "DHW", title = "(H) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos") +
   scale_color_manual(values = cols) +
@@ -926,11 +926,11 @@ GCM_HAB10A <- GCM_HAB10A %>%
 HAB10A_Sat_Combined <- rbind(CCI_HAB10A, NOAA_HAB10A, GCM_HAB10A)
 
 HAB10A <- ggplot(HAB10A_Sat_Combined)+
-  geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
+  geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
-  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.3, size = 2) +
+  geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   labs(x = "", y = "DHW", title = "(G) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
