@@ -1861,7 +1861,7 @@ BRS07 <- BRS07_Combined %>%
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
-  labs(x = "", y = "Degree Heating Month", title = "(B) BRS07 (-14.12, 123.55)", subtitle = "Browse Island")+
+  labs(x = "", y = "Degree Heating Month", title = "(b) BRS07 (-14.12, 123.55)", subtitle = "Browse Island")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2225,7 +2225,7 @@ DARL <- DARL_Combined %>%
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)GCM>CCI>NOAA", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island")+
+  labs(x = "", y = "Degree Heating Month", title = "(a) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2383,7 +2383,7 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Date", y = "Degree Heating Month", title = "(A) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef")+
+  labs(x = "Date", y = "Degree Heating Month", title = "(a) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -2875,7 +2875,7 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(B) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef")+
+  labs(x = "", y = "Degree Heating Month", title = "(b) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3630,7 +3630,7 @@ Bundegi_13BND_cum
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Time", y = "Degree Heating Month", title = "(C) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
+  labs(x = "Time", y = "Degree Heating Month", title = "(c) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3681,7 +3681,7 @@ ggsave("Supp_08BND_DHM.png", path = here::here("graphics/Figures"), dpi = 300, s
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(D) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
+  labs(x = "", y = "Degree Heating Month", title = "(d) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -3871,7 +3871,7 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(E) 08TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
+  labs(x = "", y = "Degree Heating Month", title = "(e) 08TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -4060,7 +4060,7 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Time", y = "Degree Heating Month", title = "(F) 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
+  labs(x = "Time", y = "Degree Heating Month", title = "(f) 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -4202,7 +4202,7 @@ HAB05B <- HAB05B_Combined %>%
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Time", y = "Degree Heating Month", title = "(D) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos")+
+  labs(x = "Time", y = "Degree Heating Month", title = "(d) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -4343,7 +4343,7 @@ HAB10A <- HAB10A_Combined %>%
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "Degree Heating Month", title = "(C) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos")+
+  labs(x = "", y = "Degree Heating Month", title = "(c) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
   scale_y_continuous(breaks = c(0, 1, 2)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -4403,11 +4403,11 @@ ggsave("Cumulative_DHM.png", path = here::here("graphics/Figures"), dpi = 300, w
 ```{r Combined_Sites_with_Coral, echo = FALSE, fig.width = 15, fig.height = 8}
 
 DARL / BRS07 / `08BND` 
-ggsave("DHM01.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 297, units = "mm", limitsize = FALSE)
+ggsave("DHM01.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 279, units = "mm", limitsize = FALSE)
 
 
 `13BND` / `08TNT` / `13TNT`
-ggsave("DHM02.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 297, units = "mm", limitsize = FALSE)
+ggsave("DHM02.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 279, units = "mm", limitsize = FALSE)
 
 
 ```
@@ -4417,7 +4417,7 @@ ggsave("DHM02.png", path = here::here("graphics/Figures"), dpi = 300, width = 21
 ```{r Combined_Sites_without_Coral, echo = FALSE, fig.width= 15, fig.height = 8}
 
 SCOTT_RPO_1 / SCOTTSL1 / HAB10A / HAB05B
-ggsave("DHM03.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 297, units = "mm", limitsize = FALSE)
+ggsave("DHM03.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 279, units = "mm", limitsize = FALSE)
 
 
 ```

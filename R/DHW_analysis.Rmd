@@ -161,7 +161,7 @@ BRS07 <- ggplot(BRS07_Sat_Combined)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "DHW", title = "(D) BRS07 (-14.12, 123.55)", subtitle = "Browse Island") +
+  labs(x = "", y = "DHW", title = "(d) BRS07 (-14.12, 123.55)", subtitle = "Browse Island") +
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -250,7 +250,7 @@ DARL <- ggplot(DARL_Sat_Combined)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>(NOAA=GCM)", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
-  labs(x = "", y = "DHW", title = "(A) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island") +
+  labs(x = "", y = "DHW", title = "(a) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
@@ -298,7 +298,7 @@ SCOTT_RPO_1 <- ggplot(SCOTT_RPO_1_Sat_Combined)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>GCM>CCI", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "DHW", title = "(B) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef") +
+  labs(x = "", y = "DHW", title = "(b) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef") +
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -476,7 +476,7 @@ SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)NOAA>CCI>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "DHW", title = "(C) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef") +
+  labs(x = "", y = "DHW", title = "(c) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef") +
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -730,7 +730,7 @@ Bundegi <- ggplot(Bundegi_Sat_Combined)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "", y = "DHW", title = "(E) 08BND, 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
+  labs(x = "", y = "DHW", title = "(e) 08BND, 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef") +
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -769,7 +769,7 @@ Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
-  labs(x = "", y = "DHW", title = "(F) 08TNT, 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
+  labs(x = "", y = "DHW", title = "(f) 08TNT, 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
@@ -895,7 +895,7 @@ HAB05B <- ggplot(HAB05B_Sat_Combined)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
-  labs(x = "Time", y = "DHW", title = "(H) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos") +
+  labs(x = "Time", y = "DHW", title = "(h) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos") +
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
@@ -931,7 +931,7 @@ HAB10A <- ggplot(HAB10A_Sat_Combined)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = Date, y = accum_DHW_12weeks, color = Data_Type), alpha = 0.5, size = 1) +
-  labs(x = "", y = "DHW", title = "(G) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos") +
+  labs(x = "", y = "DHW", title = "(g) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos") +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   scale_color_manual(values = cols) +
   scale_y_continuous(breaks = c(0, 4, 8, 12, 16, 20)) +
@@ -954,11 +954,11 @@ HAB10A <- ggplot(HAB10A_Sat_Combined)+
 
 DARL / SCOTT_RPO_1 / SCOTTSL1 / BRS07 
 
-ggsave("DHW01.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 297, units = "mm", limitsize = FALSE)
+ggsave("DHW01.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 279, units = "mm", limitsize = FALSE)
 
 Bundegi / Tantabiddi / HAB10A / HAB05B
 
-ggsave("DHW02.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 297, units = "mm", limitsize = FALSE)
+ggsave("DHW02.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 279, units = "mm", limitsize = FALSE)
 
 
 
