@@ -45,7 +45,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 13TNT NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA 13TNT.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -67,7 +68,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 13TNT CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI 13TNT.jpg", dpi = 300)
 
@@ -145,7 +147,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 08TNT NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA 08TNT.jpg", dpi = 300)
 # linear decreasing trend 
@@ -174,7 +177,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 08TNT CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI 08TNT.jpg", dpi = 300)
 # linear decreasing trend 
@@ -254,7 +258,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 13BND NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA 13BND.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature for NOAA vs coral core. 
@@ -283,7 +288,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 13BND CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI 13BND.jpg", dpi = 300)
 # linear decreasing trend 
@@ -363,7 +369,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 08BND NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA 08BND.jpg", dpi = 300)
 # linear decreasing trend with curvature. 
@@ -387,7 +394,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 08BND CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI 08BND.jpg", dpi = 300)
 # linear decreasing trend with curvature. 
@@ -557,7 +565,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef TNT07C NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA TNT07C.jpg", dpi = 300)
 # linear decreasing trend 
@@ -586,7 +595,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef TNT07C CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI TNT07C.jpg", dpi = 300)
 # linear decreasing trend 
@@ -666,7 +676,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef BUN05A NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA BUN05A.jpg", dpi = 300)
 # linear decreasing trend 
@@ -695,7 +706,8 @@ ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef BUN05A CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI BUN05A.jpg", dpi = 300)
 # linear decreasing trend 
@@ -777,7 +789,8 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Browse Island BRS05 NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA BRS05.jpg", dpi = 300)
 # decreasing trend with curvature. 
@@ -806,7 +819,8 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Browse Island BRS05 CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI BRS05.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -887,7 +901,8 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Browse Island BRS07 NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA BRS07.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -916,7 +931,8 @@ ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Browse Island BRS07 CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI BRS07.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -992,7 +1008,8 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Cocos Keeling Island DARL NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA DARL.jpg", dpi = 300)
 
@@ -1023,7 +1040,8 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Cocos Keeling Island DARL CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI DARL.jpg", dpi = 300)
 # linear decreasing trend 
@@ -1105,7 +1123,8 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Cocos Keeling Island DAR3 NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA DAR3.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -1134,7 +1153,8 @@ ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Cocos Keeling Island DAR3 CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI DAR3.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -1449,7 +1469,8 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Houtman Abrolhos Island HAB10A NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA HAB10A.jpg", dpi = 300)
 # trend is linear and seems to be decreasing slightly
@@ -1480,7 +1501,8 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Houtman Abrolhos Island HAB10A CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI HAB10A.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
@@ -1545,7 +1567,8 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Houtman Abrolhos Island HAB05B NOAA SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with NOAA HAB05B.jpg", dpi = 300)
 # linear and slight decreasing trend
@@ -1576,7 +1599,8 @@ ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) +
   theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
         axis.line = element_line("black")) +
   labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Houtman Abrolhos Island HAB05B CCI SST calibration with Sr/Ca ratios") +
-  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1) +
+  stat_correlation(label.y = 0.05)
 
 ggsave("graphics/Supplementary/SrCa Calibration with CCI HAB05B.jpg", dpi = 300)
 # linear decreasing trend
