@@ -3,16 +3,16 @@ library(lubridate)
 library(glue)
 
 #load csv files of coral cores
-Browse <- read_csv("BRS05_BRS07_Year_Month.csv")
-DAR_Long <- read_csv("DAR_Long_Year_Month.csv")
-DAR3 <- read_csv("DAR3_Year_Month.csv")
-Ningaloo_08BND <- read_csv("Ningaloo_08BND_Year_Month.csv")
-Ningaloo_08TNT <- read_csv("Ningaloo_08TNT_Year_Month.csv")
-Ningaloo_13BND <- read_csv("Ningaloo_13BND_Year_Month.csv")
-Ningaloo_13TNT <- read_csv("Ningaloo_13TNT_Year_Month.csv")
-Ningaloo_TNT <- read_csv("Ningaloo_TNT_Year_Month.csv")
-Ningaloo_TNT07C <- read_csv("Ningaloo_TNT07C_year.csv")
-Ningaloo_BUN05A <- read_csv("Ningaloo_BUN05A_year.csv")
+Browse <- read_csv("data_raw/Coral_Site_SST/BRS05_BRS07_Year_Month.csv")
+DAR_Long <- read_csv("data_raw/Coral_Site_SST/DAR_Long_Year_Month.csv")
+DAR3 <- read_csv("data_raw/Coral_Site_SST/DAR3_Year_Month.csv")
+Ningaloo_08BND <- read_csv("data_raw/Coral_Site_SST/Ningaloo_08BND_Year_Month.csv")
+Ningaloo_08TNT <- read_csv("data_raw/Coral_Site_SST/Ningaloo_08TNT_Year_Month.csv")
+Ningaloo_13BND <- read_csv("data_raw/Coral_Site_SST/Ningaloo_13BND_Year_Month.csv")
+Ningaloo_13TNT <- read_csv("data_raw/Coral_Site_SST/Ningaloo_13TNT_Year_Month.csv")
+Ningaloo_TNT <- read_csv("data_raw/Coral_Site_SST/Ningaloo_TNT_Year_Month.csv")
+Ningaloo_TNT07C <- read_csv("data_raw/Coral_Site_SST/Ningaloo_TNT07C_year.csv")
+Ningaloo_BUN05A <- read_csv("data_raw/Coral_Site_SST/Ningaloo_BUN05A_year.csv")
 
 #standardize column names of Sr/Ca proxies - core id and Sr/Ca
 Ningaloo_08BND <- Ningaloo_08BND %>% 

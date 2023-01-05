@@ -1,4 +1,3 @@
-# Start script from row 60 #
 # Run script in pre_tsclust_sites_raw_data.R before running this to load raw data
 # Sites showing significance for quadratic terms in both CCI and NOAA: 13TNT, 08BND, Wallabi Island
 # Sites showing significance for quadratic terms in only CCI: BRS07
@@ -8,65 +7,18 @@
 library(TSclust)
 library(mgcv)
 library(broom)
-        
-#####-----#####
-library(TSclust)
-dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
-  add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
-  add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% 
-  add_row(as_tibble(Ningaloo_13TNT_CCore) %>% 
-            rename(sst = `Sr/Ca`)) %>% 
-  mutate(data_type = 
-           case_when( data_type == "CCI" ~ "ningaloo_CCI",
-                      data_type == "Logger" ~ "ningaloo_Logger", 
-                      data_type == "NOAA" ~ "ningaloo_NOAA",
-                      data_type == "Coral Core" ~ "ningaloo_coral_core",
-                      TRUE ~ data_type))
-
-dat2 <- as_tibble(Browse_05_CCI) %>% 
-  add_row(as_tibble(Browse_05_Logger)) %>% 
-  add_row(as_tibble(Browse_05_NOAA)) %>% 
-  mutate(data_type = 
-           case_when( data_type == "CCI" ~ "browse_CCI",
-                      data_type == "Logger" ~ "browse_Logger",
-                      data_type == "NOAA" ~ "browse_NOAA",
-                      TRUE ~ data_type))
-
-# To use the TSclust package, we need each series to be in their own column
-# It's important we line the dates up, so we are going to use pivot_wider
-dat_joint <- dat %>% 
-  #add_row(dat2) %>% 
-  pivot_wider(names_from = data_type, values_from = sst) %>% 
-  select(-date) %>% 
-  drop_na() 
-# dropped browse_Logger as it contains the least amount of data
-
-# structure based similarity measure 
-# whether the series goes up and down together
-tsdist <- diss( t(dat_joint) , "CORT")
-names(tsdist) <- colnames(dat_joint)
-hc <- hclust(tsdist)
-plot(hc)
-# I prefer this one. 
-
-# shape based similarity measure 
-# whether the series goes are close enough together. 
-tsdist2 <- diss( t(dat_joint) , "COR")
-names(tsdist2) <- colnames(dat_joint)
-hc2 <- hclust(tsdist2)
-plot(hc2)
+library(ggpmisc)
 
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_13TNT_CCI
 # Ningaloo_13TNT_Logger
 # Ningaloo_13TNT_CCore
 # Ningaloo_13TNT_NOAA
-#
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_13TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_13TNT_NOAA)) %>% 
   # only 13 data points available if logger data is included in analysis: add_row(as_tibble(Ningaloo_13TNT_Logger)) %>% 
@@ -86,11 +38,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA than CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 13TNT NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA 13TNT.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -101,9 +60,17 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core + I(ningaloo_coral_core^2),
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 13TNT CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI 13TNT.jpg", dpi = 300)
+
 # linear decreasing trend with a slight curvature. 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -144,14 +111,14 @@ write_csv(CCore_SST_Ningaloo_13TNT_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_08TNT_CCI
 # Ningaloo_08TNT_Logger
 # Ningaloo_08TNT_CCore
 # Ningaloo_08TNT_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_08TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_08TNT_NOAA)) %>% 
   # no values if logger data is added here: add_row(as_tibble(Ningaloo_08TNT_Logger)) %>% 
@@ -171,11 +138,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA over CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 08TNT NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA 08TNT.jpg", dpi = 300)
 # linear decreasing trend 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -193,9 +167,16 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 08TNT CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI 08TNT.jpg", dpi = 300)
 # linear decreasing trend 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -239,14 +220,14 @@ write_csv(CCore_SST_Ningaloo_08TNT_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_13BND_CCI
 # Ningaloo_13BND_Logger
 # Ningaloo_13BND_CCore
 # Ningaloo_13BND_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_13BND_CCI) %>% 
   add_row(as_tibble(Ningaloo_13BND_NOAA)) %>% 
   # only 10 observations when logger data is added : add_row(as_tibble(Ningaloo_13BND_Logger)) %>%
@@ -266,11 +247,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is much more aligned with NOAA over CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 13BND NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA 13BND.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature for NOAA vs coral core. 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -288,9 +276,16 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 13BND CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI 13BND.jpg", dpi = 300)
 # linear decreasing trend 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -334,14 +329,14 @@ write_csv(CCore_SST_Ningaloo_13BND_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_08BND_CCI
 # Ningaloo_08BND_Logger
 # Ningaloo_08BND_CCore
 # Ningaloo_08BND_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_08BND_CCI) %>% 
   add_row(as_tibble(Ningaloo_08BND_NOAA)) %>% 
   #no values if logger data is included : add_row(as_tibble(Ningaloo_08BND_Logger)) %>% 
@@ -361,11 +356,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is more aligned with NOAA over CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef 08BND NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA 08BND.jpg", dpi = 300)
 # linear decreasing trend with curvature. 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -378,9 +380,16 @@ summary(lm1)
 # significant p-value for quadratic
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef 08BND CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI 08BND.jpg", dpi = 300)
 # linear decreasing trend with curvature. 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -418,14 +427,14 @@ write_csv(CCore_SST_Ningaloo_08BND_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_TNT_CCI
 # Ningaloo_TNT_Logger
 # Ningaloo_TNT_CCore
 # Ningaloo_TNT_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_TNT_CCI) %>% 
   add_row(as_tibble(Ningaloo_TNT_NOAA)) %>% 
   # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT_Logger)) %>% 
@@ -445,11 +454,12 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -467,6 +477,7 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam")
@@ -512,14 +523,14 @@ write_csv(CCore_SST_Ningaloo_TNT_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_TNT07C_CCI
 # Ningaloo_TNT07C_Logger
 # Ningaloo_TNT07C_CCore
 # Ningaloo_TNT07C_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_TNT07C_CCI) %>% 
   add_row(as_tibble(Ningaloo_TNT07C_NOAA)) %>% 
   # no data is available when logger data is added: add_row(as_tibble(Ningaloo_TNT07C_Logger)) %>% 
@@ -539,11 +550,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA over CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef TNT07C NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA TNT07C.jpg", dpi = 300)
 # linear decreasing trend 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -561,9 +579,16 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef TNT07C CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI TNT07C.jpg", dpi = 300)
 # linear decreasing trend 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -607,14 +632,14 @@ write_csv(CCore_SST_Ningaloo_TNT07C_CCI, here::here
 
 #####--------------------##### 
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Ningaloo_BUN05A_CCI
 # Ningaloo_BUN05A_Logger
 # Ningaloo_BUN05A_CCore
 # Ningaloo_BUN05A_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Ningaloo_BUN05A_CCI) %>% 
   add_row(as_tibble(Ningaloo_BUN05A_NOAA)) %>% 
   # no data is available when logger data is added: add_row(as_tibble(Ningaloo_BUN05A_Logger)) %>% 
@@ -634,11 +659,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is more aligned with CCI than NOAA 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Ningaloo Reef BUN05A NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA BUN05A.jpg", dpi = 300)
 # linear decreasing trend 
-library(mgcv)
+
 gam1 <- gam(ningaloo_NOAA ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -656,9 +688,16 @@ lm1 <- lm(ningaloo_NOAA ~ 1 + ningaloo_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = ningaloo_coral_core, y = ningaloo_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Ningaloo Reef BUN05A CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI BUN05A.jpg", dpi = 300)
 # linear decreasing trend 
 gam2 <- gam(ningaloo_CCI ~ s(ningaloo_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -704,14 +743,14 @@ write_csv(CCore_SST_Ningaloo_BUN05A_CCI, here::here
 #####-----#####
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Browse_05_CCI
 # Browse_05_Logger
 # Browse_05_CCore
 # Browse_05_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Browse_05_CCI) %>% 
   add_row(as_tibble(Browse_05_NOAA)) %>% 
   # only few data points when logger data is included: add_row(as_tibble(Browse_05_Logger)) %>% 
@@ -731,11 +770,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Browse Island BRS05 NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA BRS05.jpg", dpi = 300)
 # decreasing trend with curvature. 
-library(mgcv)
+
 gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -753,9 +799,16 @@ lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Browse Island BRS05 CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI BRS05.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
 gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -800,14 +853,14 @@ write_csv(CCore_SST_BRS05_CCI, here::here
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Browse_07_CCI
 # Browse_07_Logger
 # Browse_07_CCore
 # Browse_07_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Browse_07_CCI) %>% 
   add_row(as_tibble(Browse_07_NOAA)) %>% 
   # only 9 points are available when including logger data: add_row(as_tibble(Browse_07_Logger)) %>% 
@@ -827,11 +880,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = browse_coral_core, y = browse_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Browse Island BRS07 NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA BRS07.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
-library(mgcv)
+
 gam1 <- gam(browse_NOAA ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -849,9 +909,16 @@ lm1 <- lm(browse_NOAA ~ 1 + browse_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = browse_coral_core, y = browse_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "gam") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Browse Island BRS07 CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI BRS07.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
 gam2 <- gam(browse_CCI ~ s(browse_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -891,14 +958,14 @@ write_csv(CCore_SST_BRS07_CCI, here::here
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # DARL_CCI
 # DARL_Logger
 # DARL_CCore
 # DARL_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(DARL_CCI) %>% 
   add_row(as_tibble(DARL_NOAA)) %>% 
   #less than 10 points if logger data is included : add_row(as_tibble(DARL_Logger)) %>% 
@@ -918,13 +985,20 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Cocos Keeling Island DARL NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA DARL.jpg", dpi = 300)
 
 # linear decreasing trend
 
-library(mgcv)
+
 gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -942,9 +1016,16 @@ lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Cocos Keeling Island DARL CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI DARL.jpg", dpi = 300)
 # linear decreasing trend 
 gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -990,14 +1071,14 @@ write_csv(CCore_SST_DARL_CCI, here::here
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # DAR3_CCI
 # DAR3_Logger
 # DAR3_CCore
 # DAR3_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(DAR3_CCI) %>% 
   add_row(as_tibble(DAR3_NOAA)) %>% 
   #less than 10 points if logger data is included : add_row(as_tibble(DAR3_Logger)) %>% 
@@ -1017,11 +1098,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more align with NOAA over CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Cocos Keeling Island DAR3 NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA DAR3.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
-library(mgcv)
+
 gam1 <- gam(Cocos_NOAA ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -1039,9 +1127,16 @@ lm1 <- lm(Cocos_NOAA ~ 1 + Cocos_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = Cocos_coral_core, y = Cocos_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Cocos Keeling Island DAR3 CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI DAR3.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
 gam2 <- gam(Cocos_CCI ~ s(Cocos_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -1088,14 +1183,14 @@ write_csv(CCore_SST_DAR3_CCI, here::here
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # Wallabi_Island_CCI
 # Wallabi_Island_Logger
 # Wallabi_Island_CCore
 # Wallabi_Island_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(Wallabi_Island_CCI) %>% 
   add_row(as_tibble(Wallabi_Island_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(Wallabi_Island_Logger)) %>% 
@@ -1115,11 +1210,12 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam")
 # trend is explained by a curvature. 
-library(mgcv)
+
 gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -1132,6 +1228,7 @@ summary(lm1)
 # p-value for quadratic is significant
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam")
@@ -1172,14 +1269,14 @@ write_csv(CCore_SST_Wallabi_Island_CCI, here::here
 #R-sq values are very low <0.5
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # HAB10A_d18O_CCI
 # HAB10A_d18O_Logger
 # HAB10A_d18O_CCore
 # HAB10A_d18O_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(HAB10A_d18O_CCI) %>% 
   add_row(as_tibble(HAB10A_d18O_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(HAB10A_d18O_Logger)) %>% 
@@ -1199,11 +1296,12 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with NOAA than CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
   geom_smooth(method = "gam")
 # linear decreasing trend with a slight curvature. 
-library(mgcv)
+
 gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -1221,6 +1319,7 @@ lm1 <- lm(HAbrol_NOAA ~ 1 + HAbrol_coral_core,
 summary(lm1)
 
 # repeat for CCI 
+formula <- y ~ poly(x, 2, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
   geom_smooth(method = "gam")
@@ -1267,14 +1366,14 @@ write_csv(CCore_SST_HAB10A_d18O_CCI, here::here
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # HAB05B_d18O_CCI
 # HAB05B_d18O_Logger
 # HAB05B_d18O_CCore
 # HAB05B_d18O_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(HAB05B_d18O_CCI) %>% 
   add_row(as_tibble(HAB05B_d18O_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(HAB05B_d18O_Logger)) %>% 
@@ -1316,14 +1415,14 @@ modelsummary::modelsummary(list(lm1, lm2))
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # HAB10A_SrCa_CCI
 # HAB10A_SrCa_Logger
 # HAB10A_SrCa_CCore
 # HAB10A_SrCa_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(HAB10A_SrCa_CCI) %>% 
   add_row(as_tibble(HAB10A_SrCa_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(HAB10A_SrCa_Logger)) %>% 
@@ -1343,11 +1442,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is more aligned with CCI than NOAA 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Houtman Abrolhos Island HAB10A NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA HAB10A.jpg", dpi = 300)
 # trend is linear and seems to be decreasing slightly
-library(mgcv)
+
 gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -1367,9 +1473,16 @@ summary(lm1)
 # p-value for linear model is not significant as well
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Houtman Abrolhos Island HAB10A CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI HAB10A.jpg", dpi = 300)
 # linear decreasing trend with a slight curvature. 
 gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -1398,14 +1511,14 @@ modelsummary::modelsummary(list(lm1, lm2))
 
 #####--------------------#####
 ## To run the calibration analysis
-# Need to run another script (Detrended.R files) to get the following tibbles:
+# Need to run another script (pre_tsclust_sites_raw_data.R files) to get the following tibbles:
 # HAB05B_SrCa_CCI
 # HAB05B_SrCa_Logger
 # HAB05B_SrCa_CCore
 # HAB05B_SrCa_NOAA
 #
 
-library(TSclust)
+
 dat <- as_tibble(HAB05B_SrCa_CCI) %>% 
   add_row(as_tibble(HAB05B_SrCa_NOAA)) %>% 
   # no available data if logger data is included : add_row(as_tibble(HAB05B_SrCa_Logger)) %>% 
@@ -1425,11 +1538,18 @@ dat_joint <- dat %>%
 
 GGally::ggpairs(dat_joint)
 ## coral core is slightly more aligned with CCI than NOAA
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_NOAA)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "NOAA SST", title = "Houtman Abrolhos Island HAB05B NOAA SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with NOAA HAB05B.jpg", dpi = 300)
 # linear and slight decreasing trend
-library(mgcv)
+
 gam1 <- gam(HAbrol_NOAA ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam1)
 summary(gam1)
@@ -1449,9 +1569,16 @@ summary(lm1)
 # p-value for linear model is not significant as well
 
 # repeat for CCI 
+formula <- y ~ poly(x, 1, raw = TRUE)
 ggplot(dat_joint, aes(x = HAbrol_coral_core, y = HAbrol_CCI)) + 
   geom_point() + 
-  geom_smooth(method = "gam")
+  geom_smooth(method = "lm") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black")) +
+  labs(x = "Sr/Ca ratio", y = "CCI SST", title = "Houtman Abrolhos Island HAB05B CCI SST calibration with Sr/Ca ratios") +
+  stat_poly_eq(aes(label = after_stat(eq.label)), formula = formula, parse = TRUE, label.y = 0.1)
+
+ggsave("graphics/Supplementary/SrCa Calibration with CCI HAB05B.jpg", dpi = 300)
 # linear decreasing trend
 gam2 <- gam(HAbrol_CCI ~ s(HAbrol_coral_core, bs = "cs"), data = dat_joint, method = "REML")
 plot(gam2)
@@ -1489,3 +1616,25 @@ write_csv(CCore_SST_HAB05B_SrCa_CCI, here::here
 # model summary shows not significant
 # R-sq values are very low <0.5
 # p-value for linear models are only significant for CCI but not NOAA
+
+#####Plotting Supplementary Data#####
+
+#Raw Sr/Ca time series and Calibrated Sr/Ca time series 
+#Study Sites with Coral Cores only, excluding Scott Reef sites - 
+# Ningaloo Reef (08TNT, 13TNT, 08BND, 13BND, BUN05A, TNT07C), Cocos Keeling (DAR3, DARL), 
+# Browse (BRS05, BRS07), Houtman Abrolhos (HAB05B, HAB10A)
+# excluded d18O cores in Wallabi Island, TNT, HAB05B_d18O, HAB10A_d18O sites
+
+#Ningaloo Reef 08TNT
+ggplot(CCore_SST_Ningaloo_08TNT_CCI) +
+  geom_point(aes(x = date, y = SrCa)) +
+  labs(x = "Date", y = "Sr/Ca ratio", title = "Ningaloo Reef 08TNT site Sr/Ca raw timeseries data") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black"))
+
+ggplot(CCore_SST_Ningaloo_08TNT_NOAA) +
+  geom_point(aes(x = date, y = SrCa)) +
+  labs(x = "Date", y = "Sr/Ca ratio", title = "Ningaloo Reef 08TNT site Sr/Ca raw timeseries data") +
+  theme(panel.background = element_blank(), panel.grid.minor.y = element_line("light grey"), 
+        axis.line = element_line("black"))
+#Sr/Ca values are the same, it is only necessary to plot using either CCI or NOAA calibrated dataset  
