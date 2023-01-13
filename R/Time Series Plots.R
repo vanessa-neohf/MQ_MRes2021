@@ -28,7 +28,7 @@ Browse_05_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTS
 Browse_05_Logger <- Browse_05_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Browse_05_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS05_SST.csv"))
 Browse_05_NOAA <- Browse_05_NOAA %>% 
@@ -74,7 +74,7 @@ Browse_07_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTS
 Browse_07_Logger <- Browse_07_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Browse_07_NOAA <- read_csv(here::here("data_raw", "NOAA_BRS07_SST.csv"))
 Browse_07_NOAA <- Browse_07_NOAA %>% 
@@ -120,7 +120,7 @@ Cocos_DARL_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100TH
 Cocos_DARL_Logger <- Cocos_DARL_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Cocos_DARL_NOAA <- read_csv(here::here("data_raw", "NOAA_DAR_Long_SST.csv"))
 Cocos_DARL_NOAA <- Cocos_DARL_NOAA %>% 
@@ -165,7 +165,7 @@ Cocos_DAR3_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100TH
 Cocos_DAR3_Logger <- Cocos_DAR3_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Cocos_DAR3_NOAA <- read_csv(here::here("data_raw", "NOAA_DAR3_SST.csv"))
 Cocos_DAR3_NOAA <- Cocos_DAR3_NOAA %>% 
@@ -210,7 +210,7 @@ Ningaloo_13TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_T
 Ningaloo_13TNT_Logger <- Ningaloo_13TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_13TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_13TNT_SST.csv"))
 Ningaloo_13TNT_NOAA <- Ningaloo_13TNT_NOAA %>% 
@@ -255,7 +255,7 @@ Ningaloo_08TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_T
 Ningaloo_08TNT_Logger <- Ningaloo_08TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_08TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_Tantabiddi_08TNT_SST.csv"))
 Ningaloo_08TNT_NOAA <- Ningaloo_08TNT_NOAA %>% 
@@ -300,7 +300,7 @@ Ningaloo_13BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_B
 Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_13BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_13BND_SST.csv"))
 Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>% 
@@ -345,7 +345,7 @@ Ningaloo_08BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_B
 Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_08BND_NOAA <- read_csv(here::here("data_raw", "NOAA_Bundegi_08BND_SST.csv"))
 Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>% 
@@ -392,7 +392,7 @@ Ningaloo_TNT07C_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_
 Ningaloo_TNT07C_Logger <- Ningaloo_TNT07C_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_TNT07C_NOAA <- read_csv(here::here("data_raw", "NOAA_TNT07C_SST.csv"))
 Ningaloo_TNT07C_NOAA <- Ningaloo_TNT07C_NOAA %>% 
@@ -440,7 +440,7 @@ Ningaloo_BUN05A_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_
 Ningaloo_BUN05A_Logger <- Ningaloo_BUN05A_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_BUN05A_NOAA <- read_csv(here::here("data_raw", "NOAA_BUN05A_SST.csv"))
 Ningaloo_BUN05A_NOAA <- Ningaloo_BUN05A_NOAA %>% 
@@ -486,7 +486,7 @@ Ningaloo_TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TAN
 Ningaloo_TNT_Logger <- Ningaloo_TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 Ningaloo_TNT_NOAA <- read_csv(here::here("data_raw", "NOAA_TNT_SST.csv"))
 Ningaloo_TNT_NOAA <- Ningaloo_TNT_NOAA %>% 
@@ -532,7 +532,7 @@ HAbrol_Wallabi_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_N
 HAbrol_Wallabi_Logger <- HAbrol_Wallabi_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 HAbrol_Wallabi_NOAA <- read_csv(here::here("data_raw", "NOAA_Wallabi_Island_SST.csv"))
 HAbrol_Wallabi_NOAA <- HAbrol_Wallabi_NOAA %>% 
@@ -579,7 +579,7 @@ HAbrol_HAB10A_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_S
 HAbrol_HAB10A_d18O_Logger <- HAbrol_HAB10A_d18O_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 HAbrol_HAB10A_d18O_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB10A_d18O_Proxy_SST.csv"))
 HAbrol_HAB10A_d18O_NOAA <- HAbrol_HAB10A_d18O_NOAA %>% 
@@ -628,7 +628,7 @@ HAbrol_HAB10A_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_S
 HAbrol_HAB10A_SrCa_Logger <- HAbrol_HAB10A_SrCa_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 HAbrol_HAB10A_SrCa_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB10A_SrCa_Proxy_SST.csv"))
 HAbrol_HAB10A_SrCa_NOAA <- HAbrol_HAB10A_SrCa_NOAA %>% 
@@ -676,7 +676,7 @@ HAbrol_HAB05B_d18O_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_S
 HAbrol_HAB05B_d18O_Logger <- HAbrol_HAB05B_d18O_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 HAbrol_HAB05B_d18O_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB05B_d18O_Proxy_SST.csv"))
 HAbrol_HAB05B_d18O_NOAA <- HAbrol_HAB05B_d18O_NOAA %>% 
@@ -723,7 +723,7 @@ HAbrol_HAB05B_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_S
 HAbrol_HAB05B_SrCa_Logger <- HAbrol_HAB05B_SrCa_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
   mutate(data_type = "Logger") %>% #prepare data for binding with other data types
-  select(data_type, date, sst)  #select only useful columns
+  select(subsite, data_type, date, sst)  #select only useful columns
 
 HAbrol_HAB05B_SrCa_NOAA <- read_csv(here::here("data_raw", "NOAA_HAB05B_SrCa_Proxy_SST.csv"))
 HAbrol_HAB05B_SrCa_NOAA <- HAbrol_HAB05B_SrCa_NOAA %>% 
@@ -747,4 +747,110 @@ Plot_2_HAB05B_SrCa <- HAbrol_HAB05B_SrCa_CCore %>%
 
 Plot_1_HAB05B_SrCa + Plot_2_HAB05B_SrCa  #using Patchwork to bring plots together
 
-##Scott Reef##
+##Scott Reef Loggers##
+SCOTT_RPO_1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTT_RPO_1.csv"))
+SCOTT_RPO_1_Logger <- SCOTT_RPO_1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>% 
+  select(subsite, data_type, date, sst)  
+
+SCOTT_SL4_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTT_SL4.csv"))
+SCOTT_SL4_Logger <- SCOTT_SL4_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst)  
+
+SCOTT_SS3_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTT_SS3.csv"))
+SCOTT_SS3_Logger <- SCOTT_SS3_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst)  
+
+SCOTTNR1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTNR1.csv"))
+SCOTTNR1_Logger <- SCOTTNR1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+SCOTTSL1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSL1.csv"))
+SCOTTSL1_Logger <- SCOTTSL1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+SCOTTSL2_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSL2.csv"))
+SCOTTSL2_Logger <- SCOTTSL2_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+SCOTTSL3_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSL3.csv"))
+SCOTTSL3_Logger <- SCOTTSL3_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+SCOTTSS1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv"))
+SCOTTSS1_Logger <- SCOTTSS1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+SCOTTSS2_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS2.csv"))
+SCOTTSS2_Logger <- SCOTTSS2_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+##Other Data Loggers##
+`100THSITE_Logger` <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.csv"))
+`100THSITE_Logger` <- `100THSITE_Logger` %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+BUNDEGI_BR_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDEGI_BR.csv"))
+BUNDEGI_BR_Logger <- BUNDEGI_BR_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+BUNDFL1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
+BUNDFL1_Logger <- BUNDFL1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+NTHFISHFL1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
+NTHFISHFL1_Logger <- NTHFISHFL1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+TANDFL1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
+TANDFL1_Logger <- TANDFL1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+TANTABIDDI_SL1_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANTABIDDI_SL1.csv"))
+TANTABIDDI_SL1_Logger <- TANTABIDDI_SL1_Logger %>% 
+  rename(sst = mean_SST) %>% 
+  mutate(data_type = "Logger") %>%
+  select(subsite, data_type, date, sst) 
+
+#Combine all data loggers 
+Logger_COMBINED <- rbind(SCOTT_RPO_1_Logger, SCOTT_SL4_Logger, SCOTT_SS3_Logger, 
+      SCOTTNR1_Logger, SCOTTSL1_Logger, SCOTTSL2_Logger, SCOTTSL3_Logger, 
+      SCOTTSS1_Logger, SCOTTSS2_Logger, SCOTT_SS3_Logger, `100THSITE_Logger`, 
+      BUNDEGI_BR_Logger, BUNDFL1_Logger, NTHFISHFL1_Logger, TANDFL1_Logger, TANTABIDDI_SL1_Logger)
+
+cols = c("SCOTT_RPO_1" = "black", "SCOTT_SL4" = "black", "SCOTT_SS3" = "black", 
+     "SCOTTNR1" = "black", "SCOTTSL1" = "black", "SCOTTSL2" = "black", 
+     "SCOTTSL3" = "black", "SCOTTSS1" = "black", "SCOTTSS2" = "black", "SCOTT_SS3" = "black", 
+     "100THSITE" = "dark blue", "BUNDEGI_BR" = "sky blue", "BUNDFL1" = "brown",
+     "NTHFISHFL1" = "dark green", "TANDFL1" = "light green", "TANTABIDDI_SL1" = "red")
+
+ggplot(Logger_COMBINED) +
+  geom_line(aes(x = date, y = sst, color = subsite), position = "jitter") +
+  scale_color_manual(values = cols)

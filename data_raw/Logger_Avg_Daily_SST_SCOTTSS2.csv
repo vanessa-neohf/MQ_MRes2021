@@ -1,4 +1,4 @@
-X1,parameter,site,site_id,subsite,subsite_id,series,series_id,lat,lon,depth,serial_num,from_date,thru_date,time,uncal_val,cal_val,qc_val,qc_flag,parameter_id,date,mean_SST
+...1,parameter,site,site_id,subsite,subsite_id,series,series_id,lat,lon,depth,serial_num,from_date,thru_date,time,uncal_val,cal_val,qc_val,qc_flag,parameter_id,date,mean_SST
 0,Water Temperature,Scott Reef,1098,SCOTTSS2,3990,SCOTTSS2,3990,-13.9238,121.915,6,SST-6381,2006-07-09,2007-06-21,2007-04-03T02:56:32Z,NA,25.427,25.427,1,1,2007-04-03,30.06742857142857
 43,Water Temperature,Scott Reef,1098,SCOTTSS2,3990,SCOTTSS2,3990,-13.9238,121.915,6,SST-6381,2006-07-09,2007-06-21,2007-04-04T00:26:32Z,NA,30.1412,30.1412,1,1,2007-04-04,30.331833333333332
 91,Water Temperature,Scott Reef,1098,SCOTTSS2,3990,SCOTTSS2,3990,-13.9238,121.915,6,SST-6381,2006-07-09,2007-06-21,2007-04-05T00:26:32Z,NA,30.299,30.299,1,1,2007-04-05,30.395527083333334
