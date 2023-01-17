@@ -1,6 +1,6 @@
 #Data visualisation for each coral core site 
-#(Scott Reef to be plotted later)
-#Plotting NOAA, CCI, Coral Core, Data Logger time series
+#Plotting NOAA, CCI, Coral Core, Data Logger, and GCM Sea Surface Temp time series
+#Sites DAR Long, SCOTT_RPO_1, SCOTTSL1, BRS07, 08BND, 13BND, 08TNT. 13TNT, HAB10A, HAB05B
 
 #load packages
 library(tidyverse)
@@ -70,6 +70,14 @@ Browse_07_CCore <- Browse_07_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `BRS07 Sr/Ca [mmol/mol]`)  #select only useful columns
 
+Browse_07_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_BRS07_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Browse_07_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_BRS07_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Browse_07_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_SCOTTSS1.csv"))
 Browse_07_Logger <- Browse_07_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -83,7 +91,13 @@ Browse_07_NOAA <- Browse_07_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Browse_07_comb <- bind_rows(Browse_07_CCI, Browse_07_Logger, Browse_07_NOAA, Browse_07_CCore)
+Browse_07_GCM <- read_csv(here::here("data_raw/GCM", "GCM_BRS07_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Browse_07_comb <- bind_rows(Browse_07_CCI, Browse_07_Logger, Browse_07_NOAA, 
+                            Browse_07_GCM, Browse_07_CCore_CCI, Browse_07_CCore_NOAA)
 
 Plot_1_BRS07 <- Browse_07_comb %>% 
   ggplot(aes(x = date, y = sst)) +
@@ -116,6 +130,14 @@ Cocos_DARL_CCore <- Cocos_DARL_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `Sr/Ca`)  #select only useful columns
 
+Cocos_DARL_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_DARL_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Cocos_DARL_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_DARL_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Cocos_DARL_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_100THSITE.csv"))
 Cocos_DARL_Logger <- Cocos_DARL_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -129,7 +151,13 @@ Cocos_DARL_NOAA <- Cocos_DARL_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Cocos_DARL_comb <- bind_rows(Cocos_DARL_CCI, Cocos_DARL_CCore, Cocos_DARL_Logger, Cocos_DARL_NOAA)
+Cocos_DARL_GCM <- read_csv(here::here("data_raw/GCM", "GCM_DAR_Long_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Cocos_DARL_comb <- bind_rows(Cocos_DARL_CCI, Cocos_DARL_Logger, Cocos_DARL_NOAA, 
+                             Cocos_DARL_GCM, Cocos_DARL_CCore_CCI, Cocos_DARL_CCore_NOAA)
 
 Plot_1_DARL <- Cocos_DARL_comb %>% 
   ggplot(aes(x = date, y = sst)) +
@@ -206,6 +234,14 @@ Ningaloo_13TNT_CCore <- Ningaloo_13TNT_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `Sr/Ca`)  #select only useful columns
 
+Ningaloo_13TNT_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Ningaloo_13TNT_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13TNT_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Ningaloo_13TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
 Ningaloo_13TNT_Logger <- Ningaloo_13TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -219,11 +255,18 @@ Ningaloo_13TNT_NOAA <- Ningaloo_13TNT_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Ningaloo_13TNT_comb <- bind_rows(Ningaloo_13TNT_CCI, Ningaloo_13TNT_CCore, Ningaloo_13TNT_Logger, Ningaloo_13TNT_NOAA)
+Ningaloo_13TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Ningaloo_13TNT_comb <- bind_rows(Ningaloo_13TNT_CCI, Ningaloo_13TNT_Logger, Ningaloo_13TNT_NOAA,
+                                 Ningaloo_13TNT_GCM, Ningaloo_13TNT_CCore_CCI, Ningaloo_13TNT_CCore_NOAA)
 
 Plot_1_13TNT <- Ningaloo_13TNT_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   geom_smooth(aes(color = data_type))
 
 Plot_2_13TNT <- Ningaloo_13TNT_CCore %>% 
@@ -251,6 +294,14 @@ Ningaloo_08TNT_CCore <- Ningaloo_08TNT_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `Sr/Ca`)  #select only useful columns
 
+Ningaloo_08TNT_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Ningaloo_08TNT_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08TNT_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Ningaloo_08TNT_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_TANDFL1.csv"))
 Ningaloo_08TNT_Logger <- Ningaloo_08TNT_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -264,11 +315,18 @@ Ningaloo_08TNT_NOAA <- Ningaloo_08TNT_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Ningaloo_08TNT_comb <- bind_rows(Ningaloo_08TNT_CCI, Ningaloo_08TNT_CCore, Ningaloo_08TNT_Logger, Ningaloo_08TNT_NOAA)
+Ningaloo_08TNT_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Tantabiddi_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Ningaloo_08TNT_comb <- bind_rows(Ningaloo_08TNT_CCI, Ningaloo_08TNT_Logger, Ningaloo_08TNT_NOAA,
+                                 Ningaloo_08TNT_GCM, Ningaloo_08TNT_CCore_CCI, Ningaloo_08TNT_CCore_NOAA)
 
 Plot_1_08TNT <- Ningaloo_08TNT_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   geom_smooth(aes(color = data_type))
 
 Plot_2_08TNT <- Ningaloo_08TNT_CCore %>% 
@@ -296,6 +354,14 @@ Ningaloo_13BND_CCore <- Ningaloo_13BND_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `Sr/Ca`)  #select only useful columns
 
+Ningaloo_13BND_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13BND_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Ningaloo_13BND_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_13BND_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Ningaloo_13BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
 Ningaloo_13BND_Logger <- Ningaloo_13BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -309,11 +375,18 @@ Ningaloo_13BND_NOAA <- Ningaloo_13BND_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Ningaloo_13BND_comb <- bind_rows(Ningaloo_13BND_CCI, Ningaloo_13BND_CCore, Ningaloo_13BND_Logger, Ningaloo_13BND_NOAA)
+Ningaloo_13BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Ningaloo_13BND_comb <- bind_rows(Ningaloo_13BND_CCI, Ningaloo_13BND_Logger, Ningaloo_13BND_NOAA,
+                                 Ningaloo_13BND_GCM, Ningaloo_13BND_CCore_CCI, Ningaloo_13BND_CCore_NOAA)
 
 Plot_1_13BND <- Ningaloo_13BND_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   geom_smooth(aes(color = data_type))
 
 Plot_2_13BND <- Ningaloo_13BND_CCore %>% 
@@ -341,6 +414,14 @@ Ningaloo_08BND_CCore <- Ningaloo_08BND_CCore %>%
   mutate(date = ym(date)) %>% #converting date column fr chr to date format
   select(data_type, date, `Sr/Ca`)  #select only useful columns
 
+Ningaloo_08BND_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08BND_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
+Ningaloo_08BND_CCore_NOAA <- read_csv(here::here("data_raw", "CCore_SST_Ningaloo_08BND_NOAA.csv")) %>% 
+  mutate(data_type = "Coral Core NOAA calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 Ningaloo_08BND_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_BUNDFL1.csv"))
 Ningaloo_08BND_Logger <- Ningaloo_08BND_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -354,11 +435,18 @@ Ningaloo_08BND_NOAA <- Ningaloo_08BND_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-Ningaloo_08BND_comb <- bind_rows(Ningaloo_08BND_CCI, Ningaloo_08BND_CCore, Ningaloo_08BND_Logger, Ningaloo_08BND_NOAA)
+Ningaloo_08BND_GCM <- read_csv(here::here("data_raw/GCM", "GCM_Bundegi_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+Ningaloo_08BND_comb <- bind_rows(Ningaloo_08BND_CCI, Ningaloo_08BND_Logger, Ningaloo_08BND_NOAA,
+                                 Ningaloo_08BND_GCM, Ningaloo_08BND_CCore_CCI, Ningaloo_08BND_CCore_NOAA)
 
 Plot_1_08BND <- Ningaloo_08BND_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   geom_smooth(aes(color = data_type))
 
 Plot_2_08BND <- Ningaloo_08BND_CCore %>% 
@@ -637,7 +725,13 @@ HAbrol_HAB10A_SrCa_NOAA <- HAbrol_HAB10A_SrCa_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-HAbrol_HAB10A_SrCa_comb <- bind_rows(HAbrol_HAB10A_SrCa_CCI, HAbrol_HAB10A_SrCa_CCore, HAbrol_HAB10A_SrCa_Logger, HAbrol_HAB10A_SrCa_NOAA)
+HAbrol_HAB10A_GCM <- read_csv(here::here("data_raw/GCM", "GCM_HAB10A_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+HAbrol_HAB10A_SrCa_comb <- bind_rows(HAbrol_HAB10A_SrCa_CCI, HAbrol_HAB10A_SrCa_Logger, HAbrol_HAB10A_SrCa_NOAA,
+                                     HAbrol_HAB10A_GCM)
 
 Plot_1_HAB10A_SrCa <- HAbrol_HAB10A_SrCa_comb %>% 
   ggplot(aes(x = date, y = sst)) +
@@ -719,6 +813,10 @@ HAbrol_HAB05B_SrCa_CCore <- HAbrol_HAB05B_SrCa_CCore %>%
   mutate(date = ym(date)) %>%  #convert chr to date format
   select(data_type, date, `HAB05B Sr/Ca`)  #select only useful columns
 
+HAbrol_HAB05B_CCore_CCI <- read_csv(here::here("data_raw", "CCore_SST_HAB05B_SrCa_CCI.csv")) %>% 
+  mutate(data_type = "Coral Core CCI calibrated SST", .before = "date") %>% 
+  select(data_type, date, sst)
+
 HAbrol_HAB05B_SrCa_Logger <- read_csv(here::here("data_raw", "Logger_Avg_Daily_SST_NTHFISHFL1.csv"))
 HAbrol_HAB05B_SrCa_Logger <- HAbrol_HAB05B_SrCa_Logger %>% 
   rename(sst = mean_SST) %>% #prepare data for binding with other data types
@@ -732,7 +830,13 @@ HAbrol_HAB05B_SrCa_NOAA <- HAbrol_HAB05B_SrCa_NOAA %>%
   rename(date = Date) %>% #rename daily date column to prepare for binding with other data types
   select(data_type, date, sst) #select only useful columns
 
-HAbrol_HAB05B_SrCa_comb <- bind_rows(HAbrol_HAB05B_SrCa_CCI, HAbrol_HAB05B_SrCa_CCore, HAbrol_HAB05B_SrCa_Logger, HAbrol_HAB05B_SrCa_NOAA)
+HAbrol_HAB05B_GCM <- read_csv(here::here("data_raw/GCM", "GCM_HAB05B_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+HAbrol_HAB05B_SrCa_comb <- bind_rows(HAbrol_HAB05B_SrCa_CCI, HAbrol_HAB05B_SrCa_Logger, HAbrol_HAB05B_SrCa_NOAA,
+                                     HAbrol_HAB05B_GCM, HAbrol_HAB05B_CCore_CCI)
 
 Plot_1_HAB05B_SrCa <- HAbrol_HAB05B_SrCa_comb %>% 
   ggplot(aes(x = date, y = sst)) +
@@ -841,16 +945,195 @@ TANTABIDDI_SL1_Logger <- TANTABIDDI_SL1_Logger %>%
 
 #Combine all data loggers 
 Logger_COMBINED <- rbind(SCOTT_RPO_1_Logger, SCOTT_SL4_Logger, SCOTT_SS3_Logger, 
-      SCOTTNR1_Logger, SCOTTSL1_Logger, SCOTTSL2_Logger, SCOTTSL3_Logger, 
-      SCOTTSS1_Logger, SCOTTSS2_Logger, SCOTT_SS3_Logger, `100THSITE_Logger`, 
-      BUNDEGI_BR_Logger, BUNDFL1_Logger, NTHFISHFL1_Logger, TANDFL1_Logger, TANTABIDDI_SL1_Logger)
+                         SCOTTNR1_Logger, SCOTTSL1_Logger, SCOTTSL2_Logger, SCOTTSL3_Logger, 
+                         SCOTTSS1_Logger, SCOTTSS2_Logger, SCOTT_SS3_Logger, `100THSITE_Logger`, 
+                         BUNDEGI_BR_Logger, BUNDFL1_Logger, NTHFISHFL1_Logger, TANDFL1_Logger, TANTABIDDI_SL1_Logger)
 
 cols = c("SCOTT_RPO_1" = "black", "SCOTT_SL4" = "black", "SCOTT_SS3" = "black", 
-     "SCOTTNR1" = "black", "SCOTTSL1" = "black", "SCOTTSL2" = "black", 
-     "SCOTTSL3" = "black", "SCOTTSS1" = "black", "SCOTTSS2" = "black", "SCOTT_SS3" = "black", 
-     "100THSITE" = "dark blue", "BUNDEGI_BR" = "sky blue", "BUNDFL1" = "brown",
-     "NTHFISHFL1" = "dark green", "TANDFL1" = "light green", "TANTABIDDI_SL1" = "red")
+         "SCOTTNR1" = "black", "SCOTTSL1" = "black", "SCOTTSL2" = "black", 
+         "SCOTTSL3" = "black", "SCOTTSS1" = "black", "SCOTTSS2" = "black", "SCOTT_SS3" = "black", 
+         "100THSITE" = "dark blue", "BUNDEGI_BR" = "sky blue", "BUNDFL1" = "brown",
+         "NTHFISHFL1" = "dark green", "TANDFL1" = "light green", "TANTABIDDI_SL1" = "red")
 
 ggplot(Logger_COMBINED) +
   geom_line(aes(x = date, y = sst, color = subsite), position = "jitter") +
   scale_color_manual(values = cols)
+
+##Scott Reef##
+#SCOTT_RPO_1#
+SCOTT_RPO_1_GCM <- read_csv(here::here("data_raw/GCM", "GCM_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+SCOTT_RPO_1_CCI <- read_csv(here::here("data_raw", "CCI_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "CCI", .before = date)
+
+SCOTT_RPO_1_NOAA <- read_csv(here::here("data_raw", "NOAA_SCOTT_RPO_1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "NOAA", .before = date)
+
+SCOTT_RPO_1_Logger <- SCOTT_RPO_1_Logger %>% 
+  select(data_type, date, sst)
+
+SCOTT_RPO_1_comb <- rbind(SCOTT_RPO_1_CCI, SCOTT_RPO_1_Logger, SCOTT_RPO_1_NOAA, SCOTT_RPO_1_GCM)
+
+Plot_1_SCOTT_RPO_1 <- SCOTT_RPO_1_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+#SCOTTSL1#
+SCOTTSL1_GCM <- read_csv(here::here("data_raw/GCM", "GCM_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "GCM", .before = date)
+
+SCOTTSL1_CCI <- read_csv(here::here("data_raw", "CCI_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "CCI", .before = date)
+
+SCOTTSL1_NOAA <- read_csv(here::here("data_raw", "NOAA_SCOTTSL1_with_mmm_and_dhw.csv")) %>% 
+  select(Date, sst) %>% 
+  rename(date = Date) %>% 
+  mutate(data_type = "NOAA", .before = date)
+
+SCOTTSL1_Logger <- SCOTTSL1_Logger %>% 
+  select(data_type, date, sst)
+
+SCOTTSL1_comb <- rbind(SCOTTSL1_CCI, SCOTTSL1_Logger, SCOTTSL1_NOAA, SCOTTSL1_GCM)
+
+Plot_1_SCOTT_SL1 <- SCOTTSL1_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  geom_smooth(aes(color = data_type)) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01")))
+
+#Combined time series satellites (CCI and NOAA), loggers, coral cores, GCM
+
+setcols <- c("CCI" = "coral", "NOAA" = "purple", "Logger" = "blue", "GCM" = "black",
+             "Coral Core NOAA calibrated SST" = "green", "Coral Core CCI calibrated SST" = "brown")
+TS_BRS07 <- Browse_07_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Browse Island BRS07 (-14.12, 123.55)")
+
+TS_BRS07
+
+ggsave("graphics/TS/BRS07.jpeg", dpi = 300)
+
+TS_DARL <- Cocos_DARL_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)")
+
+TS_DARL
+
+ggsave("graphics/TS/DARL.jpeg", dpi = 300)
+
+TS_SCOTT_RPO_1 <- SCOTT_RPO_1_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)")
+
+TS_SCOTT_RPO_1
+
+ggsave("graphics/TS/SCOTT_RPO_1.jpeg", dpi = 300)
+
+TS_SCOTTSL1 <- SCOTTSL1_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)")
+
+TS_SCOTTSL1
+
+ggsave("graphics/TS/SCOTTSL1.jpeg", dpi = 300)
+
+TS_Ningaloo_08BND <- Ningaloo_08BND_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)")
+
+TS_Ningaloo_08BND
+
+ggsave("graphics/TS/Ningaloo_08BND.jpeg", dpi = 300)
+
+TS_Ningaloo_13BND <- Ningaloo_13BND_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)")
+
+TS_Ningaloo_13BND
+
+ggsave("graphics/TS/Ningaloo_13BND.jpeg", dpi = 300)
+
+TS_Ningaloo_08TNT <- Ningaloo_08TNT_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)")
+
+TS_Ningaloo_08TNT
+
+ggsave("graphics/TS/Ningaloo_08TNT.jpeg", dpi = 300)
+
+TS_Ningaloo_13TNT <- Ningaloo_13TNT_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)")
+
+TS_Ningaloo_13TNT
+
+ggsave("graphics/TS/Ningaloo_13TNT.jpeg", dpi = 300)
+
+TS_HAbrol_HAB10A <- HAbrol_HAB10A_SrCa_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)")
+
+TS_HAbrol_HAB10A
+
+ggsave("graphics/TS/HAbrol_HAB10A.jpeg", dpi = 300)
+
+TS_HAbrol_HAB05B <- HAbrol_HAB05B_SrCa_comb %>% 
+  ggplot(aes(x = date, y = sst)) +
+  geom_line(aes(color = data_type)) +
+  scale_color_manual(values = setcols) +
+  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  theme(legend.title = element_blank()) +
+  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)")
+
+TS_HAbrol_HAB05B
+
+ggsave("graphics/TS/HAbrol_HAB05B.jpeg", dpi = 300)
