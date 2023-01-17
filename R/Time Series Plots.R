@@ -957,7 +957,10 @@ cols = c("SCOTT_RPO_1" = "black", "SCOTT_SL4" = "black", "SCOTT_SS3" = "black",
 
 ggplot(Logger_COMBINED) +
   geom_line(aes(x = date, y = sst, color = subsite), position = "jitter") +
-  scale_color_manual(values = cols)
+  scale_color_manual(values = cols) +
+  facet_wrap(~subsite)
+
+ggsave("graphics/TS/logger.jpeg", dpi = 300)
 
 ##Scott Reef##
 #SCOTT_RPO_1#
