@@ -496,18 +496,29 @@ TANTABIDDI_SL1_Logger <- TANTABIDDI_SL1_Logger %>%
 Logger_COMBINED <- rbind(SCOTT_RPO_1_Logger, SCOTT_SL4_Logger, SCOTT_SS3_Logger, 
                          SCOTTNR1_Logger, SCOTTSL1_Logger, SCOTTSL2_Logger, SCOTTSL3_Logger, 
                          SCOTTSS1_Logger, SCOTTSS2_Logger, SCOTT_SS3_Logger, `100THSITE_Logger`, 
-                         BUNDEGI_BR_Logger, BUNDFL1_Logger, NTHFISHFL1_Logger, TANDFL1_Logger, TANTABIDDI_SL1_Logger)
+                         BUNDEGI_BR_Logger, BUNDFL1_Logger, NTHFISHFL1_Logger, TANDFL1_Logger, TANTABIDDI_SL1_Logger) %>% 
+  mutate(subsite = str_replace(subsite, "SCOTTSL1", "SCOTTSL1(closest to BRS05, BRS07)")) %>% 
+  mutate(subsite = str_replace(subsite, "100THSITE", "100THSITE(closest to DAR3, DAR Long)")) %>% 
+  mutate(subsite = str_replace(subsite, "TANDFL1", "TANDFL1(closest to 08TNT, 13TNT)")) %>% 
+  mutate(subsite = str_replace(subsite, "BUNDFL1", "BUNDFL1(closest to 08BND, 13BND)")) %>% 
+  mutate(subsite = str_replace(subsite, "NTHFISHFL1", "NTHFISHFL1(closest to HAB10A, HAB05B)")) %>% 
+  rename(`Logger Name` = "subsite")
 
 cols = c("SCOTT_RPO_1" = "black", "SCOTT_SL4" = "black", "SCOTT_SS3" = "black", 
-         "SCOTTNR1" = "black", "SCOTTSL1" = "black", "SCOTTSL2" = "black", 
+         "SCOTTNR1" = "black", "SCOTTSL1(closest to BRS05, BRS07)" = "black", "SCOTTSL2" = "black", 
          "SCOTTSL3" = "black", "SCOTTSS1" = "black", "SCOTTSS2" = "black", "SCOTT_SS3" = "black", 
-         "100THSITE" = "dark blue", "BUNDEGI_BR" = "sky blue", "BUNDFL1" = "brown",
-         "NTHFISHFL1" = "dark green", "TANDFL1" = "light green", "TANTABIDDI_SL1" = "red")
+         "100THSITE(closest to DAR3, DAR Long)" = "dark blue", "BUNDEGI_BR" = "sky blue", "BUNDFL1(closest to 08BND, 13BND)" = "brown",
+         "NTHFISHFL1(closest to HAB10A, HAB05B)" = "dark green", "TANDFL1(closest to 08TNT, 13TNT)" = "light green", "TANTABIDDI_SL1" = "red")
 
-ggplot(Logger_COMBINED) +
-  geom_line(aes(x = date, y = sst, color = subsite), position = "jitter") +
+Logger_TS <- ggplot(Logger_COMBINED) +
+  geom_line(aes(x = date, y = sst, color = `Logger Name`), position = "jitter") +
   scale_color_manual(values = cols) +
-  facet_wrap(~subsite)
+  scale_x_date(limits = (as.Date(c("1983-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Supplementary Figure Xx", y = ("Temperature°C"), x = "Time", caption = "Sea Surface Temperature based on in situ loggers")
+
+ggplotly(Logger_TS) %>% 
+  layout(legend = list(orientation = "h", y = -0.3))
 
 ggsave("graphics/TS/logger.jpeg", dpi = 300)
 
@@ -561,7 +572,7 @@ SCOTTSL1_comb <- rbind(SCOTTSL1_CCI, SCOTTSL1_Logger, SCOTTSL1_NOAA, SCOTTSL1_GC
 
 ```
 
-```{r Combined_TS, fig.height=8, fig.width=10}
+```{r Combined_TS, fig.width = 10, fig.height = 7}
 
 #Combined time series satellites (CCI and NOAA), loggers, coral cores, GCM
 
