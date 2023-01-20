@@ -565,16 +565,17 @@ SCOTTSL1_comb <- rbind(SCOTTSL1_CCI, SCOTTSL1_Logger, SCOTTSL1_NOAA, SCOTTSL1_GC
 
 #Combined time series satellites (CCI and NOAA), loggers, coral cores, GCM
 
-setcols <- c("CCI" = "coral", "NOAA" = "purple", "Logger" = "blue", "GCM" = "black",
-             "Coral Core NOAA calibrated SST" = "green", "Coral Core CCI calibrated SST" = "brown")
+setcols <- c("CCI" = "coral", "NOAA" = "purple", "Logger" = "blue", "GCM" = "black", "Coral Core NOAA calibrated SST" = "green", "Coral Core CCI calibrated SST" = "brown")
+
 #BRS07 Plotly
 TS_BRS07 <- Browse_07_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Browse Island BRS07 (-14.12, 123.55)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Browse Island BRS07 (-14.12, 123.55)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_BRS07) %>% 
  layout(legend = "none")
@@ -591,20 +592,22 @@ ggstream_Browse_07_comb <- Browse_07_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Browse Island BRS07 (-14.12, 123.55)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Browse Island BRS07 (-14.12, 123.55)", y = "", x = "Time")
 
-ggstream_Browse_07_comb
+#ggstream_Browse_07_comb
 
 #DARL Plotly
 TS_DARL <- Cocos_DARL_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_DARL) %>% 
  layout(legend = "none")
@@ -622,20 +625,22 @@ ggstream_Cocos_DARL_comb <- Cocos_DARL_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)", y = "", x = "Time")
 
-ggstream_Cocos_DARL_comb
+#ggstream_Cocos_DARL_comb
 
 #SCOTT_RPO_1 Plotly
 TS_SCOTT_RPO_1 <- SCOTT_RPO_1_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_SCOTT_RPO_1) %>% 
  layout(legend = "none")
@@ -651,20 +656,22 @@ ggstream_SCOTT_RPO_1_comb <- SCOTT_RPO_1_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)", y = "", x = "Time")
 
-ggstream_SCOTT_RPO_1_comb
+#ggstream_SCOTT_RPO_1_comb
 
 #SCOTTSL1 Plotly
 TS_SCOTTSL1 <- SCOTTSL1_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_SCOTTSL1) %>% 
  layout(legend = "none")
@@ -680,20 +687,22 @@ ggstream_SCOTTSL1_comb <- SCOTTSL1_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)", y = "", x = "Time")
 
-ggstream_SCOTTSL1_comb
+#ggstream_SCOTTSL1_comb
 
 #08BND Plotly 
 TS_Ningaloo_08BND <- Ningaloo_08BND_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_08BND) %>% 
  layout(legend = "none")
@@ -710,20 +719,22 @@ ggstream_Ningaloo_08BND_comb <- Ningaloo_08BND_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)", y = "", x = "Time")
 
-ggstream_Ningaloo_08BND_comb
+#ggstream_Ningaloo_08BND_comb
 
 #13BND Plotly
 TS_Ningaloo_13BND <- Ningaloo_13BND_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_13BND) %>% 
  layout(legend = "none")
@@ -740,20 +751,22 @@ ggstream_Ningaloo_13BND_comb <- Ningaloo_13BND_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)", y = "", x = "Time")
 
-ggstream_Ningaloo_13BND_comb
+#ggstream_Ningaloo_13BND_comb
 
 #08TNT Plotly
 TS_Ningaloo_08TNT <- Ningaloo_08TNT_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_08TNT) %>% 
  layout(legend = "none")
@@ -770,20 +783,22 @@ ggstream_Ningaloo_08TNT_comb <- Ningaloo_08TNT_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)", y = "", x = "Time")
 
-ggstream_Ningaloo_08TNT_comb
+#ggstream_Ningaloo_08TNT_comb
 
 #13TNT Plotly
 TS_Ningaloo_13TNT <- Ningaloo_13TNT_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_13TNT) %>% 
  layout(legend = "none")
@@ -800,20 +815,22 @@ ggstream_Ningaloo_13TNT_comb <- Ningaloo_13TNT_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)", y = "", x = "Time")
 
-ggstream_Ningaloo_13TNT_comb
+#ggstream_Ningaloo_13TNT_comb
 
 #HAB10A Plotly
 TS_HAbrol_HAB10A <- HAbrol_HAB10A_SrCa_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_HAbrol_HAB10A) %>% 
  layout(legend = "none")
@@ -830,20 +847,22 @@ ggstream_HAbrol_HAB10A_comb <- HAbrol_HAB10A_SrCa_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)", y = "", x = "Time")
 
-ggstream_HAbrol_HAB10A_comb
+#ggstream_HAbrol_HAB10A_comb
 
 #HAB05B Plotly
 TS_HAbrol_HAB05B <- HAbrol_HAB05B_SrCa_comb %>% 
   ggplot(aes(x = date, y = sst)) +
   geom_line(aes(color = data_type)) +
   scale_color_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_HAbrol_HAB05B) %>% 
  layout(legend = "none")
@@ -860,11 +879,12 @@ ggstream_HAbrol_HAB05B_comb <- HAbrol_HAB05B_SrCa_comb %>%
   ggplot(aes(x = date, y = sst, fill = data_type)) +
   geom_stream(n_grid = 100000) +
   scale_fill_manual(values = setcols) +
-  xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
-  theme(legend.title = element_blank()) +
-  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)", y = "")
+  #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
+  scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
+  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)", y = "", x = "Time")
 
-ggstream_HAbrol_HAB05B_comb
+#ggstream_HAbrol_HAB05B_comb
 
 ```
 
