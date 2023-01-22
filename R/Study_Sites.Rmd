@@ -16,13 +16,14 @@ library(tidyverse)
 library(maps)
 library(ggrepel)
 library(ggmap)
+library(patchwork)
 
 watercolor <- get_map(location = c(lon = 125, lat = -20), zoom = 3, source = 'stamen', maptype="watercolor")
 
 Study_Sites <- read_csv(here::here("data_raw", "Combined_Site_Coordinates_Full.csv")) 
 
 SS_Map <- ggmap(watercolor, fullpage = TRUE) +
-  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "jitter") +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
   labs(caption = "Number of Sites = 19") +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "bottom", legend.text = element_text(size = 7)) +
   #xlim(85, 175) + #for full map
@@ -35,29 +36,49 @@ SS_Map
 
 ggsave("study sites.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
 
-Cocos <- ggmap(watercolor, fullpage = TRUE) +
-  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "jitter") +
-  theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
-  #xlim(85, 175) + #for full map
-  #ylim(-50, 10) + #for full map
-  xlim(95, 105) +
-  ylim(-15, -5) 
+Cocos_getmap <- get_map(location = c(lon = 97, lat = -12), zoom = 10, source = 'stamen', maptype="watercolor")
 
-Scott_and_Browse <- ggmap(watercolor, fullpage = TRUE) +
-  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "jitter") +
+Cocos <- ggmap(Cocos_getmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
-  #xlim(85, 175) + #for full map
-  #ylim(-50, 10) + #for full map
-  xlim(120, 124) +
-  ylim(-15, -12) 
+  labs(title = "Cocos Keeling Island") +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
 
-ggmap(watercolor, fullpage = TRUE) +
-  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "jitter") +
+Browse_getmap <- get_map(location = c(lon = 124, lat = -14), zoom = 8, source = 'stamen', maptype="watercolor")
+
+Browse <- ggmap(Browse_getmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
-  #xlim(85, 175) + #for full map
-  #ylim(-50, 10) + #for full map
-  xlim(110, 120) +
-  ylim(-30, -21) 
+  labs(title = "Browse Island") +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+Scott_getmap <- get_map(location = c(lon = 122, lat = -13.9), zoom = 10, source = 'stamen', maptype="watercolor")
+
+Scott <- ggmap(Scott_getmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
+  theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
+  labs(title = "Scott Reef") +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+Ningaloo_getmap <- get_map(location = c(lon = 114, lat = -21.9), zoom = 9, source = 'stamen', maptype="watercolor")
+
+Ningaloo <- ggmap(Ningaloo_getmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
+  theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
+  labs(title = "Ningaloo Reef") +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+HAbrol_getmap <- get_map(location = c(lon = 113.7, lat = -28.5), zoom = 9, source = 'stamen', maptype="watercolor")
+
+HAbrol <- ggmap(HAbrol_getmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 3, position = "dodge") +
+  theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
+  labs(title = "Houtman Abrolhos Island") +
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+
+
+
 
 ###Old Code###
 #Aus <- map_data("world") %>% 
