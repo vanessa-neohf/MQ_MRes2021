@@ -44,6 +44,10 @@ Cocos <- ggmap(Cocos_getmap, fullpage = TRUE) +
   labs(title = "Cocos Keeling Island") +
   geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
 
+Cocos
+
+ggsave("Cocos.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
+
 Browse_getmap <- get_map(location = c(lon = 124, lat = -14), zoom = 8, source = 'stamen', maptype="watercolor")
 
 Browse <- ggmap(Browse_getmap, fullpage = TRUE) +
@@ -51,6 +55,10 @@ Browse <- ggmap(Browse_getmap, fullpage = TRUE) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
   labs(title = "Browse Island") +
   geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+Browse
+
+ggsave("Browse.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
 
 Scott_getmap <- get_map(location = c(lon = 122, lat = -13.9), zoom = 10, source = 'stamen', maptype="watercolor")
 
@@ -60,6 +68,10 @@ Scott <- ggmap(Scott_getmap, fullpage = TRUE) +
   labs(title = "Scott Reef") +
   geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
 
+Scott
+
+ggsave("Scott.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
+
 Ningaloo_getmap <- get_map(location = c(lon = 114, lat = -21.9), zoom = 9, source = 'stamen', maptype="watercolor")
 
 Ningaloo <- ggmap(Ningaloo_getmap, fullpage = TRUE) +
@@ -68,6 +80,10 @@ Ningaloo <- ggmap(Ningaloo_getmap, fullpage = TRUE) +
   labs(title = "Ningaloo Reef") +
   geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
 
+Ningaloo
+
+ggsave("Ningaloo.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
+
 HAbrol_getmap <- get_map(location = c(lon = 113.7, lat = -28.5), zoom = 9, source = 'stamen', maptype="watercolor")
 
 HAbrol <- ggmap(HAbrol_getmap, fullpage = TRUE) +
@@ -75,6 +91,10 @@ HAbrol <- ggmap(HAbrol_getmap, fullpage = TRUE) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank()) +
   labs(title = "Houtman Abrolhos Island") +
   geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site))
+
+HAbrol
+
+ggsave("HAbrol.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
 
 
 
