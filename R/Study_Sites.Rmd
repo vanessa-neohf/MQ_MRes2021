@@ -103,6 +103,9 @@ insetmap_Ningaloo <- viewport(width = 0.7, height = 0.55, x = 0.15, y = 0.72)
 insetmap_HAbrol <- viewport(width = 0.7, height = 0.5, x = 0.15, y = 0.15)
 insetmap_Scott <- viewport(width = 0.7, height = 0.55, x = 0.85, y = 0.72)
 insetmap_Browse <- viewport(width = 0.7, height = 0.5, x = 0.85, y = 0.15)
+
+png("Study Sites with Insets.png")
+# or jpeg("Study Sites with Insets.jpeg") 
 grid.newpage()
 print(SS_Map, vp = mainmap)
 print(Cocos, vp = insetmap_Cocos)
@@ -110,8 +113,8 @@ print(Ningaloo, vp = insetmap_Ningaloo)
 print(HAbrol, vp = insetmap_HAbrol)
 print(Scott, vp = insetmap_Scott)
 print(Browse, vp = insetmap_Browse)
-
-ggsave("Study Sites with Insets.jpg", dpi = 300)
+dev.off()
+# ggsave("Study Sites with Insets.jpg", dpi = 300)
 
 
 ###Old Code###
