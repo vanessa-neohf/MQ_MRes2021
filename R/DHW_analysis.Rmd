@@ -239,11 +239,11 @@ DARL <- ggplot(DARL_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1996-01-01")), xmax = as.Date(c("1997-01-01")),
                 ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2014-01-01")), xmax = as.Date(c("2015-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 4)+
@@ -286,11 +286,11 @@ SCOTT_RPO_1 <- ggplot(SCOTT_RPO_1_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
                 ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
@@ -464,11 +464,11 @@ SCOTTSL1 <- ggplot(SCOTTSL1_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
                 ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
@@ -724,7 +724,7 @@ Bundegi <- ggplot(Bundegi_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
@@ -764,7 +764,7 @@ Tantabiddi <- ggplot(Tantabiddi_Sat_Combined)+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
                 ymin = -Inf, ymax = 40), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 40), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)NOAA>CCI>GCM", size = 3, vjust = 1)+

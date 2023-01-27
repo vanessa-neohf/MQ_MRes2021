@@ -1676,12 +1676,12 @@ color.me <- which(High_BRS05_DHM$`Coral Core (CCI)`> 0 | High_BRS05_DHM$`Coral C
 BRS05 <- BRS05_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   labs(x = "Date", y = "Degree Heating Month", title = "BRS05 (-14.11, 123.54)")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -1697,11 +1697,11 @@ BRS05 <- BRS05_Combined %>%
 BRS05_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS05_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "BRS05 Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -1856,14 +1856,14 @@ color.me <- which(High_BRS07_DHM$`Coral Core (CCI)`> 0 | High_BRS07_DHM$`Coral C
 BRS07 <- BRS07_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)NOAA>CCI>GCM", size = 3, vjust = 1)+
   labs(x = "", y = "Degree Heating Month", title = "(b) BRS07 (-14.12, 123.55)", subtitle = "Browse Island")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -1879,11 +1879,11 @@ BRS07 <- BRS07_Combined %>%
 BRS07_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = BRS07_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "BRS07 Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2016,13 +2016,13 @@ DAR3_Combined <- rbind(CCI_DAR3, NOAA_DAR3, GCM_DAR3, CCore_DAR3_CCI, CCore_DAR3
 DAR3 <- DAR3_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 4)+
@@ -2030,7 +2030,7 @@ DAR3 <- DAR3_Combined %>%
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DAR3 (-12.10, 96.88)")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2046,17 +2046,17 @@ DAR3 <- DAR3_Combined %>%
 DAR3_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DAR3_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DAR3 Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2211,13 +2211,13 @@ color.me <- which(High_DARL_DHM$`Coral Core (CCI)`> 0 | High_DARL_DHM$`Coral Cor
 DARL <- DARL_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1996-01-01")), xmax = as.Date(c("1997-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2014-01-01")), xmax = as.Date(c("2015-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1995-06-01"), y = Inf, label = "1996", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2013-06-01"), y = Inf, label = "2014", hjust = 1, vjust = 1, size = 4)+
@@ -2227,7 +2227,7 @@ DARL <- DARL_Combined %>%
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "(a) DAR Long (-12.09, 96.88)", subtitle = "Cocos Keeling Island")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2243,17 +2243,17 @@ DARL <- DARL_Combined %>%
 DARL_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1995-06-01")), xmax = as.Date(c("1997-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-06-01")), xmax = as.Date(c("2015-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = DARL_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "DARL Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2369,13 +2369,13 @@ SCOTT_RPO_1_cum
 SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
@@ -2385,7 +2385,7 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Date", y = "Degree Heating Month", title = "(a) SCOTT_RPO_1 (-14.06, 121.78)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2401,18 +2401,18 @@ SCOTT_RPO_1 <- SCOTT_RPO_1_Combined %>%
 SCOTT_RPO_1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTT_RPO_1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "SCOTT_RPO_1 Degree Heating Month values time plot")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10), limits = c(0,10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2861,13 +2861,13 @@ SCOTTSL1_cum
 SCOTTSL1 <- SCOTTSL1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1998-01-01")), xmax = as.Date(c("1999-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2013-01-01")), xmax = as.Date(c("2014-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("1999-06-01"), y = Inf, label = "1998", hjust = 0, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2014-06-01"), y = Inf, label = "2013", hjust = 0.5, vjust = 1, size = 4)+
@@ -2877,7 +2877,7 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "(b) SCOTTSL1 (-14.08, 121.95)", subtitle = "Scott Reef")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -2894,18 +2894,18 @@ SCOTTSL1 <- SCOTTSL1_Combined %>%
 SCOTTSL1_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("1997-06-01")), xmax = as.Date(c("1999-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_rect(aes_string(xmin = as.Date(c("2012-06-01")), xmax = as.Date(c("2014-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
    geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = SCOTTSL1_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Date", y = "Degree Heating Month", title = "SCOTTSL1 Degree Heating Month values time plot")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10), limits = c(0,10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3622,9 +3622,9 @@ Bundegi_13BND_cum
 `08BND` <- Bundegi_08BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
@@ -3632,7 +3632,7 @@ Bundegi_13BND_cum
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Time", y = "Degree Heating Month", title = "(c) 08BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3648,13 +3648,13 @@ Bundegi_13BND_cum
 Bundegi_08BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08BND Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3673,9 +3673,9 @@ ggsave("Supp_08BND_DHM.png", path = here::here("graphics/Figures"), dpi = 300, s
 `13BND` <- Bundegi_13BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(M)CCI>NOAA>GCM\n(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
@@ -3683,7 +3683,7 @@ ggsave("Supp_08BND_DHM.png", path = here::here("graphics/Figures"), dpi = 300, s
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "(d) 13BND (-21.87, 114.16)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3699,13 +3699,13 @@ ggsave("Supp_08BND_DHM.png", path = here::here("graphics/Figures"), dpi = 300, s
 Bundegi_13BND_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Bundegi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "13BND Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3864,16 +3864,16 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
 `08TNT` <- Tantabiddi_08TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "(e) 08TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -3889,13 +3889,13 @@ High_08TNT_DHM <- Tantabiddi_08TNT_Combined %>%
 Tantabiddi_08TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = Tantabiddi_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "08TNT Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4053,16 +4053,16 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
 `13TNT` <- Tantabiddi_13TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2016-01-01")), xmax = as.Date(c("2017-01-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2010-06-01"), y = Inf, label = "2011", hjust = 1, vjust = 1, size = 4)+
   annotate("text", x = as.Date("2017-06-01"), y = Inf, label = "2016", hjust = 0, vjust = 1, size = 4)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Time", y = "Degree Heating Month", title = "(f) 13TNT (-21.91, 113.97)", subtitle = "Ningaloo Reef")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4078,13 +4078,13 @@ High_13TNT_DHM <- Tantabiddi_13TNT_Combined %>%
 Tantabiddi_13TNT_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
     geom_rect(aes_string(xmin = as.Date(c("2015-06-01")), xmax = as.Date(c("2017-06-01")),
-                ymin = -Inf, ymax = Inf), color = "blue", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "blue", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = `13TNT_DHM`, color = Data_Type), alpha = 0.5, size = 1.3) +
   labs(x = "Date", y = "Degree Heating Month", title = "13TNT Degree Heating Month values time plot")+
   scale_color_manual(values = cols) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4197,14 +4197,14 @@ HAB05B_cum
 HAB05B <- HAB05B_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Time", y = "Degree Heating Month", title = "(d) HAB05B (-28.46, 113.77)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4220,12 +4220,12 @@ HAB05B <- HAB05B_Combined %>%
 HAB05B_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB05B_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Date", y = "Degree Heating Month", title = "HAB05B Degree Heating Month values time plot")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10), limits = c(0,10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4338,14 +4338,14 @@ HAB10A_cum
 HAB10A <- HAB10A_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2011-01-01")), xmax = as.Date(c("2012-01-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   annotate("text", x = as.Date("2012-06-01"), y = Inf, label = "2011", hjust = 0, vjust = 1, size = 4)+
   annotate(geom = "text", x = as.Date("2027-01-01"), y = Inf, label = "(S)CCI>NOAA>GCM", size = 3, vjust = 1)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "", y = "Degree Heating Month", title = "(c) HAB10A (-28.46, 113.75)", subtitle = "Houtman Abrolhos")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
@@ -4361,12 +4361,12 @@ HAB10A <- HAB10A_Combined %>%
 HAB10A_Combined %>% 
   ggplot()+
   geom_rect(aes_string(xmin = as.Date(c("2010-06-01")), xmax = as.Date(c("2012-06-01")),
-                ymin = -Inf, ymax = Inf), color = "maroon", fill = "transparent", alpha = 0.5)+
+                ymin = -Inf, ymax = 10), color = "maroon", fill = "transparent", alpha = 0.5)+
   geom_line(aes(x = monthly_date, y = HAB10A_DHM, color = Data_Type), alpha = 0.5, size = 1.3) +
   scale_x_date(limits = as_date(c("1985-01-01","2030-01-01")))+
   labs(x = "Date", y = "Degree Heating Month", title = "HAB10A Degree Heating Month values time plot")+
   scale_color_manual(values = cols_no_cc) +
-  scale_y_continuous(breaks = c(0, 1, 2), limits = c(0,10)) +
+  scale_y_continuous(breaks = c(0, 1, 2, 10), limits = c(0,10)) + #standardise y-axis
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text(face = "bold", size = 12),
