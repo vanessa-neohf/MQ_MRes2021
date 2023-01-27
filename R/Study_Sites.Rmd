@@ -40,7 +40,7 @@ Cocos <- ggmap(Cocos_getmap, fullpage = TRUE) +
   geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank(), plot.title = element_text(size = 22, hjust = 0.5), panel.border = element_rect(color = "black", fill = "transparent", linetype = "dashed")) +
   labs(title = "Cocos Keeling Island") +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 2))
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 5))
 
 Cocos
 
@@ -52,7 +52,7 @@ Browse <- ggmap(Browse_getmap, fullpage = TRUE) +
   geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank(), plot.title = element_text(size = 22, hjust = 0.5), panel.border = element_rect(color = "black", fill = "transparent", linetype = "dashed")) +
   labs(title = "Browse Island") +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 2))
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 5))
 
 Browse
 
@@ -64,7 +64,7 @@ Scott <- ggmap(Scott_getmap, fullpage = TRUE) +
   geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank(), plot.title = element_text(size = 22, hjust = 0.5), panel.border = element_rect(color = "black", fill = "transparent", linetype = "dashed")) +
   labs(title = "Scott Reef") +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 2))
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 5))
 
 Scott
 
@@ -76,19 +76,19 @@ Ningaloo <- ggmap(Ningaloo_getmap, fullpage = TRUE) +
   geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank(), plot.title = element_text(size = 22, hjust = 0.5), panel.border = element_rect(color = "black", fill = "transparent", linetype = "dashed")) +
   labs(title = "Ningaloo Reef") +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 2))
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 5))
 
 Ningaloo
 
 ggsave("Ningaloo.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
 
-HAbrol_getmap <- get_map(location = c(lon = 113.75, lat = -28.45), zoom = 14, source = 'stamen', maptype="watercolor")
+HAbrol_getmap <- get_map(location = c(lon = 113.75, lat = -28.46), zoom = 14, source = 'stamen', maptype="watercolor")
 
 HAbrol <- ggmap(HAbrol_getmap, fullpage = TRUE) +
   geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
   theme(plot.caption = element_text(hjust = 0.5, size = 9), legend.title = element_blank(), legend.key = element_rect(fill = "transparent"), panel.background = element_rect(fill = "transparent"), legend.position = "none", legend.text = element_blank(), plot.title = element_text(size = 22, hjust = 0.5), panel.border = element_rect(color = "black", fill = "transparent", linetype = "dashed")) +
   labs(title = "Houtman Abrolhos Island") +
-  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 2))
+  geom_label_repel(data = Study_Sites, aes(x = Longitude, y = Latitude, label = Site, size = 5))
 
 HAbrol
 
