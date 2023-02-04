@@ -490,7 +490,7 @@ TANTABIDDI_SL1_Logger <- TANTABIDDI_SL1_Logger %>%
   select(subsite, data_type, date, sst) 
 
 ```
-
+Supplementary Figure S2
 ```{r Combine_Loggers}
 
 Logger_COMBINED <- rbind(SCOTT_RPO_1_Logger, SCOTT_SL4_Logger, SCOTT_SS3_Logger, 
@@ -515,7 +515,7 @@ Logger_TS <- ggplot(Logger_COMBINED) +
   scale_color_manual(values = cols) +
   scale_x_date(limits = (as.Date(c("1983-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Supplementary Figure Xx", y = ("Temperature°C"), x = "Time", caption = "Sea Surface Temperature based on in situ loggers")
+  labs(y = ("Temperature°C"), x = "Time", caption = "Sea Surface Temperature based on in situ loggers")
 
 ggplotly(Logger_TS) %>% 
   layout(legend = list(orientation = "h", y = -0.3))
@@ -572,6 +572,8 @@ SCOTTSL1_comb <- rbind(SCOTTSL1_CCI, SCOTTSL1_Logger, SCOTTSL1_NOAA, SCOTTSL1_GC
 
 ```
 
+Supplementary Figure S3
+
 ```{r Combined_TS, fig.width = 10, fig.height = 7}
 
 #Combined time series satellites (CCI and NOAA), loggers, coral cores, GCM
@@ -587,7 +589,7 @@ TS_BRS07 <- Browse_07_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Browse Island BRS07 (-14.12, 123.55)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(A) Browse Island BRS07 (-14.12, 123.55)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_BRS07) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -620,7 +622,7 @@ TS_DARL <- Cocos_DARL_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Cocos Keeling Island DARL (-12.09, 96.88)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(B) Cocos Keeling Island DARL (-12.09, 96.88)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_DARL) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -654,7 +656,7 @@ TS_SCOTT_RPO_1 <- SCOTT_RPO_1_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Scott Reef SCOTT_RPO_1 (-14.06, 121.78)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(C) Scott Reef SCOTT_RPO_1 (-14.06, 121.78)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_SCOTT_RPO_1) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -686,7 +688,7 @@ TS_SCOTTSL1 <- SCOTTSL1_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Scott Reef SCOTTSL1 (-14.08, 121.95)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(D) Scott Reef SCOTTSL1 (-14.08, 121.95)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_SCOTTSL1) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -718,7 +720,7 @@ TS_Ningaloo_08BND <- Ningaloo_08BND_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Ningaloo Reef 08BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(E) Ningaloo Reef 08BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_08BND) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -751,7 +753,7 @@ TS_Ningaloo_13BND <- Ningaloo_13BND_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Ningaloo Reef 13BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(F) Ningaloo Reef 13BND (-21.87, 114.16)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_13BND) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -784,7 +786,7 @@ TS_Ningaloo_08TNT <- Ningaloo_08TNT_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Ningaloo Reef 08TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(G) Ningaloo Reef 08TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_08TNT) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -817,7 +819,7 @@ TS_Ningaloo_13TNT <- Ningaloo_13TNT_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Ningaloo Reef 13TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(H) Ningaloo Reef 13TNT (-21.91, 113.97)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_Ningaloo_13TNT) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -850,7 +852,7 @@ TS_HAbrol_HAB10A <- HAbrol_HAB10A_SrCa_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Houtman Abrolhos HAB10A (-28.46, 113.75)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(I) Houtman Abrolhos HAB10A (-28.46, 113.75)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_HAbrol_HAB10A) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
@@ -883,7 +885,7 @@ TS_HAbrol_HAB05B <- HAbrol_HAB05B_SrCa_comb %>%
   #xlim(as.Date(c("1980-01-01", "2021-01-01"))) +
   scale_x_date(limits = (as.Date(c("1978-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
-  labs(title = "Houtman Abrolhos HAB05B (-28.46, 113.77)", y = ("Temperature°C"), x = "Time")
+  labs(title = "(J) Houtman Abrolhos HAB05B (-28.46, 113.77)", y = ("Temperature°C"), x = "Time")
 
 ggplotly(TS_HAbrol_HAB05B) %>% 
  layout(legend = list(orientation = "h", y = -0.2, x = 0.2))
