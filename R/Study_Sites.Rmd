@@ -23,6 +23,23 @@ library(grid)
 
 Study_Sites <- read_csv(here::here("data_raw", "Combined_Site_Coordinates_Full.csv")) 
 
+#full map for reference to sites
+fullmap <- get_map(location = c(lon = 120, lat = -20), zoom = 3, source = 'stamen', maptype="watercolor")
+
+Australia_map <- ggmap(fullmap, fullpage = TRUE) +
+  geom_point(data = Study_Sites, aes(x = Longitude, y = Latitude, shape = Reef), size = 5) +
+  labs(x = "", y = "") +
+  theme(legend.position = "none", panel.border = element_rect(color = "black", fill = "transparent", size = 1)) +
+  xlim(85, 160) + 
+  ylim(-50, 10) +
+  geom_rect(mapping = aes(xmin = 94, xmax = 126, ymin = -33, ymax = -7), fill = "transparent", color = "maroon", size = 2)
+
+Australia_map
+
+ggsave("full map.png", path = here::here("graphics/Figures"), dpi = 300, width = 210, height = 100, units = "mm", limitsize = TRUE, bg = "transparent")
+
+#study sites only
+
 watercolor <- get_map(location = c(lon = 110, lat = -20), zoom = 5, source = 'stamen', maptype="watercolor")
 
 SS_Map <- ggmap(watercolor, fullpage = TRUE) +
