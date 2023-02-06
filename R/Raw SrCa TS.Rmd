@@ -29,6 +29,7 @@ Browse07_SST_NOAA <- read_csv(here::here("data_raw/CCore_SST_BRS07_NOAA.csv"))
 ```
 
 ```{r plot_TS}
+
 Browse05 <- Browse %>% 
   drop_na(`BRS05 Sr/Ca [mmol/mol]`) %>% 
   select(-c(`BRS07 Sr/Ca [mmol/mol]`, year, month))
@@ -37,75 +38,35 @@ Browse07 <- Browse %>%
   drop_na(`BRS07 Sr/Ca [mmol/mol]`) %>% 
   select(-c(`BRS05 Sr/Ca [mmol/mol]`, year, month))
 
-Coeff <- 3
-
 ggplot(Browse05) +
-  geom_point(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`)) +
-  geom_line(data = Browse05_SST_CCI, aes(x = date, y = sst/Coeff)) +
-  scale_y_continuous(name = "BRS05 Sr/Ca [mmol/mol]", sec.axis = sec_axis(~ .*Coeff, name = "SST calibrated by CCI")) +
-  labs(title = "Browse Island BRS05 raw Sr/Ca time series and SST calibrated by CCI", x = "Time", caption = "dots represent Sr/Ca values and lines represent SST values") +
+  geom_point(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), alpha = 0.2) +
+  geom_line(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), color = "blue") +
+  labs(x = "Time") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
         legend.position = "right",
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
-        axis.title = element_text(size = 12),
-        plot.caption = element_text(hjust = 0.5)
+        axis.title = element_text(size = 12)
   )
 
-ggsave("SrCa raw time series Browse BRS05 and CCI calibrated SST.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
-
-ggplot(Browse05) +
-  geom_point(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`)) +
-  geom_line(data = Browse05_SST_NOAA, aes(x = date, y = sst/Coeff)) +
-  scale_y_continuous(name = "BRS05 Sr/Ca [mmol/mol]", sec.axis = sec_axis(~ .*Coeff, name = "SST calibrated by NOAA")) +
-  labs(title = "Browse Island BRS05 raw Sr/Ca time series and SST calibrated by NOAA", x = "Time", caption = "dots represent Sr/Ca values and lines represent SST values") +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold", size = 12),
-        legend.position = "right",
-        panel.background = element_blank(),
-        axis.line = element_line(color = "grey"),
-        axis.title = element_text(size = 12),
-        plot.caption = element_text(hjust = 0.5)
-  )
-
-ggsave("SrCa raw time series Browse BRS05 and NOAA calibrated SST.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+ggsave("SrCa raw time series Browse BRS05.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
 
 ggplot(Browse07) +
-  geom_point(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`)) +
-  geom_line(data = Browse07_SST_CCI, aes(x = date, y = sst/Coeff)) +
-  scale_y_continuous(name = "BRS07 Sr/Ca [mmol/mol]", sec.axis = sec_axis(~ .*Coeff, name = "SST calibrated by CCI")) +
-  labs(title = "Browse Island BRS07 raw Sr/Ca time series and SST calibrated by CCI", x = "Time", caption = "dots represent Sr/Ca values and lines represent SST values") +
+  geom_point(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), alpha = 0.2) +
+  geom_line(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), color = "blue") +
+  labs(x = "Time") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
         legend.position = "right",
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
-        axis.title = element_text(size = 12),
-        plot.caption = element_text(hjust = 0.5)
+        axis.title = element_text(size = 12)
   )
 
-ggsave("SrCa raw time series Browse BRS07 and CCI calibrated SST.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
-
-ggplot(Browse07) +
-  geom_point(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`)) +
-  geom_line(data = Browse07_SST_NOAA, aes(x = date, y = sst/Coeff)) +
-  scale_y_continuous(name = "BRS07 Sr/Ca [mmol/mol]", sec.axis = sec_axis(~ .*Coeff, name = "SST calibrated by NOAA")) +
-  labs(title = "Browse Island BRS07 raw Sr/Ca time series and SST calibrated by NOAA", x = "Time", caption = "dots represent Sr/Ca values and lines represent SST values") +
-  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
-        legend.key = element_rect(fill = "transparent"),
-        plot.title = element_text( face = "bold", size = 12),
-        legend.position = "right",
-        panel.background = element_blank(),
-        axis.line = element_line(color = "grey"),
-        axis.title = element_text(size = 12),
-        plot.caption = element_text(hjust = 0.5)
-  )
-
-ggsave("SrCa raw time series Browse BRS07 and NOAA calibrated SST.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+ggsave("SrCa raw time series Browse BRS07.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
 
 ```
 
