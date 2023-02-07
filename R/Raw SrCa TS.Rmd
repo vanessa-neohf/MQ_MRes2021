@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r load_packages_and_file, include = FALSE}
 library(tidyverse)
 library(lubridate)
+library(patchwork)
 
 Browse <- read_csv(here::here("data_raw/CCore_BRS05_BRS07_Year_Month.csv")) %>% 
   select(c(2,3,9,10)) %>% 
@@ -38,9 +39,9 @@ Browse07 <- Browse %>%
   drop_na(`BRS07 Sr/Ca [mmol/mol]`) %>% 
   select(-c(`BRS05 Sr/Ca [mmol/mol]`, year, month))
 
-ggplot(Browse05) +
-  geom_point(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), alpha = 0.2) +
-  geom_line(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), color = "blue") +
+#Time Series of Raw Sr/Ca
+BRS05_raw <- ggplot(Browse05) +
+  geom_line(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), color = "coral") +
   labs(x = "Time") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
@@ -49,13 +50,15 @@ ggplot(Browse05) +
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         axis.title = element_text(size = 12)
-  )
+  ) +
+  scale_x_date(limits = as.Date(c("1980-01-01", Inf)))
+
+BRS05_raw
 
 ggsave("SrCa raw time series Browse BRS05.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
 
-ggplot(Browse07) +
-  geom_point(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), alpha = 0.2) +
-  geom_line(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), color = "blue") +
+BRS07_raw <- ggplot(Browse07) +
+  geom_line(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), color = "skyblue") +
   labs(x = "Time") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
@@ -64,9 +67,110 @@ ggplot(Browse07) +
         panel.background = element_blank(),
         axis.line = element_line(color = "grey"),
         axis.title = element_text(size = 12)
-  )
+  ) +
+  scale_x_date(limits = as.Date(c("1980-01-01", Inf)))
+
+BRS07_raw
 
 ggsave("SrCa raw time series Browse BRS07.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+
+Browse05 <- Browse05 %>% 
+  mutate(Site = "BRS05") %>% 
+  rename("SrCa" = 1)
+Browse07 <- Browse07 %>% 
+  mutate(Site = "BRS07") %>% 
+  rename("SrCa" = 1)
+
+Browse_combined <- rbind(Browse05, Browse07)
+
+color <- c(BRS05 = "coral", BRS07 = "skyblue")
+
+BRS_raw <- ggplot(Browse_combined) +
+  geom_line(aes(x = date, y = SrCa, color = Site)) +
+  scale_color_manual(values = color) +
+  labs(x = "Time") +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "right",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        axis.title = element_text(size = 12)
+  ) +
+  scale_x_date(limits = as.Date(c("1980-01-01", Inf)))
+  
+BRS05_raw / BRS07_raw / BRS_raw
+
+ggsave("SrCa raw time series Combined.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 4)
+
+#Sr/Ca vs SST
+CCI_05 <- ggplot(Browse05_SST_CCI) +
+  geom_smooth(aes(x = sst, y = SrCa), color = "brown") +
+  labs(x = "Sea Surface Temperature (CCI)", y = "SrCa [mmol/mol]", title = "BRS05 SrCa calibrated by CCI") +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "right",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        axis.title = element_text(size = 12)
+  ) 
+
+CCI_05
+
+ggsave("SrCa Browse BRS05 calibrated by CCI.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+
+CCI_07 <- ggplot(Browse07_SST_CCI) +
+  geom_smooth(aes(x = sst, y = SrCa), color = "brown") +
+  labs(x = "Sea Surface Temperature (CCI)", y = "SrCa [mmol/mol]", title = "BRS07 SrCa calibrated by CCI") +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "right",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        axis.title = element_text(size = 12)
+  ) 
+
+CCI_07
+
+ggsave("SrCa Browse BRS07 calibrated by CCI.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+
+NOAA_05 <- ggplot(Browse05_SST_NOAA) +
+  geom_smooth(aes(x = sst, y = SrCa), color = "brown") +
+  labs(x = "Sea Surface Temperature (NOAA)", y = "SrCa [mmol/mol]", title = "BRS05 SrCa calibrated by NOAA") +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "right",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        axis.title = element_text(size = 12)
+  ) 
+
+NOAA_05
+
+ggsave("SrCa Browse BRS05 calibrated by NOAA.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+
+NOAA_07 <- ggplot(Browse07_SST_NOAA) +
+  geom_smooth(aes(x = sst, y = SrCa), color = "brown") +
+  labs(x = "Sea Surface Temperature (NOAA)", y = "SrCa [mmol/mol]", title = "BRS07 SrCa calibrated by NOAA") +
+  theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
+        legend.key = element_rect(fill = "transparent"),
+        plot.title = element_text( face = "bold", size = 12),
+        legend.position = "right",
+        panel.background = element_blank(),
+        axis.line = element_line(color = "grey"),
+        axis.title = element_text(size = 12)
+  ) 
+
+NOAA_07
+
+ggsave("SrCa Browse BRS07 calibrated by NOAA.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 2)
+
+(CCI_05 + CCI_07) / (NOAA_05 + NOAA_07)
+
+ggsave("SrCa Browse calibrated by CCI and NOAA.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 3)
 
 ```
 
