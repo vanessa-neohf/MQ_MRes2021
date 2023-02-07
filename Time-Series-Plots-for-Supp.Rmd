@@ -490,7 +490,7 @@ TANTABIDDI_SL1_Logger <- TANTABIDDI_SL1_Logger %>%
   select(subsite, data_type, date, sst) 
 
 ```
-Supplementary Figure S2
+Supplementary Figure S3. Time Series of Data Loggers SST data from Australian Institute of Marine Science (AIMS).
 ```{r Combine_Loggers}
 
 Logger_COMBINED <- rbind(SCOTT_RPO_1_Logger, SCOTT_SL4_Logger, SCOTT_SS3_Logger, 
@@ -513,7 +513,7 @@ cols = c("SCOTT_RPO_1" = "black", "SCOTT_SL4" = "black", "SCOTT_SS3" = "black",
 Logger_TS <- ggplot(Logger_COMBINED) +
   geom_line(aes(x = date, y = sst, color = `Logger Name`), position = "jitter") +
   scale_color_manual(values = cols) +
-  scale_x_date(limits = (as.Date(c("1983-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
+  scale_x_date(limits = (as.Date(c("1997-01-01", "2021-01-01"))), date_breaks = "5 years", date_labels = "%Y") +
   theme(legend.title = element_blank(), panel.background = element_blank(), axis.line = element_line("black"), axis.title = element_text(size = 12)) +
   labs(y = ("Temperature°C"), x = "Time", caption = "Sea Surface Temperature based on in situ loggers")
 
@@ -572,7 +572,7 @@ SCOTTSL1_comb <- rbind(SCOTTSL1_CCI, SCOTTSL1_Logger, SCOTTSL1_NOAA, SCOTTSL1_GC
 
 ```
 
-Supplementary Figure S3
+Supplementary Figure S4. Interactive Time Series of SST data from CCI, NOAA, Logger, GCM, and coral core SST calibrated from CCI and NOAA.
 
 ```{r Combined_TS, fig.width = 10, fig.height = 7}
 
