@@ -39,6 +39,22 @@ Browse07 <- Browse %>%
   drop_na(`BRS07 Sr/Ca [mmol/mol]`) %>% 
   select(-c(`BRS05 Sr/Ca [mmol/mol]`, year, month))
 
+#To find out the range of Sr/Ca in BRS05 and BRS07
+#BRS05
+min_BRS05 <- min(Browse05$`BRS05 Sr/Ca [mmol/mol]`)
+max_BRS05 <- max(Browse05$`BRS05 Sr/Ca [mmol/mol]`)
+min_BRS05
+max_BRS05
+max_BRS05 - min_BRS05 #range
+mean(Browse05$`BRS05 Sr/Ca [mmol/mol]`)
+#BRS07
+min_BRS07 <- min(Browse07$`BRS07 Sr/Ca [mmol/mol]`)
+max_BRS07 <- max(Browse07$`BRS07 Sr/Ca [mmol/mol]`)
+min_BRS07
+max_BRS07
+max_BRS07 - min_BRS07 #range
+mean(Browse07$`BRS07 Sr/Ca [mmol/mol]`)
+
 #Time Series of Raw Sr/Ca
 BRS05_raw <- ggplot(Browse05) +
   geom_line(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), color = "coral") +
