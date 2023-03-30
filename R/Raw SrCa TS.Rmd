@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(lubridate)
 library(patchwork)
+library(ggpmisc)
 
 Browse <- read_csv(here::here("data_raw/CCore_BRS05_BRS07_Year_Month.csv")) %>% 
   select(c(2,3,9,10)) %>% 
@@ -58,7 +59,7 @@ mean(Browse07$`BRS07 Sr/Ca [mmol/mol]`)
 #Time Series of Raw Sr/Ca
 BRS05_raw <- ggplot(Browse05) +
   geom_line(aes(x = date, y = `BRS05 Sr/Ca [mmol/mol]`), color = "coral") +
-  labs(x = "Time") +
+  labs(x = "Time", y = "BRS05 Sr/Ca \n [mmol/mol]") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
@@ -75,7 +76,7 @@ ggsave("SrCa raw time series Browse BRS05.jpg", path = here::here("graphics/Supp
 
 BRS07_raw <- ggplot(Browse07) +
   geom_line(aes(x = date, y = `BRS07 Sr/Ca [mmol/mol]`), color = "skyblue") +
-  labs(x = "Time") +
+  labs(x = "Time", y = "BRS07 Sr/Ca \n [mmol/mol]") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
@@ -117,7 +118,20 @@ BRS_raw <- ggplot(Browse_combined) +
   
 BRS05_raw / BRS07_raw / BRS_raw
 
-ggsave("SrCa raw time series Combined.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 4)
+ggsave("SrCa raw time series Combined.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 1)
+
+TableS1 <- read_csv(here::here("graphics/Supplementary/Table for Figure S1.csv"))
+
+ggplot_Table <- ggplot() +
+  theme_void() +
+  annotate(geom = "table",
+           x = 3,
+           y = 4,
+           label = list(TableS1), size = 10)
+
+BRS05_raw /BRS07_raw / BRS_raw / ggplot_Table
+ 
+ggsave("SrCa raw time series Combined with Table.jpg", path = here::here("graphics/Supplementary"), dpi = 300, scale = 1)
 
 #Sr/Ca vs SST
 CCI_05 <- ggplot(Browse05_SST_CCI) +
