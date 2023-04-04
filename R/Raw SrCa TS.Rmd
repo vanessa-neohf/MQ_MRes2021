@@ -105,7 +105,7 @@ color <- c(BRS05 = "coral", BRS07 = "skyblue")
 BRS_raw <- ggplot(Browse_combined) +
   geom_line(aes(x = date, y = SrCa, color = Site)) +
   scale_color_manual(values = color) +
-  labs(x = "Time") +
+  labs(x = "Time", y = "Sr/Ca \n [mmol/mol]") +
   theme(panel.grid.major.y = element_line(color = "grey", linetype = "dashed"),
         legend.key = element_rect(fill = "transparent"),
         plot.title = element_text( face = "bold", size = 12),
@@ -127,7 +127,7 @@ ggplot_Table <- ggplot() +
   annotate(geom = "table",
            x = 3,
            y = 4,
-           label = list(TableS1), size = 10)
+           label = list(TableS1), size = 5)
 
 BRS05_raw /BRS07_raw / BRS_raw / ggplot_Table
  
